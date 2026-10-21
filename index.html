@@ -1,11 +1,12 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>LLM cost vs capability</title>
+<title>Frontier models: cost, response time, and task performance</title>
 <style>
 *{box-sizing:border-box}body{margin:0;background:#f5f7fb;color:#192740;font:16px/1.55 'Segoe UI',Arial,sans-serif}
 main{max-width:1640px;margin:auto;padding:20px}svg{width:100%;height:auto;display:block}
 a{color:#315ab8}nav{display:flex;gap:20px;align-items:center;justify-content:flex-end;flex-wrap:wrap}
-select{padding:8px;border:1px solid #becbe0;border-radius:8px;background:white}
+select{max-width:100%;padding:8px;border:1px solid #becbe0;border-radius:8px;background:white;font:inherit}
+h1{font-size:34px;line-height:1.2;margin:8px 0 12px}
 h2{font-size:27px;margin:0 0 8px}h3{margin:0 0 7px;font-size:19px}
 .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:20px 0}
 .card{background:white;border:1px solid #dce3ee;border-radius:14px;padding:22px}
@@ -13,14 +14,40 @@ h2{font-size:27px;margin:0 0 8px}h3{margin:0 0 7px;font-size:19px}
 .pick{font-size:21px;font-weight:700;margin:10px 0;color:#315ab8}
 .note{padding:18px 22px;background:#e8edf9;border-radius:12px}
 .muted{color:#56647a}footer{padding:24px 0;font-size:14px}
-li{margin:6px 0}.series{transition:opacity .15s}
-@media(max-width:850px){.cards{grid-template-columns:1fr}main{padding:10px}}
+li{margin:6px 0}.series,.speed-series,.task-series{transition:opacity .15s}
+[hidden]{display:none!important}.section-nav{justify-content:flex-start;margin:20px 0}
+.controls{margin:20px 0;font-size:14px}.task-section{margin:22px 0}
+.table-scroll{overflow-x:auto}table{width:100%;border-collapse:collapse;text-align:left;min-width:720px}
+caption{text-align:left;color:#56647a;font-size:14px;padding:10px 0}
+th,td{padding:12px 14px;border-bottom:1px solid #e2e7ef;vertical-align:top}
+thead{background:#eef2f9}tbody th{font-weight:600;min-width:170px}
+td small,th small{display:block;font-size:12px;font-weight:400;color:#56647a;margin-top:3px;overflow-wrap:anywhere}
+.number{white-space:nowrap;font-variant-numeric:tabular-nums}
+.task-tabs{display:flex;gap:8px;flex-wrap:wrap;margin:26px 0 20px}
+.task-tabs button{font:inherit;cursor:pointer;padding:10px 16px;border-radius:9px;border:1px solid #becbe0;color:#192740;background:#f5f7fb}
+.task-tabs button[aria-selected=true]{background:#244ca3;color:white;border-color:#244ca3}
+:focus-visible{outline:3px solid #2776d2;outline-offset:3px}
+.task-plot{max-width:1100px;margin:14px auto}
+.task-limit{border-left:3px solid #b87c19;padding:10px 16px;background:#fff8e9}
+.configurations,.evidence-gaps{border-top:1px solid #dce3ee;padding-top:12px;margin:16px 0}
+summary{cursor:pointer;font-weight:600}.source-line{font-size:13px;color:#56647a}
+.overview-badge{display:inline-block;font-size:10px;border:1px solid #becbe0;border-radius:5px;padding:1px 5px;margin-left:5px;color:#315ab8}
+.metric-control{display:block;margin-bottom:22px}.metric-control select{margin-left:8px}
+@media(max-width:850px){.cards{grid-template-columns:1fr}main{padding:10px}.card{padding:16px}h1{font-size:28px}}
+@media(max-width:600px){.task-plot{min-width:650px}[role=tabpanel]{overflow-x:auto}.metric-control select{display:block;margin:8px 0 0}}
 </style></head><body><main>
-<nav><label>Highlight model: <select id="model"><option value="all">Show all models</option><option value="0">Claude Opus 5.5</option><option value="1">Claude Sonnet 5.5</option><option value="2">GPT-6 Astra</option><option value="3">GPT-6.1 Sol</option><option value="4">GPT-5.6 Sol</option><option value="5">Gemini 3.8 Flash</option><option value="6">GPT-6 Luna</option></select></label>
+<header><div class="tag">Frontier Model Capability</div>
+<h1>Compare models by cost, response time, and task performance</h1>
+<p class="muted">Cost/capability trade-offs, response time, and published task results with exact configurations.
+Independent benchmark scales stay separate; missing evidence stays missing.</p></header>
+<nav class="section-nav" aria-label="Page sections"><a href="#cost">Cost vs capability</a>
+<a href="#time">Response time / performance</a><a href="#tasks">Task-specific performance</a><a href="#sources">Sources</a></nav>
+<nav class="controls" aria-label="Model controls and downloads"><label>Highlight model: <select id="model"><option value="all">Show all models</option><option value="0">Claude Opus 5.5</option><option value="1">Claude Sonnet 5.5</option><option value="2">GPT-6 Astra</option><option value="3">GPT-6.1 Sol</option><option value="4">GPT-5.6 Sol</option><option value="5">Gemini 3.8 Flash</option><option value="6">GPT-6 Luna</option></select></label>
 <a href="llm-cost-capability.svg" download>Download cost graph</a>
 <a href="llm-speed-capability.svg" download>Download speed graph</a>
-<a href="aa-benchmark-snapshot.json" download>Download source data</a></nav>
-<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1320" viewBox="0 0 1600 1320" role="img" aria-labelledby="title desc">
+<a href="aa-benchmark-snapshot.json" download>Cost/time data</a>
+<a href="task-benchmark-snapshot.json" download>Task benchmark data</a></nav>
+<div id="cost"><svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1320" viewBox="0 0 1600 1320" role="img" aria-labelledby="title desc">
 <title id="title">LLM smartness versus cost, by reasoning effort</title>
 <desc id="desc">The horizontal axis is average US dollar cost per Artificial Analysis Intelligence Index task, on a logarithmic scale. The vertical axis is the Intelligence Index v4.3.2 score from zero to sixty. Seven model families have separate colored curves; numbered points indicate low to max reasoning effort. Upper left is better on these two metrics. Gemini low is omitted because cost is unavailable; Gemini xhigh and max are unsupported. An exact table follows the chart.</desc>
 <rect width="1600" height="1320" rx="20" fill="#f5f7fb"/>
@@ -266,57 +293,19 @@ li{margin:6px 0}.series{transition:opacity .15s}
 <text x="48" y="1230" font-size="16" style="fill:#56647a" font-weight="400" text-anchor="start">Source: artificialanalysis.ai/leaderboards/models. Selected seven-model comparison; not an exhaustive or coding-only ranking.</text>
 <text x="48" y="1257" font-size="16" style="fill:#56647a" font-weight="400" text-anchor="start">Claude: adaptive reasoning, default fallback. Gemini low: cost unavailable, so not plotted. Effort is not a standardized budget.</text>
 <text x="48" y="1284" font-size="16" style="fill:#56647a" font-weight="400" text-anchor="start">GPT-5.6 Sol uses retained 29 Sep data because it is absent from the refreshed leaderboard; GPT-6.1 Sol uses 21 Oct data.</text>
-</svg>
+</svg></div>
 <section class="card"><h2>How to read the picture</h2>
 <p><strong>Upper-left is better:</strong> more measured capability for less money.
 Each color is a model; points 1 to 5 are low, medium, high, xhigh, and max.
 The cost axis is logarithmic because the measured costs span more than 1,000x.
 These are average evaluation costs per task, not a quote for your task or Copilot AIC.</p>
-<p><strong>Price per token is not cost per task.</strong> Sonnet max has a lower token rate than
-Opus max, but uses enough tokens that its benchmark cost is higher:
-<strong>$5.46 / 56.0</strong> versus <strong>$5.98 / 57.6</strong>.
-That is why plotting only token rates would give the wrong picture.</p>
+<p><strong>Price per token is not cost per task.</strong>
+Benchmark cost reflects both token prices and tokens consumed. Sonnet max measures <strong>$5.46 / 56.0</strong>; Opus max measures <strong>$5.98 / 57.6</strong> (cost / capability score).
+Token rates alone cannot tell you the total cost of completing a task.</p>
 <p><strong>More effort is not always the best purchase.</strong>
-Opus medium measures <strong>$1.34 / 51.2</strong>; Astra high measures
-<strong>$1.73 / 50.9</strong>. Their score difference is too small to treat as decisive,
-but their benchmark costs differ. GPT-6.1 Sol high measures <strong>$0.32 / 50.2</strong>,
-versus Gemini high at <strong>$1.24 / 40.9</strong>.
-Those are observations on this suite, not universal task rankings.</p></section>
-<h2 style="margin-top:28px">Starting choices for your development workflow</h2>
-<p class="muted">Recommendations to evaluate locally, not results measured on your TypeSpec repository.</p>
-<div class="cards">
-<section class="card"><div class="tag">Cheap / bounded execution</div><div class="pick">GPT-6 Luna high or max</div>
-<p>Try for straightforward edits, extraction, and implementing an accepted plan.
-The benchmark cost is about $0.029-$0.068 per task.
-Require tests and escalate on failed checks.</p></section>
-<section class="card"><div class="tag">Everyday implementation</div><div class="pick">GPT-6.1 Sol medium or high</div>
-<p>A cost-conscious starting candidate for coding and debugging:
-about $0.21-$0.32 per benchmark task.
-Compare with Sonnet high on your own coding cases rather than using the aggregate score alone.</p></section>
-<section class="card"><div class="tag">Difficult design / judgment</div><div class="pick">Claude Opus 5.5 medium or high</div>
-<p>Try for architecture and ambiguous compatibility decisions:
-about $1.34-$1.82 per benchmark task.
-Use xhigh/max when measured quality gains justify the extra cost.</p></section>
-</div>
-<div class="note"><strong>For assessment-skill:</strong>
-Keep compilation, evidence extraction, validation, and rendering in code.
-Use a stronger model for the hard design and compatibility judgments,
-then a cheaper model for bounded implementation. A failed cheap attempt plus retries can cost
-more than one successful stronger attempt.</div>
-<section class="card" style="margin-top:20px"><h3>Important limits</h3>
-<p>The Intelligence Index v4.3.2 mixes agent tasks, coding, scientific reasoning, and general tasks;
-it is not an IQ score or a TypeSpec accuracy measure. This picture covers seven selected model families,
-not every available model. Lines do not interpolate unmeasured settings.
-Gemini low has a score but no published cost in the extracted data; its xhigh/max settings are unsupported.
-Claude entries use adaptive reasoning with default fallback.
-GPT-5.6 Sol is absent from the refreshed leaderboard, so its retained 29 Sep results are shown as historical comparison data.</p>
-<p>No speed claim is encoded: end-to-end latency must be measured separately.
-Provider effort levels are not equal compute budgets. Benchmark costs use API pricing,
-not Copilot credits, and depend on task mix, token usage, and evaluation settings.</p>
-<p><strong>Final selection rule:</strong> run the same representative cases with the same tools and context.
-Track finding accuracy, tests, retries, total cost/AIC, and wall time.
-Choose the least costly configuration that passes your quality bar.</p></section>
-<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-labelledby="speed-title speed-desc">
+Use the task-specific evidence below to form a shortlist, then compare settings on your own cases.
+A small difference in the aggregate score does not establish a frontend, backend, or writing advantage.</p></section>
+<div id="time"><svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-labelledby="speed-title speed-desc">
 <title id="speed-title">LLM smartness versus execution speed, by reasoning effort</title>
 <desc id="speed-desc">The horizontal axis is median end-to-end response time in seconds, shown on a logarithmic scale. The vertical axis is Artificial Analysis Intelligence Index v4.3.2. Farther left and higher is better. Only model-effort points with published median end-to-end response time are shown.</desc>
 <rect width="1600" height="900" rx="20" fill="#f5f7fb"/>
@@ -495,7 +484,7 @@ Choose the least costly configuration that passes your quality bar.</p></section
 <text x="1246" y="751" font-size="14" style="fill:#56647a" font-weight="400" text-anchor="start">Missing timings are not plotted.</text>
 <text x="48" y="822" font-size="16" style="fill:#56647a" font-weight="400" text-anchor="start">Source: artificialanalysis.ai/leaderboards/models. Current series refreshed 21 Oct 2026.</text>
 <text x="48" y="849" font-size="16" style="fill:#56647a" font-weight="400" text-anchor="start">Median response time depends on benchmark output length and provider behavior; validate wall time on your own agent workflow.</text>
-</svg>
+</svg></div>
 <section class="card"><h2>How execution time is measured</h2>
 <p>The horizontal value is the published <strong>median end-to-end response time in seconds</strong>.
 It includes time before and during answer generation, making it more useful for reasoning models
@@ -505,8 +494,454 @@ compilation, network retrieval, retries, and human waits are outside a standalon
 Use this graph to compare model-serving behavior, then benchmark complete tasks in your actual workflow.</p>
 <p>Some model-effort variants have no published end-to-end timing in the retained snapshot.
 They are omitted rather than estimated, and curves are not connected across missing measurements.</p></section>
-<footer><strong>Sources refreshed 21 Oct 2026</strong>
-<p class="muted">Current model series use the 21 Oct leaderboard. GPT-5.6 Sol alone uses retained 29 Sep data because it is no longer present in the refreshed source.</p><ul>
+
+<section id="tasks" class="card task-section">
+<div class="tag">Task-specific evidence / seven selected families</div>
+<h2>What kind of work do you need done?</h2>
+<p>General capability, cost, and response time are only part of the decision.
+Compare <strong>visual preference</strong>, <strong>executable task success</strong>,
+and <strong>document quality</strong> separately. No fabricated combined score or radar ranking.</p>
+<div class="table-scroll"><table class="task-matrix">
+<caption>Named snapshot configurations, not an equal-effort experiment. Read each column in its own units.</caption>
+<thead><tr><th scope="col">Model</th>
+<th scope="col">UI / frontend<small>DesignArena Website / Elo</small></th>
+<th scope="col">Engineering proxy<small>Terminal-Bench 4.0 / resolved %</small></th>
+<th scope="col">Document writing proxy<small>AA-Briefcase Word / rubric %</small></th></tr></thead>
+<tbody><tr class="task-series" data-model="0"><th scope="row">Claude Opus 5.5</th><td><strong>1,335.00</strong><small>Effort not stated</small></td><td><strong>64.85%</strong><small>Max / Claude Code</small></td><td><strong>60.36%</strong><small>Max / default fallback</small></td></tr><tr class="task-series" data-model="1"><th scope="row">Claude Sonnet 5.5</th><td><strong>1,326.00</strong><small>Effort not stated</small></td><td><strong>61.82%</strong><small>Max / Claude Code</small></td><td><strong>60.95%</strong><small>Max / default fallback</small></td></tr><tr class="task-series" data-model="2"><th scope="row">GPT-6 Astra</th><td><strong>1,337.00</strong><small>Max</small></td><td><strong>58.18%</strong><small>Max / Codex</small></td><td><strong>52.07%</strong><small>Max</small></td></tr><tr class="task-series" data-model="3"><th scope="row">GPT-6.1 Sol</th><td><strong>1,320.00</strong><small>Effort not stated</small></td><td><strong>58.18%</strong><small>Max / Codex</small></td><td><strong>52.07%</strong><small>Max</small></td></tr><tr class="task-series" data-model="4"><th scope="row">GPT-5.6 Sol</th><td><strong>1,321.00</strong><small>Xhigh</small></td><td><strong>37.27%</strong><small>Max / Codex</small></td><td><strong class="muted">N/A</strong><small>Not in captured data</small></td></tr><tr class="task-series" data-model="5"><th scope="row">Gemini 3.8 Flash</th><td><strong>1,301.00</strong><small>Effort not stated</small></td><td><strong>19.09%</strong><small>High / mini-SWE-agent</small></td><td><strong>44.97%</strong><small>High</small></td></tr><tr class="task-series" data-model="6"><th scope="row">GPT-6 Luna</th><td><strong>1,272.00</strong><small>Effort not stated</small></td><td><strong>16.36%</strong><small>Max / Codex</small></td><td><strong>44.38%</strong><small>Max</small></td></tr></tbody></table></div>
+<p class="muted">Settings differ by source and are shown in every cell. N/A means absent from
+the captured data, not zero or a prediction. Higher is better within a column; numbers across
+columns are not comparable. Close scores do not establish a winner.</p>
+<div class="task-tabs" role="tablist" aria-label="Task-specific benchmark details">
+<button type="button" id="tab-frontend" role="tab" aria-selected="true" aria-controls="panel-frontend" tabindex="0">UI / frontend</button>
+<button type="button" id="tab-engineering" role="tab" aria-selected="false" aria-controls="panel-engineering" tabindex="-1">Engineering / backend proxy</button>
+<button type="button" id="tab-documents" role="tab" aria-selected="false" aria-controls="panel-documents" tabindex="-1">Documents / writing</button>
+</div>
+<section id="panel-frontend" role="tabpanel" aria-labelledby="tab-frontend" tabindex="0"><h3>Website / frontend design</h3><p>Blind human preferences between websites generated from the same prompt. Bradley-Terry ratings are displayed as Elo.</p><svg class="task-plot" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 430" role="img" aria-labelledby="task-website-title task-website-desc">
+<title id="task-website-title">Website / frontend design</title>
+<desc id="task-website-desc">Seven selected model families. Horizontal axis: Elo from 1200 to 1400, higher is better. Exact scores and configurations are in the table below. Whiskers are published 95% confidence intervals where available; missing results are labeled, not plotted as zero.</desc>
+<style>text{font-family:Segoe UI,Arial,sans-serif;fill:#192740}</style>
+<rect width="1000" height="430" rx="12" fill="#f5f7fb"/>
+<line x1="230.0" y1="38" x2="230.0" y2="350" stroke="#dde4ee"/>
+<text x="230.0" y="380" text-anchor="middle" font-size="14">1,200</text>
+<line x1="367.5" y1="38" x2="367.5" y2="350" stroke="#dde4ee"/>
+<text x="367.5" y="380" text-anchor="middle" font-size="14">1,250</text>
+<line x1="505.0" y1="38" x2="505.0" y2="350" stroke="#dde4ee"/>
+<text x="505.0" y="380" text-anchor="middle" font-size="14">1,300</text>
+<line x1="642.5" y1="38" x2="642.5" y2="350" stroke="#dde4ee"/>
+<text x="642.5" y="380" text-anchor="middle" font-size="14">1,350</text>
+<line x1="780.0" y1="38" x2="780.0" y2="350" stroke="#dde4ee"/>
+<text x="780.0" y="380" text-anchor="middle" font-size="14">1,400</text>
+<g class="task-series" data-model="0">
+<text x="18" y="70" font-size="17" font-weight="600">Claude Opus 5.5</text>
+<title>Claude Opus 5.5: 1,335.00; Effort not stated; 95% CI: Not published in captured record</title>
+<circle cx="601.25" cy="65" r="7" fill="#a34415"/>
+<text x="805" y="70" font-size="17" font-weight="600">1,335.00</text>
+</g>
+<g class="task-series" data-model="1">
+<text x="18" y="114" font-size="17" font-weight="600">Claude Sonnet 5.5</text>
+<title>Claude Sonnet 5.5: 1,326.00; Effort not stated; 95% CI: Not published in captured record</title>
+<circle cx="576.50" cy="109" r="7" fill="#d17908"/>
+<text x="805" y="114" font-size="17" font-weight="600">1,326.00</text>
+</g>
+<g class="task-series" data-model="2">
+<text x="18" y="158" font-size="17" font-weight="600">GPT-6 Astra</text>
+<title>GPT-6 Astra: 1,337.00; Max; 95% CI: Not published in captured record</title>
+<circle cx="606.75" cy="153" r="7" fill="#5144c7"/>
+<text x="805" y="158" font-size="17" font-weight="600">1,337.00</text>
+</g>
+<g class="task-series" data-model="3">
+<text x="18" y="202" font-size="17" font-weight="600">GPT-6.1 Sol</text>
+<title>GPT-6.1 Sol: 1,320.00; Effort not stated; 95% CI: Not published in captured record</title>
+<circle cx="560.00" cy="197" r="7" fill="#1878ba"/>
+<text x="805" y="202" font-size="17" font-weight="600">1,320.00</text>
+</g>
+<g class="task-series" data-model="4">
+<text x="18" y="246" font-size="17" font-weight="600">GPT-5.6 Sol</text>
+<title>GPT-5.6 Sol: 1,321.00; Xhigh; 95% CI: Not published in captured record</title>
+<circle cx="562.75" cy="241" r="7" fill="#bf3c85"/>
+<text x="805" y="246" font-size="17" font-weight="600">1,321.00</text>
+</g>
+<g class="task-series" data-model="5">
+<text x="18" y="290" font-size="17" font-weight="600">Gemini 3.8 Flash</text>
+<title>Gemini 3.8 Flash: 1,301.00; Effort not stated; 95% CI: Not published in captured record</title>
+<circle cx="507.75" cy="285" r="7" fill="#07816c"/>
+<text x="805" y="290" font-size="17" font-weight="600">1,301.00</text>
+</g>
+<g class="task-series" data-model="6">
+<text x="18" y="334" font-size="17" font-weight="600">GPT-6 Luna</text>
+<title>GPT-6 Luna: 1,272.00; Effort not stated; 95% CI: Not published in captured record</title>
+<circle cx="428.00" cy="329" r="7" fill="#6e7889"/>
+<text x="805" y="334" font-size="17" font-weight="600">1,272.00</text>
+</g>
+<text x="505" y="412" text-anchor="middle" font-size="14">Elo / higher is better / native benchmark scale</text></svg><p class="task-limit">Design preference is not a test of accessibility, working interactions, maintainability, or production frontend correctness. Effort is unstated unless it appears in the source model ID. No confidence intervals are published for these captured rows; close ratings are not decisive.</p><p class="muted">Overview: explicitly named Astra max and GPT-5.6 Sol xhigh entries; otherwise the exact base entry with effort unstated. These are not matched-effort configurations. Alternate base entries remain below.</p><details class="configurations"><summary>Exact configurations and source records (9)</summary><div class="table-scroll"><table><caption>DesignArena: Website: captured selected-family runs</caption><thead><tr><th scope="col">Model</th><th scope="col">Source configuration</th><th scope="col">Score</th><th scope="col">95% CI</th><th scope="col">Sample</th></tr></thead><tbody><tr class="task-series" data-model="0"><th scope="row">Claude Opus 5.5 <span class="overview-badge">Overview</span></th><td>Effort not stated<small>Source: claude-opus-5-5</small></td><td class="number">1,335.00</td><td>Not published in captured record</td><td>2,173 pairwise comparisons</td></tr><tr class="task-series" data-model="1"><th scope="row">Claude Sonnet 5.5 <span class="overview-badge">Overview</span></th><td>Effort not stated<small>Source: claude-sonnet-5-5</small></td><td class="number">1,326.00</td><td>Not published in captured record</td><td>1,873 pairwise comparisons</td></tr><tr class="task-series" data-model="2"><th scope="row">GPT-6 Astra <span class="overview-badge">Overview</span></th><td>Max<small>Source: gpt-6-astra-max</small></td><td class="number">1,337.00</td><td>Not published in captured record</td><td>2,271 pairwise comparisons</td></tr><tr class="task-series" data-model="2"><th scope="row">GPT-6 Astra </th><td>Effort not stated<small>Source: gpt-6-astra</small></td><td class="number">1,329.00</td><td>Not published in captured record</td><td>4,791 pairwise comparisons</td></tr><tr class="task-series" data-model="3"><th scope="row">GPT-6.1 Sol <span class="overview-badge">Overview</span></th><td>Effort not stated<small>Source: gpt-6.1-sol</small></td><td class="number">1,320.00</td><td>Not published in captured record</td><td>2,161 pairwise comparisons</td></tr><tr class="task-series" data-model="4"><th scope="row">GPT-5.6 Sol <span class="overview-badge">Overview</span></th><td>Xhigh<small>Source: gpt-5.6-sol-xhigh</small></td><td class="number">1,321.00</td><td>Not published in captured record</td><td>7,178 pairwise comparisons</td></tr><tr class="task-series" data-model="4"><th scope="row">GPT-5.6 Sol </th><td>Effort not stated<small>Source: gpt-5.6-sol</small></td><td class="number">1,309.00</td><td>Not published in captured record</td><td>13,401 pairwise comparisons</td></tr><tr class="task-series" data-model="5"><th scope="row">Gemini 3.8 Flash <span class="overview-badge">Overview</span></th><td>Effort not stated<small>Source: gemini-3.8-flash</small></td><td class="number">1,301.00</td><td>Not published in captured record</td><td>29,439 pairwise comparisons</td></tr><tr class="task-series" data-model="6"><th scope="row">GPT-6 Luna <span class="overview-badge">Overview</span></th><td>Effort not stated<small>Source: gpt-6-luna</small></td><td class="number">1,272.00</td><td>Not published in captured record</td><td>3,901 pairwise comparisons</td></tr></tbody></table></div></details><p class="source-line"><a href="https://www.designarena.ai/leaderboard/website">DesignArena: Website</a> / <a href="https://www.designarena.ai/about">Methodology</a> / Retrieved 21 Oct 2026. Elo scales are benchmark-specific.</p></section>
+<section id="panel-engineering" role="tabpanel" aria-labelledby="tab-engineering" tabindex="0" hidden><h3>Software engineering / terminal tasks</h3><p>Resolution rate on executable terminal tasks. Each row identifies the actual agent and reasoning effort; whiskers show the source&#x27;s 95% CI.</p><svg class="task-plot" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 430" role="img" aria-labelledby="task-engineering-title task-engineering-desc">
+<title id="task-engineering-title">Software engineering / terminal tasks</title>
+<desc id="task-engineering-desc">Seven selected model families. Horizontal axis: % from 0 to 100, higher is better. Exact scores and configurations are in the table below. Whiskers are published 95% confidence intervals where available; missing results are labeled, not plotted as zero.</desc>
+<style>text{font-family:Segoe UI,Arial,sans-serif;fill:#192740}</style>
+<rect width="1000" height="430" rx="12" fill="#f5f7fb"/>
+<line x1="230.0" y1="38" x2="230.0" y2="350" stroke="#dde4ee"/>
+<text x="230.0" y="380" text-anchor="middle" font-size="14">0</text>
+<line x1="340.0" y1="38" x2="340.0" y2="350" stroke="#dde4ee"/>
+<text x="340.0" y="380" text-anchor="middle" font-size="14">20</text>
+<line x1="450.0" y1="38" x2="450.0" y2="350" stroke="#dde4ee"/>
+<text x="450.0" y="380" text-anchor="middle" font-size="14">40</text>
+<line x1="560.0" y1="38" x2="560.0" y2="350" stroke="#dde4ee"/>
+<text x="560.0" y="380" text-anchor="middle" font-size="14">60</text>
+<line x1="670.0" y1="38" x2="670.0" y2="350" stroke="#dde4ee"/>
+<text x="670.0" y="380" text-anchor="middle" font-size="14">80</text>
+<line x1="780.0" y1="38" x2="780.0" y2="350" stroke="#dde4ee"/>
+<text x="780.0" y="380" text-anchor="middle" font-size="14">100</text>
+<g class="task-series" data-model="0">
+<text x="18" y="70" font-size="17" font-weight="600">Claude Opus 5.5</text>
+<title>Claude Opus 5.5: 64.85%; Max / Claude Code; 95% CI: 61.74% to 67.96%</title>
+<path d="M569.57,65 H603.78 M569.57,60 V70 M603.78,60 V70" fill="none" stroke="#a34415" stroke-width="2"/>
+<circle cx="586.67" cy="65" r="7" fill="#a34415"/>
+<text x="805" y="70" font-size="17" font-weight="600">64.85%</text>
+</g>
+<g class="task-series" data-model="1">
+<text x="18" y="114" font-size="17" font-weight="600">Claude Sonnet 5.5</text>
+<title>Claude Sonnet 5.5: 61.82%; Max / Claude Code; 95% CI: 58.88% to 64.76%</title>
+<path d="M553.84,109 H586.18 M553.84,104 V114 M586.18,104 V114" fill="none" stroke="#d17908" stroke-width="2"/>
+<circle cx="570.01" cy="109" r="7" fill="#d17908"/>
+<text x="805" y="114" font-size="17" font-weight="600">61.82%</text>
+</g>
+<g class="task-series" data-model="2">
+<text x="18" y="158" font-size="17" font-weight="600">GPT-6 Astra</text>
+<title>GPT-6 Astra: 58.18%; Max / Codex; 95% CI: 55.39% to 60.97%</title>
+<path d="M534.64,153 H565.34 M534.64,148 V158 M565.34,148 V158" fill="none" stroke="#5144c7" stroke-width="2"/>
+<circle cx="549.99" cy="153" r="7" fill="#5144c7"/>
+<text x="805" y="158" font-size="17" font-weight="600">58.18%</text>
+</g>
+<g class="task-series" data-model="3">
+<text x="18" y="202" font-size="17" font-weight="600">GPT-6.1 Sol</text>
+<title>GPT-6.1 Sol: 58.18%; Max / Codex; 95% CI: 55.07% to 61.29%</title>
+<path d="M532.88,197 H567.10 M532.88,192 V202 M567.10,192 V202" fill="none" stroke="#1878ba" stroke-width="2"/>
+<circle cx="549.99" cy="197" r="7" fill="#1878ba"/>
+<text x="805" y="202" font-size="17" font-weight="600">58.18%</text>
+</g>
+<g class="task-series" data-model="4">
+<text x="18" y="246" font-size="17" font-weight="600">GPT-5.6 Sol</text>
+<title>GPT-5.6 Sol: 37.27%; Max / Codex; 95% CI: 33.49% to 41.05%</title>
+<path d="M414.20,241 H455.77 M414.20,236 V246 M455.77,236 V246" fill="none" stroke="#bf3c85" stroke-width="2"/>
+<circle cx="434.99" cy="241" r="7" fill="#bf3c85"/>
+<text x="805" y="246" font-size="17" font-weight="600">37.27%</text>
+</g>
+<g class="task-series" data-model="5">
+<text x="18" y="290" font-size="17" font-weight="600">Gemini 3.8 Flash</text>
+<title>Gemini 3.8 Flash: 19.09%; High / mini-SWE-agent; 95% CI: 15.73% to 22.45%</title>
+<path d="M316.51,285 H353.48 M316.51,280 V290 M353.48,280 V290" fill="none" stroke="#07816c" stroke-width="2"/>
+<circle cx="335.00" cy="285" r="7" fill="#07816c"/>
+<text x="805" y="290" font-size="17" font-weight="600">19.09%</text>
+</g>
+<g class="task-series" data-model="6">
+<text x="18" y="334" font-size="17" font-weight="600">GPT-6 Luna</text>
+<title>GPT-6 Luna: 16.36%; Max / Codex; 95% CI: 13.64% to 19.08%</title>
+<path d="M305.02,329 H334.94 M305.02,324 V334 M334.94,324 V334" fill="none" stroke="#6e7889" stroke-width="2"/>
+<circle cx="319.98" cy="329" r="7" fill="#6e7889"/>
+<text x="805" y="334" font-size="17" font-weight="600">16.36%</text>
+</g>
+<text x="505" y="412" text-anchor="middle" font-size="14">% / higher is better / native benchmark scale</text></svg><p class="task-limit">A software-engineering proxy, not a backend-only benchmark. These results measure model + agent + tools + budget, not the base model in isolation. Different agents make cross-model comparisons confounded.</p><p class="muted">Overview: max effort for each selected model, except Gemini high. All available selected-family runs remain in the configuration table.</p><details class="configurations"><summary>Exact configurations and source records (11)</summary><div class="table-scroll"><table><caption>Terminal-Bench 4.0: captured selected-family runs</caption><thead><tr><th scope="col">Model</th><th scope="col">Source configuration</th><th scope="col">Score</th><th scope="col">95% CI</th><th scope="col">Sample</th></tr></thead><tbody><tr class="task-series" data-model="0"><th scope="row">Claude Opus 5.5 <span class="overview-badge">Overview</span></th><td>Max / Claude Code<small>Source: Opus 5.5</small></td><td class="number">64.85%</td><td>61.74% to 67.96%</td><td>330 trials</td></tr><tr class="task-series" data-model="1"><th scope="row">Claude Sonnet 5.5 <span class="overview-badge">Overview</span></th><td>Max / Claude Code<small>Source: Sonnet 5.5</small></td><td class="number">61.82%</td><td>58.88% to 64.76%</td><td>330 trials</td></tr><tr class="task-series" data-model="2"><th scope="row">GPT-6 Astra <span class="overview-badge">Overview</span></th><td>Max / Codex<small>Source: GPT-6 Astra</small></td><td class="number">58.18%</td><td>55.39% to 60.97%</td><td>330 trials</td></tr><tr class="task-series" data-model="2"><th scope="row">GPT-6 Astra </th><td>Xhigh / Codex<small>Source: GPT-6 Astra</small></td><td class="number">57.88%</td><td>55.16% to 60.60%</td><td>330 trials</td></tr><tr class="task-series" data-model="2"><th scope="row">GPT-6 Astra </th><td>High / Codex<small>Source: GPT-6 Astra</small></td><td class="number">57.88%</td><td>54.91% to 60.85%</td><td>330 trials</td></tr><tr class="task-series" data-model="2"><th scope="row">GPT-6 Astra </th><td>Medium / Codex<small>Source: GPT-6 Astra</small></td><td class="number">54.24%</td><td>51.58% to 56.90%</td><td>330 trials</td></tr><tr class="task-series" data-model="2"><th scope="row">GPT-6 Astra </th><td>Low / Codex<small>Source: GPT-6 Astra</small></td><td class="number">50.61%</td><td>47.86% to 53.36%</td><td>330 trials</td></tr><tr class="task-series" data-model="3"><th scope="row">GPT-6.1 Sol <span class="overview-badge">Overview</span></th><td>Max / Codex<small>Source: GPT-6.1 Sol</small></td><td class="number">58.18%</td><td>55.07% to 61.29%</td><td>330 trials</td></tr><tr class="task-series" data-model="4"><th scope="row">GPT-5.6 Sol <span class="overview-badge">Overview</span></th><td>Max / Codex<small>Source: GPT-5.6 Sol</small></td><td class="number">37.27%</td><td>33.49% to 41.05%</td><td>330 trials</td></tr><tr class="task-series" data-model="5"><th scope="row">Gemini 3.8 Flash <span class="overview-badge">Overview</span></th><td>High / mini-SWE-agent<small>Source: Gemini 3.8 Flash</small></td><td class="number">19.09%</td><td>15.73% to 22.45%</td><td>330 trials</td></tr><tr class="task-series" data-model="6"><th scope="row">GPT-6 Luna <span class="overview-badge">Overview</span></th><td>Max / Codex<small>Source: GPT-6 Luna</small></td><td class="number">16.36%</td><td>13.64% to 19.08%</td><td>330 trials</td></tr></tbody></table></div></details><p class="source-line"><a href="https://www.tbench.ai/">Terminal-Bench 4.0</a> / <a href="https://www.tbench.ai/run">Methodology</a> / Retrieved 21 Oct 2026. Elo scales are benchmark-specific.</p></section>
+<section id="panel-documents" role="tabpanel" aria-labelledby="tab-documents" tabindex="0" hidden>
+<label class="metric-control">Document metric:
+<select id="document-metric">
+<option value="word">Word deliverables / rubric checks met</option>
+<option value="analysis">Analytical quality / all artifact types</option>
+<option value="presentation">Presentation quality / all artifact types</option>
+<option value="professional">Professional work / GDPval-AA</option>
+</select></label><div data-document-metric="word"><h3>Document writing: Word deliverables</h3><p>Raw Word (.docx) rubric-check pass rate, extracted from briefcaseBreakdown.rubricByFileType.docx. Each captured run contains 17 Word tasks; this is checks satisfied, not whole documents passed.</p><svg class="task-plot" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 430" role="img" aria-labelledby="task-word-title task-word-desc">
+<title id="task-word-title">Document writing: Word deliverables</title>
+<desc id="task-word-desc">Seven selected model families. Horizontal axis: % from 0 to 100, higher is better. Exact scores and configurations are in the table below. Whiskers are published 95% confidence intervals where available; missing results are labeled, not plotted as zero.</desc>
+<style>text{font-family:Segoe UI,Arial,sans-serif;fill:#192740}</style>
+<rect width="1000" height="430" rx="12" fill="#f5f7fb"/>
+<line x1="230.0" y1="38" x2="230.0" y2="350" stroke="#dde4ee"/>
+<text x="230.0" y="380" text-anchor="middle" font-size="14">0</text>
+<line x1="340.0" y1="38" x2="340.0" y2="350" stroke="#dde4ee"/>
+<text x="340.0" y="380" text-anchor="middle" font-size="14">20</text>
+<line x1="450.0" y1="38" x2="450.0" y2="350" stroke="#dde4ee"/>
+<text x="450.0" y="380" text-anchor="middle" font-size="14">40</text>
+<line x1="560.0" y1="38" x2="560.0" y2="350" stroke="#dde4ee"/>
+<text x="560.0" y="380" text-anchor="middle" font-size="14">60</text>
+<line x1="670.0" y1="38" x2="670.0" y2="350" stroke="#dde4ee"/>
+<text x="670.0" y="380" text-anchor="middle" font-size="14">80</text>
+<line x1="780.0" y1="38" x2="780.0" y2="350" stroke="#dde4ee"/>
+<text x="780.0" y="380" text-anchor="middle" font-size="14">100</text>
+<g class="task-series" data-model="0">
+<text x="18" y="70" font-size="17" font-weight="600">Claude Opus 5.5</text>
+<title>Claude Opus 5.5: 60.36%; Claude Opus 5.5 (Max, Default Fallback); 95% CI: Not published in captured record</title>
+<circle cx="561.95" cy="65" r="7" fill="#a34415"/>
+<text x="805" y="70" font-size="17" font-weight="600">60.36%</text>
+</g>
+<g class="task-series" data-model="1">
+<text x="18" y="114" font-size="17" font-weight="600">Claude Sonnet 5.5</text>
+<title>Claude Sonnet 5.5: 60.95%; Claude Sonnet 5.5 (Max, Default Fallback); 95% CI: Not published in captured record</title>
+<circle cx="565.21" cy="109" r="7" fill="#d17908"/>
+<text x="805" y="114" font-size="17" font-weight="600">60.95%</text>
+</g>
+<g class="task-series" data-model="2">
+<text x="18" y="158" font-size="17" font-weight="600">GPT-6 Astra</text>
+<title>GPT-6 Astra: 52.07%; GPT-6 Astra (Max); 95% CI: Not published in captured record</title>
+<circle cx="516.39" cy="153" r="7" fill="#5144c7"/>
+<text x="805" y="158" font-size="17" font-weight="600">52.07%</text>
+</g>
+<g class="task-series" data-model="3">
+<text x="18" y="202" font-size="17" font-weight="600">GPT-6.1 Sol</text>
+<title>GPT-6.1 Sol: 52.07%; GPT-6.1 Sol (Max); 95% CI: Not published in captured record</title>
+<circle cx="516.39" cy="197" r="7" fill="#1878ba"/>
+<text x="805" y="202" font-size="17" font-weight="600">52.07%</text>
+</g>
+<g class="task-series" data-model="4">
+<text x="18" y="246" font-size="17" font-weight="600">GPT-5.6 Sol</text>
+<text x="805" y="246" font-size="15" fill="#56647a">No result</text>
+</g>
+<g class="task-series" data-model="5">
+<text x="18" y="290" font-size="17" font-weight="600">Gemini 3.8 Flash</text>
+<title>Gemini 3.8 Flash: 44.97%; Gemini 3.8 Flash (High); 95% CI: Not published in captured record</title>
+<circle cx="477.34" cy="285" r="7" fill="#07816c"/>
+<text x="805" y="290" font-size="17" font-weight="600">44.97%</text>
+</g>
+<g class="task-series" data-model="6">
+<text x="18" y="334" font-size="17" font-weight="600">GPT-6 Luna</text>
+<title>GPT-6 Luna: 44.38%; GPT-6 Luna (Max); 95% CI: Not published in captured record</title>
+<circle cx="474.08" cy="329" r="7" fill="#6e7889"/>
+<text x="805" y="334" font-size="17" font-weight="600">44.38%</text>
+</g>
+<text x="505" y="412" text-anchor="middle" font-size="14">% / higher is better / native benchmark scale</text></svg><p class="task-limit">Agent-assisted professional artifact creation using Stirrup, not a pure prose or creative-writing test. Word scores have no published CI in these records; a small gap is not a reliable ranking.</p><p class="muted">Overview: max effort with the source&#x27;s stated fallback for Claude; Gemini high. Unavailable models are left missing, not estimated.</p><details class="configurations"><summary>Exact configurations and source records (9)</summary><div class="table-scroll"><table><caption>AA-Briefcase v1.1: captured selected-family runs</caption><thead><tr><th scope="col">Model</th><th scope="col">Source configuration</th><th scope="col">Score</th><th scope="col">95% CI</th><th scope="col">Sample</th></tr></thead><tbody><tr class="task-series" data-model="0"><th scope="row">Claude Opus 5.5 <span class="overview-badge">Overview</span></th><td>Claude Opus 5.5 (Max, Default Fallback)<small>Source: claude-opus-5-5</small></td><td class="number">60.36%</td><td>Not published in captured record</td><td>17 tasks</td></tr><tr class="task-series" data-model="0"><th scope="row">Claude Opus 5.5 </th><td>Claude Opus 5.5 (Xhigh, Default Fallback)<small>Source: claude-opus-5-5-xhigh</small></td><td class="number">55.62%</td><td>Not published in captured record</td><td>17 tasks</td></tr><tr class="task-series" data-model="0"><th scope="row">Claude Opus 5.5 </th><td>Claude Opus 5.5 (High, Default Fallback)<small>Source: claude-opus-5-5-high</small></td><td class="number">55.62%</td><td>Not published in captured record</td><td>17 tasks</td></tr><tr class="task-series" data-model="1"><th scope="row">Claude Sonnet 5.5 <span class="overview-badge">Overview</span></th><td>Claude Sonnet 5.5 (Max, Default Fallback)<small>Source: claude-sonnet-5-5</small></td><td class="number">60.95%</td><td>Not published in captured record</td><td>17 tasks</td></tr><tr class="task-series" data-model="1"><th scope="row">Claude Sonnet 5.5 </th><td>Claude Sonnet 5.5 (Xhigh, Default Fallback)<small>Source: claude-sonnet-5-5-xhigh</small></td><td class="number">59.17%</td><td>Not published in captured record</td><td>17 tasks</td></tr><tr class="task-series" data-model="2"><th scope="row">GPT-6 Astra <span class="overview-badge">Overview</span></th><td>GPT-6 Astra (Max)<small>Source: gpt-6-astra</small></td><td class="number">52.07%</td><td>Not published in captured record</td><td>17 tasks</td></tr><tr class="task-series" data-model="3"><th scope="row">GPT-6.1 Sol <span class="overview-badge">Overview</span></th><td>GPT-6.1 Sol (Max)<small>Source: gpt-6-1-sol</small></td><td class="number">52.07%</td><td>Not published in captured record</td><td>17 tasks</td></tr><tr class="task-series" data-model="5"><th scope="row">Gemini 3.8 Flash <span class="overview-badge">Overview</span></th><td>Gemini 3.8 Flash (High)<small>Source: gemini-3-8-flash</small></td><td class="number">44.97%</td><td>Not published in captured record</td><td>17 tasks</td></tr><tr class="task-series" data-model="6"><th scope="row">GPT-6 Luna <span class="overview-badge">Overview</span></th><td>GPT-6 Luna (Max)<small>Source: gpt-6-luna</small></td><td class="number">44.38%</td><td>Not published in captured record</td><td>17 tasks</td></tr></tbody></table></div></details><p class="source-line"><a href="https://artificialanalysis.ai/evaluations/aa-briefcase">AA-Briefcase v1.1</a> / <a href="https://artificialanalysis.ai/methodology/intelligence-benchmarking#aa-briefcase">Methodology</a> / Retrieved 21 Oct 2026. Elo scales are benchmark-specific.</p></div><div data-document-metric="analysis" hidden><h3>Analytical quality: all deliverable types</h3><p>Analytical quality pairwise Elo across all deliverable types (Word, PDF, slides, spreadsheets, and others), not Word-only.</p><svg class="task-plot" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 430" role="img" aria-labelledby="task-analysis-title task-analysis-desc">
+<title id="task-analysis-title">Analytical quality: all deliverable types</title>
+<desc id="task-analysis-desc">Seven selected model families. Horizontal axis: Elo from 1000 to 2250, higher is better. Exact scores and configurations are in the table below. Whiskers are published 95% confidence intervals where available; missing results are labeled, not plotted as zero.</desc>
+<style>text{font-family:Segoe UI,Arial,sans-serif;fill:#192740}</style>
+<rect width="1000" height="430" rx="12" fill="#f5f7fb"/>
+<line x1="230.0" y1="38" x2="230.0" y2="350" stroke="#dde4ee"/>
+<text x="230.0" y="380" text-anchor="middle" font-size="14">1,000</text>
+<line x1="340.0" y1="38" x2="340.0" y2="350" stroke="#dde4ee"/>
+<text x="340.0" y="380" text-anchor="middle" font-size="14">1,250</text>
+<line x1="450.0" y1="38" x2="450.0" y2="350" stroke="#dde4ee"/>
+<text x="450.0" y="380" text-anchor="middle" font-size="14">1,500</text>
+<line x1="560.0" y1="38" x2="560.0" y2="350" stroke="#dde4ee"/>
+<text x="560.0" y="380" text-anchor="middle" font-size="14">1,750</text>
+<line x1="670.0" y1="38" x2="670.0" y2="350" stroke="#dde4ee"/>
+<text x="670.0" y="380" text-anchor="middle" font-size="14">2,000</text>
+<line x1="780.0" y1="38" x2="780.0" y2="350" stroke="#dde4ee"/>
+<text x="780.0" y="380" text-anchor="middle" font-size="14">2,250</text>
+<g class="task-series" data-model="0">
+<text x="18" y="70" font-size="17" font-weight="600">Claude Opus 5.5</text>
+<title>Claude Opus 5.5: 2,142.71; Claude Opus 5.5 (Max, Default Fallback); 95% CI: 2,119.83 to 2,164.06</title>
+<path d="M722.73,65 H742.19 M722.73,60 V70 M742.19,60 V70" fill="none" stroke="#a34415" stroke-width="2"/>
+<circle cx="732.79" cy="65" r="7" fill="#a34415"/>
+<text x="805" y="70" font-size="17" font-weight="600">2,142.71</text>
+</g>
+<g class="task-series" data-model="1">
+<text x="18" y="114" font-size="17" font-weight="600">Claude Sonnet 5.5</text>
+<title>Claude Sonnet 5.5: 2,115.09; Claude Sonnet 5.5 (Max, Default Fallback); 95% CI: 2,093.81 to 2,138.33</title>
+<path d="M711.28,109 H730.87 M711.28,104 V114 M730.87,104 V114" fill="none" stroke="#d17908" stroke-width="2"/>
+<circle cx="720.64" cy="109" r="7" fill="#d17908"/>
+<text x="805" y="114" font-size="17" font-weight="600">2,115.09</text>
+</g>
+<g class="task-series" data-model="2">
+<text x="18" y="158" font-size="17" font-weight="600">GPT-6 Astra</text>
+<title>GPT-6 Astra: 1,757.39; GPT-6 Astra (Max); 95% CI: 1,742.11 to 1,774.30</title>
+<path d="M556.53,153 H570.69 M556.53,148 V158 M570.69,148 V158" fill="none" stroke="#5144c7" stroke-width="2"/>
+<circle cx="563.25" cy="153" r="7" fill="#5144c7"/>
+<text x="805" y="158" font-size="17" font-weight="600">1,757.39</text>
+</g>
+<g class="task-series" data-model="3">
+<text x="18" y="202" font-size="17" font-weight="600">GPT-6.1 Sol</text>
+<title>GPT-6.1 Sol: 1,773.21; GPT-6.1 Sol (Max); 95% CI: 1,758.00 to 1,790.79</title>
+<path d="M563.52,197 H577.95 M563.52,192 V202 M577.95,192 V202" fill="none" stroke="#1878ba" stroke-width="2"/>
+<circle cx="570.21" cy="197" r="7" fill="#1878ba"/>
+<text x="805" y="202" font-size="17" font-weight="600">1,773.21</text>
+</g>
+<g class="task-series" data-model="4">
+<text x="18" y="246" font-size="17" font-weight="600">GPT-5.6 Sol</text>
+<text x="805" y="246" font-size="15" fill="#56647a">No result</text>
+</g>
+<g class="task-series" data-model="5">
+<text x="18" y="290" font-size="17" font-weight="600">Gemini 3.8 Flash</text>
+<title>Gemini 3.8 Flash: 1,137.87; Gemini 3.8 Flash (High); 95% CI: 1,122.84 to 1,152.99</title>
+<path d="M284.05,285 H297.32 M284.05,280 V290 M297.32,280 V290" fill="none" stroke="#07816c" stroke-width="2"/>
+<circle cx="290.66" cy="285" r="7" fill="#07816c"/>
+<text x="805" y="290" font-size="17" font-weight="600">1,137.87</text>
+</g>
+<g class="task-series" data-model="6">
+<text x="18" y="334" font-size="17" font-weight="600">GPT-6 Luna</text>
+<title>GPT-6 Luna: 1,374.83; GPT-6 Luna (Max); 95% CI: 1,355.97 to 1,394.56</title>
+<path d="M386.63,329 H403.61 M386.63,324 V334 M403.61,324 V334" fill="none" stroke="#6e7889" stroke-width="2"/>
+<circle cx="394.93" cy="329" r="7" fill="#6e7889"/>
+<text x="805" y="334" font-size="17" font-weight="600">1,374.83</text>
+</g>
+<text x="505" y="412" text-anchor="middle" font-size="14">Elo / higher is better / native benchmark scale</text></svg><p class="task-limit">A broader professional-work proxy, not a prose-only score. Its Elo scale cannot be compared numerically with DesignArena or GDPval.</p><p class="muted">Overview: max effort with the source&#x27;s stated fallback for Claude; Gemini high. Unavailable models are left missing, not estimated.</p><details class="configurations"><summary>Exact configurations and source records (9)</summary><div class="table-scroll"><table><caption>AA-Briefcase v1.1: captured selected-family runs</caption><thead><tr><th scope="col">Model</th><th scope="col">Source configuration</th><th scope="col">Score</th><th scope="col">95% CI</th><th scope="col">Sample</th></tr></thead><tbody><tr class="task-series" data-model="0"><th scope="row">Claude Opus 5.5 <span class="overview-badge">Overview</span></th><td>Claude Opus 5.5 (Max, Default Fallback)<small>Source: claude-opus-5-5</small></td><td class="number">2,142.71</td><td>2,119.83 to 2,164.06</td><td>91 tasks</td></tr><tr class="task-series" data-model="0"><th scope="row">Claude Opus 5.5 </th><td>Claude Opus 5.5 (Xhigh, Default Fallback)<small>Source: claude-opus-5-5-xhigh</small></td><td class="number">2,093.30</td><td>2,071.83 to 2,115.11</td><td>91 tasks</td></tr><tr class="task-series" data-model="0"><th scope="row">Claude Opus 5.5 </th><td>Claude Opus 5.5 (High, Default Fallback)<small>Source: claude-opus-5-5-high</small></td><td class="number">1,982.57</td><td>1,963.89 to 2,003.46</td><td>91 tasks</td></tr><tr class="task-series" data-model="1"><th scope="row">Claude Sonnet 5.5 <span class="overview-badge">Overview</span></th><td>Claude Sonnet 5.5 (Max, Default Fallback)<small>Source: claude-sonnet-5-5</small></td><td class="number">2,115.09</td><td>2,093.81 to 2,138.33</td><td>91 tasks</td></tr><tr class="task-series" data-model="1"><th scope="row">Claude Sonnet 5.5 </th><td>Claude Sonnet 5.5 (Xhigh, Default Fallback)<small>Source: claude-sonnet-5-5-xhigh</small></td><td class="number">2,026.49</td><td>2,005.26 to 2,049.84</td><td>91 tasks</td></tr><tr class="task-series" data-model="2"><th scope="row">GPT-6 Astra <span class="overview-badge">Overview</span></th><td>GPT-6 Astra (Max)<small>Source: gpt-6-astra</small></td><td class="number">1,757.39</td><td>1,742.11 to 1,774.30</td><td>91 tasks</td></tr><tr class="task-series" data-model="3"><th scope="row">GPT-6.1 Sol <span class="overview-badge">Overview</span></th><td>GPT-6.1 Sol (Max)<small>Source: gpt-6-1-sol</small></td><td class="number">1,773.21</td><td>1,758.00 to 1,790.79</td><td>91 tasks</td></tr><tr class="task-series" data-model="5"><th scope="row">Gemini 3.8 Flash <span class="overview-badge">Overview</span></th><td>Gemini 3.8 Flash (High)<small>Source: gemini-3-8-flash</small></td><td class="number">1,137.87</td><td>1,122.84 to 1,152.99</td><td>91 tasks</td></tr><tr class="task-series" data-model="6"><th scope="row">GPT-6 Luna <span class="overview-badge">Overview</span></th><td>GPT-6 Luna (Max)<small>Source: gpt-6-luna</small></td><td class="number">1,374.83</td><td>1,355.97 to 1,394.56</td><td>91 tasks</td></tr></tbody></table></div></details><p class="source-line"><a href="https://artificialanalysis.ai/evaluations/aa-briefcase">AA-Briefcase v1.1</a> / <a href="https://artificialanalysis.ai/methodology/intelligence-benchmarking#aa-briefcase">Methodology</a> / Retrieved 21 Oct 2026. Elo scales are benchmark-specific.</p></div><div data-document-metric="presentation" hidden><h3>Presentation: all deliverable types</h3><p>Presentation pairwise Elo across all deliverable types (Word, PDF, slides, spreadsheets, and others), not Word-only.</p><svg class="task-plot" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 430" role="img" aria-labelledby="task-presentation-title task-presentation-desc">
+<title id="task-presentation-title">Presentation: all deliverable types</title>
+<desc id="task-presentation-desc">Seven selected model families. Horizontal axis: Elo from 1000 to 2000, higher is better. Exact scores and configurations are in the table below. Whiskers are published 95% confidence intervals where available; missing results are labeled, not plotted as zero.</desc>
+<style>text{font-family:Segoe UI,Arial,sans-serif;fill:#192740}</style>
+<rect width="1000" height="430" rx="12" fill="#f5f7fb"/>
+<line x1="230.0" y1="38" x2="230.0" y2="350" stroke="#dde4ee"/>
+<text x="230.0" y="380" text-anchor="middle" font-size="14">1,000</text>
+<line x1="367.5" y1="38" x2="367.5" y2="350" stroke="#dde4ee"/>
+<text x="367.5" y="380" text-anchor="middle" font-size="14">1,250</text>
+<line x1="505.0" y1="38" x2="505.0" y2="350" stroke="#dde4ee"/>
+<text x="505.0" y="380" text-anchor="middle" font-size="14">1,500</text>
+<line x1="642.5" y1="38" x2="642.5" y2="350" stroke="#dde4ee"/>
+<text x="642.5" y="380" text-anchor="middle" font-size="14">1,750</text>
+<line x1="780.0" y1="38" x2="780.0" y2="350" stroke="#dde4ee"/>
+<text x="780.0" y="380" text-anchor="middle" font-size="14">2,000</text>
+<g class="task-series" data-model="0">
+<text x="18" y="70" font-size="17" font-weight="600">Claude Opus 5.5</text>
+<title>Claude Opus 5.5: 1,714.96; Claude Opus 5.5 (Max, Default Fallback); 95% CI: 1,694.88 to 1,736.97</title>
+<path d="M612.18,65 H635.33 M612.18,60 V70 M635.33,60 V70" fill="none" stroke="#a34415" stroke-width="2"/>
+<circle cx="623.23" cy="65" r="7" fill="#a34415"/>
+<text x="805" y="70" font-size="17" font-weight="600">1,714.96</text>
+</g>
+<g class="task-series" data-model="1">
+<text x="18" y="114" font-size="17" font-weight="600">Claude Sonnet 5.5</text>
+<title>Claude Sonnet 5.5: 1,716.02; Claude Sonnet 5.5 (Max, Default Fallback); 95% CI: 1,692.87 to 1,737.48</title>
+<path d="M611.08,109 H635.61 M611.08,104 V114 M635.61,104 V114" fill="none" stroke="#d17908" stroke-width="2"/>
+<circle cx="623.81" cy="109" r="7" fill="#d17908"/>
+<text x="805" y="114" font-size="17" font-weight="600">1,716.02</text>
+</g>
+<g class="task-series" data-model="2">
+<text x="18" y="158" font-size="17" font-weight="600">GPT-6 Astra</text>
+<title>GPT-6 Astra: 1,549.00; GPT-6 Astra (Max); 95% CI: 1,532.66 to 1,567.05</title>
+<path d="M522.96,153 H541.88 M522.96,148 V158 M541.88,148 V158" fill="none" stroke="#5144c7" stroke-width="2"/>
+<circle cx="531.95" cy="153" r="7" fill="#5144c7"/>
+<text x="805" y="158" font-size="17" font-weight="600">1,549.00</text>
+</g>
+<g class="task-series" data-model="3">
+<text x="18" y="202" font-size="17" font-weight="600">GPT-6.1 Sol</text>
+<title>GPT-6.1 Sol: 1,447.29; GPT-6.1 Sol (Max); 95% CI: 1,428.08 to 1,466.40</title>
+<path d="M465.44,197 H486.52 M465.44,192 V202 M486.52,192 V202" fill="none" stroke="#1878ba" stroke-width="2"/>
+<circle cx="476.01" cy="197" r="7" fill="#1878ba"/>
+<text x="805" y="202" font-size="17" font-weight="600">1,447.29</text>
+</g>
+<g class="task-series" data-model="4">
+<text x="18" y="246" font-size="17" font-weight="600">GPT-5.6 Sol</text>
+<text x="805" y="246" font-size="15" fill="#56647a">No result</text>
+</g>
+<g class="task-series" data-model="5">
+<text x="18" y="290" font-size="17" font-weight="600">Gemini 3.8 Flash</text>
+<title>Gemini 3.8 Flash: 1,223.27; Gemini 3.8 Flash (High); 95% CI: 1,208.64 to 1,237.83</title>
+<path d="M344.75,285 H360.81 M344.75,280 V290 M360.81,280 V290" fill="none" stroke="#07816c" stroke-width="2"/>
+<circle cx="352.80" cy="285" r="7" fill="#07816c"/>
+<text x="805" y="290" font-size="17" font-weight="600">1,223.27</text>
+</g>
+<g class="task-series" data-model="6">
+<text x="18" y="334" font-size="17" font-weight="600">GPT-6 Luna</text>
+<title>GPT-6 Luna: 1,394.86; GPT-6 Luna (Max); 95% CI: 1,379.49 to 1,410.73</title>
+<path d="M438.72,329 H455.90 M438.72,324 V334 M455.90,324 V334" fill="none" stroke="#6e7889" stroke-width="2"/>
+<circle cx="447.17" cy="329" r="7" fill="#6e7889"/>
+<text x="805" y="334" font-size="17" font-weight="600">1,394.86</text>
+</g>
+<text x="505" y="412" text-anchor="middle" font-size="14">Elo / higher is better / native benchmark scale</text></svg><p class="task-limit">A broader professional-work proxy, not a prose-only score. Its Elo scale cannot be compared numerically with DesignArena or GDPval.</p><p class="muted">Overview: max effort with the source&#x27;s stated fallback for Claude; Gemini high. Unavailable models are left missing, not estimated.</p><details class="configurations"><summary>Exact configurations and source records (9)</summary><div class="table-scroll"><table><caption>AA-Briefcase v1.1: captured selected-family runs</caption><thead><tr><th scope="col">Model</th><th scope="col">Source configuration</th><th scope="col">Score</th><th scope="col">95% CI</th><th scope="col">Sample</th></tr></thead><tbody><tr class="task-series" data-model="0"><th scope="row">Claude Opus 5.5 <span class="overview-badge">Overview</span></th><td>Claude Opus 5.5 (Max, Default Fallback)<small>Source: claude-opus-5-5</small></td><td class="number">1,714.96</td><td>1,694.88 to 1,736.97</td><td>91 tasks</td></tr><tr class="task-series" data-model="0"><th scope="row">Claude Opus 5.5 </th><td>Claude Opus 5.5 (Xhigh, Default Fallback)<small>Source: claude-opus-5-5-xhigh</small></td><td class="number">1,642.19</td><td>1,624.29 to 1,662.13</td><td>91 tasks</td></tr><tr class="task-series" data-model="0"><th scope="row">Claude Opus 5.5 </th><td>Claude Opus 5.5 (High, Default Fallback)<small>Source: claude-opus-5-5-high</small></td><td class="number">1,549.88</td><td>1,532.60 to 1,568.62</td><td>91 tasks</td></tr><tr class="task-series" data-model="1"><th scope="row">Claude Sonnet 5.5 <span class="overview-badge">Overview</span></th><td>Claude Sonnet 5.5 (Max, Default Fallback)<small>Source: claude-sonnet-5-5</small></td><td class="number">1,716.02</td><td>1,692.87 to 1,737.48</td><td>91 tasks</td></tr><tr class="task-series" data-model="1"><th scope="row">Claude Sonnet 5.5 </th><td>Claude Sonnet 5.5 (Xhigh, Default Fallback)<small>Source: claude-sonnet-5-5-xhigh</small></td><td class="number">1,649.87</td><td>1,623.16 to 1,679.38</td><td>91 tasks</td></tr><tr class="task-series" data-model="2"><th scope="row">GPT-6 Astra <span class="overview-badge">Overview</span></th><td>GPT-6 Astra (Max)<small>Source: gpt-6-astra</small></td><td class="number">1,549.00</td><td>1,532.66 to 1,567.05</td><td>91 tasks</td></tr><tr class="task-series" data-model="3"><th scope="row">GPT-6.1 Sol <span class="overview-badge">Overview</span></th><td>GPT-6.1 Sol (Max)<small>Source: gpt-6-1-sol</small></td><td class="number">1,447.29</td><td>1,428.08 to 1,466.40</td><td>91 tasks</td></tr><tr class="task-series" data-model="5"><th scope="row">Gemini 3.8 Flash <span class="overview-badge">Overview</span></th><td>Gemini 3.8 Flash (High)<small>Source: gemini-3-8-flash</small></td><td class="number">1,223.27</td><td>1,208.64 to 1,237.83</td><td>91 tasks</td></tr><tr class="task-series" data-model="6"><th scope="row">GPT-6 Luna <span class="overview-badge">Overview</span></th><td>GPT-6 Luna (Max)<small>Source: gpt-6-luna</small></td><td class="number">1,394.86</td><td>1,379.49 to 1,410.73</td><td>91 tasks</td></tr></tbody></table></div></details><p class="source-line"><a href="https://artificialanalysis.ai/evaluations/aa-briefcase">AA-Briefcase v1.1</a> / <a href="https://artificialanalysis.ai/methodology/intelligence-benchmarking#aa-briefcase">Methodology</a> / Retrieved 21 Oct 2026. Elo scales are benchmark-specific.</p></div><div data-document-metric="professional" hidden><h3>Professional work: broader deliverables</h3><p>Pairwise Elo for professional deliverables, including documents, slides, diagrams, and spreadsheets. Whiskers show the source&#x27;s 95% CI.</p><svg class="task-plot" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 430" role="img" aria-labelledby="task-professional-title task-professional-desc">
+<title id="task-professional-title">Professional work: broader deliverables</title>
+<desc id="task-professional-desc">Seven selected model families. Horizontal axis: Elo from 1000 to 2000, higher is better. Exact scores and configurations are in the table below. Whiskers are published 95% confidence intervals where available; missing results are labeled, not plotted as zero.</desc>
+<style>text{font-family:Segoe UI,Arial,sans-serif;fill:#192740}</style>
+<rect width="1000" height="430" rx="12" fill="#f5f7fb"/>
+<line x1="230.0" y1="38" x2="230.0" y2="350" stroke="#dde4ee"/>
+<text x="230.0" y="380" text-anchor="middle" font-size="14">1,000</text>
+<line x1="367.5" y1="38" x2="367.5" y2="350" stroke="#dde4ee"/>
+<text x="367.5" y="380" text-anchor="middle" font-size="14">1,250</text>
+<line x1="505.0" y1="38" x2="505.0" y2="350" stroke="#dde4ee"/>
+<text x="505.0" y="380" text-anchor="middle" font-size="14">1,500</text>
+<line x1="642.5" y1="38" x2="642.5" y2="350" stroke="#dde4ee"/>
+<text x="642.5" y="380" text-anchor="middle" font-size="14">1,750</text>
+<line x1="780.0" y1="38" x2="780.0" y2="350" stroke="#dde4ee"/>
+<text x="780.0" y="380" text-anchor="middle" font-size="14">2,000</text>
+<g class="task-series" data-model="0">
+<text x="18" y="70" font-size="17" font-weight="600">Claude Opus 5.5</text>
+<title>Claude Opus 5.5: 1,866.27; Claude Opus 5.5 (Max, Default Fallback); 95% CI: -26 / +26 Elo (source-rounded)</title>
+<path d="M692.15,65 H720.75 M692.15,60 V70 M720.75,60 V70" fill="none" stroke="#a34415" stroke-width="2"/>
+<circle cx="706.45" cy="65" r="7" fill="#a34415"/>
+<text x="805" y="70" font-size="17" font-weight="600">1,866.27</text>
+</g>
+<g class="task-series" data-model="1">
+<text x="18" y="114" font-size="17" font-weight="600">Claude Sonnet 5.5</text>
+<title>Claude Sonnet 5.5: 1,837.82; Claude Sonnet 5.5 (Max, Default Fallback); 95% CI: -23 / +23 Elo (source-rounded)</title>
+<path d="M678.15,109 H703.45 M678.15,104 V114 M703.45,104 V114" fill="none" stroke="#d17908" stroke-width="2"/>
+<circle cx="690.80" cy="109" r="7" fill="#d17908"/>
+<text x="805" y="114" font-size="17" font-weight="600">1,837.82</text>
+</g>
+<g class="task-series" data-model="2">
+<text x="18" y="158" font-size="17" font-weight="600">GPT-6 Astra</text>
+<title>GPT-6 Astra: 1,572.84; GPT-6 Astra (Max); 95% CI: -20 / +20 Elo (source-rounded)</title>
+<path d="M534.06,153 H556.06 M534.06,148 V158 M556.06,148 V158" fill="none" stroke="#5144c7" stroke-width="2"/>
+<circle cx="545.06" cy="153" r="7" fill="#5144c7"/>
+<text x="805" y="158" font-size="17" font-weight="600">1,572.84</text>
+</g>
+<g class="task-series" data-model="3">
+<text x="18" y="202" font-size="17" font-weight="600">GPT-6.1 Sol</text>
+<title>GPT-6.1 Sol: 1,593.85; GPT-6.1 Sol (Max); 95% CI: -23 / +23 Elo (source-rounded)</title>
+<path d="M543.97,197 H569.27 M543.97,192 V202 M569.27,192 V202" fill="none" stroke="#1878ba" stroke-width="2"/>
+<circle cx="556.62" cy="197" r="7" fill="#1878ba"/>
+<text x="805" y="202" font-size="17" font-weight="600">1,593.85</text>
+</g>
+<g class="task-series" data-model="4">
+<text x="18" y="246" font-size="17" font-weight="600">GPT-5.6 Sol</text>
+<title>GPT-5.6 Sol: 1,608.63; GPT-5.6 Sol (Max); 95% CI: -17 / +17 Elo (source-rounded)</title>
+<path d="M555.40,241 H574.10 M555.40,236 V246 M574.10,236 V246" fill="none" stroke="#bf3c85" stroke-width="2"/>
+<circle cx="564.75" cy="241" r="7" fill="#bf3c85"/>
+<text x="805" y="246" font-size="17" font-weight="600">1,608.63</text>
+</g>
+<g class="task-series" data-model="5">
+<text x="18" y="290" font-size="17" font-weight="600">Gemini 3.8 Flash</text>
+<title>Gemini 3.8 Flash: 1,436.30; Gemini 3.8 Flash (High); 95% CI: -20 / +20 Elo (source-rounded)</title>
+<path d="M458.96,285 H480.96 M458.96,280 V290 M480.96,280 V290" fill="none" stroke="#07816c" stroke-width="2"/>
+<circle cx="469.96" cy="285" r="7" fill="#07816c"/>
+<text x="805" y="290" font-size="17" font-weight="600">1,436.30</text>
+</g>
+<g class="task-series" data-model="6">
+<text x="18" y="334" font-size="17" font-weight="600">GPT-6 Luna</text>
+<title>GPT-6 Luna: 1,431.86; GPT-6 Luna (Max); 95% CI: -22 / +22 Elo (source-rounded)</title>
+<path d="M455.42,329 H479.62 M455.42,324 V334 M479.62,324 V334" fill="none" stroke="#6e7889" stroke-width="2"/>
+<circle cx="467.52" cy="329" r="7" fill="#6e7889"/>
+<text x="805" y="334" font-size="17" font-weight="600">1,431.86</text>
+</g>
+<text x="505" y="412" text-anchor="middle" font-size="14">Elo / higher is better / native benchmark scale</text></svg><p class="task-limit">Not writing-only and not interchangeable with the Word rubric score. Elo is relative to this benchmark&#x27;s comparison pool, not a universal scale.</p><p class="muted">Overview: the exact source max entries, with the stated fallback for Claude; Gemini high. The configurations are not equal compute budgets.</p><details class="configurations"><summary>Exact configurations and source records (35)</summary><div class="table-scroll"><table><caption>GDPval-AA v2.1: captured selected-family runs</caption><thead><tr><th scope="col">Model</th><th scope="col">Source configuration</th><th scope="col">Score</th><th scope="col">95% CI</th><th scope="col">Sample</th></tr></thead><tbody><tr class="task-series" data-model="0"><th scope="row">Claude Opus 5.5 <span class="overview-badge">Overview</span></th><td>Claude Opus 5.5 (Max, Default Fallback)<small>Source: Claude Opus 5.5 (Max, Default Fallback)</small></td><td class="number">1,866.27</td><td>-26 / +26 Elo (source-rounded)</td><td>Not stated in captured record</td></tr><tr class="task-series" data-model="0"><th scope="row">Claude Opus 5.5 </th><td>Claude Opus 5.5 (Xhigh, Default Fallback)<small>Source: Claude Opus 5.5 (Xhigh, Default Fallback)</small></td><td class="number">1,831.09</td><td>-24 / +24 Elo (source-rounded)</td><td>Not stated in captured record</td></tr><tr class="task-series" data-model="0"><th scope="row">Claude Opus 5.5 </th><td>Claude Opus 5.5 (High, Default Fallback)<small>Source: Claude Opus 5.5 (High, Default Fallback)</small></td><td class="number">1,704.37</td><td>-22 / +22 Elo (source-rounded)</td><td>Not stated in captured record</td></tr><tr class="task-series" data-model="0"><th scope="row">Claude Opus 5.5 </th><td>Claude Opus 5.5 (Medium, Default Fallback)<small>Source: Claude Opus 5.5 (Medium, Default Fallback)</small></td><td class="number">1,583.60</td><td>-21 / +21 Elo (source-rounded)</td><td>Not stated in captured record</td></tr><tr class="task-series" data-model="0"><th scope="row">Claude Opus 5.5 </th><td>Claude Opus 5.5 (Low, Default Fallback)<small>Source: Claude Opus 5.5 (Low, Default Fallback)</small></td><td class="number">1,235.23</td><td>-22 / +22 Elo (source-rounded)</td><td>Not stated in captured record</td></tr><tr class="task-series" data-model="1"><th scope="row">Claude Sonnet 5.5 <span class="overview-badge">Overview</span></th><td>Claude Sonnet 5.5 (Max, Default Fallback)<small>Source: Claude Sonnet 5.5 (Max, Default Fallback)</small></td><td class="number">1,837.82</td><td>-23 / +23 Elo (source-rounded)</td><td>Not stated in captured record</td></tr><tr class="task-series" data-model="1"><th scope="row">Claude Sonnet 5.5 </th><td>Claude Sonnet 5.5 (Xhigh, Default Fallback)<small>Source: Claude Sonnet 5.5 (Xhigh, Default Fallback)</small></td><td class="number">1,728.44</td><td>-25 / +25 Elo (source-rounded)</td><td>Not stated in captured record</td></tr><tr class="task-series" data-model="1"><th scope="row">Claude Sonnet 5.5 </th><td>Claude Sonnet 5.5 (High, Default Fallback)<small>Source: Claude Sonnet 5.5 (High, Default Fallback)</small></td><td class="number">1,549.39</td><td>-23 / +23 Elo (source-rounded)</td><td>Not stated in captured record</td></tr><tr class="task-series" data-model="1"><th scope="row">Claude Sonnet 5.5 </th><td>Claude Sonnet 5.5 (Medium, Default Fallback)<small>Source: Claude Sonnet 5.5 (Medium, Default Fallback)</small></td><td class="number">1,323.27</td><td>-22 / +22 Elo (source-rounded)</td><td>Not stated in captured record</td></tr><tr class="task-series" data-model="1"><th scope="row">Claude Sonnet 5.5 </th><td>Claude Sonnet 5.5 (Low, Default Fallback)<small>Source: Claude Sonnet 5.5 (Low, Default Fallback)</small></td><td class="number">1,175.34</td><td>-23 / +23 Elo (source-rounded)</td><td>Not stated in captured record</td></tr><tr class="task-series" data-model="2"><th scope="row">GPT-6 Astra <span class="overview-badge">Overview</span></th><td>GPT-6 Astra (Max)<small>Source: GPT-6 Astra (Max)</small></td><td class="number">1,572.84</td><td>-20 / +20 Elo (source-rounded)</td><td>Not stated in captured record</td></tr><tr class="task-series" data-model="2"><th scope="row">GPT-6 Astra </th><td>GPT-6 Astra (Xhigh)<small>Source: GPT-6 Astra (Xhigh)</small></td><td class="number">1,555.91</td><td>-20 / +20 Elo (source-rounded)</td><td>Not stated in captured record</td></tr><tr class="task-series" data-model="2"><th scope="row">GPT-6 Astra </th><td>GPT-6 Astra (High)<small>Source: GPT-6 Astra (High)</small></td><td class="number">1,522.92</td><td>-20 / +20 Elo (source-rounded)</td><td>Not stated in captured record</td></tr><tr class="task-series" data-model="2"><th scope="row">GPT-6 Astra </th><td>GPT-6 Astra (Medium)<small>Source: GPT-6 Astra (Medium)</small></td><td class="number">1,486.40</td><td>-19 / +19 Elo (source-rounded)</td><td>Not stated in captured record</td></tr><tr class="task-series" data-model="2"><th scope="row">GPT-6 Astra </th><td>GPT-6 Astra (Low)<small>Source: GPT-6 Astra (Low)</small></td><td class="number">1,389.25</td><td>-21 / +21 Elo (source-rounded)</td><td>Not stated in captured record</td></tr><tr class="task-series" data-model="3"><th scope="row">GPT-6.1 Sol <span class="overview-badge">Overview</span></th><td>GPT-6.1 Sol (Max)<small>Source: GPT-6.1 Sol (Max)</small></td><td class="number">1,593.85</td><td>-23 / +23 Elo (source-rounded)</td><td>Not stated in captured record</td></tr><tr class="task-series" data-model="3"><th scope="row">GPT-6.1 Sol </th><td>GPT-6.1 Sol (Xhigh)<small>Source: GPT-6.1 Sol (Xhigh)</small></td><td class="number">1,538.05</td><td>-22 / +22 Elo (source-rounded)</td><td>Not stated in captured record</td></tr><tr class="task-series" data-model="3"><th scope="row">GPT-6.1 Sol </th><td>GPT-6.1 Sol (High)<small>Source: GPT-6.1 Sol (High)</small></td><td class="number">1,511.35</td><td>-22 / +22 Elo (source-rounded)</td><td>Not stated in captured record</td></tr><tr class="task-series" data-model="3"><th scope="row">GPT-6.1 Sol </th><td>GPT-6.1 Sol (Medium)<small>Source: GPT-6.1 Sol (Medium)</small></td><td class="number">1,450.10</td><td>-22 / +22 Elo (source-rounded)</td><td>Not stated in captured record</td></tr><tr class="task-series" data-model="3"><th scope="row">GPT-6.1 Sol </th><td>GPT-6.1 Sol (Low)<small>Source: GPT-6.1 Sol (Low)</small></td><td class="number">1,314.67</td><td>-22 / +22 Elo (source-rounded)</td><td>Not stated in captured record</td></tr><tr class="task-series" data-model="4"><th scope="row">GPT-5.6 Sol <span class="overview-badge">Overview</span></th><td>GPT-5.6 Sol (Max)<small>Source: GPT-5.6 Sol (Max)</small></td><td class="number">1,608.63</td><td>-17 / +17 Elo (source-rounded)</td><td>Not stated in captured record</td></tr><tr class="task-series" data-model="4"><th scope="row">GPT-5.6 Sol </th><td>GPT-5.6 Sol (Xhigh)<small>Source: GPT-5.6 Sol (Xhigh)</small></td><td class="number">1,568.48</td><td>-17 / +17 Elo (source-rounded)</td><td>Not stated in captured record</td></tr><tr class="task-series" data-model="4"><th scope="row">GPT-5.6 Sol </th><td>GPT-5.6 Sol (High)<small>Source: GPT-5.6 Sol (High)</small></td><td class="number">1,503.99</td><td>-17 / +17 Elo (source-rounded)</td><td>Not stated in captured record</td></tr><tr class="task-series" data-model="4"><th scope="row">GPT-5.6 Sol </th><td>GPT-5.6 Sol (Medium)<small>Source: GPT-5.6 Sol (Medium)</small></td><td class="number">1,421.47</td><td>-17 / +17 Elo (source-rounded)</td><td>Not stated in captured record</td></tr><tr class="task-series" data-model="4"><th scope="row">GPT-5.6 Sol </th><td>GPT-5.6 Sol (Low)<small>Source: GPT-5.6 Sol (Low)</small></td><td class="number">1,303.39</td><td>-17 / +17 Elo (source-rounded)</td><td>Not stated in captured record</td></tr><tr class="task-series" data-model="4"><th scope="row">GPT-5.6 Sol </th><td>GPT-5.6 Sol (Non-reasoning)<small>Source: GPT-5.6 Sol (Non-reasoning)</small></td><td class="number">1,241.59</td><td>-19 / +19 Elo (source-rounded)</td><td>Not stated in captured record</td></tr><tr class="task-series" data-model="5"><th scope="row">Gemini 3.8 Flash <span class="overview-badge">Overview</span></th><td>Gemini 3.8 Flash (High)<small>Source: Gemini 3.8 Flash (High)</small></td><td class="number">1,436.30</td><td>-20 / +20 Elo (source-rounded)</td><td>Not stated in captured record</td></tr><tr class="task-series" data-model="5"><th scope="row">Gemini 3.8 Flash </th><td>Gemini 3.8 Flash (Medium)<small>Source: Gemini 3.8 Flash (Medium)</small></td><td class="number">1,421.18</td><td>-21 / +21 Elo (source-rounded)</td><td>Not stated in captured record</td></tr><tr class="task-series" data-model="5"><th scope="row">Gemini 3.8 Flash </th><td>Gemini 3.8 Flash (Low)<small>Source: Gemini 3.8 Flash (Low)</small></td><td class="number">1,307.18</td><td>-18 / +18 Elo (source-rounded)</td><td>Not stated in captured record</td></tr><tr class="task-series" data-model="6"><th scope="row">GPT-6 Luna <span class="overview-badge">Overview</span></th><td>GPT-6 Luna (Max)<small>Source: GPT-6 Luna (Max)</small></td><td class="number">1,431.86</td><td>-22 / +22 Elo (source-rounded)</td><td>Not stated in captured record</td></tr><tr class="task-series" data-model="6"><th scope="row">GPT-6 Luna </th><td>GPT-6 Luna (Xhigh)<small>Source: GPT-6 Luna (Xhigh)</small></td><td class="number">1,362.25</td><td>-22 / +22 Elo (source-rounded)</td><td>Not stated in captured record</td></tr><tr class="task-series" data-model="6"><th scope="row">GPT-6 Luna </th><td>GPT-6 Luna (High)<small>Source: GPT-6 Luna (High)</small></td><td class="number">1,339.93</td><td>-23 / +23 Elo (source-rounded)</td><td>Not stated in captured record</td></tr><tr class="task-series" data-model="6"><th scope="row">GPT-6 Luna </th><td>GPT-6 Luna (Medium)<small>Source: GPT-6 Luna (Medium)</small></td><td class="number">1,261.32</td><td>-22 / +22 Elo (source-rounded)</td><td>Not stated in captured record</td></tr><tr class="task-series" data-model="6"><th scope="row">GPT-6 Luna </th><td>GPT-6 Luna (Low)<small>Source: GPT-6 Luna (Low)</small></td><td class="number">1,029.43</td><td>-23 / +23 Elo (source-rounded)</td><td>Not stated in captured record</td></tr><tr class="task-series" data-model="6"><th scope="row">GPT-6 Luna </th><td>GPT-6 Luna (Non-reasoning)<small>Source: GPT-6 Luna (Non-reasoning)</small></td><td class="number">1,042.31</td><td>-23 / +23 Elo (source-rounded)</td><td>Not stated in captured record</td></tr></tbody></table></div></details><p class="source-line"><a href="https://artificialanalysis.ai/evaluations/gdpval-aa">GDPval-AA v2.1</a> / <a href="https://artificialanalysis.ai/methodology/intelligence-benchmarking#gdpval-aa">Methodology</a> / Retrieved 21 Oct 2026. Elo scales are benchmark-specific.</p></div></section>
+<details class="evidence-gaps"><summary>What this research does not establish</summary>
+<p>None of these sources isolates production backend API work, this TypeSpec repository,
+or Chinese technical writing. Word artifact scores are not pure prose-style preferences.
+Arena Code and Creative Writing returned HTTP 403 during retrieval, so no Arena scores
+or creative-writing rankings have been invented. Agent harnesses, budgets, dates, samples,
+and effort settings differ. Full provenance is in the downloadable task data.</p></details>
+</section>
+
+<h2 style="margin-top:28px">Turn benchmark results into a local decision</h2>
+<p class="muted">Evaluation suggestions, not additional measured model rankings.</p>
+<div class="cards">
+<section class="card"><div class="tag">UI / frontend</div><div class="pick">Visuals + working interactions</div>
+<p>Use website preferences to shortlist visual candidates. Then check responsive layouts,
+accessibility, interaction behavior, and changes in the real codebase.</p></section>
+<section class="card"><div class="tag">Backend / engineering</div><div class="pick">Executable acceptance criteria</div>
+<p>Keep the agent, tools, repository, and budget comparable. Measure tests passed, API behavior,
+regressions, retries, total cost, and full task wall time.</p></section>
+<section class="card"><div class="tag">Documents / writing</div><div class="pick">Evidence + editorial quality</div>
+<p>Check facts and citations, requirement coverage, audience fit, clarity, and formatting.
+Business-artifact benchmarks do not replace a review of your actual documents.</p></section>
+</div>
+<div class="note"><strong>For assessment-skill:</strong>
+Keep compilation, evidence extraction, validation, and rendering in code.
+Use a stronger model for the hard design and compatibility judgments,
+then a cheaper model for bounded implementation. A failed cheap attempt plus retries can cost
+more than one successful stronger attempt.</div>
+<section class="card" style="margin-top:20px"><h3>Important limits</h3>
+<p>The Intelligence Index v4.3.2 mixes agent tasks, coding, scientific reasoning, and general tasks;
+it is not an IQ score or a TypeSpec accuracy measure. This picture covers seven selected model families,
+not every available model. Lines do not interpolate unmeasured settings.
+Gemini low has a score but no published cost in the extracted data; its xhigh/max settings are unsupported.
+Claude entries use adaptive reasoning with default fallback.
+GPT-5.6 Sol is absent from the refreshed leaderboard, so its retained 29 Sep results are shown as historical comparison data.</p>
+<p>The cost chart alone does not encode latency; response time is shown separately.
+Provider effort levels are not equal compute budgets. Benchmark costs use API pricing,
+not Copilot credits, and depend on task mix, token usage, and evaluation settings.</p>
+<p><strong>Final selection rule:</strong> run the same representative cases with the same tools and context.
+Track finding accuracy, tests, retries, total cost/AIC, and wall time.
+Choose the least costly configuration that passes your quality bar.</p></section>
+<footer id="sources"><strong>Sources / cost-time series refreshed 21 Oct 2026</strong>
+<p class="muted">Task snapshots have their own retrieval dates and configurations above.
+Cost/time series use the 21 Oct leaderboard, except retained 29 Sep GPT-5.6 Sol data.</p><ul>
+<li><a href="https://www.designarena.ai/leaderboard/website">DesignArena Website: human design preference</a> /
+<a href="https://www.designarena.ai/about">tournament and Bradley-Terry methodology</a></li>
+<li><a href="https://www.tbench.ai/">Terminal-Bench 4.0: agent task resolution</a> /
+<a href="https://www.tbench.ai/run">harness and execution</a></li>
+<li><a href="https://artificialanalysis.ai/evaluations/aa-briefcase">AA-Briefcase v1.1: Word rubric checks, analytical quality, presentation</a></li>
+<li><a href="https://artificialanalysis.ai/evaluations/gdpval-aa">GDPval-AA v2.1: broader professional work</a></li>
 <li><a href="https://artificialanalysis.ai/leaderboards/models">Artificial Analysis: scores, exact effort variants, average evaluation cost per task</a></li>
 <li><a href="https://artificialanalysis.ai/methodology/intelligence-benchmarking">Intelligence Index v4.3.2 methodology and limitations</a></li>
 <li><a href="https://developers.openai.com/api/docs/guides/reasoning">OpenAI reasoning effort</a></li>
@@ -514,6 +949,35 @@ They are omitted rather than estimated, and curves are not connected across miss
 <li><a href="https://ai.google.dev/gemini-api/docs/thinking">Google thinking levels</a></li>
 </ul></footer></main>
 <script>document.getElementById('model').addEventListener('change',event=>{
-document.querySelectorAll('.series,.speed-series').forEach(group=>{
+document.querySelectorAll('.series,.speed-series,.task-series').forEach(group=>{
 group.style.opacity=event.target.value==='all'||group.dataset.model===event.target.value?'1':'0.12';
-});});</script></body></html>
+});});
+const tabs=[...document.querySelectorAll('[role="tab"]')];
+function selectTab(tab){
+tabs.forEach(item=>{
+const selected=item===tab;
+item.setAttribute('aria-selected',String(selected));
+item.tabIndex=selected?0:-1;
+document.getElementById(item.getAttribute('aria-controls')).hidden=!selected;
+});
+}
+tabs.forEach((tab,index)=>{
+tab.addEventListener('click',()=>selectTab(tab));
+tab.addEventListener('keydown',event=>{
+let next;
+if(event.key==='ArrowRight') next=tabs[(index+1)%tabs.length];
+else if(event.key==='ArrowLeft') next=tabs[(index+tabs.length-1)%tabs.length];
+else if(event.key==='Home') next=tabs[0];
+else if(event.key==='End') next=tabs[tabs.length-1];
+else return;
+event.preventDefault();
+selectTab(next);
+next.focus();
+});
+});
+document.getElementById('document-metric').addEventListener('change',event=>{
+document.querySelectorAll('[data-document-metric]').forEach(view=>{
+view.hidden=view.dataset.documentMetric!==event.target.value;
+});
+});
+</script></body></html>
