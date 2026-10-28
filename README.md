@@ -9,7 +9,10 @@ Interactive comparisons of selected frontier models, organized as:
 
 Cost and response-time charts use Artificial Analysis Intelligence Index data.
 Task comparisons use DesignArena Website, Terminal-Bench 4.0, AA-Briefcase v1.1,
-and GDPval-AA v2.1. Native scores, exact configurations, missing data, and
+GDPval-AA v2.1, CursorBench 4.0, ARC-AGI-1/2, Vals Code Migration v1.1,
+and the seven LiveBench 2.0 suites from the October 25, 2026 release.
+The dashboard contains 17 native-scale metrics and 274 captured
+model-configuration results. Native scores, exact configurations, missing data, and
 available confidence intervals are shown separately rather than combined into
 a universal ranking. These are model selection aids, not substitutes for
 workload-specific evaluation.
@@ -40,3 +43,16 @@ setting is unsupported.
 
 Task snapshots have their own retrieval dates, effort settings, and agent
 harnesses. Their provenance is included in `task-benchmark-snapshot.json`.
+Available per-task costs, source-reported runtime, standard errors, task counts,
+and LiveBench subscores are retained without inventing confidence intervals.
+
+Gemini 4 Argon Low, Medium, and High results are visible in an effort-coverage
+table near the top of the page. These are primary-source CursorBench and ARC
+Prize measurements, not substitutes for the missing lower-effort Artificial
+Analysis Intelligence Index points. The main cost/time charts remain High-only
+for Argon.
+
+Collection exclusions are recorded in the task snapshot. Secondary-only scores,
+an ambiguously versioned Vals effort chart, ARC-AGI-3's distinct interactive
+harnesses, and a LiveBench Overall composite with conflicting weighting notes
+are not mixed into the displayed metrics.
