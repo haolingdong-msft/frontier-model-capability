@@ -1,180 +1,209 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-labelledby="speed-title speed-desc">
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1045" viewBox="0 0 1600 1045" role="img" aria-labelledby="speed-title speed-desc">
 <title id="speed-title">LLM smartness versus execution speed, by reasoning effort</title>
-<desc id="speed-desc">The horizontal axis is median end-to-end response time in seconds, shown on a logarithmic scale. The vertical axis is Artificial Analysis Intelligence Index v4.3.2. Farther left and higher is better. Only model-effort points with published median end-to-end response time are shown.</desc>
-<rect width="1600" height="900" rx="20" fill="#f5f7fb"/>
+<desc id="speed-desc">The horizontal axis is median end-to-end response time in seconds, shown on a logarithmic scale. The vertical axis is Artificial Analysis Intelligence Index v5.0. Farther left and higher is better. Only model-effort points with published median end-to-end response time are shown.</desc>
+<rect width="1600" height="1045" rx="20" fill="#f5f7fb"/>
 <style>text{font-family:Segoe UI,Arial,sans-serif;fill:#192740}</style>
 <text x="48" y="58" font-size="40" style="fill:#192740" font-weight="700" text-anchor="start">LLM smartness vs. execution speed</text>
 <text x="48" y="93" font-size="21" style="fill:#56647a" font-weight="400" text-anchor="start">Lower response time is faster; reasoning delay is included.</text>
 <rect x="48" y="119" width="1504" height="59" rx="10" fill="#e8edf9"/>
 <text x="70" y="146" font-size="20" style="fill:#192740" font-weight="600" text-anchor="start">X = median end-to-end response time in seconds (log scale)     Y = capability score     Upper-left is better.</text>
 <text x="70" y="167" font-size="15" style="fill:#56647a" font-weight="400" text-anchor="start">This is response-level benchmark speed, not full coding-agent or repository task completion time.</text>
-<rect x="48" y="197" width="1504" height="574" rx="16" fill="white"/>
-<text x="77" y="225" font-size="17" style="fill:#56647a" font-weight="400" text-anchor="start">Capability / Artificial Analysis Intelligence Index v4.3.2</text>
-<line x1="120" y1="697.0" x2="1210" y2="697.0" stroke="#e4e9f1" stroke-width="1"/>
-<text x="103" y="702.0" font-size="15" style="fill:#68768b" font-weight="400" text-anchor="end">0</text>
-<line x1="120" y1="620.3333333333334" x2="1210" y2="620.3333333333334" stroke="#e4e9f1" stroke-width="1"/>
-<text x="103" y="625.3333333333334" font-size="15" style="fill:#68768b" font-weight="400" text-anchor="end">10</text>
-<line x1="120" y1="543.6666666666667" x2="1210" y2="543.6666666666667" stroke="#e4e9f1" stroke-width="1"/>
-<text x="103" y="548.6666666666667" font-size="15" style="fill:#68768b" font-weight="400" text-anchor="end">20</text>
-<line x1="120" y1="467.0" x2="1210" y2="467.0" stroke="#e4e9f1" stroke-width="1"/>
-<text x="103" y="472.0" font-size="15" style="fill:#68768b" font-weight="400" text-anchor="end">30</text>
-<line x1="120" y1="390.33333333333337" x2="1210" y2="390.33333333333337" stroke="#e4e9f1" stroke-width="1"/>
-<text x="103" y="395.33333333333337" font-size="15" style="fill:#68768b" font-weight="400" text-anchor="end">40</text>
-<line x1="120" y1="313.66666666666663" x2="1210" y2="313.66666666666663" stroke="#e4e9f1" stroke-width="1"/>
-<text x="103" y="318.66666666666663" font-size="15" style="fill:#68768b" font-weight="400" text-anchor="end">50</text>
+<rect x="48" y="197" width="1504" height="752" rx="16" fill="white"/>
+<text x="77" y="225" font-size="17" style="fill:#56647a" font-weight="400" text-anchor="start">Capability / Artificial Analysis Intelligence Index v5.0</text>
+<line x1="120" y1="875.0" x2="1210" y2="875.0" stroke="#e4e9f1" stroke-width="1"/>
+<text x="103" y="880.0" font-size="15" style="fill:#68768b" font-weight="400" text-anchor="end">0</text>
+<line x1="120" y1="768.6666666666666" x2="1210" y2="768.6666666666666" stroke="#e4e9f1" stroke-width="1"/>
+<text x="103" y="773.6666666666666" font-size="15" style="fill:#68768b" font-weight="400" text-anchor="end">10</text>
+<line x1="120" y1="662.3333333333334" x2="1210" y2="662.3333333333334" stroke="#e4e9f1" stroke-width="1"/>
+<text x="103" y="667.3333333333334" font-size="15" style="fill:#68768b" font-weight="400" text-anchor="end">20</text>
+<line x1="120" y1="556.0" x2="1210" y2="556.0" stroke="#e4e9f1" stroke-width="1"/>
+<text x="103" y="561.0" font-size="15" style="fill:#68768b" font-weight="400" text-anchor="end">30</text>
+<line x1="120" y1="449.6666666666667" x2="1210" y2="449.6666666666667" stroke="#e4e9f1" stroke-width="1"/>
+<text x="103" y="454.6666666666667" font-size="15" style="fill:#68768b" font-weight="400" text-anchor="end">40</text>
+<line x1="120" y1="343.33333333333326" x2="1210" y2="343.33333333333326" stroke="#e4e9f1" stroke-width="1"/>
+<text x="103" y="348.33333333333326" font-size="15" style="fill:#68768b" font-weight="400" text-anchor="end">50</text>
 <line x1="120" y1="237.0" x2="1210" y2="237.0" stroke="#e4e9f1" stroke-width="1"/>
 <text x="103" y="242.0" font-size="15" style="fill:#68768b" font-weight="400" text-anchor="end">60</text>
-<line x1="120.0" y1="237" x2="120.0" y2="697" stroke="#eff2f7" stroke-width="1"/>
-<text x="120.0" y="724" font-size="16" style="fill:#56647a" font-weight="400" text-anchor="middle">5s</text>
-<line x1="272.8905497802899" y1="237" x2="272.8905497802899" y2="697" stroke="#eff2f7" stroke-width="1"/>
-<text x="272.8905497802899" y="724" font-size="16" style="fill:#56647a" font-weight="400" text-anchor="middle">10s</text>
-<line x1="425.7810995605799" y1="237" x2="425.7810995605799" y2="697" stroke="#eff2f7" stroke-width="1"/>
-<text x="425.7810995605799" y="724" font-size="16" style="fill:#56647a" font-weight="400" text-anchor="middle">20s</text>
-<line x1="627.8914127579199" y1="237" x2="627.8914127579199" y2="697" stroke="#eff2f7" stroke-width="1"/>
-<text x="627.8914127579199" y="724" font-size="16" style="fill:#56647a" font-weight="400" text-anchor="middle">50s</text>
-<line x1="780.7819625382099" y1="237" x2="780.7819625382099" y2="697" stroke="#eff2f7" stroke-width="1"/>
-<text x="780.7819625382099" y="724" font-size="16" style="fill:#56647a" font-weight="400" text-anchor="middle">100s</text>
-<line x1="933.6725123184998" y1="237" x2="933.6725123184998" y2="697" stroke="#eff2f7" stroke-width="1"/>
-<text x="933.6725123184998" y="724" font-size="16" style="fill:#56647a" font-weight="400" text-anchor="middle">200s</text>
-<line x1="1135.7828255158397" y1="237" x2="1135.7828255158397" y2="697" stroke="#eff2f7" stroke-width="1"/>
-<text x="1135.7828255158397" y="724" font-size="16" style="fill:#56647a" font-weight="400" text-anchor="middle">500s</text>
-<line x1="1210.0" y1="237" x2="1210.0" y2="697" stroke="#eff2f7" stroke-width="1"/>
-<text x="1210.0" y="724" font-size="16" style="fill:#56647a" font-weight="400" text-anchor="middle">700s</text>
-<text x="655" y="756" font-size="16" style="fill:#56647a" font-weight="400" text-anchor="middle">Median end-to-end response time (seconds)  |  lower is faster  |  logarithmic scale</text>
+<line x1="120.0" y1="237" x2="120.0" y2="875" stroke="#eff2f7" stroke-width="1"/>
+<text x="120.0" y="902" font-size="16" style="fill:#56647a" font-weight="400" text-anchor="middle">5s</text>
+<line x1="262.5981825061159" y1="237" x2="262.5981825061159" y2="875" stroke="#eff2f7" stroke-width="1"/>
+<text x="262.5981825061159" y="902" font-size="16" style="fill:#56647a" font-weight="400" text-anchor="middle">10s</text>
+<line x1="405.1963650122318" y1="237" x2="405.1963650122318" y2="875" stroke="#eff2f7" stroke-width="1"/>
+<text x="405.1963650122318" y="902" font-size="16" style="fill:#56647a" font-weight="400" text-anchor="middle">20s</text>
+<line x1="593.700908746942" y1="237" x2="593.700908746942" y2="875" stroke="#eff2f7" stroke-width="1"/>
+<text x="593.700908746942" y="902" font-size="16" style="fill:#56647a" font-weight="400" text-anchor="middle">50s</text>
+<line x1="736.299091253058" y1="237" x2="736.299091253058" y2="875" stroke="#eff2f7" stroke-width="1"/>
+<text x="736.299091253058" y="902" font-size="16" style="fill:#56647a" font-weight="400" text-anchor="middle">100s</text>
+<line x1="878.8972737591739" y1="237" x2="878.8972737591739" y2="875" stroke="#eff2f7" stroke-width="1"/>
+<text x="878.8972737591739" y="902" font-size="16" style="fill:#56647a" font-weight="400" text-anchor="middle">200s</text>
+<line x1="1067.4018174938842" y1="237" x2="1067.4018174938842" y2="875" stroke="#eff2f7" stroke-width="1"/>
+<text x="1067.4018174938842" y="902" font-size="16" style="fill:#56647a" font-weight="400" text-anchor="middle">500s</text>
+<line x1="1210.0" y1="237" x2="1210.0" y2="875" stroke="#eff2f7" stroke-width="1"/>
+<text x="1210.0" y="902" font-size="16" style="fill:#56647a" font-weight="400" text-anchor="middle">1,000s</text>
+<text x="655" y="933" font-size="16" style="fill:#56647a" font-weight="400" text-anchor="middle">Median end-to-end response time (seconds)  |  lower is faster  |  logarithmic scale</text>
 <path d="M225 297 L167 254 M167 254 L187 257 M167 254 L175 274" fill="none" stroke="#465b76" stroke-width="2"/>
 <text x="234" y="302" font-size="16" style="fill:#465b76" font-weight="400" text-anchor="start">Prefer this direction</text>
 <g class="speed-series" data-model="0">
-<polyline points="277.22,372.64 449.76,304.13 555.41,286.20 824.40,267.76 1195.19,255.23" fill="none" stroke="#a34415" stroke-width="3.2" stroke-linejoin="round"/>
-<g><title>Claude Opus 5.5 / Low: score 42.3, median end-to-end response time 10.2s</title><circle cx="277.22" cy="372.64" r="10" fill="#a34415" stroke="white" stroke-width="1.5"/>
-<text x="277.22" y="376.64" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">1</text>
+<polyline points="288.32,508.12 430.21,363.98 546.65,325.41 782.26,268.96 1138.16,253.95" fill="none" stroke="#a34415" stroke-width="3.2" stroke-linejoin="round"/>
+<g><title>Claude Opus 5.5 / Low: score 34.5, median end-to-end response time 11.3s</title><circle cx="288.32" cy="508.12" r="10" fill="#a34415" stroke="white" stroke-width="1.5"/>
+<text x="288.32" y="512.12" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">1</text>
 </g>
-<g><title>Claude Opus 5.5 / Medium: score 51.2, median end-to-end response time 22.3s</title><circle cx="449.76" cy="304.13" r="10" fill="#a34415" stroke="white" stroke-width="1.5"/>
-<text x="449.76" y="308.13" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">2</text>
+<g><title>Claude Opus 5.5 / Medium: score 48.1, median end-to-end response time 22.6s</title><circle cx="430.21" cy="363.98" r="10" fill="#a34415" stroke="white" stroke-width="1.5"/>
+<text x="430.21" y="367.98" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">2</text>
 </g>
-<g><title>Claude Opus 5.5 / High: score 53.6, median end-to-end response time 36.0s</title><circle cx="555.41" cy="286.20" r="10" fill="#a34415" stroke="white" stroke-width="1.5"/>
-<text x="555.41" y="290.20" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">3</text>
+<g><title>Claude Opus 5.5 / High: score 51.7, median end-to-end response time 39.8s</title><circle cx="546.65" cy="325.41" r="10" fill="#a34415" stroke="white" stroke-width="1.5"/>
+<text x="546.65" y="329.41" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">3</text>
 </g>
-<g><title>Claude Opus 5.5 / Xhigh: score 56.0, median end-to-end response time 121.9s</title><circle cx="824.40" cy="267.76" r="10" fill="#a34415" stroke="white" stroke-width="1.5"/>
-<text x="824.40" y="271.76" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">4</text>
+<g><title>Claude Opus 5.5 / Xhigh: score 57.0, median end-to-end response time 125.0s</title><circle cx="782.26" cy="268.96" r="10" fill="#a34415" stroke="white" stroke-width="1.5"/>
+<text x="782.26" y="272.96" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">4</text>
 </g>
-<g><title>Claude Opus 5.5 / Max: score 57.6, median end-to-end response time 654.6s</title><circle cx="1195.19" cy="255.23" r="10" fill="#a34415" stroke="white" stroke-width="1.5"/>
-<text x="1195.19" y="259.23" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">5</text>
+<g><title>Claude Opus 5.5 / Max: score 58.4, median end-to-end response time 705.2s</title><circle cx="1138.16" cy="253.95" r="10" fill="#a34415" stroke="white" stroke-width="1.5"/>
+<text x="1138.16" y="257.95" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">5</text>
 </g>
 </g>
 <g class="speed-series" data-model="1">
-<polyline points="155.56,422.01 161.34,383.90 367.46,338.56 538.07,299.13 1098.16,267.67" fill="none" stroke="#d17908" stroke-width="3.2" stroke-linejoin="round"/>
-<g><title>Claude Sonnet 5.5 / Low: score 35.9, median end-to-end response time 5.9s</title><circle cx="155.56" cy="422.01" r="10" fill="#d17908" stroke="white" stroke-width="1.5"/>
-<text x="155.56" y="426.01" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">1</text>
+<polyline points="152.66,605.98 206.57,552.60 351.72,437.81 508.56,347.86 1049.62,298.23" fill="none" stroke="#d17908" stroke-width="3.2" stroke-linejoin="round"/>
+<g><title>Claude Sonnet 5.5 / Low: score 25.3, median end-to-end response time 5.9s</title><circle cx="152.66" cy="605.98" r="10" fill="#d17908" stroke="white" stroke-width="1.5"/>
+<text x="152.66" y="609.98" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">1</text>
 </g>
-<g><title>Claude Sonnet 5.5 / Medium: score 40.8, median end-to-end response time 6.0s</title><circle cx="161.34" cy="383.90" r="10" fill="#d17908" stroke="white" stroke-width="1.5"/>
-<text x="161.34" y="387.90" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">2</text>
+<g><title>Claude Sonnet 5.5 / Medium: score 30.3, median end-to-end response time 7.6s</title><circle cx="206.57" cy="552.60" r="10" fill="#d17908" stroke="white" stroke-width="1.5"/>
+<text x="206.57" y="556.60" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">2</text>
 </g>
-<g><title>Claude Sonnet 5.5 / High: score 46.8, median end-to-end response time 15.4s</title><circle cx="367.46" cy="338.56" r="10" fill="#d17908" stroke="white" stroke-width="1.5"/>
-<text x="367.46" y="342.56" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">3</text>
+<g><title>Claude Sonnet 5.5 / High: score 41.1, median end-to-end response time 15.4s</title><circle cx="351.72" cy="437.81" r="10" fill="#d17908" stroke="white" stroke-width="1.5"/>
+<text x="351.72" y="441.81" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">3</text>
 </g>
-<g><title>Claude Sonnet 5.5 / Xhigh: score 51.9, median end-to-end response time 33.3s</title><circle cx="538.07" cy="299.13" r="10" fill="#d17908" stroke="white" stroke-width="1.5"/>
-<text x="538.07" y="303.13" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">4</text>
+<g><title>Claude Sonnet 5.5 / Xhigh: score 49.6, median end-to-end response time 33.1s</title><circle cx="508.56" cy="347.86" r="10" fill="#d17908" stroke="white" stroke-width="1.5"/>
+<text x="508.56" y="351.86" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">4</text>
 </g>
-<g><title>Claude Sonnet 5.5 / Max: score 56.0, median end-to-end response time 421.6s</title><circle cx="1098.16" cy="267.67" r="10" fill="#d17908" stroke="white" stroke-width="1.5"/>
-<text x="1098.16" y="271.67" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">5</text>
+<g><title>Claude Sonnet 5.5 / Max: score 54.2, median end-to-end response time 458.6s</title><circle cx="1049.62" cy="298.23" r="10" fill="#d17908" stroke="white" stroke-width="1.5"/>
+<text x="1049.62" y="302.23" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">5</text>
 </g>
 </g>
 <g class="speed-series" data-model="2">
-<polyline points="309.65,346.01 332.77,316.96 629.77,306.62 845.59,295.37 1005.00,293.17" fill="none" stroke="#5144c7" stroke-width="3.2" stroke-linejoin="round"/>
-<g><title>GPT-6 Astra / Low: score 45.8, median end-to-end response time 11.8s</title><circle cx="309.65" cy="346.01" r="10" fill="#5144c7" stroke="white" stroke-width="1.5"/>
-<text x="309.65" y="350.01" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">1</text>
+<polyline points="317.52,417.39 317.24,327.86 601.54,291.76 840.46,287.45 944.99,270.45" fill="none" stroke="#5144c7" stroke-width="3.2" stroke-linejoin="round"/>
+<g><title>GPT-6 Astra / Low: score 43.0, median end-to-end response time 13.1s</title><circle cx="317.52" cy="417.39" r="10" fill="#5144c7" stroke="white" stroke-width="1.5"/>
+<text x="317.52" y="421.39" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">1</text>
 </g>
-<g><title>GPT-6 Astra / Medium: score 49.6, median end-to-end response time 13.1s</title><circle cx="332.77" cy="316.96" r="10" fill="#5144c7" stroke="white" stroke-width="1.5"/>
-<text x="332.77" y="320.96" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">2</text>
+<g><title>GPT-6 Astra / Medium: score 51.5, median end-to-end response time 13.0s</title><circle cx="317.24" cy="327.86" r="10" fill="#5144c7" stroke="white" stroke-width="1.5"/>
+<text x="317.24" y="331.86" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">2</text>
 </g>
-<g><title>GPT-6 Astra / High: score 50.9, median end-to-end response time 50.4s</title><circle cx="629.77" cy="306.62" r="10" fill="#5144c7" stroke="white" stroke-width="1.5"/>
-<text x="629.77" y="310.62" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">3</text>
+<g><title>GPT-6 Astra / High: score 54.8, median end-to-end response time 51.9s</title><circle cx="601.54" cy="291.76" r="10" fill="#5144c7" stroke="white" stroke-width="1.5"/>
+<text x="601.54" y="295.76" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">3</text>
 </g>
-<g><title>GPT-6 Astra / Xhigh: score 52.4, median end-to-end response time 134.2s</title><circle cx="845.59" cy="295.37" r="10" fill="#5144c7" stroke="white" stroke-width="1.5"/>
-<text x="845.59" y="299.37" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">4</text>
+<g><title>GPT-6 Astra / Xhigh: score 55.3, median end-to-end response time 165.9s</title><circle cx="840.46" cy="287.45" r="10" fill="#5144c7" stroke="white" stroke-width="1.5"/>
+<text x="840.46" y="291.45" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">4</text>
 </g>
-<g><title>GPT-6 Astra / Max: score 52.7, median end-to-end response time 276.3s</title><circle cx="1005.00" cy="293.17" r="10" fill="#5144c7" stroke="white" stroke-width="1.5"/>
-<text x="1005.00" y="297.17" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">5</text>
+<g><title>GPT-6 Astra / Max: score 56.9, median end-to-end response time 275.8s</title><circle cx="944.99" cy="270.45" r="10" fill="#5144c7" stroke="white" stroke-width="1.5"/>
+<text x="944.99" y="274.45" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">5</text>
 </g>
 </g>
 <g class="speed-series" data-model="3">
-<polyline points="352.72,374.36 365.08,330.66 577.44,311.84 816.59,305.71 989.41,299.61" fill="none" stroke="#1878ba" stroke-width="3.2" stroke-linejoin="round"/>
-<g><title>GPT-6.1 Sol / Low: score 42.1, median end-to-end response time 14.4s</title><circle cx="352.72" cy="374.36" r="10" fill="#1878ba" stroke="white" stroke-width="1.5"/>
-<text x="352.72" y="378.36" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">1</text>
+<polyline points="274.18,508.12 302.03,384.30 584.93,340.90 762.51,318.79 951.17,295.39" fill="none" stroke="#1878ba" stroke-width="3.2" stroke-linejoin="round"/>
+<g><title>GPT-6.1 Sol / Low: score 34.5, median end-to-end response time 10.6s</title><circle cx="274.18" cy="508.12" r="10" fill="#1878ba" stroke="white" stroke-width="1.5"/>
+<text x="274.18" y="512.12" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">1</text>
 </g>
-<g><title>GPT-6.1 Sol / Medium: score 47.8, median end-to-end response time 15.2s</title><circle cx="365.08" cy="330.66" r="10" fill="#1878ba" stroke="white" stroke-width="1.5"/>
-<text x="365.08" y="334.66" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">2</text>
+<g><title>GPT-6.1 Sol / Medium: score 46.1, median end-to-end response time 12.1s</title><circle cx="302.03" cy="384.30" r="10" fill="#1878ba" stroke="white" stroke-width="1.5"/>
+<text x="302.03" y="388.30" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">2</text>
 </g>
-<g><title>GPT-6.1 Sol / High: score 50.2, median end-to-end response time 39.8s</title><circle cx="577.44" cy="311.84" r="10" fill="#1878ba" stroke="white" stroke-width="1.5"/>
-<text x="577.44" y="315.84" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">3</text>
+<g><title>GPT-6.1 Sol / High: score 50.2, median end-to-end response time 47.9s</title><circle cx="584.93" cy="340.90" r="10" fill="#1878ba" stroke="white" stroke-width="1.5"/>
+<text x="584.93" y="344.90" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">3</text>
 </g>
-<g><title>GPT-6.1 Sol / Xhigh: score 51.0, median end-to-end response time 117.6s</title><circle cx="816.59" cy="305.71" r="10" fill="#1878ba" stroke="white" stroke-width="1.5"/>
-<text x="816.59" y="309.71" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">4</text>
+<g><title>GPT-6.1 Sol / Xhigh: score 52.3, median end-to-end response time 113.6s</title><circle cx="762.51" cy="318.79" r="10" fill="#1878ba" stroke="white" stroke-width="1.5"/>
+<text x="762.51" y="322.79" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">4</text>
 </g>
-<g><title>GPT-6.1 Sol / Max: score 51.8, median end-to-end response time 257.5s</title><circle cx="989.41" cy="299.61" r="10" fill="#1878ba" stroke="white" stroke-width="1.5"/>
-<text x="989.41" y="303.61" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">5</text>
+<g><title>GPT-6.1 Sol / Max: score 54.5, median end-to-end response time 284.2s</title><circle cx="951.17" cy="295.39" r="10" fill="#1878ba" stroke="white" stroke-width="1.5"/>
+<text x="951.17" y="299.39" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">5</text>
 </g>
 </g>
 <g class="speed-series" data-model="4">
-<polyline points="246.87,440.37 280.25,396.19 355.20,372.35 571.46,359.60 790.47,336.88" fill="none" stroke="#bf3c85" stroke-width="3.2" stroke-linejoin="round"/>
-<g><title>GPT-5.6 Sol / Low: score 33.5, median end-to-end response time 8.9s</title><circle cx="246.87" cy="440.37" r="10" fill="#bf3c85" stroke="white" stroke-width="1.5"/>
-<text x="246.87" y="444.37" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">1</text>
-</g>
-<g><title>GPT-5.6 Sol / Medium: score 39.2, median end-to-end response time 10.3s</title><circle cx="280.25" cy="396.19" r="10" fill="#bf3c85" stroke="white" stroke-width="1.5"/>
-<text x="280.25" y="400.19" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">2</text>
-</g>
-<g><title>GPT-5.6 Sol / High: score 42.3, median end-to-end response time 14.5s</title><circle cx="355.20" cy="372.35" r="10" fill="#bf3c85" stroke="white" stroke-width="1.5"/>
-<text x="355.20" y="376.35" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">3</text>
-</g>
-<g><title>GPT-5.6 Sol / Xhigh: score 44.0, median end-to-end response time 38.7s</title><circle cx="571.46" cy="359.60" r="10" fill="#bf3c85" stroke="white" stroke-width="1.5"/>
-<text x="571.46" y="363.60" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">4</text>
-</g>
-<g><title>GPT-5.6 Sol / Max: score 47.0, median end-to-end response time 104.5s</title><circle cx="790.47" cy="336.88" r="10" fill="#bf3c85" stroke="white" stroke-width="1.5"/>
-<text x="790.47" y="340.88" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">5</text>
-</g>
 </g>
 <g class="speed-series" data-model="5">
-<g><title>Gemini 3.8 Flash / High: score 40.9, median end-to-end response time 28.5s</title><circle cx="504.10" cy="383.23" r="10" fill="#07816c" stroke="white" stroke-width="1.5"/>
-<text x="504.10" y="387.23" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">3</text>
+<g><title>Gemini 3.8 Flash / High: score 30.5, median end-to-end response time 31.0s</title><circle cx="495.52" cy="550.19" r="10" fill="#07816c" stroke="white" stroke-width="1.5"/>
+<text x="495.52" y="554.19" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">3</text>
 </g>
 </g>
 <g class="speed-series" data-model="6">
-<polyline points="369.01,444.55 492.83,432.05 780.55,404.71" fill="none" stroke="#6e7889" stroke-width="3.2" stroke-linejoin="round"/>
-<g><title>GPT-6 Luna / Low: score 21.5, median end-to-end response time 6.2s</title><circle cx="165.74" cy="531.97" r="10" fill="#6e7889" stroke="white" stroke-width="1.5"/>
-<text x="165.74" y="535.97" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">1</text>
+<polyline points="381.42,647.67 414.03,627.23 691.97,579.87" fill="none" stroke="#6e7889" stroke-width="3.2" stroke-linejoin="round"/>
+<g><title>GPT-6 Luna / Low: score 9.7, median end-to-end response time 6.6s</title><circle cx="178.11" cy="772.22" r="10" fill="#6e7889" stroke="white" stroke-width="1.5"/>
+<text x="178.11" y="776.22" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">1</text>
 </g>
-<g><title>GPT-6 Luna / High: score 32.9, median end-to-end response time 15.5s</title><circle cx="369.01" cy="444.55" r="10" fill="#6e7889" stroke="white" stroke-width="1.5"/>
-<text x="369.01" y="448.55" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">3</text>
+<g><title>GPT-6 Luna / High: score 21.4, median end-to-end response time 17.8s</title><circle cx="381.42" cy="647.67" r="10" fill="#6e7889" stroke="white" stroke-width="1.5"/>
+<text x="381.42" y="651.67" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">3</text>
 </g>
-<g><title>GPT-6 Luna / Xhigh: score 34.6, median end-to-end response time 27.1s</title><circle cx="492.83" cy="432.05" r="10" fill="#6e7889" stroke="white" stroke-width="1.5"/>
-<text x="492.83" y="436.05" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">4</text>
+<g><title>GPT-6 Luna / Xhigh: score 23.3, median end-to-end response time 20.9s</title><circle cx="414.03" cy="627.23" r="10" fill="#6e7889" stroke="white" stroke-width="1.5"/>
+<text x="414.03" y="631.23" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">4</text>
 </g>
-<g><title>GPT-6 Luna / Max: score 38.1, median end-to-end response time 99.9s</title><circle cx="780.55" cy="404.71" r="10" fill="#6e7889" stroke="white" stroke-width="1.5"/>
-<text x="780.55" y="408.71" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">5</text>
+<g><title>GPT-6 Luna / Max: score 27.8, median end-to-end response time 80.6s</title><circle cx="691.97" cy="579.87" r="10" fill="#6e7889" stroke="white" stroke-width="1.5"/>
+<text x="691.97" y="583.87" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">5</text>
+</g>
+</g>
+<g class="speed-series" data-model="7">
+</g>
+<g class="speed-series" data-model="8">
+<polyline points="183.00,564.33 193.48,469.71 285.18,424.84 433.92,397.03 699.10,332.95" fill="none" stroke="#9744a0" stroke-width="3.2" stroke-linejoin="round"/>
+<g><title>GPT-6.1 Terra / Low: score 29.2, median end-to-end response time 6.8s</title><circle cx="183.00" cy="564.33" r="10" fill="#9744a0" stroke="white" stroke-width="1.5"/>
+<text x="183.00" y="568.33" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">1</text>
+</g>
+<g><title>GPT-6.1 Terra / Medium: score 38.1, median end-to-end response time 7.1s</title><circle cx="193.48" cy="469.71" r="10" fill="#9744a0" stroke="white" stroke-width="1.5"/>
+<text x="193.48" y="473.71" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">2</text>
+</g>
+<g><title>GPT-6.1 Terra / High: score 42.3, median end-to-end response time 11.2s</title><circle cx="285.18" cy="424.84" r="10" fill="#9744a0" stroke="white" stroke-width="1.5"/>
+<text x="285.18" y="428.84" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">3</text>
+</g>
+<g><title>GPT-6.1 Terra / Xhigh: score 45.0, median end-to-end response time 23.0s</title><circle cx="433.92" cy="397.03" r="10" fill="#9744a0" stroke="white" stroke-width="1.5"/>
+<text x="433.92" y="401.03" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">4</text>
+</g>
+<g><title>GPT-6.1 Terra / Max: score 51.0, median end-to-end response time 83.5s</title><circle cx="699.10" cy="332.95" r="10" fill="#9744a0" stroke="white" stroke-width="1.5"/>
+<text x="699.10" y="336.95" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">5</text>
+</g>
+</g>
+<g class="speed-series" data-model="9">
+<g><title>Gemini 4 Argon / High: score 50.4, median end-to-end response time 52.7s</title><circle cx="604.64" cy="338.95" r="10" fill="#4d7b16" stroke="white" stroke-width="1.5"/>
+<text x="604.64" y="342.95" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">3</text>
+</g>
+</g>
+<g class="speed-series" data-model="10">
+<polyline points="465.27,502.70 629.56,509.90" fill="none" stroke="#be3042" stroke-width="3.2" stroke-linejoin="round"/>
+<g><title>Grok 4.7 / Low: score 30.9, median end-to-end response time 11.9s</title><circle cx="298.36" cy="546.62" r="10" fill="#be3042" stroke="white" stroke-width="1.5"/>
+<text x="298.36" y="550.62" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">1</text>
+</g>
+<g><title>Grok 4.7 / High: score 35.0, median end-to-end response time 26.8s</title><circle cx="465.27" cy="502.70" r="10" fill="#be3042" stroke="white" stroke-width="1.5"/>
+<text x="465.27" y="506.70" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">3</text>
+</g>
+<g><title>Grok 4.7 / Xhigh: score 34.3, median end-to-end response time 59.5s</title><circle cx="629.56" cy="509.90" r="10" fill="#be3042" stroke="white" stroke-width="1.5"/>
+<text x="629.56" y="513.90" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">4</text>
 </g>
 </g>
 <text x="1246" y="251" font-size="14" style="fill:#56647a" font-weight="700" text-anchor="start">MODEL COLOR</text>
 <line x1="1246" y1="279" x2="1272" y2="279" stroke="#a34415" stroke-width="4"/>
 <text x="1282" y="285" font-size="18" style="fill:#a34415" font-weight="600" text-anchor="start">Claude Opus 5.5</text>
-<line x1="1246" y1="316" x2="1272" y2="316" stroke="#d17908" stroke-width="4"/>
-<text x="1282" y="322" font-size="18" style="fill:#d17908" font-weight="600" text-anchor="start">Claude Sonnet 5.5</text>
-<line x1="1246" y1="353" x2="1272" y2="353" stroke="#5144c7" stroke-width="4"/>
-<text x="1282" y="359" font-size="18" style="fill:#5144c7" font-weight="600" text-anchor="start">GPT-6 Astra</text>
-<line x1="1246" y1="390" x2="1272" y2="390" stroke="#1878ba" stroke-width="4"/>
-<text x="1282" y="396" font-size="18" style="fill:#1878ba" font-weight="600" text-anchor="start">GPT-6.1 Sol</text>
-<line x1="1246" y1="427" x2="1272" y2="427" stroke="#bf3c85" stroke-width="4"/>
-<text x="1282" y="433" font-size="18" style="fill:#bf3c85" font-weight="600" text-anchor="start">GPT-5.6 Sol</text>
-<line x1="1246" y1="464" x2="1272" y2="464" stroke="#07816c" stroke-width="4"/>
-<text x="1282" y="470" font-size="18" style="fill:#07816c" font-weight="600" text-anchor="start">Gemini 3.8 Flash</text>
-<line x1="1246" y1="501" x2="1272" y2="501" stroke="#6e7889" stroke-width="4"/>
-<text x="1282" y="507" font-size="18" style="fill:#6e7889" font-weight="600" text-anchor="start">GPT-6 Luna</text>
-<text x="1246" y="576" font-size="14" style="fill:#56647a" font-weight="700" text-anchor="start">EFFORT / POINT NUMBER</text>
-<text x="1246" y="606" font-size="17" style="fill:#192740" font-weight="400" text-anchor="start">1  Low</text>
-<text x="1246" y="631" font-size="17" style="fill:#192740" font-weight="400" text-anchor="start">2  Medium</text>
-<text x="1246" y="656" font-size="17" style="fill:#192740" font-weight="400" text-anchor="start">3  High</text>
-<text x="1246" y="681" font-size="17" style="fill:#192740" font-weight="400" text-anchor="start">4  Xhigh</text>
-<text x="1246" y="706" font-size="17" style="fill:#192740" font-weight="400" text-anchor="start">5  Max</text>
-<text x="1246" y="751" font-size="14" style="fill:#56647a" font-weight="400" text-anchor="start">Missing timings are not plotted.</text>
-<text x="48" y="822" font-size="16" style="fill:#56647a" font-weight="400" text-anchor="start">Source: artificialanalysis.ai/leaderboards/models. Current series refreshed 21 Oct 2026.</text>
-<text x="48" y="849" font-size="16" style="fill:#56647a" font-weight="400" text-anchor="start">Median response time depends on benchmark output length and provider behavior; validate wall time on your own agent workflow.</text>
+<line x1="1246" y1="312" x2="1272" y2="312" stroke="#d17908" stroke-width="4"/>
+<text x="1282" y="318" font-size="18" style="fill:#d17908" font-weight="600" text-anchor="start">Claude Sonnet 5.5</text>
+<line x1="1246" y1="345" x2="1272" y2="345" stroke="#5144c7" stroke-width="4"/>
+<text x="1282" y="351" font-size="18" style="fill:#5144c7" font-weight="600" text-anchor="start">GPT-6 Astra</text>
+<line x1="1246" y1="378" x2="1272" y2="378" stroke="#1878ba" stroke-width="4"/>
+<text x="1282" y="384" font-size="18" style="fill:#1878ba" font-weight="600" text-anchor="start">GPT-6.1 Sol</text>
+<line x1="1246" y1="411" x2="1272" y2="411" stroke="#bf3c85" stroke-width="4"/>
+<text x="1282" y="417" font-size="18" style="fill:#bf3c85" font-weight="600" text-anchor="start">GPT-5.6 Sol</text>
+<line x1="1246" y1="444" x2="1272" y2="444" stroke="#07816c" stroke-width="4"/>
+<text x="1282" y="450" font-size="18" style="fill:#07816c" font-weight="600" text-anchor="start">Gemini 3.8 Flash</text>
+<line x1="1246" y1="477" x2="1272" y2="477" stroke="#6e7889" stroke-width="4"/>
+<text x="1282" y="483" font-size="18" style="fill:#6e7889" font-weight="600" text-anchor="start">GPT-6 Luna</text>
+<line x1="1246" y1="510" x2="1272" y2="510" stroke="#8c6b21" stroke-width="4"/>
+<text x="1282" y="516" font-size="18" style="fill:#8c6b21" font-weight="600" text-anchor="start">GPT-5.6 Sol Fast</text>
+<line x1="1246" y1="543" x2="1272" y2="543" stroke="#9744a0" stroke-width="4"/>
+<text x="1282" y="549" font-size="18" style="fill:#9744a0" font-weight="600" text-anchor="start">GPT-6.1 Terra</text>
+<line x1="1246" y1="576" x2="1272" y2="576" stroke="#4d7b16" stroke-width="4"/>
+<text x="1282" y="582" font-size="18" style="fill:#4d7b16" font-weight="600" text-anchor="start">Gemini 4 Argon</text>
+<line x1="1246" y1="609" x2="1272" y2="609" stroke="#be3042" stroke-width="4"/>
+<text x="1282" y="615" font-size="18" style="fill:#be3042" font-weight="600" text-anchor="start">Grok 4.7</text>
+<text x="1246" y="664" font-size="14" style="fill:#56647a" font-weight="700" text-anchor="start">EFFORT / POINT NUMBER</text>
+<text x="1246" y="693" font-size="17" style="fill:#192740" font-weight="400" text-anchor="start">1  Low</text>
+<text x="1246" y="718" font-size="17" style="fill:#192740" font-weight="400" text-anchor="start">2  Medium</text>
+<text x="1246" y="743" font-size="17" style="fill:#192740" font-weight="400" text-anchor="start">3  High</text>
+<text x="1246" y="768" font-size="17" style="fill:#192740" font-weight="400" text-anchor="start">4  Xhigh</text>
+<text x="1246" y="793" font-size="17" style="fill:#192740" font-weight="400" text-anchor="start">5  Max</text>
+<text x="1246" y="875" font-size="14" style="fill:#56647a" font-weight="400" text-anchor="start">Missing timings are not plotted.</text>
+<text x="48" y="987" font-size="16" style="fill:#56647a" font-weight="400" text-anchor="start">Source: artificialanalysis.ai/leaderboards/models. Current v5.0 series refreshed 28 Oct 2026.</text>
+<text x="48" y="1014" font-size="16" style="fill:#56647a" font-weight="400" text-anchor="start">Median response time depends on benchmark output length and provider behavior; validate wall time on your own agent workflow.</text>
 </svg>

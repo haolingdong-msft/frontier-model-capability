@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "assembled_at": "2026-10-21T08:53:28.838846+00:00",
+  "assembled_at": "2026-10-28T05:42:30.621982+00:00",
   "models": [
     {
       "id": "claude-opus-5-5",
@@ -29,19 +29,37 @@
     {
       "id": "gpt-6-luna",
       "name": "GPT-6 Luna"
+    },
+    {
+      "id": "gpt-5-6-sol-fast",
+      "name": "GPT-5.6 Sol Fast"
+    },
+    {
+      "id": "gpt-6-1-terra",
+      "name": "GPT-6.1 Terra"
+    },
+    {
+      "id": "gemini-4-argon",
+      "name": "Gemini 4 Argon"
+    },
+    {
+      "id": "grok-4-7",
+      "name": "Grok 4.7"
     }
   ],
-  "selection_note": "Seven pre-selected families, not an exhaustive leaderboard. Overview configurations are explicitly recorded per source. Different sources use different efforts, agent harnesses, budgets, and samples. Missing results are not inferred from a general capability score.",
+  "selection_note": "11 pre-selected families, not an exhaustive leaderboard. Overview configurations are explicitly recorded per source. Different sources use different efforts, agent harnesses, budgets, and samples. Missing results are not inferred from a general capability score.",
   "unavailable_sources": [
     {
       "name": "Arena Code / WebDev",
       "url": "https://arena.ai/leaderboard/code",
-      "status": "HTTP 403 during retrieval; no scores imported"
+      "status": "HTTP 403 during retrieval; no scores imported",
+      "checked_on": "2026-10-21"
     },
     {
       "name": "Arena Creative Writing",
       "url": "https://arena.ai/leaderboard/text/creative-writing",
-      "status": "HTTP 403 during retrieval; no prose-style ranking inferred"
+      "status": "HTTP 403 during retrieval; no prose-style ranking inferred",
+      "checked_on": "2026-10-21"
     }
   ],
   "benchmarks": [
@@ -61,8 +79,8 @@
       "source": {
         "url": "https://www.designarena.ai/leaderboard/website",
         "methodology_url": "https://www.designarena.ai/about",
-        "retrieved_at": "2026-10-21T08:45:29.641029+00:00",
-        "raw_snapshot_sha256": "2d5246a62526dd8b4fe42a5462481fd484b7a2a53912fffe956bd1146fb71ab1",
+        "retrieved_at": "2026-10-28T05:37:20.269556+00:00",
+        "raw_snapshot_sha256": "2dfc2fa269ef37ad98d8f8248a06f30442cfcb3ef928cf01139ec25a399ce600",
         "data_url": "https://www.designarena.ai/api/leaderboard",
         "data_request": {
           "method": "POST",
@@ -72,8 +90,8 @@
           }
         },
         "source_metadata": {
-          "lastUpdateTime": "2026-10-21T08:06:40.5915+00:00",
-          "totalVotes": 1131075
+          "lastUpdateTime": "2026-10-28T04:07:14.087549+00:00",
+          "totalVotes": 1149105
         }
       },
       "results": [
@@ -81,34 +99,34 @@
           "family": "gpt-6-astra",
           "source_model_id": "gpt-6-astra-max",
           "configuration": "Max",
-          "score": 1337,
+          "score": 1339,
           "representative": true,
           "ci95": null,
-          "sample_size": 2271,
+          "sample_size": 2559,
           "sample_unit": "pairwise comparisons",
           "effort": "max",
-          "agent": "DesignArena website generation"
-        },
-        {
-          "family": "claude-opus-5-5",
-          "source_model_id": "claude-opus-5-5",
-          "configuration": "Effort not stated",
-          "score": 1335,
-          "representative": true,
-          "ci95": null,
-          "sample_size": 2173,
-          "sample_unit": "pairwise comparisons",
-          "effort": null,
           "agent": "DesignArena website generation"
         },
         {
           "family": "gpt-6-astra",
           "source_model_id": "gpt-6-astra",
           "configuration": "Effort not stated",
-          "score": 1329,
+          "score": 1328,
           "representative": false,
           "ci95": null,
-          "sample_size": 4791,
+          "sample_size": 5563,
+          "sample_unit": "pairwise comparisons",
+          "effort": null,
+          "agent": "DesignArena website generation"
+        },
+        {
+          "family": "claude-opus-5-5",
+          "source_model_id": "claude-opus-5-5",
+          "configuration": "Effort not stated",
+          "score": 1325,
+          "representative": true,
+          "ci95": null,
+          "sample_size": 3028,
           "sample_unit": "pairwise comparisons",
           "effort": null,
           "agent": "DesignArena website generation"
@@ -117,10 +135,10 @@
           "family": "claude-sonnet-5-5",
           "source_model_id": "claude-sonnet-5-5",
           "configuration": "Effort not stated",
-          "score": 1326,
+          "score": 1322,
           "representative": true,
           "ci95": null,
-          "sample_size": 1873,
+          "sample_size": 2655,
           "sample_unit": "pairwise comparisons",
           "effort": null,
           "agent": "DesignArena website generation"
@@ -129,22 +147,34 @@
           "family": "gpt-5-6-sol",
           "source_model_id": "gpt-5.6-sol-xhigh",
           "configuration": "Xhigh",
-          "score": 1321,
+          "score": 1320,
           "representative": true,
           "ci95": null,
-          "sample_size": 7178,
+          "sample_size": 7556,
           "sample_unit": "pairwise comparisons",
           "effort": "xhigh",
+          "agent": "DesignArena website generation"
+        },
+        {
+          "family": "gemini-4-argon",
+          "source_model_id": "gemini-4-argon",
+          "configuration": "Effort not stated",
+          "score": 1316,
+          "representative": true,
+          "ci95": null,
+          "sample_size": 9173,
+          "sample_unit": "pairwise comparisons",
+          "effort": null,
           "agent": "DesignArena website generation"
         },
         {
           "family": "gpt-6-1-sol",
           "source_model_id": "gpt-6.1-sol",
           "configuration": "Effort not stated",
-          "score": 1320,
+          "score": 1315,
           "representative": true,
           "ci95": null,
-          "sample_size": 2161,
+          "sample_size": 3023,
           "sample_unit": "pairwise comparisons",
           "effort": null,
           "agent": "DesignArena website generation"
@@ -153,10 +183,10 @@
           "family": "gpt-5-6-sol",
           "source_model_id": "gpt-5.6-sol",
           "configuration": "Effort not stated",
-          "score": 1309,
+          "score": 1308,
           "representative": false,
           "ci95": null,
-          "sample_size": 13401,
+          "sample_size": 13828,
           "sample_unit": "pairwise comparisons",
           "effort": null,
           "agent": "DesignArena website generation"
@@ -165,10 +195,22 @@
           "family": "gemini-3-8-flash",
           "source_model_id": "gemini-3.8-flash",
           "configuration": "Effort not stated",
-          "score": 1301,
+          "score": 1299,
           "representative": true,
           "ci95": null,
-          "sample_size": 29439,
+          "sample_size": 29895,
+          "sample_unit": "pairwise comparisons",
+          "effort": null,
+          "agent": "DesignArena website generation"
+        },
+        {
+          "family": "gpt-6-1-terra",
+          "source_model_id": "gpt-6.1-terra",
+          "configuration": "Effort not stated",
+          "score": 1284,
+          "representative": true,
+          "ci95": null,
+          "sample_size": 1642,
           "sample_unit": "pairwise comparisons",
           "effort": null,
           "agent": "DesignArena website generation"
@@ -177,10 +219,22 @@
           "family": "gpt-6-luna",
           "source_model_id": "gpt-6-luna",
           "configuration": "Effort not stated",
-          "score": 1272,
+          "score": 1266,
           "representative": true,
           "ci95": null,
-          "sample_size": 3901,
+          "sample_size": 4320,
+          "sample_unit": "pairwise comparisons",
+          "effort": null,
+          "agent": "DesignArena website generation"
+        },
+        {
+          "family": "grok-4-7",
+          "source_model_id": "grok-4.7",
+          "configuration": "Effort not stated",
+          "score": 1251,
+          "representative": true,
+          "ci95": null,
+          "sample_size": 1834,
           "sample_unit": "pairwise comparisons",
           "effort": null,
           "agent": "DesignArena website generation"
@@ -199,12 +253,12 @@
       ],
       "scope": "Resolution rate on executable terminal tasks. Each row identifies the actual agent and reasoning effort; whiskers show the source's 95% CI.",
       "limit": "A software-engineering proxy, not a backend-only benchmark. These results measure model + agent + tools + budget, not the base model in isolation. Different agents make cross-model comparisons confounded.",
-      "configuration_rule": "Overview: max effort for each selected model, except Gemini high. All available selected-family runs remain in the configuration table.",
+      "configuration_rule": "Overview: max effort where available, Gemini high, and Grok xhigh. All available selected-family runs remain in the configuration table.",
       "source": {
         "url": "https://www.tbench.ai/",
         "methodology_url": "https://www.tbench.ai/run",
-        "retrieved_at": "2026-10-21T08:42:10.499605+00:00",
-        "raw_snapshot_sha256": "c6a205b882d57f7aad7ce3f0ded174a6c7d2511c7d9de7038cfa4c1f9c4815c5"
+        "retrieved_at": "2026-10-28T05:37:20.297075+00:00",
+        "raw_snapshot_sha256": "3acf7c3e634429d49ce0078281bd86e3622d564aa0f64d81646fea619294a113"
       },
       "results": [
         {
@@ -344,6 +398,23 @@
           "source_reported_date": "2026-09-03"
         },
         {
+          "family": "grok-4-7",
+          "source_model_id": "Grok 4.7",
+          "configuration": "Xhigh / Grok Build",
+          "score": 37.58,
+          "representative": true,
+          "ci95": [
+            34.04,
+            41.12
+          ],
+          "sample_size": 330,
+          "sample_unit": "trials",
+          "effort": "xhigh",
+          "agent": "Grok Build",
+          "source_run_id": "84b39f56-fe3c-46c3-919f-3b67b73f9b49",
+          "source_reported_date": "2026-09-21"
+        },
+        {
           "family": "gpt-5-6-sol",
           "source_model_id": "GPT-5.6 Sol",
           "configuration": "Max / Codex",
@@ -408,12 +479,12 @@
       ],
       "scope": "Raw Word (.docx) rubric-check pass rate, extracted from briefcaseBreakdown.rubricByFileType.docx. Each captured run contains 17 Word tasks; this is checks satisfied, not whole documents passed.",
       "limit": "Agent-assisted professional artifact creation using Stirrup, not a pure prose or creative-writing test. Word scores have no published CI in these records; a small gap is not a reliable ranking.",
-      "configuration_rule": "Overview: max effort with the source's stated fallback for Claude; Gemini high. Unavailable models are left missing, not estimated.",
+      "configuration_rule": "Overview: max effort with the source's stated fallback for Claude; Gemini high and Grok xhigh. Unavailable models are left missing, not estimated.",
       "source": {
         "url": "https://artificialanalysis.ai/evaluations/aa-briefcase",
         "methodology_url": "https://artificialanalysis.ai/methodology/intelligence-benchmarking#aa-briefcase",
-        "retrieved_at": "2026-10-21T08:42:10.518564+00:00",
-        "raw_snapshot_sha256": "a0c388798137f935048ecde6bc50d450fec90f75272129e80f48ca0384fce94c"
+        "retrieved_at": "2026-10-28T05:37:20.053598+00:00",
+        "raw_snapshot_sha256": "d593afad60eda2b0523076ca8db253dfdc8081e4a769d4a2892b09741aba5a74"
       },
       "results": [
         {
@@ -421,6 +492,32 @@
           "source_model_id": "claude-opus-5-5",
           "configuration": "Claude Opus 5.5 (Max, Default Fallback)",
           "score": 60.35502958579882,
+          "representative": true,
+          "ci95": null,
+          "sample_size": 17,
+          "sample_unit": "tasks",
+          "effort": "max",
+          "agent": "Stirrup",
+          "source_field": "briefcaseBreakdown.rubricByFileType.docx"
+        },
+        {
+          "family": "gpt-6-astra",
+          "source_model_id": "gpt-6-astra",
+          "configuration": "GPT-6 Astra (Max)",
+          "score": 52.071005917159766,
+          "representative": true,
+          "ci95": null,
+          "sample_size": 17,
+          "sample_unit": "tasks",
+          "effort": "max",
+          "agent": "Stirrup",
+          "source_field": "briefcaseBreakdown.rubricByFileType.docx"
+        },
+        {
+          "family": "gpt-6-1-sol",
+          "source_model_id": "gpt-6-1-sol",
+          "configuration": "GPT-6.1 Sol (Max)",
+          "score": 52.071005917159766,
           "representative": true,
           "ci95": null,
           "sample_size": 17,
@@ -443,24 +540,24 @@
           "source_field": "briefcaseBreakdown.rubricByFileType.docx"
         },
         {
-          "family": "claude-opus-5-5",
-          "source_model_id": "claude-opus-5-5-xhigh",
-          "configuration": "Claude Opus 5.5 (Xhigh, Default Fallback)",
-          "score": 55.62130177514793,
-          "representative": false,
+          "family": "gpt-6-1-terra",
+          "source_model_id": "gpt-6-1-terra",
+          "configuration": "GPT-6.1 Terra (Max)",
+          "score": 37.278106508875744,
+          "representative": true,
           "ci95": null,
           "sample_size": 17,
           "sample_unit": "tasks",
-          "effort": "xhigh",
+          "effort": "max",
           "agent": "Stirrup",
           "source_field": "briefcaseBreakdown.rubricByFileType.docx"
         },
         {
-          "family": "claude-opus-5-5",
-          "source_model_id": "claude-opus-5-5-high",
-          "configuration": "Claude Opus 5.5 (High, Default Fallback)",
-          "score": 55.62130177514793,
-          "representative": false,
+          "family": "gemini-4-argon",
+          "source_model_id": "gemini-4-argon",
+          "configuration": "Gemini 4 Argon (High)",
+          "score": 62.1301775147929,
+          "representative": true,
           "ci95": null,
           "sample_size": 17,
           "sample_unit": "tasks",
@@ -469,41 +566,15 @@
           "source_field": "briefcaseBreakdown.rubricByFileType.docx"
         },
         {
-          "family": "gpt-6-astra",
-          "source_model_id": "gpt-6-astra",
-          "configuration": "GPT-6 Astra (Max)",
-          "score": 52.071005917159766,
+          "family": "grok-4-7",
+          "source_model_id": "grok-4-7",
+          "configuration": "Grok 4.7 (Xhigh)",
+          "score": 57.396449704142015,
           "representative": true,
-          "ci95": null,
-          "sample_size": 17,
-          "sample_unit": "tasks",
-          "effort": "max",
-          "agent": "Stirrup",
-          "source_field": "briefcaseBreakdown.rubricByFileType.docx"
-        },
-        {
-          "family": "claude-sonnet-5-5",
-          "source_model_id": "claude-sonnet-5-5-xhigh",
-          "configuration": "Claude Sonnet 5.5 (Xhigh, Default Fallback)",
-          "score": 59.171597633136095,
-          "representative": false,
           "ci95": null,
           "sample_size": 17,
           "sample_unit": "tasks",
           "effort": "xhigh",
-          "agent": "Stirrup",
-          "source_field": "briefcaseBreakdown.rubricByFileType.docx"
-        },
-        {
-          "family": "gpt-6-1-sol",
-          "source_model_id": "gpt-6-1-sol",
-          "configuration": "GPT-6.1 Sol (Max)",
-          "score": 52.071005917159766,
-          "representative": true,
-          "ci95": null,
-          "sample_size": 17,
-          "sample_unit": "tasks",
-          "effort": "max",
           "agent": "Stirrup",
           "source_field": "briefcaseBreakdown.rubricByFileType.docx"
         },
@@ -547,23 +618,55 @@
       ],
       "scope": "Analytical quality pairwise Elo across all deliverable types (Word, PDF, slides, spreadsheets, and others), not Word-only.",
       "limit": "A broader professional-work proxy, not a prose-only score. Its Elo scale cannot be compared numerically with DesignArena or GDPval.",
-      "configuration_rule": "Overview: max effort with the source's stated fallback for Claude; Gemini high. Unavailable models are left missing, not estimated.",
+      "configuration_rule": "Overview: max effort with the source's stated fallback for Claude; Gemini high and Grok xhigh. Unavailable models are left missing, not estimated.",
       "source": {
         "url": "https://artificialanalysis.ai/evaluations/aa-briefcase",
         "methodology_url": "https://artificialanalysis.ai/methodology/intelligence-benchmarking#aa-briefcase",
-        "retrieved_at": "2026-10-21T08:42:10.518564+00:00",
-        "raw_snapshot_sha256": "a0c388798137f935048ecde6bc50d450fec90f75272129e80f48ca0384fce94c"
+        "retrieved_at": "2026-10-28T05:37:20.053598+00:00",
+        "raw_snapshot_sha256": "d593afad60eda2b0523076ca8db253dfdc8081e4a769d4a2892b09741aba5a74"
       },
       "results": [
         {
           "family": "claude-opus-5-5",
           "source_model_id": "claude-opus-5-5",
           "configuration": "Claude Opus 5.5 (Max, Default Fallback)",
-          "score": 2142.71,
+          "score": 2135.15,
           "representative": true,
           "ci95": [
-            2119.83,
-            2164.06
+            2111.93,
+            2160.57
+          ],
+          "sample_size": 91,
+          "sample_unit": "tasks",
+          "effort": "max",
+          "agent": "Stirrup",
+          "source_field": "briefcaseBreakdown.analyticalQuality.elo"
+        },
+        {
+          "family": "gpt-6-astra",
+          "source_model_id": "gpt-6-astra",
+          "configuration": "GPT-6 Astra (Max)",
+          "score": 1752.19,
+          "representative": true,
+          "ci95": [
+            1736.55,
+            1768.94
+          ],
+          "sample_size": 91,
+          "sample_unit": "tasks",
+          "effort": "max",
+          "agent": "Stirrup",
+          "source_field": "briefcaseBreakdown.analyticalQuality.elo"
+        },
+        {
+          "family": "gpt-6-1-sol",
+          "source_model_id": "gpt-6-1-sol",
+          "configuration": "GPT-6.1 Sol (Max)",
+          "score": 1766.62,
+          "representative": true,
+          "ci95": [
+            1751.28,
+            1782.49
           ],
           "sample_size": 91,
           "sample_unit": "tasks",
@@ -575,11 +678,11 @@
           "family": "claude-sonnet-5-5",
           "source_model_id": "claude-sonnet-5-5",
           "configuration": "Claude Sonnet 5.5 (Max, Default Fallback)",
-          "score": 2115.09,
+          "score": 2104.3,
           "representative": true,
           "ci95": [
-            2093.81,
-            2138.33
+            2083.51,
+            2127.26
           ],
           "sample_size": 91,
           "sample_unit": "tasks",
@@ -588,82 +691,50 @@
           "source_field": "briefcaseBreakdown.analyticalQuality.elo"
         },
         {
-          "family": "claude-opus-5-5",
-          "source_model_id": "claude-opus-5-5-xhigh",
-          "configuration": "Claude Opus 5.5 (Xhigh, Default Fallback)",
-          "score": 2093.3,
-          "representative": false,
+          "family": "gpt-6-1-terra",
+          "source_model_id": "gpt-6-1-terra",
+          "configuration": "GPT-6.1 Terra (Max)",
+          "score": 1491.89,
+          "representative": true,
           "ci95": [
-            2071.83,
-            2115.11
+            1471.3,
+            1514.37
           ],
           "sample_size": 91,
           "sample_unit": "tasks",
-          "effort": "xhigh",
+          "effort": "max",
           "agent": "Stirrup",
           "source_field": "briefcaseBreakdown.analyticalQuality.elo"
         },
         {
-          "family": "claude-opus-5-5",
-          "source_model_id": "claude-opus-5-5-high",
-          "configuration": "Claude Opus 5.5 (High, Default Fallback)",
-          "score": 1982.57,
-          "representative": false,
+          "family": "gemini-4-argon",
+          "source_model_id": "gemini-4-argon",
+          "configuration": "Gemini 4 Argon (High)",
+          "score": 1550.88,
+          "representative": true,
           "ci95": [
-            1963.89,
-            2003.46
+            1530.1,
+            1571.08
           ],
-          "sample_size": 91,
+          "sample_size": 90,
           "sample_unit": "tasks",
           "effort": "high",
           "agent": "Stirrup",
           "source_field": "briefcaseBreakdown.analyticalQuality.elo"
         },
         {
-          "family": "gpt-6-astra",
-          "source_model_id": "gpt-6-astra",
-          "configuration": "GPT-6 Astra (Max)",
-          "score": 1757.39,
+          "family": "grok-4-7",
+          "source_model_id": "grok-4-7",
+          "configuration": "Grok 4.7 (Xhigh)",
+          "score": 1933.69,
           "representative": true,
           "ci95": [
-            1742.11,
-            1774.3
-          ],
-          "sample_size": 91,
-          "sample_unit": "tasks",
-          "effort": "max",
-          "agent": "Stirrup",
-          "source_field": "briefcaseBreakdown.analyticalQuality.elo"
-        },
-        {
-          "family": "claude-sonnet-5-5",
-          "source_model_id": "claude-sonnet-5-5-xhigh",
-          "configuration": "Claude Sonnet 5.5 (Xhigh, Default Fallback)",
-          "score": 2026.49,
-          "representative": false,
-          "ci95": [
-            2005.26,
-            2049.84
+            1917.67,
+            1951.53
           ],
           "sample_size": 91,
           "sample_unit": "tasks",
           "effort": "xhigh",
-          "agent": "Stirrup",
-          "source_field": "briefcaseBreakdown.analyticalQuality.elo"
-        },
-        {
-          "family": "gpt-6-1-sol",
-          "source_model_id": "gpt-6-1-sol",
-          "configuration": "GPT-6.1 Sol (Max)",
-          "score": 1773.21,
-          "representative": true,
-          "ci95": [
-            1758,
-            1790.79
-          ],
-          "sample_size": 91,
-          "sample_unit": "tasks",
-          "effort": "max",
           "agent": "Stirrup",
           "source_field": "briefcaseBreakdown.analyticalQuality.elo"
         },
@@ -671,11 +742,11 @@
           "family": "gemini-3-8-flash",
           "source_model_id": "gemini-3-8-flash",
           "configuration": "Gemini 3.8 Flash (High)",
-          "score": 1137.87,
+          "score": 1136.55,
           "representative": true,
           "ci95": [
-            1122.84,
-            1152.99
+            1119.49,
+            1151.98
           ],
           "sample_size": 91,
           "sample_unit": "tasks",
@@ -687,11 +758,11 @@
           "family": "gpt-6-luna",
           "source_model_id": "gpt-6-luna",
           "configuration": "GPT-6 Luna (Max)",
-          "score": 1374.83,
+          "score": 1376.09,
           "representative": true,
           "ci95": [
-            1355.97,
-            1394.56
+            1358.18,
+            1395.26
           ],
           "sample_size": 91,
           "sample_unit": "tasks",
@@ -713,23 +784,55 @@
       ],
       "scope": "Presentation pairwise Elo across all deliverable types (Word, PDF, slides, spreadsheets, and others), not Word-only.",
       "limit": "A broader professional-work proxy, not a prose-only score. Its Elo scale cannot be compared numerically with DesignArena or GDPval.",
-      "configuration_rule": "Overview: max effort with the source's stated fallback for Claude; Gemini high. Unavailable models are left missing, not estimated.",
+      "configuration_rule": "Overview: max effort with the source's stated fallback for Claude; Gemini high and Grok xhigh. Unavailable models are left missing, not estimated.",
       "source": {
         "url": "https://artificialanalysis.ai/evaluations/aa-briefcase",
         "methodology_url": "https://artificialanalysis.ai/methodology/intelligence-benchmarking#aa-briefcase",
-        "retrieved_at": "2026-10-21T08:42:10.518564+00:00",
-        "raw_snapshot_sha256": "a0c388798137f935048ecde6bc50d450fec90f75272129e80f48ca0384fce94c"
+        "retrieved_at": "2026-10-28T05:37:20.053598+00:00",
+        "raw_snapshot_sha256": "d593afad60eda2b0523076ca8db253dfdc8081e4a769d4a2892b09741aba5a74"
       },
       "results": [
         {
           "family": "claude-opus-5-5",
           "source_model_id": "claude-opus-5-5",
           "configuration": "Claude Opus 5.5 (Max, Default Fallback)",
-          "score": 1714.96,
+          "score": 1715.1,
           "representative": true,
           "ci95": [
-            1694.88,
-            1736.97
+            1696.04,
+            1737.45
+          ],
+          "sample_size": 91,
+          "sample_unit": "tasks",
+          "effort": "max",
+          "agent": "Stirrup",
+          "source_field": "briefcaseBreakdown.presentation.elo"
+        },
+        {
+          "family": "gpt-6-astra",
+          "source_model_id": "gpt-6-astra",
+          "configuration": "GPT-6 Astra (Max)",
+          "score": 1553.29,
+          "representative": true,
+          "ci95": [
+            1538.19,
+            1570.19
+          ],
+          "sample_size": 91,
+          "sample_unit": "tasks",
+          "effort": "max",
+          "agent": "Stirrup",
+          "source_field": "briefcaseBreakdown.presentation.elo"
+        },
+        {
+          "family": "gpt-6-1-sol",
+          "source_model_id": "gpt-6-1-sol",
+          "configuration": "GPT-6.1 Sol (Max)",
+          "score": 1452.57,
+          "representative": true,
+          "ci95": [
+            1434.41,
+            1471.42
           ],
           "sample_size": 91,
           "sample_unit": "tasks",
@@ -741,11 +844,11 @@
           "family": "claude-sonnet-5-5",
           "source_model_id": "claude-sonnet-5-5",
           "configuration": "Claude Sonnet 5.5 (Max, Default Fallback)",
-          "score": 1716.02,
+          "score": 1711.94,
           "representative": true,
           "ci95": [
-            1692.87,
-            1737.48
+            1691.6,
+            1734.75
           ],
           "sample_size": 91,
           "sample_unit": "tasks",
@@ -754,82 +857,50 @@
           "source_field": "briefcaseBreakdown.presentation.elo"
         },
         {
-          "family": "claude-opus-5-5",
-          "source_model_id": "claude-opus-5-5-xhigh",
-          "configuration": "Claude Opus 5.5 (Xhigh, Default Fallback)",
-          "score": 1642.19,
-          "representative": false,
+          "family": "gpt-6-1-terra",
+          "source_model_id": "gpt-6-1-terra",
+          "configuration": "GPT-6.1 Terra (Max)",
+          "score": 1463.42,
+          "representative": true,
           "ci95": [
-            1624.29,
-            1662.13
+            1446.17,
+            1483.14
           ],
           "sample_size": 91,
           "sample_unit": "tasks",
-          "effort": "xhigh",
+          "effort": "max",
           "agent": "Stirrup",
           "source_field": "briefcaseBreakdown.presentation.elo"
         },
         {
-          "family": "claude-opus-5-5",
-          "source_model_id": "claude-opus-5-5-high",
-          "configuration": "Claude Opus 5.5 (High, Default Fallback)",
-          "score": 1549.88,
-          "representative": false,
+          "family": "gemini-4-argon",
+          "source_model_id": "gemini-4-argon",
+          "configuration": "Gemini 4 Argon (High)",
+          "score": 1305.21,
+          "representative": true,
           "ci95": [
-            1532.6,
-            1568.62
+            1287.98,
+            1321.34
           ],
-          "sample_size": 91,
+          "sample_size": 90,
           "sample_unit": "tasks",
           "effort": "high",
           "agent": "Stirrup",
           "source_field": "briefcaseBreakdown.presentation.elo"
         },
         {
-          "family": "gpt-6-astra",
-          "source_model_id": "gpt-6-astra",
-          "configuration": "GPT-6 Astra (Max)",
-          "score": 1549,
+          "family": "grok-4-7",
+          "source_model_id": "grok-4-7",
+          "configuration": "Grok 4.7 (Xhigh)",
+          "score": 1502.89,
           "representative": true,
           "ci95": [
-            1532.66,
-            1567.05
-          ],
-          "sample_size": 91,
-          "sample_unit": "tasks",
-          "effort": "max",
-          "agent": "Stirrup",
-          "source_field": "briefcaseBreakdown.presentation.elo"
-        },
-        {
-          "family": "claude-sonnet-5-5",
-          "source_model_id": "claude-sonnet-5-5-xhigh",
-          "configuration": "Claude Sonnet 5.5 (Xhigh, Default Fallback)",
-          "score": 1649.87,
-          "representative": false,
-          "ci95": [
-            1623.16,
-            1679.38
+            1487.69,
+            1520.09
           ],
           "sample_size": 91,
           "sample_unit": "tasks",
           "effort": "xhigh",
-          "agent": "Stirrup",
-          "source_field": "briefcaseBreakdown.presentation.elo"
-        },
-        {
-          "family": "gpt-6-1-sol",
-          "source_model_id": "gpt-6-1-sol",
-          "configuration": "GPT-6.1 Sol (Max)",
-          "score": 1447.29,
-          "representative": true,
-          "ci95": [
-            1428.08,
-            1466.4
-          ],
-          "sample_size": 91,
-          "sample_unit": "tasks",
-          "effort": "max",
           "agent": "Stirrup",
           "source_field": "briefcaseBreakdown.presentation.elo"
         },
@@ -837,11 +908,11 @@
           "family": "gemini-3-8-flash",
           "source_model_id": "gemini-3-8-flash",
           "configuration": "Gemini 3.8 Flash (High)",
-          "score": 1223.27,
+          "score": 1224.82,
           "representative": true,
           "ci95": [
-            1208.64,
-            1237.83
+            1210.65,
+            1239.22
           ],
           "sample_size": 91,
           "sample_unit": "tasks",
@@ -853,11 +924,11 @@
           "family": "gpt-6-luna",
           "source_model_id": "gpt-6-luna",
           "configuration": "GPT-6 Luna (Max)",
-          "score": 1394.86,
+          "score": 1395.16,
           "representative": true,
           "ci95": [
             1379.49,
-            1410.73
+            1409.96
           ],
           "sample_size": 91,
           "sample_unit": "tasks",
@@ -879,12 +950,12 @@
       ],
       "scope": "Pairwise Elo for professional deliverables, including documents, slides, diagrams, and spreadsheets. Whiskers show the source's 95% CI.",
       "limit": "Not writing-only and not interchangeable with the Word rubric score. Elo is relative to this benchmark's comparison pool, not a universal scale.",
-      "configuration_rule": "Overview: the exact source max entries, with the stated fallback for Claude; Gemini high. The configurations are not equal compute budgets.",
+      "configuration_rule": "Overview: the exact source max entries, with the stated fallback for Claude; Gemini high and Grok xhigh. The configurations are not equal compute budgets.",
       "source": {
         "url": "https://artificialanalysis.ai/evaluations/gdpval-aa",
         "methodology_url": "https://artificialanalysis.ai/methodology/intelligence-benchmarking#gdpval-aa",
-        "retrieved_at": "2026-10-21T08:42:10.509797+00:00",
-        "raw_snapshot_sha256": "13985b77b09f8238a96119594e9d543b88125aefa4a4f1a60e51097fed1eaa4b"
+        "retrieved_at": "2026-10-28T05:37:20.285595+00:00",
+        "raw_snapshot_sha256": "3c3c22216771519be83514319c5aa528ec8bc865b212e98a6fbe39b856fc0522"
       },
       "results": [
         {
@@ -905,6 +976,91 @@
           "ci95_display": "-26 / +26 Elo (source-rounded)"
         },
         {
+          "family": "claude-opus-5-5",
+          "source_model_id": "df5bf99d-d228-4715-b41b-19ca86118777",
+          "configuration": "Claude Opus 5.5 (Xhigh, Default Fallback)",
+          "score": 1836.67,
+          "representative": false,
+          "ci95": [
+            1813.67,
+            1859.67
+          ],
+          "sample_size": null,
+          "sample_unit": null,
+          "source_model_name": "Claude Opus 5.5 (Xhigh, Default Fallback)",
+          "effort": "xhigh",
+          "agent": "Stirrup",
+          "ci95_display": "-23 / +23 Elo (source-rounded)"
+        },
+        {
+          "family": "gpt-6-astra",
+          "source_model_id": "2f339a97-9a0d-499a-9cb5-e0db665bfa25",
+          "configuration": "GPT-6 Astra (Max)",
+          "score": 1584.4,
+          "representative": true,
+          "ci95": [
+            1565.4,
+            1603.4
+          ],
+          "sample_size": null,
+          "sample_unit": null,
+          "source_model_name": "GPT-6 Astra (Max)",
+          "effort": "max",
+          "agent": "Stirrup",
+          "ci95_display": "-19 / +19 Elo (source-rounded)"
+        },
+        {
+          "family": "gpt-6-astra",
+          "source_model_id": "1f541ef3-913f-4eb2-9d07-0e93c7a9a5e3",
+          "configuration": "GPT-6 Astra (Xhigh)",
+          "score": 1569.33,
+          "representative": false,
+          "ci95": [
+            1550.33,
+            1588.33
+          ],
+          "sample_size": null,
+          "sample_unit": null,
+          "source_model_name": "GPT-6 Astra (Xhigh)",
+          "effort": "xhigh",
+          "agent": "Stirrup",
+          "ci95_display": "-19 / +19 Elo (source-rounded)"
+        },
+        {
+          "family": "gpt-6-astra",
+          "source_model_id": "e05a4828-0536-4876-870d-a235023f992b",
+          "configuration": "GPT-6 Astra (High)",
+          "score": 1536.99,
+          "representative": false,
+          "ci95": [
+            1516.99,
+            1556.99
+          ],
+          "sample_size": null,
+          "sample_unit": null,
+          "source_model_name": "GPT-6 Astra (High)",
+          "effort": "high",
+          "agent": "Stirrup",
+          "ci95_display": "-20 / +20 Elo (source-rounded)"
+        },
+        {
+          "family": "gpt-6-1-sol",
+          "source_model_id": "b25ac058-1e33-4c31-bbc9-a20c3ad0717a",
+          "configuration": "GPT-6.1 Sol (Max)",
+          "score": 1607.61,
+          "representative": true,
+          "ci95": [
+            1585.61,
+            1629.61
+          ],
+          "sample_size": null,
+          "sample_unit": null,
+          "source_model_name": "GPT-6.1 Sol (Max)",
+          "effort": "max",
+          "agent": "Stirrup",
+          "ci95_display": "-22 / +22 Elo (source-rounded)"
+        },
+        {
           "family": "claude-sonnet-5-5",
           "source_model_id": "b171d979-5ec1-45de-b8b9-db1ee65e77ec",
           "configuration": "Claude Sonnet 5.5 (Max, Default Fallback)",
@@ -922,154 +1078,86 @@
           "ci95_display": "-23 / +23 Elo (source-rounded)"
         },
         {
-          "family": "claude-opus-5-5",
-          "source_model_id": "df5bf99d-d228-4715-b41b-19ca86118777",
-          "configuration": "Claude Opus 5.5 (Xhigh, Default Fallback)",
-          "score": 1831.09,
-          "representative": false,
-          "ci95": [
-            1807.09,
-            1855.09
-          ],
-          "sample_size": null,
-          "sample_unit": null,
-          "source_model_name": "Claude Opus 5.5 (Xhigh, Default Fallback)",
-          "effort": "xhigh",
-          "agent": "Stirrup",
-          "ci95_display": "-24 / +24 Elo (source-rounded)"
-        },
-        {
-          "family": "claude-opus-5-5",
-          "source_model_id": "f314eade-2232-44bf-a3ab-9b326bc67de6",
-          "configuration": "Claude Opus 5.5 (High, Default Fallback)",
-          "score": 1704.37,
-          "representative": false,
-          "ci95": [
-            1682.37,
-            1726.37
-          ],
-          "sample_size": null,
-          "sample_unit": null,
-          "source_model_name": "Claude Opus 5.5 (High, Default Fallback)",
-          "effort": "high",
-          "agent": "Stirrup",
-          "ci95_display": "-22 / +22 Elo (source-rounded)"
-        },
-        {
-          "family": "gpt-6-astra",
-          "source_model_id": "2f339a97-9a0d-499a-9cb5-e0db665bfa25",
-          "configuration": "GPT-6 Astra (Max)",
-          "score": 1572.84,
-          "representative": true,
-          "ci95": [
-            1552.84,
-            1592.84
-          ],
-          "sample_size": null,
-          "sample_unit": null,
-          "source_model_name": "GPT-6 Astra (Max)",
-          "effort": "max",
-          "agent": "Stirrup",
-          "ci95_display": "-20 / +20 Elo (source-rounded)"
-        },
-        {
-          "family": "gpt-6-astra",
-          "source_model_id": "1f541ef3-913f-4eb2-9d07-0e93c7a9a5e3",
-          "configuration": "GPT-6 Astra (Xhigh)",
-          "score": 1555.91,
-          "representative": false,
-          "ci95": [
-            1535.91,
-            1575.91
-          ],
-          "sample_size": null,
-          "sample_unit": null,
-          "source_model_name": "GPT-6 Astra (Xhigh)",
-          "effort": "xhigh",
-          "agent": "Stirrup",
-          "ci95_display": "-20 / +20 Elo (source-rounded)"
-        },
-        {
-          "family": "claude-sonnet-5-5",
-          "source_model_id": "975aeaef-50bd-4a65-9c73-f1015adcd4d4",
-          "configuration": "Claude Sonnet 5.5 (Xhigh, Default Fallback)",
-          "score": 1728.44,
-          "representative": false,
-          "ci95": [
-            1703.44,
-            1753.44
-          ],
-          "sample_size": null,
-          "sample_unit": null,
-          "source_model_name": "Claude Sonnet 5.5 (Xhigh, Default Fallback)",
-          "effort": "xhigh",
-          "agent": "Stirrup",
-          "ci95_display": "-25 / +25 Elo (source-rounded)"
-        },
-        {
-          "family": "gpt-6-1-sol",
-          "source_model_id": "b25ac058-1e33-4c31-bbc9-a20c3ad0717a",
-          "configuration": "GPT-6.1 Sol (Max)",
-          "score": 1593.85,
-          "representative": true,
-          "ci95": [
-            1570.85,
-            1616.85
-          ],
-          "sample_size": null,
-          "sample_unit": null,
-          "source_model_name": "GPT-6.1 Sol (Max)",
-          "effort": "max",
-          "agent": "Stirrup",
-          "ci95_display": "-23 / +23 Elo (source-rounded)"
-        },
-        {
-          "family": "claude-opus-5-5",
-          "source_model_id": "ea9e0da6-169f-43c6-92f5-730a10d6ff8d",
-          "configuration": "Claude Opus 5.5 (Medium, Default Fallback)",
-          "score": 1583.6,
-          "representative": false,
-          "ci95": [
-            1562.6,
-            1604.6
-          ],
-          "sample_size": null,
-          "sample_unit": null,
-          "source_model_name": "Claude Opus 5.5 (Medium, Default Fallback)",
-          "effort": "medium",
-          "agent": "Stirrup",
-          "ci95_display": "-21 / +21 Elo (source-rounded)"
-        },
-        {
           "family": "gpt-6-1-sol",
           "source_model_id": "092a3b0e-c5c8-45dc-bf1b-53673c8ff352",
           "configuration": "GPT-6.1 Sol (Xhigh)",
-          "score": 1538.05,
+          "score": 1552.61,
           "representative": false,
           "ci95": [
-            1516.05,
-            1560.05
+            1531.61,
+            1573.61
           ],
           "sample_size": null,
           "sample_unit": null,
           "source_model_name": "GPT-6.1 Sol (Xhigh)",
           "effort": "xhigh",
           "agent": "Stirrup",
-          "ci95_display": "-22 / +22 Elo (source-rounded)"
+          "ci95_display": "-21 / +21 Elo (source-rounded)"
         },
         {
-          "family": "gpt-6-astra",
-          "source_model_id": "e05a4828-0536-4876-870d-a235023f992b",
-          "configuration": "GPT-6 Astra (High)",
-          "score": 1522.92,
+          "family": "claude-opus-5-5",
+          "source_model_id": "f314eade-2232-44bf-a3ab-9b326bc67de6",
+          "configuration": "Claude Opus 5.5 (High, Default Fallback)",
+          "score": 1713.33,
           "representative": false,
           "ci95": [
-            1502.92,
-            1542.92
+            1692.33,
+            1734.33
           ],
           "sample_size": null,
           "sample_unit": null,
-          "source_model_name": "GPT-6 Astra (High)",
+          "source_model_name": "Claude Opus 5.5 (High, Default Fallback)",
+          "effort": "high",
+          "agent": "Stirrup",
+          "ci95_display": "-21 / +21 Elo (source-rounded)"
+        },
+        {
+          "family": "gpt-6-astra",
+          "source_model_id": "e97a4ef5-e817-480e-9595-12f81dc4974f",
+          "configuration": "GPT-6 Astra (Medium)",
+          "score": 1498.04,
+          "representative": false,
+          "ci95": [
+            1480.04,
+            1516.04
+          ],
+          "sample_size": null,
+          "sample_unit": null,
+          "source_model_name": "GPT-6 Astra (Medium)",
+          "effort": "medium",
+          "agent": "Stirrup",
+          "ci95_display": "-18 / +18 Elo (source-rounded)"
+        },
+        {
+          "family": "gpt-6-1-terra",
+          "source_model_id": "b0c462cf-f2d0-4126-9434-28db9502219f",
+          "configuration": "GPT-6.1 Terra (Max)",
+          "score": 1476.05,
+          "representative": true,
+          "ci95": [
+            1453.05,
+            1499.05
+          ],
+          "sample_size": null,
+          "sample_unit": null,
+          "source_model_name": "GPT-6.1 Terra (Max)",
+          "effort": "max",
+          "agent": "Stirrup",
+          "ci95_display": "-23 / +23 Elo (source-rounded)"
+        },
+        {
+          "family": "gemini-4-argon",
+          "source_model_id": "d366dfa1-d940-4788-aa73-d298c45699b3",
+          "configuration": "Gemini 4 Argon (High)",
+          "score": 1631.09,
+          "representative": true,
+          "ci95": [
+            1611.09,
+            1651.09
+          ],
+          "sample_size": null,
+          "sample_unit": null,
+          "source_model_name": "Gemini 4 Argon (High)",
           "effort": "high",
           "agent": "Stirrup",
           "ci95_display": "-20 / +20 Elo (source-rounded)"
@@ -1078,84 +1166,84 @@
           "family": "gpt-6-1-sol",
           "source_model_id": "3b84fee3-b70a-41bc-819e-5fbdef9a0042",
           "configuration": "GPT-6.1 Sol (High)",
-          "score": 1511.35,
+          "score": 1520.91,
           "representative": false,
           "ci95": [
-            1489.35,
-            1533.35
+            1499.91,
+            1541.91
           ],
           "sample_size": null,
           "sample_unit": null,
           "source_model_name": "GPT-6.1 Sol (High)",
           "effort": "high",
           "agent": "Stirrup",
-          "ci95_display": "-22 / +22 Elo (source-rounded)"
+          "ci95_display": "-21 / +21 Elo (source-rounded)"
         },
         {
-          "family": "gpt-6-astra",
-          "source_model_id": "e97a4ef5-e817-480e-9595-12f81dc4974f",
-          "configuration": "GPT-6 Astra (Medium)",
-          "score": 1486.4,
+          "family": "claude-sonnet-5-5",
+          "source_model_id": "975aeaef-50bd-4a65-9c73-f1015adcd4d4",
+          "configuration": "Claude Sonnet 5.5 (Xhigh, Default Fallback)",
+          "score": 1734.59,
           "representative": false,
           "ci95": [
-            1467.4,
-            1505.4
+            1711.59,
+            1757.59
           ],
           "sample_size": null,
           "sample_unit": null,
-          "source_model_name": "GPT-6 Astra (Medium)",
+          "source_model_name": "Claude Sonnet 5.5 (Xhigh, Default Fallback)",
+          "effort": "xhigh",
+          "agent": "Stirrup",
+          "ci95_display": "-23 / +23 Elo (source-rounded)"
+        },
+        {
+          "family": "claude-opus-5-5",
+          "source_model_id": "ea9e0da6-169f-43c6-92f5-730a10d6ff8d",
+          "configuration": "Claude Opus 5.5 (Medium, Default Fallback)",
+          "score": 1593.33,
+          "representative": false,
+          "ci95": [
+            1573.33,
+            1613.33
+          ],
+          "sample_size": null,
+          "sample_unit": null,
+          "source_model_name": "Claude Opus 5.5 (Medium, Default Fallback)",
           "effort": "medium",
           "agent": "Stirrup",
-          "ci95_display": "-19 / +19 Elo (source-rounded)"
+          "ci95_display": "-20 / +20 Elo (source-rounded)"
         },
         {
           "family": "gpt-6-1-sol",
           "source_model_id": "a2e51d62-ea4e-4f15-8be0-be9dc1fb489d",
           "configuration": "GPT-6.1 Sol (Medium)",
-          "score": 1450.1,
+          "score": 1459.4,
           "representative": false,
           "ci95": [
-            1428.1,
-            1472.1
+            1438.4,
+            1480.4
           ],
           "sample_size": null,
           "sample_unit": null,
           "source_model_name": "GPT-6.1 Sol (Medium)",
           "effort": "medium",
           "agent": "Stirrup",
-          "ci95_display": "-22 / +22 Elo (source-rounded)"
+          "ci95_display": "-21 / +21 Elo (source-rounded)"
         },
         {
-          "family": "gpt-5-6-sol",
-          "source_model_id": "d93edfe8-bf35-49ad-b56e-b18116142a1c",
-          "configuration": "GPT-5.6 Sol (Max)",
-          "score": 1608.63,
-          "representative": true,
-          "ci95": [
-            1591.63,
-            1625.63
-          ],
-          "sample_size": null,
-          "sample_unit": null,
-          "source_model_name": "GPT-5.6 Sol (Max)",
-          "effort": "max",
-          "agent": "Stirrup",
-          "ci95_display": "-17 / +17 Elo (source-rounded)"
-        },
-        {
-          "family": "claude-sonnet-5-5",
-          "source_model_id": "268525e2-f873-4178-bc07-e6a0ee1f002d",
-          "configuration": "Claude Sonnet 5.5 (High, Default Fallback)",
-          "score": 1549.39,
+          "family": "gpt-6-1-terra",
+          "source_model_id": "e8d443ba-8aca-4830-a186-ae869bb9c6fe",
+          "configuration": "GPT-6.1 Terra (Xhigh)",
+          "score": 1415.29,
           "representative": false,
           "ci95": [
-            1526.39,
-            1572.39
+            1392.29,
+            1438.29
           ],
           "sample_size": null,
           "sample_unit": null,
-          "source_model_name": "Claude Sonnet 5.5 (High, Default Fallback)",
-          "effort": "high",
+          "source_model_name": "GPT-6.1 Terra (Xhigh)",
+          "effort": "xhigh",
           "agent": "Stirrup",
           "ci95_display": "-23 / +23 Elo (source-rounded)"
         },
@@ -1163,83 +1251,151 @@
           "family": "gpt-6-astra",
           "source_model_id": "a3f8100d-e38f-408b-b0fa-0085dae18dc1",
           "configuration": "GPT-6 Astra (Low)",
-          "score": 1389.25,
+          "score": 1403.02,
           "representative": false,
           "ci95": [
-            1368.25,
-            1410.25
+            1383.02,
+            1423.02
           ],
           "sample_size": null,
           "sample_unit": null,
           "source_model_name": "GPT-6 Astra (Low)",
           "effort": "low",
           "agent": "Stirrup",
-          "ci95_display": "-21 / +21 Elo (source-rounded)"
+          "ci95_display": "-20 / +20 Elo (source-rounded)"
         },
         {
-          "family": "gpt-5-6-sol",
-          "source_model_id": "d998db47-9b67-4727-a2bb-2e1261020ac0",
-          "configuration": "GPT-5.6 Sol (Xhigh)",
-          "score": 1568.48,
+          "family": "gpt-6-1-terra",
+          "source_model_id": "ea3e1f50-f62d-41d2-849a-9af0413e4d37",
+          "configuration": "GPT-6.1 Terra (High)",
+          "score": 1353.15,
           "representative": false,
           "ci95": [
-            1551.48,
-            1585.48
+            1330.15,
+            1376.15
           ],
           "sample_size": null,
           "sample_unit": null,
-          "source_model_name": "GPT-5.6 Sol (Xhigh)",
-          "effort": "xhigh",
-          "agent": "Stirrup",
-          "ci95_display": "-17 / +17 Elo (source-rounded)"
-        },
-        {
-          "family": "gpt-5-6-sol",
-          "source_model_id": "8afc250d-b538-45a2-812a-4605f4ffd87e",
-          "configuration": "GPT-5.6 Sol (High)",
-          "score": 1503.99,
-          "representative": false,
-          "ci95": [
-            1486.99,
-            1520.99
-          ],
-          "sample_size": null,
-          "sample_unit": null,
-          "source_model_name": "GPT-5.6 Sol (High)",
+          "source_model_name": "GPT-6.1 Terra (High)",
           "effort": "high",
           "agent": "Stirrup",
-          "ci95_display": "-17 / +17 Elo (source-rounded)"
+          "ci95_display": "-23 / +23 Elo (source-rounded)"
+        },
+        {
+          "family": "claude-sonnet-5-5",
+          "source_model_id": "268525e2-f873-4178-bc07-e6a0ee1f002d",
+          "configuration": "Claude Sonnet 5.5 (High, Default Fallback)",
+          "score": 1558.08,
+          "representative": false,
+          "ci95": [
+            1536.08,
+            1580.08
+          ],
+          "sample_size": null,
+          "sample_unit": null,
+          "source_model_name": "Claude Sonnet 5.5 (High, Default Fallback)",
+          "effort": "high",
+          "agent": "Stirrup",
+          "ci95_display": "-22 / +22 Elo (source-rounded)"
+        },
+        {
+          "family": "gpt-6-1-terra",
+          "source_model_id": "c441e158-a87d-4116-911b-93325e4b4f1c",
+          "configuration": "GPT-6.1 Terra (Medium)",
+          "score": 1325.12,
+          "representative": false,
+          "ci95": [
+            1302.12,
+            1348.12
+          ],
+          "sample_size": null,
+          "sample_unit": null,
+          "source_model_name": "GPT-6.1 Terra (Medium)",
+          "effort": "medium",
+          "agent": "Stirrup",
+          "ci95_display": "-23 / +23 Elo (source-rounded)"
+        },
+        {
+          "family": "grok-4-7",
+          "source_model_id": "272f5f03-aea9-4675-a244-2b753b618cdf",
+          "configuration": "Grok 4.7 (High)",
+          "score": 1716.55,
+          "representative": false,
+          "ci95": [
+            1697.55,
+            1735.55
+          ],
+          "sample_size": null,
+          "sample_unit": null,
+          "source_model_name": "Grok 4.7 (High)",
+          "effort": "high",
+          "agent": "Stirrup",
+          "ci95_display": "-19 / +19 Elo (source-rounded)"
+        },
+        {
+          "family": "gpt-6-1-sol",
+          "source_model_id": "e76e0fe5-93ca-4272-9359-2eb1740467d1",
+          "configuration": "GPT-6.1 Sol (Low)",
+          "score": 1322.56,
+          "representative": false,
+          "ci95": [
+            1301.56,
+            1343.56
+          ],
+          "sample_size": null,
+          "sample_unit": null,
+          "source_model_name": "GPT-6.1 Sol (Low)",
+          "effort": "low",
+          "agent": "Stirrup",
+          "ci95_display": "-21 / +21 Elo (source-rounded)"
         },
         {
           "family": "claude-opus-5-5",
           "source_model_id": "4416ca93-fde6-4b7b-abbc-3a6be109cc3d",
           "configuration": "Claude Opus 5.5 (Low, Default Fallback)",
-          "score": 1235.23,
+          "score": 1240.33,
           "representative": false,
           "ci95": [
-            1213.23,
-            1257.23
+            1219.33,
+            1261.33
           ],
           "sample_size": null,
           "sample_unit": null,
           "source_model_name": "Claude Opus 5.5 (Low, Default Fallback)",
           "effort": "low",
           "agent": "Stirrup",
-          "ci95_display": "-22 / +22 Elo (source-rounded)"
+          "ci95_display": "-21 / +21 Elo (source-rounded)"
         },
         {
-          "family": "gpt-6-1-sol",
-          "source_model_id": "e76e0fe5-93ca-4272-9359-2eb1740467d1",
-          "configuration": "GPT-6.1 Sol (Low)",
-          "score": 1314.67,
-          "representative": false,
+          "family": "grok-4-7",
+          "source_model_id": "59627802-1546-422c-9a65-65b61c022d36",
+          "configuration": "Grok 4.7 (Xhigh)",
+          "score": 1721.59,
+          "representative": true,
           "ci95": [
-            1292.67,
-            1336.67
+            1700.59,
+            1742.59
           ],
           "sample_size": null,
           "sample_unit": null,
-          "source_model_name": "GPT-6.1 Sol (Low)",
+          "source_model_name": "Grok 4.7 (Xhigh)",
+          "effort": "xhigh",
+          "agent": "Stirrup",
+          "ci95_display": "-21 / +21 Elo (source-rounded)"
+        },
+        {
+          "family": "grok-4-7",
+          "source_model_id": "208c16f0-8c5b-4524-ac8a-ac74c02e80a9",
+          "configuration": "Grok 4.7 (Low)",
+          "score": 1591.68,
+          "representative": false,
+          "ci95": [
+            1569.68,
+            1613.68
+          ],
+          "sample_size": null,
+          "sample_unit": null,
+          "source_model_name": "Grok 4.7 (Low)",
           "effort": "low",
           "agent": "Stirrup",
           "ci95_display": "-22 / +22 Elo (source-rounded)"
@@ -1248,118 +1404,220 @@
           "family": "gemini-3-8-flash",
           "source_model_id": "8a999846-4c1d-4ce7-a8b7-1310a7166fd7",
           "configuration": "Gemini 3.8 Flash (High)",
-          "score": 1436.3,
+          "score": 1445.4,
           "representative": true,
           "ci95": [
-            1416.3,
-            1456.3
+            1426.4,
+            1464.4
           ],
           "sample_size": null,
           "sample_unit": null,
           "source_model_name": "Gemini 3.8 Flash (High)",
           "effort": "high",
           "agent": "Stirrup",
-          "ci95_display": "-20 / +20 Elo (source-rounded)"
+          "ci95_display": "-19 / +19 Elo (source-rounded)"
+        },
+        {
+          "family": "gpt-6-1-terra",
+          "source_model_id": "0d3c777f-6817-42d7-9bb9-223314bc5a57",
+          "configuration": "GPT-6.1 Terra (Non-reasoning)",
+          "score": 1286.51,
+          "representative": false,
+          "ci95": [
+            1263.51,
+            1309.51
+          ],
+          "sample_size": null,
+          "sample_unit": null,
+          "source_model_name": "GPT-6.1 Terra (Non-reasoning)",
+          "effort": "non-reasoning",
+          "agent": "Stirrup",
+          "ci95_display": "-23 / +23 Elo (source-rounded)"
         },
         {
           "family": "claude-sonnet-5-5",
           "source_model_id": "042e8a37-fcd0-40f4-8f41-99215fb68eda",
           "configuration": "Claude Sonnet 5.5 (Medium, Default Fallback)",
-          "score": 1323.27,
+          "score": 1328.83,
           "representative": false,
           "ci95": [
-            1301.27,
-            1345.27
+            1307.83,
+            1349.83
           ],
           "sample_size": null,
           "sample_unit": null,
           "source_model_name": "Claude Sonnet 5.5 (Medium, Default Fallback)",
           "effort": "medium",
           "agent": "Stirrup",
-          "ci95_display": "-22 / +22 Elo (source-rounded)"
+          "ci95_display": "-21 / +21 Elo (source-rounded)"
         },
         {
           "family": "gemini-3-8-flash",
           "source_model_id": "744fa3c1-42a7-4995-b138-fb6be11f463c",
           "configuration": "Gemini 3.8 Flash (Medium)",
-          "score": 1421.18,
+          "score": 1432.16,
           "representative": false,
           "ci95": [
-            1400.18,
-            1442.18
+            1412.16,
+            1452.16
           ],
           "sample_size": null,
           "sample_unit": null,
           "source_model_name": "Gemini 3.8 Flash (Medium)",
           "effort": "medium",
           "agent": "Stirrup",
-          "ci95_display": "-21 / +21 Elo (source-rounded)"
+          "ci95_display": "-20 / +20 Elo (source-rounded)"
         },
         {
-          "family": "gpt-5-6-sol",
-          "source_model_id": "6f174934-5b7d-4333-86cb-f5ebf4a862e3",
-          "configuration": "GPT-5.6 Sol (Medium)",
-          "score": 1421.47,
+          "family": "gpt-6-1-terra",
+          "source_model_id": "c955b262-a17f-4f1a-b097-6860b866295b",
+          "configuration": "GPT-6.1 Terra (Low)",
+          "score": 1204.16,
           "representative": false,
           "ci95": [
-            1404.47,
-            1438.47
+            1181.16,
+            1227.16
           ],
           "sample_size": null,
           "sample_unit": null,
-          "source_model_name": "GPT-5.6 Sol (Medium)",
-          "effort": "medium",
-          "agent": "Stirrup",
-          "ci95_display": "-17 / +17 Elo (source-rounded)"
-        },
-        {
-          "family": "gpt-6-luna",
-          "source_model_id": "6fb13851-40ce-4bda-ad3f-6b38e0c5daa7",
-          "configuration": "GPT-6 Luna (Max)",
-          "score": 1431.86,
-          "representative": true,
-          "ci95": [
-            1409.86,
-            1453.86
-          ],
-          "sample_size": null,
-          "sample_unit": null,
-          "source_model_name": "GPT-6 Luna (Max)",
-          "effort": "max",
-          "agent": "Stirrup",
-          "ci95_display": "-22 / +22 Elo (source-rounded)"
-        },
-        {
-          "family": "claude-sonnet-5-5",
-          "source_model_id": "bbc2ffea-cf6b-43be-8c41-1769347e234d",
-          "configuration": "Claude Sonnet 5.5 (Low, Default Fallback)",
-          "score": 1175.34,
-          "representative": false,
-          "ci95": [
-            1152.34,
-            1198.34
-          ],
-          "sample_size": null,
-          "sample_unit": null,
-          "source_model_name": "Claude Sonnet 5.5 (Low, Default Fallback)",
+          "source_model_name": "GPT-6.1 Terra (Low)",
           "effort": "low",
           "agent": "Stirrup",
           "ci95_display": "-23 / +23 Elo (source-rounded)"
         },
         {
           "family": "gpt-6-luna",
-          "source_model_id": "19813eb2-460a-475c-af65-810bb8660fec",
-          "configuration": "GPT-6 Luna (Xhigh)",
-          "score": 1362.25,
+          "source_model_id": "6fb13851-40ce-4bda-ad3f-6b38e0c5daa7",
+          "configuration": "GPT-6 Luna (Max)",
+          "score": 1444.72,
+          "representative": true,
+          "ci95": [
+            1423.72,
+            1464.72
+          ],
+          "sample_size": null,
+          "sample_unit": null,
+          "source_model_name": "GPT-6 Luna (Max)",
+          "effort": "max",
+          "agent": "Stirrup",
+          "ci95_display": "-21 / +20 Elo (source-rounded)"
+        },
+        {
+          "family": "claude-sonnet-5-5",
+          "source_model_id": "bbc2ffea-cf6b-43be-8c41-1769347e234d",
+          "configuration": "Claude Sonnet 5.5 (Low, Default Fallback)",
+          "score": 1181.83,
           "representative": false,
           "ci95": [
-            1340.25,
-            1384.25
+            1159.83,
+            1203.83
+          ],
+          "sample_size": null,
+          "sample_unit": null,
+          "source_model_name": "Claude Sonnet 5.5 (Low, Default Fallback)",
+          "effort": "low",
+          "agent": "Stirrup",
+          "ci95_display": "-22 / +22 Elo (source-rounded)"
+        },
+        {
+          "family": "gpt-6-luna",
+          "source_model_id": "19813eb2-460a-475c-af65-810bb8660fec",
+          "configuration": "GPT-6 Luna (Xhigh)",
+          "score": 1373.25,
+          "representative": false,
+          "ci95": [
+            1352.25,
+            1394.25
           ],
           "sample_size": null,
           "sample_unit": null,
           "source_model_name": "GPT-6 Luna (Xhigh)",
           "effort": "xhigh",
+          "agent": "Stirrup",
+          "ci95_display": "-21 / +21 Elo (source-rounded)"
+        },
+        {
+          "family": "gemini-3-8-flash",
+          "source_model_id": "f6db039b-0f3b-485c-9d7f-982988e44f26",
+          "configuration": "Gemini 3.8 Flash (Low)",
+          "score": 1316.57,
+          "representative": false,
+          "ci95": [
+            1299.57,
+            1333.57
+          ],
+          "sample_size": null,
+          "sample_unit": null,
+          "source_model_name": "Gemini 3.8 Flash (Low)",
+          "effort": "low",
+          "agent": "Stirrup",
+          "ci95_display": "-17 / +17 Elo (source-rounded)"
+        },
+        {
+          "family": "gpt-6-luna",
+          "source_model_id": "7d1229bc-deea-4717-ba5b-f59a35d991e3",
+          "configuration": "GPT-6 Luna (High)",
+          "score": 1352.33,
+          "representative": false,
+          "ci95": [
+            1331.33,
+            1374.33
+          ],
+          "sample_size": null,
+          "sample_unit": null,
+          "source_model_name": "GPT-6 Luna (High)",
+          "effort": "high",
+          "agent": "Stirrup",
+          "ci95_display": "-21 / +22 Elo (source-rounded)"
+        },
+        {
+          "family": "gpt-6-luna",
+          "source_model_id": "36667da0-9222-4967-adbb-f7efa15ad213",
+          "configuration": "GPT-6 Luna (Medium)",
+          "score": 1270.95,
+          "representative": false,
+          "ci95": [
+            1249.95,
+            1291.95
+          ],
+          "sample_size": null,
+          "sample_unit": null,
+          "source_model_name": "GPT-6 Luna (Medium)",
+          "effort": "medium",
+          "agent": "Stirrup",
+          "ci95_display": "-21 / +21 Elo (source-rounded)"
+        },
+        {
+          "family": "gpt-6-luna",
+          "source_model_id": "bf9708d8-933d-44f6-affa-b696a7a650c9",
+          "configuration": "GPT-6 Luna (Low)",
+          "score": 1040.9,
+          "representative": false,
+          "ci95": [
+            1018.9000000000001,
+            1062.9
+          ],
+          "sample_size": null,
+          "sample_unit": null,
+          "source_model_name": "GPT-6 Luna (Low)",
+          "effort": "low",
+          "agent": "Stirrup",
+          "ci95_display": "-22 / +22 Elo (source-rounded)"
+        },
+        {
+          "family": "gpt-6-luna",
+          "source_model_id": "63cb48ea-0b0c-4e07-8ded-6d28dec4fa28",
+          "configuration": "GPT-6 Luna (Non-reasoning)",
+          "score": 1052.09,
+          "representative": false,
+          "ci95": [
+            1030.09,
+            1074.09
+          ],
+          "sample_size": null,
+          "sample_unit": null,
+          "source_model_name": "GPT-6 Luna (Non-reasoning)",
+          "effort": "non-reasoning",
           "agent": "Stirrup",
           "ci95_display": "-22 / +22 Elo (source-rounded)"
         },
@@ -1367,11 +1625,11 @@
           "family": "gpt-5-6-sol",
           "source_model_id": "0904b596-8932-43bd-9b21-324f128e1723",
           "configuration": "GPT-5.6 Sol (Low)",
-          "score": 1303.39,
+          "score": 1313.31,
           "representative": false,
           "ci95": [
-            1286.39,
-            1320.39
+            1296.31,
+            1330.31
           ],
           "sample_size": null,
           "sample_unit": null,
@@ -1381,106 +1639,89 @@
           "ci95_display": "-17 / +17 Elo (source-rounded)"
         },
         {
-          "family": "gemini-3-8-flash",
-          "source_model_id": "f6db039b-0f3b-485c-9d7f-982988e44f26",
-          "configuration": "Gemini 3.8 Flash (Low)",
-          "score": 1307.18,
+          "family": "gpt-5-6-sol",
+          "source_model_id": "6f174934-5b7d-4333-86cb-f5ebf4a862e3",
+          "configuration": "GPT-5.6 Sol (Medium)",
+          "score": 1431.93,
           "representative": false,
           "ci95": [
-            1289.18,
-            1325.18
+            1415.93,
+            1447.93
           ],
           "sample_size": null,
           "sample_unit": null,
-          "source_model_name": "Gemini 3.8 Flash (Low)",
-          "effort": "low",
-          "agent": "Stirrup",
-          "ci95_display": "-18 / +18 Elo (source-rounded)"
-        },
-        {
-          "family": "gpt-6-luna",
-          "source_model_id": "7d1229bc-deea-4717-ba5b-f59a35d991e3",
-          "configuration": "GPT-6 Luna (High)",
-          "score": 1339.93,
-          "representative": false,
-          "ci95": [
-            1316.93,
-            1362.93
-          ],
-          "sample_size": null,
-          "sample_unit": null,
-          "source_model_name": "GPT-6 Luna (High)",
-          "effort": "high",
-          "agent": "Stirrup",
-          "ci95_display": "-23 / +23 Elo (source-rounded)"
-        },
-        {
-          "family": "gpt-6-luna",
-          "source_model_id": "36667da0-9222-4967-adbb-f7efa15ad213",
-          "configuration": "GPT-6 Luna (Medium)",
-          "score": 1261.32,
-          "representative": false,
-          "ci95": [
-            1239.32,
-            1283.32
-          ],
-          "sample_size": null,
-          "sample_unit": null,
-          "source_model_name": "GPT-6 Luna (Medium)",
+          "source_model_name": "GPT-5.6 Sol (Medium)",
           "effort": "medium",
           "agent": "Stirrup",
-          "ci95_display": "-22 / +22 Elo (source-rounded)"
+          "ci95_display": "-16 / +16 Elo (source-rounded)"
         },
         {
           "family": "gpt-5-6-sol",
           "source_model_id": "7c4d1e30-6ecb-46cf-880c-41446d7b51f1",
           "configuration": "GPT-5.6 Sol (Non-reasoning)",
-          "score": 1241.59,
+          "score": 1250.38,
           "representative": false,
           "ci95": [
-            1222.59,
-            1260.59
+            1232.38,
+            1268.38
           ],
           "sample_size": null,
           "sample_unit": null,
           "source_model_name": "GPT-5.6 Sol (Non-reasoning)",
           "effort": "non-reasoning",
           "agent": "Stirrup",
-          "ci95_display": "-19 / +19 Elo (source-rounded)"
+          "ci95_display": "-18 / +18 Elo (source-rounded)"
         },
         {
-          "family": "gpt-6-luna",
-          "source_model_id": "bf9708d8-933d-44f6-affa-b696a7a650c9",
-          "configuration": "GPT-6 Luna (Low)",
-          "score": 1029.43,
+          "family": "gpt-5-6-sol",
+          "source_model_id": "8afc250d-b538-45a2-812a-4605f4ffd87e",
+          "configuration": "GPT-5.6 Sol (High)",
+          "score": 1512.07,
           "representative": false,
           "ci95": [
-            1006.4300000000001,
-            1052.43
+            1496.07,
+            1528.07
           ],
           "sample_size": null,
           "sample_unit": null,
-          "source_model_name": "GPT-6 Luna (Low)",
-          "effort": "low",
+          "source_model_name": "GPT-5.6 Sol (High)",
+          "effort": "high",
           "agent": "Stirrup",
-          "ci95_display": "-23 / +23 Elo (source-rounded)"
+          "ci95_display": "-16 / +16 Elo (source-rounded)"
         },
         {
-          "family": "gpt-6-luna",
-          "source_model_id": "63cb48ea-0b0c-4e07-8ded-6d28dec4fa28",
-          "configuration": "GPT-6 Luna (Non-reasoning)",
-          "score": 1042.31,
-          "representative": false,
+          "family": "gpt-5-6-sol",
+          "source_model_id": "d93edfe8-bf35-49ad-b56e-b18116142a1c",
+          "configuration": "GPT-5.6 Sol (Max)",
+          "score": 1618.27,
+          "representative": true,
           "ci95": [
-            1019.31,
-            1065.31
+            1602.27,
+            1634.27
           ],
           "sample_size": null,
           "sample_unit": null,
-          "source_model_name": "GPT-6 Luna (Non-reasoning)",
-          "effort": "non-reasoning",
+          "source_model_name": "GPT-5.6 Sol (Max)",
+          "effort": "max",
           "agent": "Stirrup",
-          "ci95_display": "-23 / +23 Elo (source-rounded)"
+          "ci95_display": "-16 / +16 Elo (source-rounded)"
+        },
+        {
+          "family": "gpt-5-6-sol",
+          "source_model_id": "d998db47-9b67-4727-a2bb-2e1261020ac0",
+          "configuration": "GPT-5.6 Sol (Xhigh)",
+          "score": 1577.91,
+          "representative": false,
+          "ci95": [
+            1561.91,
+            1593.91
+          ],
+          "sample_size": null,
+          "sample_unit": null,
+          "source_model_name": "GPT-5.6 Sol (Xhigh)",
+          "effort": "xhigh",
+          "agent": "Stirrup",
+          "ci95_display": "-16 / +16 Elo (source-rounded)"
         }
       ]
     }
