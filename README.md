@@ -7,7 +7,10 @@ Interactive comparisons of selected frontier models, organized as:
 - task-specific performance: website design, software engineering, and
   document creation.
 
-Cost and response-time charts use Artificial Analysis Intelligence Index data.
+The cost graph has a benchmark selector: Artificial Analysis Intelligence Index
+v5.0, CursorBench 4.0, ARC-AGI-1, and ARC-AGI-2. Both axes always use the selected
+benchmark's published score/cost pairs; different scales are never mixed.
+The response-time chart continues to use Artificial Analysis data.
 Task comparisons use DesignArena Website, Terminal-Bench 4.0, AA-Briefcase v1.1,
 GDPval-AA v2.1, CursorBench 4.0, ARC-AGI-1/2, Vals Code Migration v1.1,
 and the seven LiveBench 2.0 suites from the October 25, 2026 release.
@@ -49,8 +52,11 @@ and LiveBench subscores are retained without inventing confidence intervals.
 Gemini 4 Argon Low, Medium, and High results are visible in an effort-coverage
 table near the top of the page. These are primary-source CursorBench and ARC
 Prize measurements, not substitutes for the missing lower-effort Artificial
-Analysis Intelligence Index points. The main cost/time charts remain High-only
-for Argon.
+Analysis Intelligence Index points. The AA cost option and response-time chart remain High-only for Argon.
+CursorBench and both ARC cost graphs plot Argon Low, Medium, and High, with
+separate label leaders for nearby points. The cost-graph download follows the
+selected benchmark. Cost and model selections are preserved in the URL, for
+example `?cost=cursor&model=gemini-4-argon#cost`.
 
 Collection exclusions are recorded in the task snapshot. Secondary-only scores,
 an ambiguously versioned Vals effort chart, ARC-AGI-3's distinct interactive
