@@ -49,10 +49,10 @@ harnesses. Their provenance is included in `task-benchmark-snapshot.json`.
 Available per-task costs, source-reported runtime, standard errors, task counts,
 and LiveBench subscores are retained without inventing confidence intervals.
 
-Gemini 4 Argon Low, Medium, and High results are visible in an effort-coverage
-table near the top of the page. These are primary-source CursorBench and ARC
-Prize measurements, not substitutes for the missing lower-effort Artificial
-Analysis Intelligence Index points. The AA cost option and response-time chart remain High-only for Argon.
+Gemini 4 Argon Low, Medium, and High results use primary-source CursorBench and
+ARC Prize measurements, not substitutes for the missing lower-effort Artificial
+Analysis Intelligence Index points. The AA cost option and response-time chart
+remain High-only for Argon.
 CursorBench and both ARC cost graphs plot Argon Low, Medium, and High, with
 separate label leaders for nearby points. The cost-graph download follows the
 selected benchmark. Cost and model selections are preserved in the URL, for

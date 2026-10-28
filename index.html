@@ -45,7 +45,7 @@ summary{cursor:pointer;font-weight:600}.source-line{font-size:13px;color:#56647a
 Independent benchmark scales stay separate; missing evidence stays missing.</p></header>
 <nav class="section-nav" aria-label="Page sections"><a href="#cost">Cost vs capability</a>
 <a href="#time">Response time / performance</a><a href="#tasks">Task-specific performance</a>
-<a href="#argon-efforts">Argon effort coverage</a><a href="#sources">Sources</a></nav>
+<a href="#sources">Sources</a></nav>
 <nav class="controls" aria-label="Model controls and downloads"><label>Highlight model: <select id="model"><option value="all">Show all models</option><option value="0">Claude Opus 5.5</option><option value="1">Claude Sonnet 5.5</option><option value="2">GPT-6 Astra</option><option value="3">GPT-6.1 Sol</option><option value="4">GPT-5.6 Sol</option><option value="5">Gemini 3.8 Flash</option><option value="6">GPT-6 Luna</option><option value="7">GPT-5.6 Sol Fast</option><option value="8">GPT-6.1 Terra</option><option value="9">Gemini 4 Argon</option><option value="10">Grok 4.7</option></select></label>
 <a id="cost-download" href="llm-cost-capability.svg" download>Download selected cost graph</a>
 <a href="llm-speed-capability.svg" download>Download speed graph</a>
@@ -59,8 +59,6 @@ GPT-5.6 Sol is retained in a <a href="#historical">separate v4.3.2 archive</a>.
 GPT-5.6 Sol Fast is listed with N/A: no exact matching public measurements were
 found in the checked sources, and standard Sol scores are not substituted.</p>
 <p id="model-status" class="note data-note" role="status" hidden></p>
-<section id="argon-efforts" class="card data-note" aria-labelledby="argon-efforts-title">
-<h2 id="argon-efforts-title">Gemini 4 Argon: Low, Medium, and High</h2><p><strong>Argon has measured Low, Medium, and High results.</strong> CursorBench and ARC Prize publish lower-effort measurements below. Artificial Analysis only has a High-effort Intelligence Index result in this snapshot; use the cost graph benchmark selector to plot the other sources on their own scales.</p><div class="table-scroll"><table><caption>Gemini 4 Argon: native score and USD cost per task. Read within each benchmark; costs reflect different task mixes.</caption><thead><tr><th scope="col">Benchmark</th><th scope="col">Low</th><th scope="col">Medium</th><th scope="col">High</th></tr></thead><tbody><tr><th scope="row"><a href="https://cursor.com/cursorbench">CursorBench 4.0</a></th><td class="number">50.60%<small>$4.09 / task</small></td><td class="number">52.80%<small>$4.39 / task</small></td><td class="number">52.90%<small>$4.57 / task</small></td></tr><tr><th scope="row"><a href="https://arcprize.org/leaderboard">ARC-AGI-1 / Semi-Private</a></th><td class="number">76.50%<small>$0.043 / task</small></td><td class="number">98.50%<small>$0.065 / task</small></td><td class="number">98.50%<small>$0.16 / task</small></td></tr><tr><th scope="row"><a href="https://arcprize.org/leaderboard">ARC-AGI-2 / Semi-Private</a></th><td class="number">42.08%<small>$0.074 / task</small></td><td class="number">87.08%<small>$0.14 / task</small></td><td class="number">91.25%<small>$0.32 / task</small></td></tr></tbody></table></div><p class="muted">No captured confidence intervals; near-equal scores are not proof that one setting is better. <a href="#panel-public">Explore all additional public benchmarks</a>.</p></section>
 <section id="cost">
 <div class="card cost-controls"><label>Cost graph benchmark:
 <select id="cost-benchmark"><option value="aa">Artificial Analysis Intelligence Index v5.0</option><option value="cursor">CursorBench 4.0</option><option value="arc1">ARC-AGI-1 / Semi-Private</option><option value="arc2">ARC-AGI-2 / Semi-Private</option></select></label>
@@ -1073,7 +1071,6 @@ These are average evaluation costs per task, not a quote for your task or Copilo
 <p>Only published <strong>Low through Max</strong> measurements are plotted.
 An empty cell means no measurement in this snapshot, not an unsupported setting.
 Grok's source base entry is Xhigh; Gemini Argon's only captured <strong>Intelligence Index</strong> effort is High.
-Other benchmarks publish Argon Low and Medium results in the <a href="#argon-efforts">effort coverage table</a>.
 Select CursorBench or ARC-AGI above to plot those measured effort points.
 Curves do not bridge missing intermediate measurements.</p>
 <p><strong>Price per token is not cost per task.</strong>
@@ -2891,9 +2888,6 @@ event.preventDefault();
 selectTab(next);
 next.focus();
 });
-});
-document.querySelectorAll('a[href="#panel-public"]').forEach(link=>{
-link.addEventListener('click',()=>selectTab(document.getElementById('tab-public')));
 });
 document.getElementById('document-metric').addEventListener('change',event=>{
 document.querySelectorAll('[data-document-metric]').forEach(view=>{
