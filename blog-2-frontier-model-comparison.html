@@ -3109,7 +3109,63 @@
       </table>
     </figure>
 
-    <p class="source-line" style="margin-top: 24px;">Data sources: Artificial Analysis Intelligence Index v5.0, CursorBench 4.0, ARC-AGI-1/2, DesignArena Website, Terminal-Bench 4.0, AA-Briefcase v1.1, and GDPval-AA v2.1 (refreshed 28 Oct 2026).</p>
+    <!-- 5. DATA SOURCES -->
+    <h2 id="h-5-data-sources" class="wp-block-heading">Data sources</h2>
+
+    <p class="wp-block-paragraph">All charts and tables in this post are generated from primary public benchmark snapshots captured on <strong>October 28, 2026</strong> (and verified against upstream leaderboards on October 30, 2026). Each benchmark is plotted on its native scale without mixing incompatible composite versions or inferring missing effort tiers:</p>
+
+    <figure class="wp-block-table">
+      <table>
+        <thead>
+          <tr>
+            <th scope="col">Benchmark</th>
+            <th scope="col">Dimension</th>
+            <th scope="col">Methodology &amp; evaluation scope</th>
+            <th scope="col">Official source</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">Artificial Analysis Intelligence Index v5.0</th>
+            <td>Capability vs. cost &amp; response time</td>
+            <td>Independent API evaluation across 10 benchmarks (GPQA Diamond, Humanity's Last Exam, Terminal-Bench Hard, &tau;<sup>2</sup>-Bench, LiveCodeBench, AIME 2025, MMMU-Pro, CritPt, IFBench, Long-Context Reasoning), paired with measured USD task cost and median end-to-end latency.</td>
+            <td><a href="https://artificialanalysis.ai/leaderboards/models" target="_blank" rel="noopener">artificialanalysis.ai</a></td>
+          </tr>
+          <tr>
+            <th scope="row">CursorBench 4.0</th>
+            <td>Capability vs. cost (coding)</td>
+            <td>Real-world multi-file repository software engineering sessions measuring resolution rate (%), agent steps, and API cost per task across reasoning efforts.</td>
+            <td><a href="https://cursor.com/cursorbench" target="_blank" rel="noopener">cursor.com/cursorbench</a></td>
+          </tr>
+          <tr>
+            <th scope="row">ARC-AGI-1 &amp; ARC-AGI-2 (Semi-Private)</th>
+            <td>Capability vs. cost (abstract reasoning)</td>
+            <td>Held-out semi-private evaluation sets operated by the ARC Prize Foundation to prevent training contamination, measuring accuracy (%) vs. USD cost per task.</td>
+            <td><a href="https://arcprize.org/leaderboard" target="_blank" rel="noopener">arcprize.org/leaderboard</a></td>
+          </tr>
+          <tr>
+            <th scope="row">DesignArena: Website</th>
+            <td>UI / frontend specialization</td>
+            <td>Blind human pairwise preference (Bradley-Terry Elo across 1.15M+ votes) on rendered websites generated from identical prompts.</td>
+            <td><a href="https://www.designarena.ai/leaderboard/website" target="_blank" rel="noopener">designarena.ai</a></td>
+          </tr>
+          <tr>
+            <th scope="row">Terminal-Bench 4.0</th>
+            <td>Engineering &amp; systems specialization</td>
+            <td>Dockerized, executable command-line and systems engineering tasks graded by deterministic verification scripts (&plusmn;95% CI).</td>
+            <td><a href="https://www.tbench.ai/" target="_blank" rel="noopener">tbench.ai</a></td>
+          </tr>
+          <tr>
+            <th scope="row">AA-Briefcase v1.1 &amp; GDPval-AA v2.1</th>
+            <td>Documents &amp; professional reports</td>
+            <td>Rubric-check pass rates (%) on Word (<code>.docx</code>) deliverables and blind pairwise Elo on analytical quality, presentations, and knowledge-work reports.</td>
+            <td><a href="https://artificialanalysis.ai/evaluations/aa-briefcase" target="_blank" rel="noopener">AA-Briefcase</a> &middot; <a href="https://artificialanalysis.ai/evaluations/gdpval-aa" target="_blank" rel="noopener">GDPval-AA</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </figure>
+
+    <p class="source-line" style="margin-top: 14px;">Raw machine-readable snapshots: <a href="aa-benchmark-snapshot.json"><code>aa-benchmark-snapshot.json</code></a> (Artificial Analysis v5.0 cost &amp; latency) and <a href="task-benchmark-snapshot.json"><code>task-benchmark-snapshot.json</code></a> (task-specific benchmarks, exact model IDs, and SHA-256 provenance).</p>
 
   </article>
 
@@ -3122,6 +3178,7 @@
         <li><a href="#h-2-smartness-vs-cost">Capability vs. cost</a></li>
         <li><a href="#h-3-smartness-vs-perf">Capability vs. response time</a></li>
         <li><a href="#h-4-best-at-task">Task specialization</a></li>
+        <li><a href="#h-5-data-sources">Data sources</a></li>
       </ul>
     </nav>
   </aside>

@@ -153,3 +153,21 @@ _Figure 7: Code migration — Vals Code Migration v1.1 hidden behavior-test pass
 | **Technical documents, .docx artifacts & analytical reports** | Claude Opus 5.5 (Max), Claude Sonnet 5.5 (Max), Gemini 4 Argon (High) | Grok 4.7 (Xhigh), GPT-6.1 Sol (Max) | Argon High leads Word rubric checks (62.13%) and Data Analysis (85.20); Opus/Sonnet lead analytical quality (2,135 / 2,104 Elo) |
 
 * **Explore the full interactive dashboard:** [haolingdong-msft.github.io/frontier-model-capability](https://haolingdong-msft.github.io/frontier-model-capability/)
+
+---
+
+## Data sources
+
+All charts and tables in this post are generated from primary public benchmark snapshots captured on **October 28, 2026** (and verified against upstream leaderboards on October 30, 2026). Each benchmark is plotted on its native scale without mixing incompatible composite versions or inferring missing effort tiers:
+
+| Benchmark | Dimension | Methodology & evaluation scope | Official source |
+| --- | --- | --- | --- |
+| **Artificial Analysis Intelligence Index v5.0** | Capability vs. cost & response time | Independent API evaluation across 10 benchmarks (GPQA Diamond, Humanity's Last Exam, Terminal-Bench Hard, $\tau^2$-Bench, LiveCodeBench, AIME 2025, MMMU-Pro, CritPt, IFBench, Long-Context Reasoning), paired with measured USD task cost and median end-to-end latency. | [artificialanalysis.ai](https://artificialanalysis.ai/leaderboards/models) |
+| **CursorBench 4.0** | Capability vs. cost (coding) | Real-world multi-file repository software engineering sessions measuring resolution rate (%), agent steps, and API cost per task across reasoning efforts. | [cursor.com/cursorbench](https://cursor.com/cursorbench) |
+| **ARC-AGI-1 & ARC-AGI-2 (Semi-Private)** | Capability vs. cost (abstract reasoning) | Held-out semi-private evaluation sets operated by the ARC Prize Foundation to prevent training contamination, measuring accuracy (%) vs. USD cost per task. | [arcprize.org/leaderboard](https://arcprize.org/leaderboard) |
+| **DesignArena: Website** | UI / frontend specialization | Blind human pairwise preference (Bradley-Terry Elo across 1.15M+ votes) on rendered websites generated from identical prompts. | [designarena.ai](https://www.designarena.ai/leaderboard/website) |
+| **Terminal-Bench 4.0** | Engineering & systems specialization | Dockerized, executable command-line and systems engineering tasks graded by deterministic verification scripts ($\pm$95% CI). | [tbench.ai](https://www.tbench.ai/) |
+| **AA-Briefcase v1.1 & GDPval-AA v2.1** | Documents & professional reports | Rubric-check pass rates (%) on Word (`.docx`) deliverables and blind pairwise Elo on analytical quality, presentations, and knowledge-work reports. | [AA-Briefcase](https://artificialanalysis.ai/evaluations/aa-briefcase) · [GDPval-AA](https://artificialanalysis.ai/evaluations/gdpval-aa) |
+
+* **Raw machine-readable snapshots:** [`aa-benchmark-snapshot.json`](aa-benchmark-snapshot.json) and [`task-benchmark-snapshot.json`](task-benchmark-snapshot.json)
+
