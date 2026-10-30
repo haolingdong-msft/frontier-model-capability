@@ -34,7 +34,7 @@ In this chart, the **vertical axis represents model smartness (capability score)
 
 ![LLM smartness versus cost by reasoning effort](llm-cost-capability.svg)
 
-_Figure 1: Capability (Artificial Analysis Intelligence Index v5.0) vs. average benchmark cost per task (USD, logarithmic scale) across Low (1) through Max (5) reasoning effort. For example, compare **Medium effort (point 2)** on **GPT-6.1 Sol** (blue) and **Claude Opus 5.5** (brown): both achieve nearly the same smartness (**46.1 vs. 48.1**, almost the same vertical height), but **Claude Opus 5.5** sits far to the right at **$2.45/task** versus **$0.36/task** for **GPT-6.1 Sol**—nearly **7× more expensive** for comparable capability._
+_Figure 1: Capability (Artificial Analysis Intelligence Index v5.0) vs. average benchmark cost per task (USD, logarithmic scale). **Example:** At **Medium (2)**, **GPT-6.1 Sol** (46.1) and **Claude Opus 5.5** (48.1) have nearly the same smartness, but Opus costs **~7× more** ($2.45 vs. $0.36/task)._
 
 Because measured evaluation costs span more than **1,000x**—from **$0.005/task** on GPT-6 Luna Low to **$10.04/task** on Claude Opus 5.5 Max—plotting cost on a logarithmic scale exposes four structural findings:
 
