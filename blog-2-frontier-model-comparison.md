@@ -1,10 +1,10 @@
 # Evaluating frontier models across smartness, cost, speed, and task specialization
 
-_Why choosing the right model is hard when working on complex, long-running engineering tasks—and how to evaluate 11 frontier model families across reasoning effort, task cost, execution latency, and 17 native task benchmarks._
+_Why choosing the right model is important when working on complex, long-running engineering tasks—and how to evaluate 11 frontier model families across reasoning effort, task cost, execution latency, and 17 native task benchmarks._
 
 ---
 
-## Why choosing the right model for complex tasks is hard
+## Why choosing the right model for complex tasks is important
 
 GitHub Copilot's agentic harness supports more than 20 frontier models across the GPT, Claude, Gemini, and Grok families. While a strong harness manages tools, context compaction, and subagent orchestration, **the model and reasoning effort you choose still determine whether a complex, long-running engineering task converges cleanly or burns hours and budget.**
 
