@@ -1,4 +1,4 @@
-# Evaluating frontier models across smartness, cost, speed, and task specialization
+# Evaluating frontier models across capability, cost, speed, and task specialization
 
 _Why choosing the right model is important when working on complex, long-running engineering tasks—and how to evaluate 11 frontier model families across reasoning effort, task cost, execution latency, and 17 native task benchmarks._
 
@@ -12,14 +12,14 @@ In practice, knowing which model will perform best on a complex task is surprisi
 
 1. **A model family is not a single operating point.** Stepping the same model across Low (1), Medium (2), High (3), Xhigh (4), and Max (5) reasoning effort shifts its capability, total token consumption, and response latency by up to an order of magnitude.
 2. **Single-number leaderboards hide critical trade-offs.** Public rankings frequently mix benchmark versions, quote per-token API rates instead of total cost per completed task, report output tokens per second instead of full thinking-plus-answer latency, or collapse UI design, terminal debugging, and document writing into a single composite score.
-3. **Complex, long-running workflows amplify small model mismatches.** In multi-step agentic tasks that chain planning, repository search, code edits, and verification across dozens of turns, choosing an under-powered model wastes retries and context budget, while running a peak-capability model at Max effort on every routine step inflates latency and cost. Effective model selection requires understanding models across three distinct axes: **smartness vs. cost**, **smartness vs. execution speed**, and **task-specific strengths**.
+3. **Complex, long-running workflows amplify small model mismatches.** In multi-step agentic tasks that chain planning, repository search, code edits, and verification across dozens of turns, choosing an under-powered model wastes retries and context budget, while running a peak-capability model at Max effort on every routine step inflates latency and cost. Effective model selection requires understanding models across three distinct axes: **capability vs. cost**, **capability vs. execution speed**, and **task-specific strengths**.
 
 To make those trade-offs concrete and reproducible, we built the **[Frontier Model Capability benchmark suite](https://haolingdong-msft.github.io/frontier-model-capability/)**, tracking **11 frontier model families** (Claude Opus 5.5, Claude Sonnet 5.5, GPT-6 Astra, GPT-6.1 Sol, GPT-5.6 Sol, Gemini 3.8 Flash, GPT-6 Luna, GPT-5.6 Sol Fast, GPT-6.1 Terra, Gemini 4 Argon, and Grok 4.7) across **5 reasoning effort levels** and **17 native-scale benchmarks (274 captured configuration records)**:
 
 | Evaluation dimension | Primary benchmarks tracked | What it measures |
 | --- | --- | --- |
-| **Smartness vs. cost per task** | Artificial Analysis Intelligence Index v5.0, CursorBench 4.0, ARC-AGI-1 & ARC-AGI-2 (Semi-Private) | Measured capability score against average USD evaluation cost per task (log scale) across reasoning efforts 1 Low to 5 Max |
-| **Smartness vs. performance (speed)** | Artificial Analysis Intelligence Index v5.0 end-to-end latency series | Measured capability score against median end-to-end response time in seconds (including thinking/reasoning delay) |
+| **Capability vs. cost per task** | Artificial Analysis Intelligence Index v5.0, CursorBench 4.0, ARC-AGI-1 & ARC-AGI-2 (Semi-Private) | Measured capability score against average USD evaluation cost per task (log scale) across reasoning efforts 1 Low to 5 Max |
+| **Capability vs. performance (speed)** | Artificial Analysis Intelligence Index v5.0 end-to-end latency series | Measured capability score against median end-to-end response time in seconds (including thinking/reasoning delay) |
 | **UI / frontend specialization** | DesignArena Website (Bradley-Terry Elo) | Blind human pairwise preference across generated websites |
 | **Engineering & code migration** | Terminal-Bench 4.0, Vals Code Migration v1.1, LiveBench 2.0 (Coding, Long Agentic, Browser Use) | Executable repository task resolution (%), hidden behavior-test pass rate (%), and multi-step agentic completion |
 | **Documents, analysis & reasoning** | AA-Briefcase v1.1 (Word, Analytical Quality, Presentation), GDPval-AA v2.1, LiveBench 2.0 (Research, Design, Data Analysis, Reasoning) | Rubric-check pass rates (%) and pairwise Elo across professional reports, .docx artifacts, and structured analysis |
@@ -30,16 +30,16 @@ _Table 1: Overview of the Frontier Model Capability evaluation dimensions and pr
 
 ## Capability vs. cost across reasoning efforts
 
-In this chart, the **vertical axis represents model smartness (capability score)** and the **horizontal axis represents average USD cost per task (log scale)** across reasoning efforts **1 (Low) to 5 (Max)**—so **upper-left means smarter and cheaper**.
+In this chart, the **vertical axis represents model capability (benchmark score)** and the **horizontal axis represents average USD cost per task (log scale)** across reasoning efforts **1 (Low) to 5 (Max)**—so **upper-left means higher capability at lower cost**.
 
-![LLM smartness versus cost by reasoning effort](llm-cost-capability.svg)
+![LLM capability versus cost by reasoning effort](llm-cost-capability.svg)
 
-_Figure 1: Capability (Artificial Analysis Intelligence Index v5.0) vs. average benchmark cost per task (USD, logarithmic scale). **Example:** At **Medium (2)**, **GPT-6.1 Sol** (46.1) and **Claude Opus 5.5** (48.1) have nearly the same smartness, but Opus costs **~7× more** ($2.45 vs. $0.36/task)._
+_Figure 1: Capability (Artificial Analysis Intelligence Index v5.0) vs. average benchmark cost per task (USD, logarithmic scale). **Example:** At **Medium (2)**, **GPT-6.1 Sol** (46.1) and **Claude Opus 5.5** (48.1) achieve nearly the **same score**, but Opus costs **~7× more** ($2.45 vs. $0.36/task)._
 
 Because measured evaluation costs span more than **1,000x**—from **$0.005/task** on GPT-6 Luna Low to **$10.04/task** on Claude Opus 5.5 Max—plotting cost on a logarithmic scale exposes four structural findings:
 
 1. **GPT-6.1 Sol and GPT-6.1 Terra define the upper-left cost-efficiency frontier.** On Intelligence Index v5.0, GPT-6.1 Sol climbs from **34.5 ($0.16/task)** at Low to **46.1 ($0.36)** at Medium, **50.2 ($0.59)** at High, **52.3 ($0.76)** at Xhigh, and **54.5 ($1.27)** at Max. At High effort ($0.59/task), GPT-6.1 Sol scores higher than Claude Opus 5.5 Medium (48.1 at $2.45/task) at roughly one-quarter of the benchmark task cost.
-2. **Peak smartness on flagship models has a steep cost inflection above High effort.** Claude Opus 5.5 reaches the highest overall score (**58.4 at Max**) and GPT-6 Astra reaches **56.9 at Max**. However, stepping Claude Opus 5.5 from High (51.7 at $3.46) to Max (58.4 at $10.04) nearly triples task cost for +6.7 points. On GPT-6 Astra, High (**54.8 at $3.24**) captures most of the capability gain before Max (**56.9 at $6.24**) nearly doubles the cost.
+2. **Peak capability on flagship models has a steep cost inflection above High effort.** Claude Opus 5.5 reaches the highest overall score (**58.4 at Max**) and GPT-6 Astra reaches **56.9 at Max**. However, stepping Claude Opus 5.5 from High (51.7 at $3.46) to Max (58.4 at $10.04) nearly triples task cost for +6.7 points. On GPT-6 Astra, High (**54.8 at $3.24**) captures most of the capability gain before Max (**56.9 at $6.24**) nearly doubles the cost.
 3. **A mid-tier model at Max effort can cost as much as a flagship model at Max effort.** Because of the volume of reasoning tokens generated, Claude Sonnet 5.5 Max costs **$10.02 per task (score 54.2)**—virtually identical in benchmark dollar cost to Claude Opus 5.5 Max (**$10.04 per task, score 58.4**).
 4. **Cross-checking on CursorBench 4.0 and ARC-AGI-1/2 shows that higher effort is not always monotonically better.** On CursorBench 4.0, Claude Opus 5.5 ties at **56.00%** across High ($3.97, 68 steps) and Xhigh ($6.98, 109 steps) before reaching **57.80%** at Max ($13.43, 185 steps). On ARC-AGI-1, GPT-6.1 Sol High (**98.50% at $0.059/task**) outperforms Max (**96.50% at $0.095/task**), and on Intelligence Index v5.0, Grok 4.7 High (**35.0 at $6.18**) edges out Xhigh (**34.3 at $7.51**).
 
@@ -69,9 +69,9 @@ _Figure 2: Native CursorBench 4.0 score (%) vs. average USD cost per task across
 
 When working interactively with an agent—or chaining multiple subagent turns inside a long-running workflow—**output tokens per second can be misleading**. Reasoning models spend significant time thinking before emitting their first visible token. To capture true model latency, we plot **median end-to-end response time in seconds (including reasoning delay)** against capability score.
 
-![LLM smartness versus execution speed by reasoning effort](llm-speed-capability.svg)
+![LLM capability versus execution speed by reasoning effort](llm-speed-capability.svg)
 
-_Figure 3: Capability (Intelligence Index v5.0) vs. median end-to-end response time in seconds (logarithmic scale). Upper-left is better: higher smartness with lower end-to-end response latency._
+_Figure 3: Capability (Intelligence Index v5.0) vs. median end-to-end response time in seconds (logarithmic scale). Upper-left is better: higher capability with lower end-to-end response latency._
 
 Three practical lessons stand out from the response-time trajectories:
 
@@ -97,7 +97,7 @@ _Table 3: Median end-to-end response time (seconds, including reasoning delay) a
 
 ## Task specialization across 17 benchmarks
 
-Aggregate smartness, cost, and speed still do not tell you whether a model excels at **visual frontend design**, **executable terminal/repository engineering**, or **structured document writing**. Rather than inventing a synthetic radar chart, we evaluate all 11 model families across **17 native-scale task benchmarks (274 captured configuration rows)**:
+Aggregate capability, cost, and speed still do not tell you whether a model excels at **visual frontend design**, **executable terminal/repository engineering**, or **structured document writing**. Rather than inventing a synthetic radar chart, we evaluate all 11 model families across **17 native-scale task benchmarks (274 captured configuration rows)**:
 
 | Model family | UI / Frontend (DesignArena Website, Elo) | Terminal Engineering (Terminal-Bench 4.0, resolved %) | Code Migration (Vals v1.1, pass % / USD / time) | Long Agentic (LiveBench 2.0, score / USD) | Document Rubric (AA-Briefcase Word, %) | Analytical Quality (AA-Briefcase, Elo) |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -122,7 +122,7 @@ _Table 4: Task-specific comparison across six representative native-scale benchm
    - **Terminal-Bench 4.0:** Claude Opus 5.5 Max (**64.85%**) and Claude Sonnet 5.5 Max (**61.82%**) lead in Claude Code, while GPT-6 Astra Max and GPT-6.1 Sol Max tie at **58.18%** in Codex. Notably, across 330 trials per setting on GPT-6 Astra, High (**57.88%**), Xhigh (**57.88%**), and Max (**58.18%**) have overlapping confidence intervals—meaning High captures virtually the same terminal resolution rate at a fraction of Max cost and latency.
    - **Vals Code Migration v1.1 & LiveBench Long Agentic:** Claude Sonnet 5.5 Max leads code migration (**86.88%**, $43.88/task) and GPT-6 Astra Max leads long-agentic execution (**77.50**, $38.38/task). However, **GPT-6.1 Sol Max is the standout value leader**, achieving **77.32% on Code Migration for just $9.51/task** (vs. $62.07–$72.40 on Astra/Opus) and **68.70 on Long Agentic for $6.49/task**, while tying Claude Opus 5.5 at the top of LiveBench Coding (**96.00 at $0.48/task** vs. **96.30 at $5.03/task**).
 3. **Documents, analytical reports, and structured reasoning (AA-Briefcase, GDPval-AA, LiveBench):** Gemini 4 Argon High leads Word .docx rubric checks (**62.13%**), LiveBench Reasoning (**95.10**), and LiveBench Data Analysis (**85.20**), whereas Claude Opus 5.5 Max and Claude Sonnet 5.5 Max lead pairwise human preference for analytical quality (**2,135.15** and **2,104.30 Elo**), presentation (**1,715.10** and **1,711.94 Elo**), and broader professional deliverables (GDPval-AA **1,866.27** and **1,842.06 Elo**).
-4. **How to combine models in complex workflows (segregation of duties):** Don't use one model setting for every step of a long-running task. Use a top-smartness frontier model (Claude Opus 5.5 or GPT-6 Astra at High/Max) to diagnose architecture, adjudicate subtle API compatibility rules, and define acceptance criteria—then delegate bounded implementation prototypes in parallel Git worktrees to fast, cost-efficient models (GPT-6.1 Sol or GPT-6.1 Terra at Medium/High).
+4. **How to combine models in complex workflows (segregation of duties):** Don't use one model setting for every step of a long-running task. Use a top-capability frontier model (Claude Opus 5.5 or GPT-6 Astra at High/Max) to diagnose architecture, adjudicate subtle API compatibility rules, and define acceptance criteria—then delegate bounded implementation prototypes in parallel Git worktrees to fast, cost-efficient models (GPT-6.1 Sol or GPT-6.1 Terra at Medium/High).
 
 ![DesignArena Website frontend preference Elo](llm-task-website.svg)
 
