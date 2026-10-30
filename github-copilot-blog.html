@@ -1052,6 +1052,66 @@
       color: #24292f;
       margin-bottom: 0.65rem;
     }
+    /* Visual takeaway mini-chart cards */
+    .takeaway-visual-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin: 18px 0 28px;
+    }
+    .takeaway-visual-card {
+      background: #ffffff;
+      border: 1px solid var(--gh-border-default);
+      border-radius: 10px;
+      padding: 14px 16px 12px;
+      box-shadow: 0 1px 2px rgba(31, 35, 40, 0.04);
+    }
+    .takeaway-visual-card.full-span {
+      grid-column: 1 / -1;
+    }
+    .takeaway-visual-card h4 {
+      margin: 0 0 4px;
+      font-size: 0.94rem;
+      font-weight: 700;
+      color: #1f2328;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+    .takeaway-visual-card .takeaway-badge {
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: #ddf4ff;
+      color: #0969da;
+      white-space: nowrap;
+    }
+    .takeaway-visual-card .takeaway-badge.warn {
+      background: #fff8c5;
+      color: #9a6700;
+    }
+    .takeaway-visual-card .takeaway-badge.danger {
+      background: #ffebe9;
+      color: #cf222e;
+    }
+    .takeaway-visual-card p.takeaway-sub {
+      margin: 0 0 10px;
+      font-size: 0.8rem;
+      color: #57606a;
+      line-height: 1.4;
+    }
+    .takeaway-visual-card svg {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    @media (max-width: 760px) {
+      .takeaway-visual-grid {
+        grid-template-columns: 1fr;
+      }
+    }
     .key-takeaway-box {
       background: #f6f8fa;
       border-left: 4px solid #0969da;
@@ -1920,11 +1980,247 @@
       <div id="aa-cost-notes" hidden></div>
     </section>
 
-    <ul class="wp-block-list">
-      <li><strong>Cost-efficiency frontier (GPT-6.1 Sol &amp; GPT-6.1 Terra):</strong> At High effort, <strong>GPT-6.1 Sol</strong> reaches a 50.2 v5.0 score for <strong>$0.59/task</strong>—delivering ~90% of peak frontier capability at <strong>6%–18% of flagship cost</strong>. <strong>GPT-6.1 Terra</strong> stays under $1 even at Max ($0.96, score 51.0) and costs just $0.26 at High (score 42.3).</li>
-      <li><strong>Flagship ceiling vs. Max-tier cost spike:</strong> <strong>Claude Opus 5.5 Max</strong> (58.4) and <strong>GPT-6 Astra Max</strong> (56.9) achieve the highest capability ceiling, but jumping from High to Max nearly triples Opus cost ($3.46 → $10.04) and multiplies <strong>Claude Sonnet 5.5</strong> cost by 6.1x ($1.64 → $10.02).</li>
-      <li><strong>Higher effort is not always better:</strong> Switching to <strong>CursorBench 4.0</strong> or <strong>ARC-AGI-2</strong> shows diminishing or negative returns above High effort for several models (e.g., Claude Opus 5.5 peaks at High on ARC-AGI-2 at $0.41 vs. $1.85 at Max; Grok 4.7 peaks at Medium on CursorBench).</li>
-    </ul>
+    <div class="takeaway-visual-grid" aria-label="Key cost vs capability takeaways">
+      <!-- Card 1: Cost-efficiency frontier (Same-origin paired bars: Capability % vs Cost %) -->
+      <div class="takeaway-visual-card">
+        <h4>
+          <span>1. Cost-efficiency sweet spot</span>
+          <span class="takeaway-badge">86% score at 6% cost</span>
+        </h4>
+        <p class="takeaway-sub">Relative to Claude Opus 5.5 Max (100%), GPT-6.1 Sol &amp; Terra keep most of the score at a fraction of the cost.</p>
+        <svg viewBox="0 0 440 218" role="img" aria-label="Paired bar chart comparing capability percentage vs cost percentage relative to Claude Opus 5.5 Max">
+          <style>
+            .c1-lbl { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-size: 11.5px; fill: #1f2328; font-weight: 700; }
+            .c1-sub { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-size: 10px; fill: #57606a; }
+            .c1-val-cap { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-size: 10.5px; font-weight: 700; fill: #0969da; }
+            .c1-val-cost { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-size: 10.5px; font-weight: 700; fill: #cf222e; }
+            .c1-val-good { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-size: 10.5px; font-weight: 700; fill: #1a7f37; }
+            .c1-leg { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-size: 10.5px; font-weight: 600; fill: #24292f; }
+          </style>
+          <!-- Top Legend -->
+          <rect x="8" y="4" width="10" height="10" rx="2" fill="#0969da"/>
+          <text x="22" y="13" class="c1-leg">Capability (AA v5.0 score)</text>
+          <rect x="195" y="4" width="10" height="10" rx="2" fill="#cf222e"/>
+          <text x="209" y="13" class="c1-leg">Cost per task (USD)</text>
+          <line x1="8" y1="22" x2="432" y2="22" stroke="#d8dee4" stroke-width="1"/>
+
+          <!-- Row 1: Baseline Reference (Claude Opus 5.5 Max = 100%) -->
+          <text x="8" y="42" class="c1-lbl">Claude Opus 5.5 (Max)</text>
+          <text x="8" y="55" class="c1-sub">Flagship ceiling (100% baseline)</text>
+          <rect x="158" y="31" width="180" height="10" rx="2.5" fill="#0969da"/>
+          <text x="344" y="40" class="c1-val-cap">58.4 pts (100%)</text>
+          <rect x="158" y="45" width="180" height="10" rx="2.5" fill="#cf222e"/>
+          <text x="344" y="54" class="c1-val-cost">$10.04 (100%)</text>
+
+          <!-- Row 2: GPT-6.1 Sol High (Highlighted Sweet Spot) -->
+          <rect x="4" y="66" width="432" height="46" rx="6" fill="#f0f9ff" stroke="#80ccff" stroke-width="1"/>
+          <text x="10" y="85" class="c1-lbl" style="fill:#0969da;">★ GPT-6.1 Sol (High)</text>
+          <text x="10" y="99" class="c1-sub">Best cost-efficiency sweet spot</text>
+          <rect x="158" y="74" width="154.7" height="10" rx="2.5" fill="#0969da"/>
+          <text x="318" y="83" class="c1-val-cap">50.2 pts (86%)</text>
+          <rect x="158" y="88" width="10.6" height="10" rx="2.5" fill="#1a7f37"/>
+          <text x="174" y="97" class="c1-val-good">$0.59 — only 6% of Opus cost!</text>
+
+          <!-- Row 3: GPT-6.1 Terra Max -->
+          <text x="8" y="132" class="c1-lbl">GPT-6.1 Terra (Max)</text>
+          <text x="8" y="145" class="c1-sub">Sub-$1 high capability</text>
+          <rect x="158" y="121" width="157.2" height="10" rx="2.5" fill="#0969da"/>
+          <text x="320" y="130" class="c1-val-cap">51.0 pts (87%)</text>
+          <rect x="158" y="135" width="17.2" height="10" rx="2.5" fill="#1a7f37"/>
+          <text x="180" y="144" class="c1-val-good">$0.96 — 10% of Opus cost</text>
+
+          <!-- Row 4: GPT-6.1 Terra High -->
+          <line x1="8" y1="158" x2="432" y2="158" stroke="#f0f3f6"/>
+          <text x="8" y="178" class="c1-lbl">GPT-6.1 Terra (High)</text>
+          <text x="8" y="191" class="c1-sub">Budget workhorse</text>
+          <rect x="158" y="167" width="130.4" height="10" rx="2.5" fill="#0969da" opacity="0.8"/>
+          <text x="294" y="176" class="c1-val-cap">42.3 pts (72%)</text>
+          <rect x="158" y="181" width="5.0" height="10" rx="2.5" fill="#1a7f37"/>
+          <text x="169" y="190" class="c1-val-good">$0.26 — 2.6% of Opus cost</text>
+        </svg>
+      </div>
+
+      <!-- Card 2: Vertical Column Chart for High -> Max Cost Spike -->
+      <div class="takeaway-visual-card">
+        <h4>
+          <span>2. High → Max cost spike</span>
+          <span class="takeaway-badge warn">2× to 6× cost jump</span>
+        </h4>
+        <p class="takeaway-sub">Jumping from High (3) to Max (5) multiplies cost per task while capability only edges up slightly.</p>
+        <svg viewBox="0 0 440 218" role="img" aria-label="Vertical column chart showing cost per task jumping 1.9x to 6.1x from High to Max effort">
+          <style>
+            .c2-lbl { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-size: 11px; fill: #1f2328; font-weight: 700; }
+            .c2-sub { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-size: 9.5px; fill: #57606a; }
+            .c2-val { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-size: 10.5px; font-weight: 700; fill: #1f2328; }
+            .c2-mult { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-size: 10.5px; font-weight: 700; fill: #cf222e; }
+            .c2-leg { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-size: 10.5px; font-weight: 600; fill: #24292f; }
+          </style>
+          <!-- Legend -->
+          <rect x="8" y="4" width="10" height="10" rx="2" fill="#94a3b8"/>
+          <text x="22" y="13" class="c2-leg">High (3) Cost</text>
+          <rect x="115" y="4" width="10" height="10" rx="2" fill="#cf222e"/>
+          <text x="129" y="13" class="c2-leg">Max (5) Cost</text>
+          <line x1="8" y1="22" x2="432" y2="22" stroke="#d8dee4" stroke-width="1"/>
+
+          <!-- Y-axis grid lines ($0, $5, $10) -->
+          <line x1="36" y1="168" x2="428" y2="168" stroke="#cbd5e1" stroke-width="1.2"/>
+          <line x1="36" y1="113" x2="428" y2="113" stroke="#eaeef2" stroke-dasharray="3,3"/>
+          <line x1="36" y1="58" x2="428" y2="58" stroke="#eaeef2" stroke-dasharray="3,3"/>
+          <text x="30" y="172" text-anchor="end" class="c2-sub">$0</text>
+          <text x="30" y="117" text-anchor="end" class="c2-sub">$5</text>
+          <text x="30" y="62" text-anchor="end" class="c2-sub">$10</text>
+
+          <!-- Group 1: Claude Opus 5.5 (High $3.46 -> Max $10.04) -->
+          <rect x="62" y="130" width="36" height="38" rx="3" fill="#94a3b8"/>
+          <text x="80" y="125" text-anchor="middle" class="c2-val">$3.46</text>
+          <rect x="104" y="57.5" width="36" height="110.5" rx="3" fill="#cf222e"/>
+          <text x="122" y="52" text-anchor="middle" class="c2-val" style="fill:#cf222e;">$10.04</text>
+          <rect x="55" y="28" width="92" height="16" rx="4" fill="#ffebe9"/>
+          <text x="101" y="39" text-anchor="middle" class="c2-mult">2.9× cost (+13% pts)</text>
+          <text x="101" y="185" text-anchor="middle" class="c2-lbl">Claude Opus 5.5</text>
+          <text x="101" y="198" text-anchor="middle" class="c2-sub">Score: 51.7 → 58.4</text>
+
+          <!-- Group 2: Claude Sonnet 5.5 (High $1.64 -> Max $10.02) -->
+          <rect x="198" y="150" width="36" height="18" rx="3" fill="#94a3b8"/>
+          <text x="216" y="145" text-anchor="middle" class="c2-val">$1.64</text>
+          <rect x="240" y="58" width="36" height="110" rx="3" fill="#cf222e"/>
+          <text x="258" y="52" text-anchor="middle" class="c2-val" style="fill:#cf222e;">$10.02</text>
+          <rect x="191" y="28" width="92" height="16" rx="4" fill="#ffebe9"/>
+          <text x="237" y="39" text-anchor="middle" class="c2-mult">6.1× cost (+32% pts)</text>
+          <text x="237" y="185" text-anchor="middle" class="c2-lbl">Claude Sonnet 5.5</text>
+          <text x="237" y="198" text-anchor="middle" class="c2-sub">Score: 41.1 → 54.2</text>
+
+          <!-- Group 3: GPT-6 Astra (High $3.24 -> Max $6.24) -->
+          <rect x="334" y="132.4" width="36" height="35.6" rx="3" fill="#94a3b8"/>
+          <text x="352" y="127" text-anchor="middle" class="c2-val">$3.24</text>
+          <rect x="376" y="99.4" width="36" height="68.6" rx="3" fill="#d97706"/>
+          <text x="394" y="94" text-anchor="middle" class="c2-val" style="fill:#b45309;">$6.24</text>
+          <rect x="327" y="68" width="92" height="16" rx="4" fill="#fff8c5"/>
+          <text x="373" y="79" text-anchor="middle" class="c2-mult" style="fill:#9a6700;">1.9× cost (+4% pts)</text>
+          <text x="373" y="185" text-anchor="middle" class="c2-lbl">GPT-6 Astra</text>
+          <text x="373" y="198" text-anchor="middle" class="c2-sub">Score: 54.8 → 56.9</text>
+        </svg>
+      </div>
+
+      <!-- Card 3: Higher effort is not always better (Full width) -->
+      <div class="takeaway-visual-card full-span">
+        <h4>
+          <span>3. Higher effort is not always better: accuracy can peak at High (3) and drop at Max (5)</span>
+          <span class="takeaway-badge danger">Over-thinking penalty at Max</span>
+        </h4>
+        <p class="takeaway-sub">On ARC-AGI-2 and ARC-AGI-1, pushing past High (3) to Max (5) multiplies cost by 1.6×–4.5× while accuracy plateaus or regresses.</p>
+        <svg viewBox="0 0 820 178" role="img" aria-label="Effort inversion curves showing accuracy peaking at High effort and dropping at Max effort">
+          <style>
+            .inv-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-size: 11.5px; font-weight: 700; fill: #1f2328; }
+            .inv-axis { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-size: 10.5px; fill: #57606a; font-weight: 600; }
+            .inv-val { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-size: 10.5px; font-weight: 700; fill: #1f2328; }
+            .inv-cost { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-size: 9.5px; fill: #57606a; }
+            .inv-peak { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-size: 10.5px; font-weight: 700; fill: #1a7f37; }
+            .inv-drop { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-size: 10px; font-weight: 700; fill: #cf222e; }
+          </style>
+
+          <!-- Left Subchart: Claude Opus 5.5 on ARC-AGI-2 -->
+          <rect x="6" y="6" width="394" height="166" rx="8" fill="#fafbfc" stroke="#e1e4e8"/>
+          <circle cx="20" cy="22" r="5" fill="#a34415"/>
+          <text x="30" y="26" class="inv-title">Claude Opus 5.5 (ARC-AGI-2)</text>
+          <text x="386" y="26" text-anchor="end" class="inv-drop">-1.7% score at 4.5× cost</text>
+
+          <!-- Grid lines Left -->
+          <line x1="42" y1="54" x2="375" y2="54" stroke="#eaeef2"/>
+          <line x1="42" y1="92" x2="375" y2="92" stroke="#eaeef2"/>
+          <line x1="42" y1="130" x2="375" y2="130" stroke="#eaeef2"/>
+          <text x="36" y="57" text-anchor="end" class="inv-cost">95%</text>
+          <text x="36" y="95" text-anchor="end" class="inv-cost">85%</text>
+          <text x="36" y="133" text-anchor="end" class="inv-cost">70%</text>
+
+          <!-- X labels Left -->
+          <text x="65" y="158" text-anchor="middle" class="inv-axis">1 Low</text>
+          <text x="140" y="158" text-anchor="middle" class="inv-axis">2 Med</text>
+          <text x="215" y="158" text-anchor="middle" class="inv-axis" style="fill:#1a7f37;">3 High ★</text>
+          <text x="290" y="158" text-anchor="middle" class="inv-axis">4 Xhigh</text>
+          <text x="360" y="158" text-anchor="middle" class="inv-axis" style="fill:#cf222e;">5 Max</text>
+
+          <!-- Shaded drop zone -->
+          <rect x="215" y="40" width="155" height="96" fill="#ffebe9" opacity="0.35" rx="4"/>
+
+          <!-- Rising polyline (1 -> 2 -> 3) -->
+          <polyline points="65,129 140,81 215,59" fill="none" stroke="#a34415" stroke-width="3"/>
+          <!-- Declining polyline (3 -> 4 -> 5) -->
+          <polyline points="215,59 290,63 360,67" fill="none" stroke="#cf222e" stroke-width="3" stroke-dasharray="5,3"/>
+
+          <!-- Points Left -->
+          <circle cx="65" cy="129" r="6" fill="#a34415"/>
+          <text x="65" y="119" text-anchor="middle" class="inv-val">70.1%</text>
+          <text x="65" y="143" text-anchor="middle" class="inv-cost">$0.24</text>
+
+          <circle cx="140" cy="81" r="6" fill="#a34415"/>
+          <text x="140" y="71" text-anchor="middle" class="inv-val">87.5%</text>
+          <text x="140" y="96" text-anchor="middle" class="inv-cost">$0.34</text>
+
+          <!-- Peak Point 3 -->
+          <circle cx="215" cy="59" r="9" fill="#dafbe1" stroke="#1a7f37" stroke-width="2"/>
+          <circle cx="215" cy="59" r="5" fill="#1a7f37"/>
+          <text x="215" y="45" text-anchor="middle" class="inv-peak">★ 93.3% (Peak)</text>
+          <text x="215" y="77" text-anchor="middle" class="inv-peak">$0.41</text>
+
+          <circle cx="290" cy="63" r="6" fill="#cf222e"/>
+          <text x="290" y="52" text-anchor="middle" class="inv-val" style="fill:#cf222e;">92.5%</text>
+          <text x="290" y="79" text-anchor="middle" class="inv-cost">$0.67</text>
+
+          <circle cx="360" cy="67" r="6" fill="#cf222e"/>
+          <text x="360" y="55" text-anchor="middle" class="inv-val" style="fill:#cf222e;">91.7%</text>
+          <text x="360" y="83" text-anchor="middle" class="inv-drop">$1.85 (4.5×)</text>
+
+          <!-- Right Subchart: GPT-6.1 Sol on ARC-AGI-1 -->
+          <rect x="416" y="6" width="398" height="166" rx="8" fill="#fafbfc" stroke="#e1e4e8"/>
+          <circle cx="430" cy="22" r="5" fill="#1878ba"/>
+          <text x="440" y="26" class="inv-title">GPT-6.1 Sol (ARC-AGI-1)</text>
+          <text x="802" y="26" text-anchor="end" class="inv-drop">-2.0% score at 1.6× cost</text>
+
+          <!-- Grid lines Right -->
+          <line x1="452" y1="54" x2="788" y2="54" stroke="#eaeef2"/>
+          <line x1="452" y1="92" x2="788" y2="92" stroke="#eaeef2"/>
+          <line x1="452" y1="130" x2="788" y2="130" stroke="#eaeef2"/>
+          <text x="446" y="57" text-anchor="end" class="inv-cost">99%</text>
+          <text x="446" y="95" text-anchor="end" class="inv-cost">96%</text>
+          <text x="446" y="133" text-anchor="end" class="inv-cost">93%</text>
+
+          <!-- X labels Right -->
+          <text x="475" y="158" text-anchor="middle" class="inv-axis">1 Low</text>
+          <text x="550" y="158" text-anchor="middle" class="inv-axis">2 Med</text>
+          <text x="625" y="158" text-anchor="middle" class="inv-axis" style="fill:#1a7f37;">3 High ★</text>
+          <text x="700" y="158" text-anchor="middle" class="inv-axis">4 Xhigh</text>
+          <text x="770" y="158" text-anchor="middle" class="inv-axis" style="fill:#cf222e;">5 Max</text>
+
+          <rect x="625" y="40" width="155" height="96" fill="#ffebe9" opacity="0.35" rx="4"/>
+
+          <!-- GPT-6.1 Sol curve -->
+          <polyline points="475,124 550,98 625,60 700,60" fill="none" stroke="#1878ba" stroke-width="3"/>
+          <polyline points="700,60 770,86" fill="none" stroke="#cf222e" stroke-width="3" stroke-dasharray="5,3"/>
+
+          <circle cx="475" cy="124" r="5.5" fill="#1878ba"/>
+          <text x="475" y="114" text-anchor="middle" class="inv-val" style="fill:#1878ba;">93.5%</text>
+          <text x="475" y="138" text-anchor="middle" class="inv-cost">$0.047</text>
+
+          <circle cx="550" cy="98" r="5.5" fill="#1878ba"/>
+          <text x="550" y="88" text-anchor="middle" class="inv-val" style="fill:#1878ba;">95.5%</text>
+          <text x="550" y="112" text-anchor="middle" class="inv-cost">$0.050</text>
+
+          <circle cx="625" cy="60" r="8.5" fill="#dafbe1" stroke="#1a7f37" stroke-width="2"/>
+          <circle cx="625" cy="60" r="4.5" fill="#1a7f37"/>
+          <text x="625" y="45" text-anchor="middle" class="inv-peak">★ 98.5% (Peak)</text>
+          <text x="625" y="77" text-anchor="middle" class="inv-peak">$0.059</text>
+
+          <circle cx="700" cy="60" r="5.5" fill="#1878ba"/>
+          <text x="700" y="49" text-anchor="middle" class="inv-val">98.5%</text>
+          <text x="700" y="77" text-anchor="middle" class="inv-cost">$0.074</text>
+
+          <circle cx="770" cy="86" r="6" fill="#cf222e"/>
+          <text x="770" y="75" text-anchor="middle" class="inv-val" style="fill:#cf222e;">96.5%</text>
+          <text x="770" y="102" text-anchor="middle" class="inv-drop">$0.095 (1.6×)</text>
+        </svg>
+      </div>
+    </div>
 
     <!-- 3. SMARTNESS VS PERFORMANCE (SPEED) -->
     <h2 id="h-3-smartness-vs-perf" class="wp-block-heading">Capability vs. end-to-end response time</h2>
@@ -2129,10 +2425,117 @@
   </div>
 </div>
 
-    <ul class="wp-block-list" style="margin-top: 18px;">
-      <li><strong>The 7–15 second interactive sweet spot:</strong> <strong>GPT-6.1 Terra Medium/High</strong> (7.1s / 11.2s), <strong>GPT-6.1 Sol Medium</strong> (12.1s, score 46.1), <strong>GPT-6 Astra Medium</strong> (13.0s, score 51.5), and <strong>Claude Sonnet 5.5 High</strong> (15.4s, score 41.1) combine strong capability with fast turnarounds for interactive coding and subagent loops.</li>
-      <li><strong>The Max-effort latency cliff:</strong> Stepping up to <strong>Max</strong> pushes single-turn latency to <strong>4.6–11.8 minutes</strong> (275.8s on GPT-6 Astra, 284.2s on GPT-6.1 Sol, 458.6s on Claude Sonnet 5.5, and 705.2s on Claude Opus 5.5). Reserve Max effort for single-turn architectural synthesis, not multi-turn tool loops.</li>
-    </ul>
+    <div class="takeaway-visual-grid" aria-label="Key response time vs capability takeaways">
+      <!-- Speed Card 1: 7-15s interactive sweet spot -->
+      <div class="takeaway-visual-card">
+        <h4>
+          <span>1. Interactive sweet spot (7–15s)</span>
+          <span class="takeaway-badge">Fast multi-turn loops</span>
+        </h4>
+        <p class="takeaway-sub">Medium and High tiers stay under the 15-second interactive threshold while delivering 41–52 AA v5.0 scores.</p>
+        <svg viewBox="0 0 440 195" role="img" aria-label="Interactive sweet spot models under 15 seconds median response time">
+          <style>
+            .sp1-lbl { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-size: 11.5px; font-weight: 700; fill: #1f2328; }
+            .sp1-sub { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-size: 10px; fill: #57606a; }
+            .sp1-val { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-size: 11px; font-weight: 700; fill: #1a7f37; }
+            .sp1-hdr { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-size: 10px; font-weight: 700; fill: #57606a; text-transform: uppercase; }
+          </style>
+          <text x="8" y="14" class="sp1-hdr">Model &amp; Capability Score</text>
+          <text x="190" y="14" class="sp1-hdr">Median Response Time (0s – 20s scale)</text>
+          <line x1="8" y1="20" x2="432" y2="20" stroke="#d8dee4"/>
+
+          <!-- 15s interactive threshold line -->
+          <rect x="190" y="24" width="165" height="150" fill="#dafbe1" opacity="0.35" rx="4"/>
+          <line x1="355" y1="24" x2="355" y2="176" stroke="#1a7f37" stroke-width="1.5" stroke-dasharray="4,3"/>
+          <text x="355" y="188" text-anchor="middle" class="sp1-val" style="font-size:9.5px;">15s interactive target</text>
+
+          <!-- Row 1: GPT-6.1 Terra High (11.2s, score 42.3) -->
+          <circle cx="14" cy="42" r="4.5" fill="#9744a0"/>
+          <text x="24" y="45" class="sp1-lbl">GPT-6.1 Terra (High)</text>
+          <text x="24" y="58" class="sp1-sub">AA v5.0 score: 42.3</text>
+          <rect x="190" y="37" width="123.2" height="12" rx="3" fill="#1a7f37"/>
+          <text x="319" y="47" class="sp1-val">11.2s</text>
+
+          <!-- Row 2: GPT-6.1 Sol Medium (12.1s, score 46.1) -->
+          <circle cx="14" cy="80" r="4.5" fill="#1878ba"/>
+          <text x="24" y="83" class="sp1-lbl">GPT-6.1 Sol (Med)</text>
+          <text x="24" y="96" class="sp1-sub">AA v5.0 score: 46.1</text>
+          <rect x="190" y="75" width="133.1" height="12" rx="3" fill="#1a7f37"/>
+          <text x="329" y="85" class="sp1-val">12.1s</text>
+
+          <!-- Row 3: GPT-6 Astra Medium (13.0s, score 51.5) -->
+          <circle cx="14" cy="118" r="4.5" fill="#5144c7"/>
+          <text x="24" y="121" class="sp1-lbl">GPT-6 Astra (Med)</text>
+          <text x="24" y="134" class="sp1-sub">AA v5.0 score: 51.5</text>
+          <rect x="190" y="113" width="143.0" height="12" rx="3" fill="#1a7f37"/>
+          <text x="339" y="123" class="sp1-val">13.0s</text>
+
+          <!-- Row 4: Claude Sonnet 5.5 High (15.4s, score 41.1) -->
+          <circle cx="14" cy="156" r="4.5" fill="#d17908"/>
+          <text x="24" y="159" class="sp1-lbl">Claude Sonnet 5.5 (High)</text>
+          <text x="24" y="172" class="sp1-sub">AA v5.0 score: 41.1</text>
+          <rect x="190" y="151" width="169.4" height="12" rx="3" fill="#2da44e"/>
+          <text x="365" y="161" class="sp1-val">15.4s</text>
+        </svg>
+      </div>
+
+      <!-- Speed Card 2: Max-effort latency cliff (High vs Max paired bars) -->
+      <div class="takeaway-visual-card">
+        <h4>
+          <span>2. High → Max latency cliff</span>
+          <span class="takeaway-badge danger">4.6 to 11.8 min / turn</span>
+        </h4>
+        <p class="takeaway-sub">Stepping from High (3) to Max (5) stretches single-turn wait times 5×–30× into minutes.</p>
+        <svg viewBox="0 0 440 195" role="img" aria-label="Comparison of High vs Max median response time showing 4.6 to 11.8 minute wait times">
+          <style>
+            .sp2-lbl { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-size: 11px; font-weight: 700; fill: #1f2328; }
+            .sp2-val { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-size: 10.5px; font-weight: 700; fill: #cf222e; }
+            .sp2-sub { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-size: 9.5px; fill: #57606a; }
+            .sp2-leg { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-size: 10.5px; font-weight: 600; fill: #24292f; }
+          </style>
+          <rect x="8" y="4" width="10" height="10" rx="2" fill="#94a3b8"/>
+          <text x="22" y="13" class="sp2-leg">High (3) Wait Time</text>
+          <rect x="140" y="4" width="10" height="10" rx="2" fill="#cf222e"/>
+          <text x="154" y="13" class="sp2-leg">Max (5) Wait Time</text>
+          <line x1="8" y1="20" x2="432" y2="20" stroke="#d8dee4"/>
+
+          <!-- Row 1: Claude Opus 5.5 (98s -> 705s) -->
+          <text x="8" y="42" class="sp2-lbl">Claude Opus 5.5</text>
+          <text x="8" y="55" class="sp2-sub">7.2× slower at Max</text>
+          <rect x="135" y="30" width="25.0" height="9" rx="2" fill="#94a3b8"/>
+          <text x="165" y="38" class="sp2-sub">98s (1.6m)</text>
+          <rect x="135" y="43" width="180.0" height="10" rx="2" fill="#cf222e"/>
+          <text x="320" y="52" class="sp2-val">705s (11.8 min)</text>
+
+          <!-- Row 2: Claude Sonnet 5.5 (15s -> 459s) -->
+          <line x1="8" y1="63" x2="432" y2="63" stroke="#f0f3f6"/>
+          <text x="8" y="82" class="sp2-lbl">Claude Sonnet 5.5</text>
+          <text x="8" y="95" class="sp2-sub">30× slower at Max</text>
+          <rect x="135" y="70" width="4.5" height="9" rx="2" fill="#94a3b8"/>
+          <text x="145" y="78" class="sp2-sub">15s (0.3m)</text>
+          <rect x="135" y="83" width="117.2" height="10" rx="2" fill="#cf222e"/>
+          <text x="258" y="92" class="sp2-val">459s (7.6 min)</text>
+
+          <!-- Row 3: GPT-6.1 Sol (47s -> 284s) -->
+          <line x1="8" y1="103" x2="432" y2="103" stroke="#f0f3f6"/>
+          <text x="8" y="122" class="sp2-lbl">GPT-6.1 Sol</text>
+          <text x="8" y="135" class="sp2-sub">6.0× slower at Max</text>
+          <rect x="135" y="110" width="12.0" height="9" rx="2" fill="#94a3b8"/>
+          <text x="152" y="118" class="sp2-sub">47s (0.8m)</text>
+          <rect x="135" y="123" width="72.5" height="10" rx="2" fill="#d97706"/>
+          <text x="213" y="132" class="sp2-val" style="fill:#b45309;">284s (4.7 min)</text>
+
+          <!-- Row 4: GPT-6 Astra (52s -> 276s) -->
+          <line x1="8" y1="143" x2="432" y2="143" stroke="#f0f3f6"/>
+          <text x="8" y="162" class="sp2-lbl">GPT-6 Astra</text>
+          <text x="8" y="175" class="sp2-sub">5.3× slower at Max</text>
+          <rect x="135" y="150" width="13.3" height="9" rx="2" fill="#94a3b8"/>
+          <text x="153" y="158" class="sp2-sub">52s (0.9m)</text>
+          <rect x="135" y="163" width="70.5" height="10" rx="2" fill="#d97706"/>
+          <text x="211" y="172" class="sp2-val" style="fill:#b45309;">276s (4.6 min)</text>
+        </svg>
+      </div>
+    </div>
 
     <!-- 4. BEST AT TASK -->
     <h2 id="h-4-best-at-task" class="wp-block-heading">Task specialization across UI, engineering, and documents</h2>
