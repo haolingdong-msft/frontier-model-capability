@@ -946,7 +946,7 @@
     <!-- =========================================================
          PART 1: BACKGROUND
          ========================================================= -->
-    <h2 id="h-1-background" class="wp-block-heading">1. Background: Why it is hard to know which model has the best performance on complex, long-running tasks</h2>
+    <h2 id="h-1-background" class="wp-block-heading">Why choosing the right model for complex tasks is hard</h2>
 
     <p class="wp-block-paragraph">GitHub Copilot’s agentic harness supports more than 20 frontier models across the GPT, Claude, Gemini, and Grok families. While the harness coordinates tools, repository search, and context compaction, <strong>the model and reasoning effort you select fundamentally shape whether a complex, long-running engineering task converges quickly or burns hours and budget.</strong></p>
 
@@ -965,24 +965,24 @@
         <caption>Table 1: The four evaluation dimensions and 17 native-scale benchmarks tracked in this analysis (data refreshed October 28, 2026).</caption>
         <thead>
           <tr>
-            <th scope="col">Article section</th>
+            <th scope="col">Evaluation dimension</th>
             <th scope="col">Benchmarks included</th>
             <th scope="col">What it helps you decide</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <th scope="row">2. Smartness vs. cost</th>
+            <th scope="row">Capability vs. cost</th>
             <td>Artificial Analysis Intelligence Index v5.0, CursorBench 4.0, ARC-AGI-1 &amp; ARC-AGI-2 (Semi-Private)</td>
             <td>Which model and reasoning effort level (<code>1 Low</code> to <code>5 Max</code>) buys enough capability for your budget per completed task</td>
           </tr>
           <tr>
-            <th scope="row">3. Smartness vs. performance</th>
+            <th scope="row">Capability vs. response time</th>
             <td>Artificial Analysis Intelligence Index v5.0 end-to-end latency series</td>
             <td>How much thinking + generation latency (seconds, log scale) each effort step adds to interactive coding or multi-turn agent loops</td>
           </tr>
           <tr>
-            <th scope="row">4. Best at task (17 native benchmarks)</th>
+            <th scope="row">Task specialization (17 benchmarks)</th>
             <td>DesignArena Website, Terminal-Bench 4.0, Vals Code Migration v1.1, AA-Briefcase v1.1 (3 views), GDPval-AA v2.1, LiveBench 2.0 (7 suites)</td>
             <td>Which model leads on visual frontend UI, executable repository engineering, code migration, or structured Word/analytical writing</td>
           </tr>
@@ -1020,7 +1020,7 @@
     <!-- =========================================================
          PART 2: UNDERSTAND MODEL'S SMARTNESS VS. COST
          ========================================================= -->
-    <h2 id="h-2-smartness-vs-cost" class="wp-block-heading">2. Understand model’s smartness vs. cost</h2>
+    <h2 id="h-2-smartness-vs-cost" class="wp-block-heading">Capability vs. cost across reasoning efforts</h2>
 
     <p class="wp-block-paragraph">A common pitfall when selecting models is equating <strong>price per million tokens</strong> with <strong>cost per completed task</strong>. In reasoning models, total cost per task depends on both token pricing and how many internal reasoning tokens and agent turns the model expends before converging.</p>
 
@@ -1972,7 +1972,7 @@
     <!-- =========================================================
          PART 3: UNDERSTAND MODEL'S SMARTNESS VS. PERFORMANCE (SPEED)
          ========================================================= -->
-    <h2 id="h-3-smartness-vs-perf" class="wp-block-heading">3. Understand model’s smartness vs. performance (execution speed)</h2>
+    <h2 id="h-3-smartness-vs-perf" class="wp-block-heading">Capability vs. end-to-end response time</h2>
 
     <p class="wp-block-paragraph">When working interactively with an AI agent—or running multi-turn subagent loops on a long-running task—<strong>output tokens per second hides the largest source of delay</strong>. Modern reasoning models spend substantial time thinking before emitting their first visible token. To evaluate real responsiveness, we plot <strong>median end-to-end response time in seconds (including reasoning delay)</strong> on a logarithmic horizontal axis against capability score:</p>
 
@@ -2215,7 +2215,7 @@
     <!-- =========================================================
          PART 4: UNDERSTAND MODEL'S BEST AT TASK
          ========================================================= -->
-    <h2 id="h-4-best-at-task" class="wp-block-heading">4. Understand what each model is best at (task-specific performance)</h2>
+    <h2 id="h-4-best-at-task" class="wp-block-heading">Task specialization across 17 benchmarks</h2>
 
     <p class="wp-block-paragraph">Aggregate smartness, cost, and speed still do not tell you whether a model is best at <strong>visual frontend design</strong>, <strong>executable terminal/repository engineering</strong>, <strong>large-scale code migration</strong>, or <strong>structured document writing</strong>. Rather than collapsing incompatible units into a synthetic radar chart, we compare all 11 model families across <strong>17 native-scale task benchmarks (274 captured configuration rows)</strong>:</p>
 
@@ -3648,7 +3648,7 @@ Full provenance, subcategory scores, and collection exclusions are in the downlo
     </section>
 
     <!-- Practical Model Selection Summary Table -->
-    <h3 class="wp-block-heading">Summary: Choosing the right model and effort for your task</h3>
+    <h3 class="wp-block-heading">Choosing the right model and effort for your task</h3>
     <figure class="wp-block-table">
       <table>
         <caption>Table 3: Practical model selection guide by engineering task and workflow stage.</caption>
@@ -3734,10 +3734,10 @@ v4.3.2 archive is separate, not a current comparable score.</p><ul>
     <nav aria-labelledby="toc-heading">
       <h2 id="toc-heading" class="aside-heading">Table of Contents</h2>
       <ul class="toc-list">
-        <li><a href="#h-1-background">1. Background: Why understanding models matters</a></li>
-        <li><a href="#h-2-smartness-vs-cost">2. Understand model’s smartness vs. cost</a></li>
-        <li><a href="#h-3-smartness-vs-perf">3. Understand model’s smartness vs. performance</a></li>
-        <li><a href="#h-4-best-at-task">4. Understand what each model is best at</a></li>
+        <li><a href="#h-1-background">Why choosing the right model is hard</a></li>
+        <li><a href="#h-2-smartness-vs-cost">Capability vs. cost across reasoning efforts</a></li>
+        <li><a href="#h-3-smartness-vs-perf">Capability vs. end-to-end response time</a></li>
+        <li><a href="#h-4-best-at-task">Task specialization across 17 benchmarks</a></li>
         <li><a href="#h-methodology">Methodology &amp; primary sources</a></li>
       </ul>
     </nav>

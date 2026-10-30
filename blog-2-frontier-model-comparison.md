@@ -4,7 +4,7 @@ _Why choosing the right model is hard when working on complex, long-running engi
 
 ---
 
-## 1. Background: Why it is hard to know which model has the best performance on complex, long-running tasks
+## Why choosing the right model for complex tasks is hard
 
 GitHub Copilot's agentic harness supports more than 20 frontier models across the GPT, Claude, Gemini, and Grok families. While a strong harness manages tools, context compaction, and subagent orchestration, **the model and reasoning effort you choose still determine whether a complex, long-running engineering task converges cleanly or burns hours and budget.**
 
@@ -28,7 +28,7 @@ _Table 1: Overview of the Frontier Model Capability evaluation dimensions and pr
 
 ---
 
-## 2. Understand model's smartness vs. cost
+## Capability vs. cost across reasoning efforts
 
 A common mistake when comparing models is equating **price per million tokens** with **cost per completed task**. In modern reasoning models, total task cost is driven both by token rates and by how many internal reasoning tokens and agent steps the model consumes before finishing.
 
@@ -65,7 +65,7 @@ _Figure 2: Native CursorBench 4.0 score (%) vs. average USD cost per task across
 
 ---
 
-## 3. Understand model's smartness vs. performance (execution speed)
+## Capability vs. end-to-end response time
 
 When working interactively with an agent—or chaining multiple subagent turns inside a long-running workflow—**output tokens per second can be misleading**. Reasoning models spend significant time thinking before emitting their first visible token. To capture true model latency, we plot **median end-to-end response time in seconds (including reasoning delay)** against capability score.
 
@@ -95,7 +95,7 @@ _Table 3: Median end-to-end response time (seconds, including reasoning delay) a
 
 ---
 
-## 4. Understand what each model is best at (task-specific performance)
+## Task specialization across 17 benchmarks
 
 Aggregate smartness, cost, and speed still do not tell you whether a model excels at **visual frontend design**, **executable terminal/repository engineering**, or **structured document writing**. Rather than inventing a synthetic radar chart, we evaluate all 11 model families across **17 native-scale task benchmarks (274 captured configuration rows)**:
 
@@ -142,7 +142,7 @@ _Figure 7: Code migration — Vals Code Migration v1.1 hidden behavior-test pass
 
 ---
 
-### Summary: Quick model selection guide by workflow stage
+### Choosing the right model and effort for your task
 
 | Workflow stage or task type | Recommended primary picks | Recommended high-efficiency picks | Why |
 | --- | --- | --- | --- |
