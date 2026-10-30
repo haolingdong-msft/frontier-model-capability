@@ -1,0 +1,87 @@
+<svg class="task-plot" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 610" role="img" aria-labelledby="task-presentation-title task-presentation-desc">
+<title id="task-presentation-title">Presentation: all deliverable types</title>
+<desc id="task-presentation-desc">11 selected model families. Horizontal axis: Elo from 1000 to 2000, higher is better. Exact scores and configurations are in the table below. Whiskers are published 95% confidence intervals where available; missing results are labeled, not plotted as zero.</desc>
+<style>text{font-family:Segoe UI,Arial,sans-serif;fill:#192740}</style>
+<rect width="1000" height="610" rx="12" fill="#f5f7fb"/>
+<line x1="230.0" y1="38" x2="230.0" y2="530" stroke="#dde4ee"/>
+<text x="230.0" y="560" text-anchor="middle" font-size="14">1,000</text>
+<line x1="367.5" y1="38" x2="367.5" y2="530" stroke="#dde4ee"/>
+<text x="367.5" y="560" text-anchor="middle" font-size="14">1,250</text>
+<line x1="505.0" y1="38" x2="505.0" y2="530" stroke="#dde4ee"/>
+<text x="505.0" y="560" text-anchor="middle" font-size="14">1,500</text>
+<line x1="642.5" y1="38" x2="642.5" y2="530" stroke="#dde4ee"/>
+<text x="642.5" y="560" text-anchor="middle" font-size="14">1,750</text>
+<line x1="780.0" y1="38" x2="780.0" y2="530" stroke="#dde4ee"/>
+<text x="780.0" y="560" text-anchor="middle" font-size="14">2,000</text>
+<g class="task-series" data-model="0">
+<text x="18" y="70" font-size="17" font-weight="600">Claude Opus 5.5</text>
+<title>Claude Opus 5.5: 1,715.10; Claude Opus 5.5 (Max, Default Fallback); 95% CI: 1,696.04 to 1,737.45</title>
+<path d="M612.82,65 H635.60 M612.82,60 V70 M635.60,60 V70" fill="none" stroke="#a34415" stroke-width="2"/>
+<circle cx="623.30" cy="65" r="7" fill="#a34415"/>
+<text x="805" y="70" font-size="17" font-weight="600">1,715.10</text>
+</g>
+<g class="task-series" data-model="1">
+<text x="18" y="114" font-size="17" font-weight="600">Claude Sonnet 5.5</text>
+<title>Claude Sonnet 5.5: 1,711.94; Claude Sonnet 5.5 (Max, Default Fallback); 95% CI: 1,691.60 to 1,734.75</title>
+<path d="M610.38,109 H634.11 M610.38,104 V114 M634.11,104 V114" fill="none" stroke="#d17908" stroke-width="2"/>
+<circle cx="621.57" cy="109" r="7" fill="#d17908"/>
+<text x="805" y="114" font-size="17" font-weight="600">1,711.94</text>
+</g>
+<g class="task-series" data-model="2">
+<text x="18" y="158" font-size="17" font-weight="600">GPT-6 Astra</text>
+<title>GPT-6 Astra: 1,553.29; GPT-6 Astra (Max); 95% CI: 1,538.19 to 1,570.19</title>
+<path d="M526.00,153 H543.60 M526.00,148 V158 M543.60,148 V158" fill="none" stroke="#5144c7" stroke-width="2"/>
+<circle cx="534.31" cy="153" r="7" fill="#5144c7"/>
+<text x="805" y="158" font-size="17" font-weight="600">1,553.29</text>
+</g>
+<g class="task-series" data-model="3">
+<text x="18" y="202" font-size="17" font-weight="600">GPT-6.1 Sol</text>
+<title>GPT-6.1 Sol: 1,452.57; GPT-6.1 Sol (Max); 95% CI: 1,434.41 to 1,471.42</title>
+<path d="M468.93,197 H489.28 M468.93,192 V202 M489.28,192 V202" fill="none" stroke="#1878ba" stroke-width="2"/>
+<circle cx="478.91" cy="197" r="7" fill="#1878ba"/>
+<text x="805" y="202" font-size="17" font-weight="600">1,452.57</text>
+</g>
+<g class="task-series" data-model="4">
+<text x="18" y="246" font-size="17" font-weight="600">GPT-5.6 Sol</text>
+<text x="805" y="246" font-size="15" fill="#56647a">No result</text>
+</g>
+<g class="task-series" data-model="5">
+<text x="18" y="290" font-size="17" font-weight="600">Gemini 3.8 Flash</text>
+<title>Gemini 3.8 Flash: 1,224.82; Gemini 3.8 Flash (High); 95% CI: 1,210.65 to 1,239.22</title>
+<path d="M345.86,285 H361.57 M345.86,280 V290 M361.57,280 V290" fill="none" stroke="#07816c" stroke-width="2"/>
+<circle cx="353.65" cy="285" r="7" fill="#07816c"/>
+<text x="805" y="290" font-size="17" font-weight="600">1,224.82</text>
+</g>
+<g class="task-series" data-model="6">
+<text x="18" y="334" font-size="17" font-weight="600">GPT-6 Luna</text>
+<title>GPT-6 Luna: 1,395.16; GPT-6 Luna (Max); 95% CI: 1,379.49 to 1,409.96</title>
+<path d="M438.72,329 H455.48 M438.72,324 V334 M455.48,324 V334" fill="none" stroke="#6e7889" stroke-width="2"/>
+<circle cx="447.34" cy="329" r="7" fill="#6e7889"/>
+<text x="805" y="334" font-size="17" font-weight="600">1,395.16</text>
+</g>
+<g class="task-series" data-model="7">
+<text x="18" y="378" font-size="17" font-weight="600">GPT-5.6 Sol Fast</text>
+<text x="805" y="378" font-size="15" fill="#56647a">No result</text>
+</g>
+<g class="task-series" data-model="8">
+<text x="18" y="422" font-size="17" font-weight="600">GPT-6.1 Terra</text>
+<title>GPT-6.1 Terra: 1,463.42; GPT-6.1 Terra (Max); 95% CI: 1,446.17 to 1,483.14</title>
+<path d="M475.39,417 H495.73 M475.39,412 V422 M495.73,412 V422" fill="none" stroke="#9744a0" stroke-width="2"/>
+<circle cx="484.88" cy="417" r="7" fill="#9744a0"/>
+<text x="805" y="422" font-size="17" font-weight="600">1,463.42</text>
+</g>
+<g class="task-series" data-model="9">
+<text x="18" y="466" font-size="17" font-weight="600">Gemini 4 Argon</text>
+<title>Gemini 4 Argon: 1,305.21; Gemini 4 Argon (High); 95% CI: 1,287.98 to 1,321.34</title>
+<path d="M388.39,461 H406.74 M388.39,456 V466 M406.74,456 V466" fill="none" stroke="#4d7b16" stroke-width="2"/>
+<circle cx="397.87" cy="461" r="7" fill="#4d7b16"/>
+<text x="805" y="466" font-size="17" font-weight="600">1,305.21</text>
+</g>
+<g class="task-series" data-model="10">
+<text x="18" y="510" font-size="17" font-weight="600">Grok 4.7</text>
+<title>Grok 4.7: 1,502.89; Grok 4.7 (Xhigh); 95% CI: 1,487.69 to 1,520.09</title>
+<path d="M498.23,505 H516.05 M498.23,500 V510 M516.05,500 V510" fill="none" stroke="#be3042" stroke-width="2"/>
+<circle cx="506.59" cy="505" r="7" fill="#be3042"/>
+<text x="805" y="510" font-size="17" font-weight="600">1,502.89</text>
+</g>
+<text x="505" y="592" text-anchor="middle" font-size="14">Elo / higher is better / native benchmark scale</text></svg>

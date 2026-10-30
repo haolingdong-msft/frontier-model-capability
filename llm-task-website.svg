@@ -1,0 +1,80 @@
+<svg class="task-plot" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 610" role="img" aria-labelledby="task-website-title task-website-desc">
+<title id="task-website-title">Website / frontend design</title>
+<desc id="task-website-desc">11 selected model families. Horizontal axis: Elo from 1200 to 1400, higher is better. Exact scores and configurations are in the table below. Whiskers are published 95% confidence intervals where available; missing results are labeled, not plotted as zero.</desc>
+<style>text{font-family:Segoe UI,Arial,sans-serif;fill:#192740}</style>
+<rect width="1000" height="610" rx="12" fill="#f5f7fb"/>
+<line x1="230.0" y1="38" x2="230.0" y2="530" stroke="#dde4ee"/>
+<text x="230.0" y="560" text-anchor="middle" font-size="14">1,200</text>
+<line x1="367.5" y1="38" x2="367.5" y2="530" stroke="#dde4ee"/>
+<text x="367.5" y="560" text-anchor="middle" font-size="14">1,250</text>
+<line x1="505.0" y1="38" x2="505.0" y2="530" stroke="#dde4ee"/>
+<text x="505.0" y="560" text-anchor="middle" font-size="14">1,300</text>
+<line x1="642.5" y1="38" x2="642.5" y2="530" stroke="#dde4ee"/>
+<text x="642.5" y="560" text-anchor="middle" font-size="14">1,350</text>
+<line x1="780.0" y1="38" x2="780.0" y2="530" stroke="#dde4ee"/>
+<text x="780.0" y="560" text-anchor="middle" font-size="14">1,400</text>
+<g class="task-series" data-model="0">
+<text x="18" y="70" font-size="17" font-weight="600">Claude Opus 5.5</text>
+<title>Claude Opus 5.5: 1,325.00; Effort not stated; 95% CI: Not published in captured record</title>
+<circle cx="573.75" cy="65" r="7" fill="#a34415"/>
+<text x="805" y="70" font-size="17" font-weight="600">1,325.00</text>
+</g>
+<g class="task-series" data-model="1">
+<text x="18" y="114" font-size="17" font-weight="600">Claude Sonnet 5.5</text>
+<title>Claude Sonnet 5.5: 1,322.00; Effort not stated; 95% CI: Not published in captured record</title>
+<circle cx="565.50" cy="109" r="7" fill="#d17908"/>
+<text x="805" y="114" font-size="17" font-weight="600">1,322.00</text>
+</g>
+<g class="task-series" data-model="2">
+<text x="18" y="158" font-size="17" font-weight="600">GPT-6 Astra</text>
+<title>GPT-6 Astra: 1,339.00; Max; 95% CI: Not published in captured record</title>
+<circle cx="612.25" cy="153" r="7" fill="#5144c7"/>
+<text x="805" y="158" font-size="17" font-weight="600">1,339.00</text>
+</g>
+<g class="task-series" data-model="3">
+<text x="18" y="202" font-size="17" font-weight="600">GPT-6.1 Sol</text>
+<title>GPT-6.1 Sol: 1,315.00; Effort not stated; 95% CI: Not published in captured record</title>
+<circle cx="546.25" cy="197" r="7" fill="#1878ba"/>
+<text x="805" y="202" font-size="17" font-weight="600">1,315.00</text>
+</g>
+<g class="task-series" data-model="4">
+<text x="18" y="246" font-size="17" font-weight="600">GPT-5.6 Sol</text>
+<title>GPT-5.6 Sol: 1,320.00; Xhigh; 95% CI: Not published in captured record</title>
+<circle cx="560.00" cy="241" r="7" fill="#bf3c85"/>
+<text x="805" y="246" font-size="17" font-weight="600">1,320.00</text>
+</g>
+<g class="task-series" data-model="5">
+<text x="18" y="290" font-size="17" font-weight="600">Gemini 3.8 Flash</text>
+<title>Gemini 3.8 Flash: 1,299.00; Effort not stated; 95% CI: Not published in captured record</title>
+<circle cx="502.25" cy="285" r="7" fill="#07816c"/>
+<text x="805" y="290" font-size="17" font-weight="600">1,299.00</text>
+</g>
+<g class="task-series" data-model="6">
+<text x="18" y="334" font-size="17" font-weight="600">GPT-6 Luna</text>
+<title>GPT-6 Luna: 1,266.00; Effort not stated; 95% CI: Not published in captured record</title>
+<circle cx="411.50" cy="329" r="7" fill="#6e7889"/>
+<text x="805" y="334" font-size="17" font-weight="600">1,266.00</text>
+</g>
+<g class="task-series" data-model="7">
+<text x="18" y="378" font-size="17" font-weight="600">GPT-5.6 Sol Fast</text>
+<text x="805" y="378" font-size="15" fill="#56647a">No result</text>
+</g>
+<g class="task-series" data-model="8">
+<text x="18" y="422" font-size="17" font-weight="600">GPT-6.1 Terra</text>
+<title>GPT-6.1 Terra: 1,284.00; Effort not stated; 95% CI: Not published in captured record</title>
+<circle cx="461.00" cy="417" r="7" fill="#9744a0"/>
+<text x="805" y="422" font-size="17" font-weight="600">1,284.00</text>
+</g>
+<g class="task-series" data-model="9">
+<text x="18" y="466" font-size="17" font-weight="600">Gemini 4 Argon</text>
+<title>Gemini 4 Argon: 1,316.00; Effort not stated; 95% CI: Not published in captured record</title>
+<circle cx="549.00" cy="461" r="7" fill="#4d7b16"/>
+<text x="805" y="466" font-size="17" font-weight="600">1,316.00</text>
+</g>
+<g class="task-series" data-model="10">
+<text x="18" y="510" font-size="17" font-weight="600">Grok 4.7</text>
+<title>Grok 4.7: 1,251.00; Effort not stated; 95% CI: Not published in captured record</title>
+<circle cx="370.25" cy="505" r="7" fill="#be3042"/>
+<text x="805" y="510" font-size="17" font-weight="600">1,251.00</text>
+</g>
+<text x="505" y="592" text-anchor="middle" font-size="14">Elo / higher is better / native benchmark scale</text></svg>

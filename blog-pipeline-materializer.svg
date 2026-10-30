@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 300" role="img" aria-labelledby="pipe-title pipe-desc">
+  <title id="pipe-title">Four-stage Azure TypeSpec assessment pipeline with deterministic Materializer</title>
+  <desc id="pipe-desc">Coordinator prepares worktree and canonical evidence; Agent emits compact judgment decisions; Materializer joins decisions with canonical evidence and validates completeness; Finalizer renders JSON and HTML reports.</desc>
+  <style>
+    text { font-family: 'Segoe UI', Arial, sans-serif; fill: #192740; }
+    .box { fill: #ffffff; stroke: #becbe0; stroke-width: 2; rx: 14; }
+    .highlight { fill: #eef4ff; stroke: #244ca3; stroke-width: 2.5; rx: 14; }
+    .outbox { fill: #f0fdf4; stroke: #15803d; stroke-width: 2; rx: 14; }
+    .badge { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; }
+    .title { font-size: 18px; font-weight: 700; }
+    .body { font-size: 13px; fill: #4a5a70; }
+    .arrow { stroke: #315ab8; stroke-width: 2.5; fill: none; }
+  </style>
+  <rect width="1200" height="300" rx="16" fill="#f5f7fb"/>
+  <text x="32" y="40" font-size="20" font-weight="700">Closing the workflow gap: Deterministic Materializer pipeline</text>
+  <text x="32" y="64" font-size="14" fill="#56647a">Instead of the agent writing one-off scripts to stitch report JSON, each stage has a strict contract.</text>
+
+  <!-- Step 1: Coordinator -->
+  <rect x="28" y="92" width="210" height="175" class="box"/>
+  <text x="44" y="118" class="badge" fill="#315ab8">1 · Deterministic Code</text>
+  <text x="44" y="144" class="title">Coordinator</text>
+  <text x="44" y="170" class="body">• Prepares PR worktree</text>
+  <text x="44" y="192" class="body">• Compiles TypeSpec / TCGC</text>
+  <text x="44" y="214" class="body">• Extracts canonical evidence</text>
+  <text x="44" y="242" font-size="12" font-weight="600" fill="#15803d">18m 51s → 29.9s setup</text>
+
+  <!-- Arrow 1 -->
+  <path d="M238,180 H268 M260,173 L268,180 L260,187" class="arrow"/>
+
+  <!-- Step 2: Agent -->
+  <rect x="272" y="92" width="215" height="175" class="box"/>
+  <text x="288" y="118" class="badge" fill="#a34415">2 · AI Judgment Only</text>
+  <text x="288" y="144" class="title">Agent</text>
+  <text x="288" y="170" class="body">• Semantic intent review</text>
+  <text x="288" y="192" class="body">• REST/SDK compatibility</text>
+  <text x="288" y="214" class="body">• Emits compact decisions</text>
+  <text x="288" y="242" font-size="12" font-weight="600" fill="#a34415">~1.6M → ~300K input</text>
+
+  <!-- Arrow 2 -->
+  <path d="M487,180 H517 M509,173 L517,180 L509,187" class="arrow"/>
+
+  <!-- Step 3: Materializer -->
+  <rect x="521" y="92" width="245" height="175" class="highlight"/>
+  <text x="537" y="118" class="badge" fill="#244ca3">3 · New Harness Step</text>
+  <text x="537" y="144" class="title">Materializer</text>
+  <text x="537" y="170" class="body">• Validates decision coverage</text>
+  <text x="537" y="192" class="body">• Verifies evidence &amp; hashes</text>
+  <text x="537" y="214" class="body">• Joins decisions + evidence</text>
+  <text x="537" y="242" font-size="12" font-weight="600" fill="#244ca3">Eliminates ad-hoc scripts</text>
+
+  <!-- Arrow 3 -->
+  <path d="M766,180 H796 M788,173 L796,180 L788,187" class="arrow"/>
+
+  <!-- Step 4: Finalizer -->
+  <rect x="800" y="92" width="185" height="175" class="box"/>
+  <text x="816" y="118" class="badge" fill="#315ab8">4 · Deterministic Gate</text>
+  <text x="816" y="144" class="title">Finalizer</text>
+  <text x="816" y="170" class="body">• Enforces schema &amp; ledger</text>
+  <text x="816" y="192" class="body">• Blocks missing items</text>
+  <text x="816" y="214" class="body">• Renders final artifacts</text>
+  <text x="816" y="242" font-size="12" font-weight="600" fill="#15803d">100% coverage ledger</text>
+
+  <!-- Arrow 4 -->
+  <path d="M985,180 H1015 M1007,173 L1015,180 L1007,187" class="arrow"/>
+
+  <!-- Step 5: Output -->
+  <rect x="1019" y="92" width="153" height="175" class="outbox"/>
+  <text x="1035" y="118" class="badge" fill="#15803d">5 · Deliverable</text>
+  <text x="1035" y="144" class="title">JSON + HTML</text>
+  <text x="1035" y="170" class="body">• Machine-checkable</text>
+  <text x="1035" y="192" class="body">• Human-readable</text>
+  <text x="1035" y="214" class="body">• ~4 min runtime</text>
+  <text x="1035" y="242" font-size="12" font-weight="700" fill="#15803d">39 AIC (-61%)</text>
+</svg>
