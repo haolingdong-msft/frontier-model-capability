@@ -30,11 +30,11 @@ _Table 1: Overview of the Frontier Model Capability evaluation dimensions and pr
 
 ## Capability vs. cost across reasoning efforts
 
-In this chart, the **vertical axis represents model smartness (capability score)** and the **horizontal axis represents average USD cost per task (log scale)** across reasoning efforts **1 (Low) to 5 (Max)**—so **upper-left means smarter and cheaper**. For example, compare **Medium effort (point 2)** on **GPT-6.1 Sol** (blue) and **Claude Opus 5.5** (brown): both achieve nearly the same smartness (**46.1 vs. 48.1**, almost the same vertical height), but **Claude Opus 5.5** sits far to the right at **$2.45/task** versus **$0.36/task** for **GPT-6.1 Sol**—nearly **7× more expensive** for comparable capability.
+In this chart, the **vertical axis represents model smartness (capability score)** and the **horizontal axis represents average USD cost per task (log scale)** across reasoning efforts **1 (Low) to 5 (Max)**—so **upper-left means smarter and cheaper**.
 
 ![LLM smartness versus cost by reasoning effort](llm-cost-capability.svg)
 
-_Figure 1: Capability (Artificial Analysis Intelligence Index v5.0) vs. average benchmark cost per task (USD, logarithmic scale) across Low (1) through Max (5) reasoning effort. Upper-left is better: higher measured smartness for lower task cost. Benchmark USD cost reflects evaluation token usage, not GitHub Copilot AI Credits._
+_Figure 1: Capability (Artificial Analysis Intelligence Index v5.0) vs. average benchmark cost per task (USD, logarithmic scale) across Low (1) through Max (5) reasoning effort. For example, compare **Medium effort (point 2)** on **GPT-6.1 Sol** (blue) and **Claude Opus 5.5** (brown): both achieve nearly the same smartness (**46.1 vs. 48.1**, almost the same vertical height), but **Claude Opus 5.5** sits far to the right at **$2.45/task** versus **$0.36/task** for **GPT-6.1 Sol**—nearly **7× more expensive** for comparable capability._
 
 Because measured evaluation costs span more than **1,000x**—from **$0.005/task** on GPT-6 Luna Low to **$10.04/task** on Claude Opus 5.5 Max—plotting cost on a logarithmic scale exposes four structural findings:
 

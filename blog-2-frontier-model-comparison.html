@@ -1149,7 +1149,7 @@
     <!-- 2. SMARTNESS VS COST -->
     <h2 id="h-2-smartness-vs-cost" class="wp-block-heading">Capability vs. cost across reasoning efforts</h2>
 
-    <p class="wp-block-paragraph">In this chart, the <strong>vertical axis represents model smartness (capability score)</strong> and the <strong>horizontal axis represents average USD cost per task (log scale)</strong> across reasoning efforts <strong>1 (Low) to 5 (Max)</strong>—so <strong>upper-left means smarter and cheaper</strong>. For example, compare <strong>Medium effort (point 2)</strong> on <strong>GPT-6.1 Sol</strong> (blue) and <strong>Claude Opus 5.5</strong> (brown): both achieve nearly the same smartness (<strong>46.1 vs. 48.1</strong>, almost the same vertical height), but <strong>Claude Opus 5.5</strong> sits far to the right at <strong>$2.45/task</strong> versus <strong>$0.36/task</strong> for <strong>GPT-6.1 Sol</strong>—nearly <strong>7× more expensive</strong> for comparable capability.</p>
+    <p class="wp-block-paragraph">In this chart, the <strong>vertical axis represents model smartness (capability score)</strong> and the <strong>horizontal axis represents average USD cost per task (log scale)</strong> across reasoning efforts <strong>1 (Low) to 5 (Max)</strong>—so <strong>upper-left means smarter and cheaper</strong>.</p>
 
     <div class="blog-chart-controls" role="region" aria-label="Interactive chart controls">
       <div class="ctrl-group">
@@ -1234,14 +1234,10 @@
 <text x="655" y="933" font-size="16" style="fill:#56647a" font-weight="400" text-anchor="middle">Average cost per benchmark task (USD)  |  logarithmic scale: equal spacing means equal cost ratios</text>
 <path d="M225 297 L167 254 M167 254 L187 257 M167 254 L175 274" fill="none" stroke="#465b76" stroke-width="2"/>
 <text x="234" y="302" font-size="16" style="fill:#465b76" font-weight="400" text-anchor="start">Prefer this direction</text>
-<g class="chart-example-annotation" aria-label="Example comparison between GPT-6.1 Sol Medium and Claude Opus 5.5 Medium">
+<g class=" series-callout" aria-hidden="true">
   <line x1="712.46" y1="384.30" x2="950.13" y2="363.98" stroke="#0969da" stroke-width="2" stroke-dasharray="6,4"/>
   <circle cx="712.46" cy="384.30" r="15" fill="none" stroke="#1878ba" stroke-width="2.2" stroke-dasharray="3,2"/>
   <circle cx="950.13" cy="363.98" r="15" fill="none" stroke="#a34415" stroke-width="2.2" stroke-dasharray="3,2"/>
-  <line x1="650" y1="378" x2="696" y2="383" stroke="#0969da" stroke-width="1.5"/>
-  <rect x="190" y="346" width="460" height="58" rx="8" fill="#f0f7ff" stroke="#80ccff" stroke-width="1.5"/>
-  <text x="204" y="368" font-size="14" style="fill:#0969da" font-weight="700">Example: Similar smartness (~47 pts), 6.8× cost difference</text>
-  <text x="204" y="390" font-size="13.5" style="fill:#1f2328" font-weight="600">GPT-6.1 Sol Med (2): 46.1, $0.36  ↔  Claude Opus 5.5 Med (2): 48.1, $2.45</text>
 </g>
 <g class="series" data-model="0">
 <polyline points="836.08,508.12 950.13,363.98 992.97,325.41 1061.92,268.96 1124.64,253.95" fill="none" stroke="#a34415" stroke-width="3.2" stroke-linejoin="round"/>
@@ -1986,7 +1982,9 @@
     
     </div>
   </div>
-      <div id="aa-cost-notes" hidden></div>
+      <div id="aa-cost-notes" style="margin-top: 12px; padding: 10px 14px; background: #f6f8fa; border-left: 3px solid #0969da; border-radius: 0 6px 6px 0; font-size: 0.92rem; line-height: 1.5; color: #24292f;">
+        <strong>How to read this chart (example):</strong> Compare <strong>Medium effort (point 2)</strong> on <strong>GPT-6.1 Sol</strong> (blue) and <strong>Claude Opus 5.5</strong> (brown): both achieve nearly the same smartness (<strong>46.1 vs. 48.1</strong>, almost the same vertical height), but <strong>Claude Opus 5.5</strong> sits far to the right at <strong>$2.45/task</strong> versus <strong>$0.36/task</strong> for <strong>GPT-6.1 Sol</strong>—nearly <strong>7&times; more expensive</strong> for comparable capability.
+      </div>
     </section>
 
     <div class="takeaway-visual-grid" aria-label="Key cost vs capability takeaways">
