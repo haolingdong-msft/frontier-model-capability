@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Beyond Prompting: How to Work Effectively with AI Agents on Hard, Long-Running Tasks | GitHub Copilot Blog</title>
+  <title>Beyond Prompting: How to Work Effectively with AI Agents on Hard, Long-Running Tasks</title>
   <style>
 *{box-sizing:border-box}body{margin:0;background:#f5f7fb;color:#192740;font:16px/1.55 'Segoe UI',Arial,sans-serif}
 main{max-width:1640px;margin:auto;padding:20px}svg{width:100%;height:auto;display:block}
@@ -81,27 +81,13 @@ summary{cursor:pointer;font-weight:600}.source-line{font-size:13px;color:#56647a
 </style>
 </head>
 <body>
-  <div class="blog-topbar">
-    <div class="blog-topbar-inner">
-      <div class="blog-brand"><span class="blog-tag">Blog 1 of 2 · Agent Engineering</span><span>GitHub Copilot Engineering Blog</span></div>
-      <nav class="blog-toc">
-        <a href="#problem">1. Background</a>
-        <a href="#failed-run">2. Failed 12-Hour Run</a>
-        <a href="#general-lessons">3. Segregation of Duties</a>
-        <a href="#harness-lessons">4. Materializer &amp; 80% Input Cut</a>
-        <a class="switch-post" href="blog-2-frontier-model-comparison.html">Read Blog 2: Frontier Model Comparison →</a>
-      </nav>
-    </div>
-  </div>
   <main>
     <header class="blog-hero">
-      <p class="eyebrow">GitHub Copilot · Engineering Case Study · Long-Running AI Agent Workflows</p>
       <h1>Beyond Prompting: How to Work Effectively with AI Agents on Hard, Long-Running Tasks</h1>
       <p class="blog-subtitle">Why leaving an AI agent to optimize a 40,000-line workflow overnight for 12 hours failed every acceptance check—and how model-tier segregation, a deterministic Materializer, and domain-invariant filtering cut AI Credit usage by 61% (100 → 39) and execution time from ~20 minutes to ~4 minutes.</p>
       <div class="blog-byline">
-        <span><strong>By Haoling Dong</strong></span>
         <span>Case Study: <a href="https://github.com/Azure/azure-rest-api-specs/blob/main/.github/skills/azure-typespec-assessment/docs/design.md">Azure TypeSpec Assessment Skill</a></span>
-        <span>Companion Post: <a href="blog-2-frontier-model-comparison.html">Blog 2 — Comparing 11 Frontier Models Across Effort, Cost, Latency &amp; Tasks</a></span>
+        <span>Companion Post: <a href="blog-2-frontier-model-comparison.html">Comparing 11 Frontier Models Across Effort, Cost, Latency &amp; Tasks</a></span>
       </div>
     </header>
     <section class="kpi-strip">

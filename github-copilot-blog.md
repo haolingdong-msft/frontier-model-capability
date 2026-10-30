@@ -2,10 +2,6 @@
 
 _Why choosing the right model is hard when working on complex, long-running engineering tasks—and how to evaluate 11 frontier model families across reasoning effort, task cost, execution latency, and 17 native task benchmarks._
 
-**Written by:** Haoling Dong  
-**Published:** October 30, 2026 | **Reading time:** 8 minutes  
-**Category:** Home / AI & ML / GitHub Copilot
-
 > **Companion post:** Curious how we applied these model-selection curves in production? Read **[Beyond prompting: How we cut a 40,000-line AI agent skill from 20 minutes to 4 minutes and reduced AIC cost by 61%](blog-1-long-running-agent-tasks.md)**.
 
 ---

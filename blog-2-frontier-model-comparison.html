@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Evaluating frontier models across smartness, cost, speed, and task specialization - The GitHub Blog</title>
+<title>Evaluating frontier models across smartness, cost, speed, and task specialization</title>
 <style>
   :root {
     --gh-bg-dark: #0d1117;
@@ -901,133 +901,43 @@
     }
     .explore-grid { grid-template-columns: repeat(2, 1fr); }
   }
-  @media (max-width: 640px) {
-    .gh-secondary-links { display: none; }
-    .explore-grid { grid-template-columns: 1fr; }
+  .article-header {
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 40px 24px 0;
+  }
+  .article-title {
+    font-size: clamp(2rem, 3.2vw, 2.85rem);
+    line-height: 1.18;
+    font-weight: 800;
+    letter-spacing: -0.025em;
+    color: var(--gh-fg-default);
+    margin: 0 0 14px;
+    max-width: 980px;
+  }
+  .article-deck {
+    font-size: 19px;
+    line-height: 1.55;
+    color: var(--gh-fg-muted);
+    max-width: 880px;
+    margin: 0 0 26px;
+  }
+  .indigo-separator {
+    height: 4px;
+    width: 100%;
+    border-radius: 2px;
+    background: linear-gradient(90deg, #7928ca 0%, #8250df 35%, #0969da 70%, #2da44e 100%);
+    margin-bottom: 36px;
   }
 </style>
 </head>
 <body>
 
-<!-- 1. GITHUB BLOG TOP HEADER -->
-<header class="gh-site-header">
-  <div class="gh-header-top">
-    <div class="gh-brand-group">
-      <a class="gh-brand" href="https://github.blog/">
-        <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"></path></svg>
-        <span class="gh-brand-slash">/</span>
-        <span>Blog</span>
-      </a>
-      <ul class="gh-secondary-links">
-        <li><a href="https://github.blog/changelog/">Changelog</a></li>
-        <li><a href="https://docs.github.com/">Docs</a></li>
-        <li><a href="https://github.com/customer-stories">Customer stories</a></li>
-      </ul>
-    </div>
-    <div class="gh-header-actions">
-      <a class="gh-btn-primary" href="https://haolingdong-msft.github.io/frontier-model-capability/" target="_blank" rel="noopener">Open Live Dashboard</a>
-      <a class="gh-btn-secondary" href="blog-1-long-running-agent-tasks.html">Read Part 2: Agent Workflow Case Study</a>
-    </div>
-  </div>
-  <nav class="gh-category-bar" aria-label="Blog categories">
-    <div class="gh-category-inner">
-      <a href="#h-1-background" class="is-active">AI &amp; ML</a>
-      <a href="#h-2-smartness-vs-cost">Smartness vs. Cost</a>
-      <a href="#h-3-smartness-vs-perf">Smartness vs. Performance</a>
-      <a href="#h-4-best-at-task">Best-at Tasks (17 Benchmarks)</a>
-      <a href="#h-methodology">Methodology &amp; Sources</a>
-    </div>
-  </nav>
-</header>
-
-<!-- 2. DARK HERO BANNER -->
-<section class="post-hero-dark">
-  <div class="post-hero-container">
-    <nav class="breadcrumbs" aria-label="Breadcrumbs">
-      <a href="https://github.blog/">Home</a>
-      <span>/</span>
-      <a href="https://github.blog/ai-and-ml/">AI &amp; ML</a>
-      <span>/</span>
-      <a href="https://github.blog/ai-and-ml/github-copilot/">GitHub Copilot</a>
-    </nav>
-    <h1 class="post-hero-title">Evaluating frontier models across smartness, cost, speed, and task specialization</h1>
-    <p class="post-hero-deck">Why it is hard to know which model performs best on complex, long-running engineering tasks—and how to evaluate 11 frontier model families across reasoning effort, task cost, execution latency, and 17 native benchmarks.</p>
-    <div class="post-hero-banner">
-      <svg viewBox="0 0 1200 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="GitHub Copilot Frontier Model Evaluation Banner">
-        <defs>
-          <linearGradient id="heroBg" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stop-color="#0d1117"/>
-            <stop offset="45%" stop-color="#161b22"/>
-            <stop offset="100%" stop-color="#1f1638"/>
-          </linearGradient>
-          <linearGradient id="stripe1" x1="0" y1="0" x2="1" y2="0">
-            <stop offset="0%" stop-color="#7928ca"/>
-            <stop offset="50%" stop-color="#0969da"/>
-            <stop offset="100%" stop-color="#2da44e"/>
-          </linearGradient>
-        </defs>
-        <rect width="1200" height="320" fill="url(#heroBg)"/>
-        <g stroke="rgba(240,246,252,0.06)" stroke-width="1">
-          <line x1="0" y1="64" x2="1200" y2="64"/><line x1="0" y1="128" x2="1200" y2="128"/>
-          <line x1="0" y1="192" x2="1200" y2="192"/><line x1="0" y1="256" x2="1200" y2="256"/>
-          <line x1="200" y1="0" x2="200" y2="320"/><line x1="400" y1="0" x2="400" y2="320"/>
-          <line x1="600" y1="0" x2="600" y2="320"/><line x1="800" y1="0" x2="800" y2="320"/>
-          <line x1="1000" y1="0" x2="1000" y2="320"/>
-        </g>
-        <path d="M-40,290 L380,-30 L470,-30 L50,290 Z" fill="url(#stripe1)" opacity="0.22"/>
-        <path d="M740,340 L1140,-20 L1220,-20 L820,340 Z" fill="url(#stripe1)" opacity="0.28"/>
-        <rect x="70" y="52" width="245" height="216" rx="14" fill="#161b22" stroke="#30363d"/>
-        <text x="92" y="88" fill="#a371f7" font-family="ui-monospace, monospace" font-size="13" font-weight="700">01 / BACKGROUND</text>
-        <text x="92" y="118" fill="#f0f6fc" font-family="Segoe UI, sans-serif" font-size="18" font-weight="700">Complex &amp; Long Tasks</text>
-        <text x="92" y="146" fill="#8b949e" font-family="Segoe UI, sans-serif" font-size="13.5">11 model families across</text>
-        <text x="92" y="166" fill="#8b949e" font-family="Segoe UI, sans-serif" font-size="13.5">5 reasoning effort levels</text>
-        <text x="92" y="206" fill="#58a6ff" font-family="ui-monospace, monospace" font-size="22" font-weight="700">1 Low → 5 Max</text>
-
-        <rect x="340" y="52" width="245" height="216" rx="14" fill="#161b22" stroke="#30363d"/>
-        <text x="362" y="88" fill="#58a6ff" font-family="ui-monospace, monospace" font-size="13" font-weight="700">02 / SMARTNESS VS. COST</text>
-        <text x="362" y="118" fill="#f0f6fc" font-family="Segoe UI, sans-serif" font-size="18" font-weight="700">Task Cost ≠ Token Rate</text>
-        <text x="362" y="146" fill="#8b949e" font-family="Segoe UI, sans-serif" font-size="13.5">Log-scale USD per task</text>
-        <text x="362" y="166" fill="#8b949e" font-family="Segoe UI, sans-serif" font-size="13.5">across AA v5.0, Cursor, ARC</text>
-        <text x="362" y="206" fill="#3fb950" font-family="ui-monospace, monospace" font-size="22" font-weight="700">$0.005 – $10.04</text>
-
-        <rect x="610" y="52" width="245" height="216" rx="14" fill="#161b22" stroke="#30363d"/>
-        <text x="632" y="88" fill="#3fb950" font-family="ui-monospace, monospace" font-size="13" font-weight="700">03 / SMARTNESS VS. PERF</text>
-        <text x="632" y="118" fill="#f0f6fc" font-family="Segoe UI, sans-serif" font-size="18" font-weight="700">End-to-End Latency</text>
-        <text x="632" y="146" fill="#8b949e" font-family="Segoe UI, sans-serif" font-size="13.5">Includes thinking delay,</text>
-        <text x="632" y="166" fill="#8b949e" font-family="Segoe UI, sans-serif" font-size="13.5">not just output tokens/s</text>
-        <text x="632" y="206" fill="#d29922" font-family="ui-monospace, monospace" font-size="22" font-weight="700">5.9s – 705.2s</text>
-
-        <rect x="880" y="52" width="250" height="216" rx="14" fill="#161b22" stroke="#30363d"/>
-        <text x="902" y="88" fill="#f778ba" font-family="ui-monospace, monospace" font-size="13" font-weight="700">04 / BEST AT TASK</text>
-        <text x="902" y="118" fill="#f0f6fc" font-family="Segoe UI, sans-serif" font-size="18" font-weight="700">Domain Specialization</text>
-        <text x="902" y="146" fill="#8b949e" font-family="Segoe UI, sans-serif" font-size="13.5">UI Elo, Terminal-Bench,</text>
-        <text x="902" y="166" fill="#8b949e" font-family="Segoe UI, sans-serif" font-size="13.5">Code Migration &amp; Briefcase</text>
-        <text x="902" y="206" fill="#f778ba" font-family="ui-monospace, monospace" font-size="22" font-weight="700">17 Benchmarks</text>
-      </svg>
-    </div>
-  </div>
-</section>
-
-<!-- 3. AUTHOR / DATE / SHARE BAR + INDIGO SEPARATOR -->
-<div class="post-meta-container">
-  <div class="post-meta-bar">
-    <div class="author-block">
-      <div class="author-names">
-        <a href="https://github.com/haolingdong-msft" target="_blank" rel="noopener">Haoling Dong</a>
-      </div>
-      <div class="post-date-reading">
-        <time datetime="2026-10-30">October 30, 2026</time>
-        <span>|</span>
-        <span>8 minutes</span>
-      </div>
-    </div>
-    <div class="social-share" aria-label="Share this post">
-      <span class="social-share-label">Share:</span>
-      <a class="social-btn" href="https://haolingdong-msft.github.io/frontier-model-capability/" target="_blank" rel="noopener" title="Open live dashboard">↗</a>
-    </div>
-  </div>
+<header class="article-header">
+  <h1 class="article-title">Evaluating frontier models across smartness, cost, speed, and task specialization</h1>
+  <p class="article-deck">Why it is hard to know which model performs best on complex, long-running engineering tasks—and how to evaluate 11 frontier model families across reasoning effort, task cost, execution latency, and 17 native benchmarks.</p>
   <div class="indigo-separator"></div>
-</div>
+</header>
 
 <!-- 4. TWO-COLUMN ARTICLE CONTENT + STICKY SIDEBAR -->
 <main class="post-layout">
@@ -3821,36 +3731,10 @@ v4.3.2 archive is separate, not a current comparable score.</p><ul>
 </ul>
     </div>
 
-    <!-- TAGS & WRITTEN BY -->
-    <div class="written-by-section">
-      <ul class="post-tags" aria-label="Post tags">
-        <li><a href="#h-1-background">agentic AI</a></li>
-        <li><a href="#h-2-smartness-vs-cost">benchmarking</a></li>
-        <li><a href="#h-3-smartness-vs-perf">GitHub Copilot</a></li>
-        <li><a href="#h-4-best-at-task">frontier models</a></li>
-      </ul>
-      <h2 style="font-size:18px;margin:0;">Written by</h2>
-      <div class="gradient-separator"></div>
-      <div class="author-bio">
-        <div class="author-avatar">HD</div>
-        <div>
-          <h3 style="margin:0 0 4px;font-size:18px;"><a href="https://github.com/haolingdong-msft" target="_blank" rel="noopener" style="color:var(--gh-fg-default);text-decoration:none;">Haoling Dong</a></h3>
-          <p style="margin:0 0 6px;font-size:14px;"><a href="https://github.com/haolingdong-msft" target="_blank" rel="noopener">@haolingdong-msft</a></p>
-          <p style="margin:0;font-size:14.5px;color:var(--gh-fg-muted);">Building agentic evaluation workflows, TypeSpec tooling, and frontier model benchmarks with GitHub Copilot.</p>
-        </div>
-      </div>
-    </div>
-
   </article>
 
-  <!-- RIGHT STICKY SIDEBAR (Matches github.blog layout) -->
+  <!-- RIGHT STICKY SIDEBAR -->
   <aside id="sidebar" class="post__sidebar" aria-label="Sidebar">
-    <ul class="post-tags">
-      <li><a href="#h-1-background">agentic AI</a></li>
-      <li><a href="#h-2-smartness-vs-cost">benchmarking</a></li>
-      <li><a href="#h-4-best-at-task">GitHub Copilot</a></li>
-    </ul>
-
     <nav aria-labelledby="toc-heading">
       <h2 id="toc-heading" class="aside-heading">Table of Contents</h2>
       <ul class="toc-list">
@@ -3861,57 +3745,8 @@ v4.3.2 archive is separate, not a current comparable score.</p><ul>
         <li><a href="#h-methodology">Methodology &amp; primary sources</a></li>
       </ul>
     </nav>
-
-    <section aria-labelledby="related-heading">
-      <h2 id="related-heading" class="aside-heading">More on agentic AI</h2>
-      <div class="related-card">
-        <h3><a href="blog-1-long-running-agent-tasks.html">Beyond prompting: Working with AI agents efficiently on long-running tasks</a></h3>
-        <p>How we cut our 40,000-line Azure TypeSpec assessment skill from ~20 minutes to ~4 minutes and reduced AI Credit usage by 61% using a deterministic materializer and multi-model orchestration.</p>
-      </div>
-      <div class="related-card">
-        <h3><a href="https://github.blog/ai-and-ml/github-copilot/evaluating-performance-and-efficiency-of-the-github-copilot-agentic-harness-across-models-and-tasks/" target="_blank" rel="noopener">Evaluating performance and efficiency of the GitHub Copilot agentic harness across models and tasks</a></h3>
-        <p>How improvements to the GitHub Copilot agentic harness translate across SWE-bench Verified, SWE-bench Pro, and TerminalBench 2.0.</p>
-      </div>
-    </section>
   </aside>
 </main>
-
-<!-- 5. EXPLORE MORE FROM GITHUB FOOTER -->
-<footer class="explore-more">
-  <div class="explore-inner">
-    <h2 style="margin:0;font-size:24px;color:#f0f6fc;">Explore more from GitHub</h2>
-    <div class="explore-grid">
-      <div class="explore-tile">
-        <div>
-          <h3>Frontier Model Dashboard</h3>
-          <p>Explore the standalone interactive dashboard with downloadable SVG plots and JSON snapshots.</p>
-        </div>
-        <a href="https://haolingdong-msft.github.io/frontier-model-capability/" target="_blank" rel="noopener">Open dashboard →</a>
-      </div>
-      <div class="explore-tile">
-        <div>
-          <h3>Part 2: Long-Running Agent Tasks</h3>
-          <p>Learn how we turned a failed 12-hour overnight optimization loop into a 4-minute, 39-AIC pipeline.</p>
-        </div>
-        <a href="blog-1-long-running-agent-tasks.html">Read companion post →</a>
-      </div>
-      <div class="explore-tile">
-        <div>
-          <h3>GitHub Copilot CLI &amp; App</h3>
-          <p>Run multi-model agentic workflows locally in isolated Git worktrees or in the cloud.</p>
-        </div>
-        <a href="https://github.com/features/copilot/cli" target="_blank" rel="noopener">Learn more →</a>
-      </div>
-      <div class="explore-tile">
-        <div>
-          <h3>Raw Benchmark Snapshots</h3>
-          <p>Download the captured 274 model-configuration records and Intelligence Index v5.0 series.</p>
-        </div>
-        <a href="task-benchmark-snapshot.json" download>Download JSON →</a>
-      </div>
-    </div>
-  </div>
-</footer>
 
 <script>const modelCoverage={"0": {"name": "Claude Opus 5.5", "slug": "claude-opus-5-5", "cost_points": 5, "time_points": 5, "task_results": 33, "note": ""}, "1": {"name": "Claude Sonnet 5.5", "slug": "claude-sonnet-5-5", "cost_points": 5, "time_points": 5, "task_results": 32, "note": ""}, "2": {"name": "GPT-6 Astra", "slug": "gpt-6-astra", "cost_points": 5, "time_points": 5, "task_results": 35, "note": ""}, "3": {"name": "GPT-6.1 Sol", "slug": "gpt-6-1-sol", "cost_points": 5, "time_points": 5, "task_results": 28, "note": ""}, "4": {"name": "GPT-5.6 Sol", "slug": "gpt-5-6-sol", "cost_points": 0, "time_points": 0, "task_results": 24, "note": "No v5.0 Intelligence Index result in the current leaderboard or model page. Historical v4.3.2 results are retained separately; task-specific results are shown where published."}, "5": {"name": "Gemini 3.8 Flash", "slug": "gemini-3-8-flash", "cost_points": 2, "time_points": 1, "task_results": 24, "note": ""}, "6": {"name": "GPT-6 Luna", "slug": "gpt-6-luna", "cost_points": 5, "time_points": 4, "task_results": 31, "note": ""}, "7": {"name": "GPT-5.6 Sol Fast", "slug": "gpt-5-6-sol-fast", "cost_points": 0, "time_points": 0, "task_results": 0, "note": "No exact matching measurements in the checked leaderboard, DesignArena Website, Terminal-Bench, AA-Briefcase, or GDPval-AA sources as of 2026-10-28. Standard Sol measurements are not used as a substitute."}, "8": {"name": "GPT-6.1 Terra", "slug": "gpt-6-1-terra", "cost_points": 5, "time_points": 5, "task_results": 17, "note": ""}, "9": {"name": "Gemini 4 Argon", "slug": "gemini-4-argon", "cost_points": 1, "time_points": 1, "task_results": 22, "note": "The AA option has High only; choose CursorBench or ARC-AGI to plot measured Low, Medium, and High points on that benchmark's own scale."}, "10": {"name": "Grok 4.7", "slug": "grok-4-7", "cost_points": 3, "time_points": 3, "task_results": 28, "note": ""}};
 const costMetadata={"aa": {"label": "Artificial Analysis Intelligence Index v5.0", "download": "llm-cost-capability.svg", "counts": {"0": 5, "1": 5, "2": 5, "3": 5, "4": 0, "5": 2, "6": 5, "7": 0, "8": 5, "9": 1, "10": 3}}, "cursor": {"label": "CursorBench 4.0", "download": "llm-cost-cursor.svg", "counts": {"0": 5, "1": 5, "2": 0, "3": 0, "4": 5, "5": 2, "6": 0, "7": 0, "8": 0, "9": 3, "10": 4}}, "arc1": {"label": "ARC-AGI-1 / Semi-Private", "download": "llm-cost-arc1.svg", "counts": {"0": 5, "1": 5, "2": 5, "3": 5, "4": 5, "5": 3, "6": 5, "7": 0, "8": 0, "9": 3, "10": 4}}, "arc2": {"label": "ARC-AGI-2 / Semi-Private", "download": "llm-cost-arc2.svg", "counts": {"0": 5, "1": 4, "2": 5, "3": 5, "4": 5, "5": 3, "6": 5, "7": 0, "8": 0, "9": 3, "10": 4}}};
