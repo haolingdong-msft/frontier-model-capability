@@ -2,8 +2,6 @@
 
 _Why choosing the right model is hard when working on complex, long-running engineering tasks—and how to evaluate 11 frontier model families across reasoning effort, task cost, execution latency, and 17 native task benchmarks._
 
-> **Companion post:** Curious how we applied these model-selection curves in production? Read **[Beyond prompting: How we cut a 40,000-line AI agent skill from 20 minutes to 4 minutes and reduced AIC cost by 61%](blog-1-long-running-agent-tasks.md)**.
-
 ---
 
 ## 1. Background: Why it is hard to know which model has the best performance on complex, long-running tasks
@@ -14,7 +12,7 @@ In practice, knowing which model will perform best on a complex task is surprisi
 
 1. **A model family is not a single operating point.** Stepping the same model across `Low (1)`, `Medium (2)`, `High (3)`, `Xhigh (4)`, and `Max (5)` reasoning effort shifts its capability, total token consumption, and response latency by up to an order of magnitude.
 2. **Single-number leaderboards hide critical trade-offs.** Public rankings frequently mix benchmark versions, quote per-token API rates instead of total cost per completed task, report output tokens per second instead of full thinking-plus-answer latency, or collapse UI design, terminal debugging, and document writing into a single composite score.
-3. **Long-running agent workflows amplify small model mismatches.** When we optimized our 40,000+ line `azure-typespec-assessment` skill, an unguided 12-hour overnight optimization loop failed (`0/12` runs met our 5-minute target and `11/12` drifted from baseline). Reaching a **~80% faster runtime (`~20m -> ~4m`)** and **61% lower AI Credit cost (`100 -> 39 AIC`)** required understanding models across three distinct axes: **smartness vs. cost**, **smartness vs. execution speed**, and **task-specific strengths**.
+3. **Complex, long-running workflows amplify small model mismatches.** In multi-step agentic tasks that chain planning, repository search, code edits, and verification across dozens of turns, choosing an under-powered model wastes retries and context budget, while running a peak-capability model at `Max` effort on every routine step inflates latency and cost. Effective model selection requires understanding models across three distinct axes: **smartness vs. cost**, **smartness vs. execution speed**, and **task-specific strengths**.
 
 To make those trade-offs concrete and reproducible, we built the **[Frontier Model Capability benchmark suite](https://haolingdong-msft.github.io/frontier-model-capability/)**, tracking **11 frontier model families** (`Claude Opus 5.5`, `Claude Sonnet 5.5`, `GPT-6 Astra`, `GPT-6.1 Sol`, `GPT-5.6 Sol`, `Gemini 3.8 Flash`, `GPT-6 Luna`, `GPT-5.6 Sol Fast`, `GPT-6.1 Terra`, `Gemini 4 Argon`, and `Grok 4.7`) across **5 reasoning effort levels** and **17 native-scale benchmarks (274 captured configuration records)**:
 
@@ -155,4 +153,3 @@ _Figure 7: Code migration — Vals Code Migration v1.1 hidden behavior-test pass
 | **Technical documents, `.docx` artifacts & analytical reports** | `Claude Opus 5.5 (Max)`, `Claude Sonnet 5.5 (Max)`, `Gemini 4 Argon (High)` | `Grok 4.7 (Xhigh)`, `GPT-6.1 Sol (Max)` | `Argon High` leads Word rubric checks (`62.13%`) and Data Analysis (`85.20`); `Opus`/`Sonnet` lead analytical quality (`2,135` / `2,104 Elo`) |
 
 * **Explore the full interactive dashboard:** [haolingdong-msft.github.io/frontier-model-capability](https://haolingdong-msft.github.io/frontier-model-capability/)
-* **Read the companion post on long-running agent tasks:** **[Beyond prompting: Working with AI agents efficiently on long-running tasks](blog-1-long-running-agent-tasks.md)**
