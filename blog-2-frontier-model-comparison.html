@@ -1,4 +1,4 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>How to tackle complex, long-running tasks with GitHub Copilot</title><style>:root{color-scheme:light dark;--bg:#fff;--fg:#1f2328;--muted:#59636e;--card:#f6f8fa;--line:#d1d9e0;--blue:#0969da;--soft:#ddf4ff} @media(prefers-color-scheme:dark){:root{--bg:#0d1117;--fg:#f0f6fc;--muted:#9198a1;--card:#161b22;--line:#3d444d;--blue:#58a6ff;--soft:#12233b}}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:18px/1.7 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif}main{max-width:800px;margin:auto;padding:64px 24px 96px}h1{font-size:clamp(40px,7vw,62px);line-height:1.08;letter-spacing:-.035em;margin:.2em 0}h2{font-size:34px;line-height:1.2;margin:2em 0 .6em}h3{font-size:24px;margin:1.7em 0 .4em}.eyebrow,a{color:var(--blue)}.eyebrow{font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:.08em}.dek{font-size:22px;color:var(--muted)}.byline,.note{color:var(--muted);font-size:15px}p{margin:0 0 22px}li{margin:8px 0}.box,.prompt,.takeaway{padding:22px;margin:28px 0;border:1px solid var(--line);border-radius:12px;background:var(--card)}.takeaway{border-left:5px solid var(--blue);background:var(--soft);font-weight:650;font-size:20px}pre{white-space:pre-wrap;overflow:auto;font:15px/1.55 ui-monospace,SFMono-Regular,Menlo,monospace}table{width:100%;border-collapse:collapse;margin:24px 0 34px;font-size:16px}th,td{border:1px solid var(--line);padding:13px;text-align:left;vertical-align:top}th{background:var(--card)}blockquote{border-left:4px solid #8250df;margin:30px 0;padding-left:22px;color:var(--muted);font-size:21px}.flow{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}.flow div{border:1px solid var(--line);background:var(--card);padding:14px 8px;border-radius:9px;text-align:center;font-weight:650}.visual{margin:30px 0;padding:20px;border:1px solid var(--line);border-radius:14px;background:var(--card)}.visual h4{margin:0 0 4px;font-size:19px}.visual .sub{margin:0 0 16px;color:var(--muted);font-size:14px}.visual svg{display:block;width:100%;height:auto;background:var(--bg);border:1px solid var(--line);border-radius:10px}.model-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:22px 0}.model-card{padding:18px;border:1px solid var(--line);border-radius:12px;background:var(--card)}.model-card strong{display:block;margin-bottom:8px}.model-card .pick{margin-top:10px;color:var(--blue);font-weight:700}.legend{display:flex;flex-wrap:wrap;gap:12px;margin-top:12px;color:var(--muted);font-size:13px}.dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:5px}.source{color:var(--muted);font-size:13px;margin-top:10px}@media(max-width:640px){main{padding-top:36px}.flow,.model-grid{grid-template-columns:1fr}body{font-size:17px}}
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>How to tackle complex, long-running tasks with GitHub Copilot</title><style>:root{color-scheme:light dark;--bg:#fff;--fg:#1f2328;--muted:#59636e;--card:#f6f8fa;--line:#d1d9e0;--blue:#0969da;--soft:#ddf4ff} @media(prefers-color-scheme:dark){:root{--bg:#0d1117;--fg:#f0f6fc;--muted:#9198a1;--card:#161b22;--line:#3d444d;--blue:#58a6ff;--soft:#12233b}}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:18px/1.7 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif}main{max-width:800px;margin:auto;padding:64px 24px 96px}h1{font-size:clamp(40px,7vw,62px);line-height:1.08;letter-spacing:-.035em;margin:.2em 0}h2{font-size:34px;line-height:1.2;margin:2em 0 .6em}h3{font-size:24px;margin:1.7em 0 .4em}h4{font-size:20px;margin:1.5em 0 .4em}.eyebrow,a{color:var(--blue)}.eyebrow{font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:.08em}.dek{font-size:22px;color:var(--muted)}.byline,.note{color:var(--muted);font-size:15px}p{margin:0 0 22px}li{margin:8px 0}.box,.prompt,.takeaway{padding:22px;margin:28px 0;border:1px solid var(--line);border-radius:12px;background:var(--card)}.takeaway{border-left:5px solid var(--blue);background:var(--soft);font-weight:650;font-size:20px}pre{white-space:pre-wrap;overflow:auto;font:15px/1.55 ui-monospace,SFMono-Regular,Menlo,monospace}table{width:100%;border-collapse:collapse;margin:24px 0 34px;font-size:16px}th,td{border:1px solid var(--line);padding:13px;text-align:left;vertical-align:top}th{background:var(--card)}blockquote{border-left:4px solid #8250df;margin:30px 0;padding-left:22px;color:var(--muted);font-size:21px}.flow{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}.flow div{border:1px solid var(--line);background:var(--card);padding:14px 8px;border-radius:9px;text-align:center;font-weight:650}.visual{margin:30px 0;padding:20px;border:1px solid var(--line);border-radius:14px;background:var(--card)}.visual h4{margin:0 0 4px;font-size:19px}.visual .sub{margin:0 0 16px;color:var(--muted);font-size:14px}.visual svg{display:block;width:100%;height:auto;background:var(--bg);border:1px solid var(--line);border-radius:10px}.model-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:22px 0}.model-card{padding:18px;border:1px solid var(--line);border-radius:12px;background:var(--card)}.model-card strong{display:block;margin-bottom:8px}.model-card .pick{margin-top:10px;color:var(--blue);font-weight:700}.legend{display:flex;flex-wrap:wrap;gap:12px;margin-top:12px;color:var(--muted);font-size:13px}.dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:5px}.source{color:var(--muted);font-size:13px;margin-top:10px}@media(max-width:640px){main{padding-top:36px}.flow,.model-grid{grid-template-columns:1fr}body{font-size:17px}}
 main{max-width:880px}
 figure.wp-block-table{margin:24px 0 34px}
 .card{background:#ffffff;color:#1f2328;border:1px solid var(--line);border-radius:14px;padding:20px 22px;margin:20px 0}
@@ -57,8 +57,6 @@ Do not implement the full solution yet. Recommend which approaches are worth pro
 
 <div class="takeaway">Capability bar first. Task fit second. Efficiency third.</div>
 
-<p>Task fit cannot compensate for insufficient reasoning when a problem is ambiguous or cross-cutting. Start by asking which models clear the capability bar for the problem, refine by task fit among the models that clear it, and then optimize for cost and latency.</p>
-
 <div class="visual"><h4>A layered model-selection framework</h4><p class="sub">Move from left to right. Each step narrows the candidate models.</p>
 <svg viewBox="0 0 900 300" role="img" aria-label="Capability bar first, task fit second, efficiency third"><defs><marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#59636e"/></marker></defs>
 <rect x="25" y="45" width="245" height="180" rx="16" fill="#ddf4ff" stroke="#0969da"/><text x="147" y="82" text-anchor="middle" font-size="21" font-weight="700" fill="#0969da">1. Capability bar</text><text x="147" y="115" text-anchor="middle" font-size="15" font-style="italic" fill="currentColor">What level of capability</text><text x="147" y="138" text-anchor="middle" font-size="15" font-style="italic" fill="currentColor">does this work require?</text><text x="147" y="178" text-anchor="middle" font-size="13.5" fill="currentColor">Difficulty · uncertainty</text><text x="147" y="200" text-anchor="middle" font-size="13.5" fill="currentColor">decision impact</text>
@@ -68,52 +66,552 @@ Do not implement the full solution yet. Recommend which approaches are worth pro
 <rect x="645" y="45" width="230" height="180" rx="16" fill="#dafbe1" stroke="#1a7f37"/><text x="760" y="82" text-anchor="middle" font-size="21" font-weight="700" fill="#1a7f37">3. Efficiency</text><text x="760" y="115" text-anchor="middle" font-size="15" font-style="italic" fill="currentColor">Among good-fit models,</text><text x="760" y="138" text-anchor="middle" font-size="15" font-style="italic" fill="currentColor">which is most efficient?</text><text x="760" y="178" text-anchor="middle" font-size="13.5" fill="currentColor">Cost · latency</text><text x="760" y="200" text-anchor="middle" font-size="13.5" fill="currentColor">reasoning effort</text>
 <text x="450" y="270" text-anchor="middle" font-size="16" font-weight="650" fill="currentColor">Choose for capability, refine for fit, optimize for efficiency.</text></svg></div>
 
-<h3>1. Set the capability bar for the problem</h3>
-<p>For complex architecture, ambiguous UX flows, or high-impact decisions, the capability bar is high. A model needs enough reasoning ability, reliability, and instruction-following strength to handle the uncertainty before specialization, price, or speed becomes useful.</p>
+<h3>1. Capability bar: set the quality threshold for the problem</h3>
+<p>Task fit cannot compensate for insufficient reasoning when a problem is ambiguous or cross-cutting. For complex architecture, new UX flows, or high-impact decisions, the capability bar is high—a model needs enough reasoning strength and instruction-following reliability before specialization, price, or speed matters.</p>
 
-<p>This does not mean design always requires an expensive model—it means design usually carries higher uncertainty, which raises the capability bar. Once those decisions are captured in a mockup or reviewed design doc, the problem is constrained, the capability bar drops, and more models can clear it.</p>
+<p>This does not mean design always requires the most expensive model; it means open-ended design carries higher uncertainty. Once those decisions are locked into a mockup or reviewed design doc, the problem is constrained, the capability bar drops, and more models can clear it:</p>
 
-<blockquote>The best model changes as the task becomes better defined and the capability bar shifts.</blockquote>
-
-<h3>2. Use task-specific strengths to refine the choice</h3>
-<p>Once multiple models are capable enough, task fit becomes meaningful. Some models may be especially effective at visual and UI work, others at coding, and others at organizing and polishing documentation.</p>
-
-<p>The best model can therefore change several times within the same project.</p>
-
-<table><thead><tr><th>Workflow</th><th>High-uncertainty work</th><th>Well-defined execution</th></tr></thead><tbody>
-<tr><td><strong>UI</strong></td><td>Use a strong model with good visual and UI capabilities to explore the experience, compare directions, and create a mockup.</td><td>Once the mockup and component behavior are clear, use a faster, lower-cost coding model to implement and iterate.</td></tr>
-<tr><td><strong>Backend or service</strong></td><td>Use a strong reasoning model to design the architecture, APIs, data flow, failure cases, and compatibility boundaries.</td><td>After capturing those decisions in a reviewed design document, use a more efficient coding model for scoped implementation tasks.</td></tr>
-<tr><td><strong>Design documentation</strong></td><td>If the technical substance is unresolved, use a strong reasoning model to work through decisions, tradeoffs, and the outline.</td><td>Once the substance is clear, use a model that is especially good at writing, structure, clarity, and tone.</td></tr>
-<tr><td><strong>Routine coding</strong></td><td>A separate high-cost design step may not be necessary when the change is already clear and low risk.</td><td>Use a fast, lower-cost model for repetitive edits, tests, and small fixes.</td></tr>
+<table><thead><tr><th>Workflow</th><th>High-uncertainty step (higher capability bar)</th><th>Constrained execution (lower capability bar)</th></tr></thead><tbody>
+<tr><td><strong>UI</strong></td><td>Explore the user experience, compare layout directions, and create an initial mockup with a strong reasoning + visual model.</td><td>Once the mockup and component behavior are fixed, switch to a faster, lower-cost coding model to implement and iterate.</td></tr>
+<tr><td><strong>Backend or service</strong></td><td>Design architecture, API contracts, data flow, failure modes, and compatibility boundaries with a high-capability reasoning model.</td><td>After capturing decisions in a reviewed design doc, use a cost-efficient coding model for scoped implementation tasks.</td></tr>
+<tr><td><strong>Design documentation</strong></td><td>Work through unresolved technical tradeoffs, invariants, and document structure with a strong reasoning model.</td><td>Once the technical substance is settled, use a model specialized in clear writing, structure, and tone.</td></tr>
+<tr><td><strong>Routine coding</strong></td><td>A separate high-bar design pass is unnecessary when requirements are already clear and low risk.</td><td>Use a fast, low-cost model directly for repetitive edits, tests, and small fixes.</td></tr>
 </tbody></table>
 
-<div class="takeaway">Use capability to handle complexity, specialization to match the work, and cost and latency to optimize execution.</div>
+<h3 id="h-4-best-at-task">2. Task fit: match domain strengths among models that clear the bar</h3>
+<p>Once multiple models clear the capability bar for your step, aggregate benchmark scores are not enough—models have distinct domain strengths. Switch tabs below to compare how the 11 frontier model families perform across <strong>UI / frontend design</strong>, <strong>terminal &amp; systems engineering</strong>, and <strong>document generation</strong>:</p>
 
-<h3>3. Optimize cost and latency after the quality bar is met</h3>
-<p>Cost and latency matter, but they should not be the first filter for difficult work. First identify the models that can reliably meet the quality bar. Then compare efficiency among those candidates.</p>
+<section id="tasks" class="card task-section" style="margin-bottom: 20px;">
+      <div class="task-tabs" role="tablist" aria-label="Task-specific benchmark details">
+<button type="button" id="tab-frontend" role="tab" aria-selected="true" aria-controls="panel-frontend" tabindex="0">UI / frontend</button>
+<button type="button" id="tab-engineering" role="tab" aria-selected="false" aria-controls="panel-engineering" tabindex="-1">Engineering / backend proxy</button>
+<button type="button" id="tab-documents" role="tab" aria-selected="false" aria-controls="panel-documents" tabindex="-1">Documents / writing</button>
+</div>
+<section id="panel-frontend" role="tabpanel" aria-labelledby="tab-frontend" tabindex="0"><h3>Website / frontend design</h3><p>Blind human preferences between websites generated from the same prompt. Bradley-Terry ratings are displayed as Elo.</p><svg class="task-plot" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 610" role="img" aria-labelledby="task-website-title task-website-desc">
+<title id="task-website-title">Website / frontend design</title>
+<desc id="task-website-desc">11 selected model families. Horizontal axis: Elo from 1200 to 1400, higher is better. Exact scores and configurations are in the table below. Whiskers are published 95% confidence intervals where available; missing results are labeled, not plotted as zero.</desc>
+<style>text{font-family:Segoe UI,Arial,sans-serif;fill:#192740}</style>
+<rect width="1000" height="610" rx="10" fill="#ffffff" stroke="#d1d9e0"/>
+<line x1="230.0" y1="38" x2="230.0" y2="530" stroke="#dde4ee"/>
+<text x="230.0" y="560" text-anchor="middle" font-size="14">1,200</text>
+<line x1="367.5" y1="38" x2="367.5" y2="530" stroke="#dde4ee"/>
+<text x="367.5" y="560" text-anchor="middle" font-size="14">1,250</text>
+<line x1="505.0" y1="38" x2="505.0" y2="530" stroke="#dde4ee"/>
+<text x="505.0" y="560" text-anchor="middle" font-size="14">1,300</text>
+<line x1="642.5" y1="38" x2="642.5" y2="530" stroke="#dde4ee"/>
+<text x="642.5" y="560" text-anchor="middle" font-size="14">1,350</text>
+<line x1="780.0" y1="38" x2="780.0" y2="530" stroke="#dde4ee"/>
+<text x="780.0" y="560" text-anchor="middle" font-size="14">1,400</text>
+<g class="task-series" data-model="0">
+<text x="18" y="70" font-size="17" font-weight="600">Claude Opus 5.5</text>
+<title>Claude Opus 5.5: 1,325.00; Effort not stated; 95% CI: Not published in captured record</title>
+<circle cx="573.75" cy="65" r="7" fill="#a34415"/>
+<text x="805" y="70" font-size="17" font-weight="600">1,325.00</text>
+</g>
+<g class="task-series" data-model="1">
+<text x="18" y="114" font-size="17" font-weight="600">Claude Sonnet 5.5</text>
+<title>Claude Sonnet 5.5: 1,322.00; Effort not stated; 95% CI: Not published in captured record</title>
+<circle cx="565.50" cy="109" r="7" fill="#d17908"/>
+<text x="805" y="114" font-size="17" font-weight="600">1,322.00</text>
+</g>
+<g class="task-series" data-model="2">
+<text x="18" y="158" font-size="17" font-weight="600">GPT-6 Astra</text>
+<title>GPT-6 Astra: 1,339.00; Max; 95% CI: Not published in captured record</title>
+<circle cx="612.25" cy="153" r="7" fill="#5144c7"/>
+<text x="805" y="158" font-size="17" font-weight="600">1,339.00</text>
+</g>
+<g class="task-series" data-model="3">
+<text x="18" y="202" font-size="17" font-weight="600">GPT-6.1 Sol</text>
+<title>GPT-6.1 Sol: 1,315.00; Effort not stated; 95% CI: Not published in captured record</title>
+<circle cx="546.25" cy="197" r="7" fill="#1878ba"/>
+<text x="805" y="202" font-size="17" font-weight="600">1,315.00</text>
+</g>
+<g class="task-series" data-model="4">
+<text x="18" y="246" font-size="17" font-weight="600">GPT-5.6 Sol</text>
+<title>GPT-5.6 Sol: 1,320.00; Xhigh; 95% CI: Not published in captured record</title>
+<circle cx="560.00" cy="241" r="7" fill="#bf3c85"/>
+<text x="805" y="246" font-size="17" font-weight="600">1,320.00</text>
+</g>
+<g class="task-series" data-model="5">
+<text x="18" y="290" font-size="17" font-weight="600">Gemini 3.8 Flash</text>
+<title>Gemini 3.8 Flash: 1,299.00; Effort not stated; 95% CI: Not published in captured record</title>
+<circle cx="502.25" cy="285" r="7" fill="#07816c"/>
+<text x="805" y="290" font-size="17" font-weight="600">1,299.00</text>
+</g>
+<g class="task-series" data-model="6">
+<text x="18" y="334" font-size="17" font-weight="600">GPT-6 Luna</text>
+<title>GPT-6 Luna: 1,266.00; Effort not stated; 95% CI: Not published in captured record</title>
+<circle cx="411.50" cy="329" r="7" fill="#6e7889"/>
+<text x="805" y="334" font-size="17" font-weight="600">1,266.00</text>
+</g>
+<g class="task-series" data-model="7">
+<text x="18" y="378" font-size="17" font-weight="600">GPT-5.6 Sol Fast</text>
+<text x="805" y="378" font-size="15" fill="#56647a">No result</text>
+</g>
+<g class="task-series" data-model="8">
+<text x="18" y="422" font-size="17" font-weight="600">GPT-6.1 Terra</text>
+<title>GPT-6.1 Terra: 1,284.00; Effort not stated; 95% CI: Not published in captured record</title>
+<circle cx="461.00" cy="417" r="7" fill="#9744a0"/>
+<text x="805" y="422" font-size="17" font-weight="600">1,284.00</text>
+</g>
+<g class="task-series" data-model="9">
+<text x="18" y="466" font-size="17" font-weight="600">Gemini 4 Argon</text>
+<title>Gemini 4 Argon: 1,316.00; Effort not stated; 95% CI: Not published in captured record</title>
+<circle cx="549.00" cy="461" r="7" fill="#4d7b16"/>
+<text x="805" y="466" font-size="17" font-weight="600">1,316.00</text>
+</g>
+<g class="task-series" data-model="10">
+<text x="18" y="510" font-size="17" font-weight="600">Grok 4.7</text>
+<title>Grok 4.7: 1,251.00; Effort not stated; 95% CI: Not published in captured record</title>
+<circle cx="370.25" cy="505" r="7" fill="#be3042"/>
+<text x="805" y="510" font-size="17" font-weight="600">1,251.00</text>
+</g>
+<text x="505" y="592" text-anchor="middle" font-size="14">Elo / higher is better / native benchmark scale</text></svg></section>
+<section id="panel-engineering" role="tabpanel" aria-labelledby="tab-engineering" tabindex="0" hidden><h3>Software engineering / terminal tasks</h3><p>Resolution rate on executable terminal tasks. Each row identifies the actual agent and reasoning effort; whiskers show the source&#x27;s 95% CI.</p><svg class="task-plot" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 610" role="img" aria-labelledby="task-engineering-title task-engineering-desc">
+<title id="task-engineering-title">Software engineering / terminal tasks</title>
+<desc id="task-engineering-desc">11 selected model families. Horizontal axis: % from 0 to 100, higher is better. Exact scores and configurations are in the table below. Whiskers are published 95% confidence intervals where available; missing results are labeled, not plotted as zero.</desc>
+<style>text{font-family:Segoe UI,Arial,sans-serif;fill:#192740}</style>
+<rect width="1000" height="610" rx="10" fill="#ffffff" stroke="#d1d9e0"/>
+<line x1="230.0" y1="38" x2="230.0" y2="530" stroke="#dde4ee"/>
+<text x="230.0" y="560" text-anchor="middle" font-size="14">0</text>
+<line x1="340.0" y1="38" x2="340.0" y2="530" stroke="#dde4ee"/>
+<text x="340.0" y="560" text-anchor="middle" font-size="14">20</text>
+<line x1="450.0" y1="38" x2="450.0" y2="530" stroke="#dde4ee"/>
+<text x="450.0" y="560" text-anchor="middle" font-size="14">40</text>
+<line x1="560.0" y1="38" x2="560.0" y2="530" stroke="#dde4ee"/>
+<text x="560.0" y="560" text-anchor="middle" font-size="14">60</text>
+<line x1="670.0" y1="38" x2="670.0" y2="530" stroke="#dde4ee"/>
+<text x="670.0" y="560" text-anchor="middle" font-size="14">80</text>
+<line x1="780.0" y1="38" x2="780.0" y2="530" stroke="#dde4ee"/>
+<text x="780.0" y="560" text-anchor="middle" font-size="14">100</text>
+<g class="task-series" data-model="0">
+<text x="18" y="70" font-size="17" font-weight="600">Claude Opus 5.5</text>
+<title>Claude Opus 5.5: 64.85%; Max / Claude Code; 95% CI: 61.74% to 67.96%</title>
+<path d="M569.57,65 H603.78 M569.57,60 V70 M603.78,60 V70" fill="none" stroke="#a34415" stroke-width="2"/>
+<circle cx="586.67" cy="65" r="7" fill="#a34415"/>
+<text x="805" y="70" font-size="17" font-weight="600">64.85%</text>
+</g>
+<g class="task-series" data-model="1">
+<text x="18" y="114" font-size="17" font-weight="600">Claude Sonnet 5.5</text>
+<title>Claude Sonnet 5.5: 61.82%; Max / Claude Code; 95% CI: 58.88% to 64.76%</title>
+<path d="M553.84,109 H586.18 M553.84,104 V114 M586.18,104 V114" fill="none" stroke="#d17908" stroke-width="2"/>
+<circle cx="570.01" cy="109" r="7" fill="#d17908"/>
+<text x="805" y="114" font-size="17" font-weight="600">61.82%</text>
+</g>
+<g class="task-series" data-model="2">
+<text x="18" y="158" font-size="17" font-weight="600">GPT-6 Astra</text>
+<title>GPT-6 Astra: 58.18%; Max / Codex; 95% CI: 55.39% to 60.97%</title>
+<path d="M534.64,153 H565.34 M534.64,148 V158 M565.34,148 V158" fill="none" stroke="#5144c7" stroke-width="2"/>
+<circle cx="549.99" cy="153" r="7" fill="#5144c7"/>
+<text x="805" y="158" font-size="17" font-weight="600">58.18%</text>
+</g>
+<g class="task-series" data-model="3">
+<text x="18" y="202" font-size="17" font-weight="600">GPT-6.1 Sol</text>
+<title>GPT-6.1 Sol: 58.18%; Max / Codex; 95% CI: 55.07% to 61.29%</title>
+<path d="M532.88,197 H567.10 M532.88,192 V202 M567.10,192 V202" fill="none" stroke="#1878ba" stroke-width="2"/>
+<circle cx="549.99" cy="197" r="7" fill="#1878ba"/>
+<text x="805" y="202" font-size="17" font-weight="600">58.18%</text>
+</g>
+<g class="task-series" data-model="4">
+<text x="18" y="246" font-size="17" font-weight="600">GPT-5.6 Sol</text>
+<title>GPT-5.6 Sol: 37.27%; Max / Codex; 95% CI: 33.49% to 41.05%</title>
+<path d="M414.20,241 H455.77 M414.20,236 V246 M455.77,236 V246" fill="none" stroke="#bf3c85" stroke-width="2"/>
+<circle cx="434.99" cy="241" r="7" fill="#bf3c85"/>
+<text x="805" y="246" font-size="17" font-weight="600">37.27%</text>
+</g>
+<g class="task-series" data-model="5">
+<text x="18" y="290" font-size="17" font-weight="600">Gemini 3.8 Flash</text>
+<title>Gemini 3.8 Flash: 19.09%; High / mini-SWE-agent; 95% CI: 15.73% to 22.45%</title>
+<path d="M316.51,285 H353.48 M316.51,280 V290 M353.48,280 V290" fill="none" stroke="#07816c" stroke-width="2"/>
+<circle cx="335.00" cy="285" r="7" fill="#07816c"/>
+<text x="805" y="290" font-size="17" font-weight="600">19.09%</text>
+</g>
+<g class="task-series" data-model="6">
+<text x="18" y="334" font-size="17" font-weight="600">GPT-6 Luna</text>
+<title>GPT-6 Luna: 16.36%; Max / Codex; 95% CI: 13.64% to 19.08%</title>
+<path d="M305.02,329 H334.94 M305.02,324 V334 M334.94,324 V334" fill="none" stroke="#6e7889" stroke-width="2"/>
+<circle cx="319.98" cy="329" r="7" fill="#6e7889"/>
+<text x="805" y="334" font-size="17" font-weight="600">16.36%</text>
+</g>
+<g class="task-series" data-model="7">
+<text x="18" y="378" font-size="17" font-weight="600">GPT-5.6 Sol Fast</text>
+<text x="805" y="378" font-size="15" fill="#56647a">No result</text>
+</g>
+<g class="task-series" data-model="8">
+<text x="18" y="422" font-size="17" font-weight="600">GPT-6.1 Terra</text>
+<text x="805" y="422" font-size="15" fill="#56647a">No result</text>
+</g>
+<g class="task-series" data-model="9">
+<text x="18" y="466" font-size="17" font-weight="600">Gemini 4 Argon</text>
+<text x="805" y="466" font-size="15" fill="#56647a">No result</text>
+</g>
+<g class="task-series" data-model="10">
+<text x="18" y="510" font-size="17" font-weight="600">Grok 4.7</text>
+<title>Grok 4.7: 37.58%; Xhigh / Grok Build; 95% CI: 34.04% to 41.12%</title>
+<path d="M417.22,505 H456.16 M417.22,500 V510 M456.16,500 V510" fill="none" stroke="#be3042" stroke-width="2"/>
+<circle cx="436.69" cy="505" r="7" fill="#be3042"/>
+<text x="805" y="510" font-size="17" font-weight="600">37.58%</text>
+</g>
+<text x="505" y="592" text-anchor="middle" font-size="14">% / higher is better / native benchmark scale</text></svg></section>
+<section id="panel-documents" role="tabpanel" aria-labelledby="tab-documents" tabindex="0" hidden>
+<label class="metric-control">Document metric:
+<select id="document-metric">
+<option value="word">Word deliverables / rubric checks met</option>
+<option value="analysis">Analytical quality / all artifact types</option>
+<option value="presentation">Presentation quality / all artifact types</option>
+<option value="professional">Professional work / GDPval-AA</option>
+</select></label><div data-document-metric="word"><h3>Document writing: Word deliverables</h3><p>Raw Word (.docx) rubric-check pass rate, extracted from briefcaseBreakdown.rubricByFileType.docx. Each captured run contains 17 Word tasks; this is checks satisfied, not whole documents passed.</p><svg class="task-plot" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 610" role="img" aria-labelledby="task-word-title task-word-desc">
+<title id="task-word-title">Document writing: Word deliverables</title>
+<desc id="task-word-desc">11 selected model families. Horizontal axis: % from 0 to 100, higher is better. Exact scores and configurations are in the table below. Whiskers are published 95% confidence intervals where available; missing results are labeled, not plotted as zero.</desc>
+<style>text{font-family:Segoe UI,Arial,sans-serif;fill:#192740}</style>
+<rect width="1000" height="610" rx="10" fill="#ffffff" stroke="#d1d9e0"/>
+<line x1="230.0" y1="38" x2="230.0" y2="530" stroke="#dde4ee"/>
+<text x="230.0" y="560" text-anchor="middle" font-size="14">0</text>
+<line x1="340.0" y1="38" x2="340.0" y2="530" stroke="#dde4ee"/>
+<text x="340.0" y="560" text-anchor="middle" font-size="14">20</text>
+<line x1="450.0" y1="38" x2="450.0" y2="530" stroke="#dde4ee"/>
+<text x="450.0" y="560" text-anchor="middle" font-size="14">40</text>
+<line x1="560.0" y1="38" x2="560.0" y2="530" stroke="#dde4ee"/>
+<text x="560.0" y="560" text-anchor="middle" font-size="14">60</text>
+<line x1="670.0" y1="38" x2="670.0" y2="530" stroke="#dde4ee"/>
+<text x="670.0" y="560" text-anchor="middle" font-size="14">80</text>
+<line x1="780.0" y1="38" x2="780.0" y2="530" stroke="#dde4ee"/>
+<text x="780.0" y="560" text-anchor="middle" font-size="14">100</text>
+<g class="task-series" data-model="0">
+<text x="18" y="70" font-size="17" font-weight="600">Claude Opus 5.5</text>
+<title>Claude Opus 5.5: 60.36%; Claude Opus 5.5 (Max, Default Fallback); 95% CI: Not published in captured record</title>
+<circle cx="561.95" cy="65" r="7" fill="#a34415"/>
+<text x="805" y="70" font-size="17" font-weight="600">60.36%</text>
+</g>
+<g class="task-series" data-model="1">
+<text x="18" y="114" font-size="17" font-weight="600">Claude Sonnet 5.5</text>
+<title>Claude Sonnet 5.5: 60.95%; Claude Sonnet 5.5 (Max, Default Fallback); 95% CI: Not published in captured record</title>
+<circle cx="565.21" cy="109" r="7" fill="#d17908"/>
+<text x="805" y="114" font-size="17" font-weight="600">60.95%</text>
+</g>
+<g class="task-series" data-model="2">
+<text x="18" y="158" font-size="17" font-weight="600">GPT-6 Astra</text>
+<title>GPT-6 Astra: 52.07%; GPT-6 Astra (Max); 95% CI: Not published in captured record</title>
+<circle cx="516.39" cy="153" r="7" fill="#5144c7"/>
+<text x="805" y="158" font-size="17" font-weight="600">52.07%</text>
+</g>
+<g class="task-series" data-model="3">
+<text x="18" y="202" font-size="17" font-weight="600">GPT-6.1 Sol</text>
+<title>GPT-6.1 Sol: 52.07%; GPT-6.1 Sol (Max); 95% CI: Not published in captured record</title>
+<circle cx="516.39" cy="197" r="7" fill="#1878ba"/>
+<text x="805" y="202" font-size="17" font-weight="600">52.07%</text>
+</g>
+<g class="task-series" data-model="4">
+<text x="18" y="246" font-size="17" font-weight="600">GPT-5.6 Sol</text>
+<text x="805" y="246" font-size="15" fill="#56647a">No result</text>
+</g>
+<g class="task-series" data-model="5">
+<text x="18" y="290" font-size="17" font-weight="600">Gemini 3.8 Flash</text>
+<title>Gemini 3.8 Flash: 44.97%; Gemini 3.8 Flash (High); 95% CI: Not published in captured record</title>
+<circle cx="477.34" cy="285" r="7" fill="#07816c"/>
+<text x="805" y="290" font-size="17" font-weight="600">44.97%</text>
+</g>
+<g class="task-series" data-model="6">
+<text x="18" y="334" font-size="17" font-weight="600">GPT-6 Luna</text>
+<title>GPT-6 Luna: 44.38%; GPT-6 Luna (Max); 95% CI: Not published in captured record</title>
+<circle cx="474.08" cy="329" r="7" fill="#6e7889"/>
+<text x="805" y="334" font-size="17" font-weight="600">44.38%</text>
+</g>
+<g class="task-series" data-model="7">
+<text x="18" y="378" font-size="17" font-weight="600">GPT-5.6 Sol Fast</text>
+<text x="805" y="378" font-size="15" fill="#56647a">No result</text>
+</g>
+<g class="task-series" data-model="8">
+<text x="18" y="422" font-size="17" font-weight="600">GPT-6.1 Terra</text>
+<title>GPT-6.1 Terra: 37.28%; GPT-6.1 Terra (Max); 95% CI: Not published in captured record</title>
+<circle cx="435.03" cy="417" r="7" fill="#9744a0"/>
+<text x="805" y="422" font-size="17" font-weight="600">37.28%</text>
+</g>
+<g class="task-series" data-model="9">
+<text x="18" y="466" font-size="17" font-weight="600">Gemini 4 Argon</text>
+<title>Gemini 4 Argon: 62.13%; Gemini 4 Argon (High); 95% CI: Not published in captured record</title>
+<circle cx="571.72" cy="461" r="7" fill="#4d7b16"/>
+<text x="805" y="466" font-size="17" font-weight="600">62.13%</text>
+</g>
+<g class="task-series" data-model="10">
+<text x="18" y="510" font-size="17" font-weight="600">Grok 4.7</text>
+<title>Grok 4.7: 57.40%; Grok 4.7 (Xhigh); 95% CI: Not published in captured record</title>
+<circle cx="545.68" cy="505" r="7" fill="#be3042"/>
+<text x="805" y="510" font-size="17" font-weight="600">57.40%</text>
+</g>
+<text x="505" y="592" text-anchor="middle" font-size="14">% / higher is better / native benchmark scale</text></svg></div><div data-document-metric="analysis" hidden><h3>Analytical quality: all deliverable types</h3><p>Analytical quality pairwise Elo across all deliverable types (Word, PDF, slides, spreadsheets, and others), not Word-only.</p><svg class="task-plot" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 610" role="img" aria-labelledby="task-analysis-title task-analysis-desc">
+<title id="task-analysis-title">Analytical quality: all deliverable types</title>
+<desc id="task-analysis-desc">11 selected model families. Horizontal axis: Elo from 1000 to 2250, higher is better. Exact scores and configurations are in the table below. Whiskers are published 95% confidence intervals where available; missing results are labeled, not plotted as zero.</desc>
+<style>text{font-family:Segoe UI,Arial,sans-serif;fill:#192740}</style>
+<rect width="1000" height="610" rx="10" fill="#ffffff" stroke="#d1d9e0"/>
+<line x1="230.0" y1="38" x2="230.0" y2="530" stroke="#dde4ee"/>
+<text x="230.0" y="560" text-anchor="middle" font-size="14">1,000</text>
+<line x1="340.0" y1="38" x2="340.0" y2="530" stroke="#dde4ee"/>
+<text x="340.0" y="560" text-anchor="middle" font-size="14">1,250</text>
+<line x1="450.0" y1="38" x2="450.0" y2="530" stroke="#dde4ee"/>
+<text x="450.0" y="560" text-anchor="middle" font-size="14">1,500</text>
+<line x1="560.0" y1="38" x2="560.0" y2="530" stroke="#dde4ee"/>
+<text x="560.0" y="560" text-anchor="middle" font-size="14">1,750</text>
+<line x1="670.0" y1="38" x2="670.0" y2="530" stroke="#dde4ee"/>
+<text x="670.0" y="560" text-anchor="middle" font-size="14">2,000</text>
+<line x1="780.0" y1="38" x2="780.0" y2="530" stroke="#dde4ee"/>
+<text x="780.0" y="560" text-anchor="middle" font-size="14">2,250</text>
+<g class="task-series" data-model="0">
+<text x="18" y="70" font-size="17" font-weight="600">Claude Opus 5.5</text>
+<title>Claude Opus 5.5: 2,135.15; Claude Opus 5.5 (Max, Default Fallback); 95% CI: 2,111.93 to 2,160.57</title>
+<path d="M719.25,65 H740.65 M719.25,60 V70 M740.65,60 V70" fill="none" stroke="#a34415" stroke-width="2"/>
+<circle cx="729.47" cy="65" r="7" fill="#a34415"/>
+<text x="805" y="70" font-size="17" font-weight="600">2,135.15</text>
+</g>
+<g class="task-series" data-model="1">
+<text x="18" y="114" font-size="17" font-weight="600">Claude Sonnet 5.5</text>
+<title>Claude Sonnet 5.5: 2,104.30; Claude Sonnet 5.5 (Max, Default Fallback); 95% CI: 2,083.51 to 2,127.26</title>
+<path d="M706.74,109 H725.99 M706.74,104 V114 M725.99,104 V114" fill="none" stroke="#d17908" stroke-width="2"/>
+<circle cx="715.89" cy="109" r="7" fill="#d17908"/>
+<text x="805" y="114" font-size="17" font-weight="600">2,104.30</text>
+</g>
+<g class="task-series" data-model="2">
+<text x="18" y="158" font-size="17" font-weight="600">GPT-6 Astra</text>
+<title>GPT-6 Astra: 1,752.19; GPT-6 Astra (Max); 95% CI: 1,736.55 to 1,768.94</title>
+<path d="M554.08,153 H568.33 M554.08,148 V158 M568.33,148 V158" fill="none" stroke="#5144c7" stroke-width="2"/>
+<circle cx="560.96" cy="153" r="7" fill="#5144c7"/>
+<text x="805" y="158" font-size="17" font-weight="600">1,752.19</text>
+</g>
+<g class="task-series" data-model="3">
+<text x="18" y="202" font-size="17" font-weight="600">GPT-6.1 Sol</text>
+<title>GPT-6.1 Sol: 1,766.62; GPT-6.1 Sol (Max); 95% CI: 1,751.28 to 1,782.49</title>
+<path d="M560.56,197 H574.30 M560.56,192 V202 M574.30,192 V202" fill="none" stroke="#1878ba" stroke-width="2"/>
+<circle cx="567.31" cy="197" r="7" fill="#1878ba"/>
+<text x="805" y="202" font-size="17" font-weight="600">1,766.62</text>
+</g>
+<g class="task-series" data-model="4">
+<text x="18" y="246" font-size="17" font-weight="600">GPT-5.6 Sol</text>
+<text x="805" y="246" font-size="15" fill="#56647a">No result</text>
+</g>
+<g class="task-series" data-model="5">
+<text x="18" y="290" font-size="17" font-weight="600">Gemini 3.8 Flash</text>
+<title>Gemini 3.8 Flash: 1,136.55; Gemini 3.8 Flash (High); 95% CI: 1,119.49 to 1,151.98</title>
+<path d="M282.58,285 H296.87 M282.58,280 V290 M296.87,280 V290" fill="none" stroke="#07816c" stroke-width="2"/>
+<circle cx="290.08" cy="285" r="7" fill="#07816c"/>
+<text x="805" y="290" font-size="17" font-weight="600">1,136.55</text>
+</g>
+<g class="task-series" data-model="6">
+<text x="18" y="334" font-size="17" font-weight="600">GPT-6 Luna</text>
+<title>GPT-6 Luna: 1,376.09; GPT-6 Luna (Max); 95% CI: 1,358.18 to 1,395.26</title>
+<path d="M387.60,329 H403.91 M387.60,324 V334 M403.91,324 V334" fill="none" stroke="#6e7889" stroke-width="2"/>
+<circle cx="395.48" cy="329" r="7" fill="#6e7889"/>
+<text x="805" y="334" font-size="17" font-weight="600">1,376.09</text>
+</g>
+<g class="task-series" data-model="7">
+<text x="18" y="378" font-size="17" font-weight="600">GPT-5.6 Sol Fast</text>
+<text x="805" y="378" font-size="15" fill="#56647a">No result</text>
+</g>
+<g class="task-series" data-model="8">
+<text x="18" y="422" font-size="17" font-weight="600">GPT-6.1 Terra</text>
+<title>GPT-6.1 Terra: 1,491.89; GPT-6.1 Terra (Max); 95% CI: 1,471.30 to 1,514.37</title>
+<path d="M437.37,417 H456.32 M437.37,412 V422 M456.32,412 V422" fill="none" stroke="#9744a0" stroke-width="2"/>
+<circle cx="446.43" cy="417" r="7" fill="#9744a0"/>
+<text x="805" y="422" font-size="17" font-weight="600">1,491.89</text>
+</g>
+<g class="task-series" data-model="9">
+<text x="18" y="466" font-size="17" font-weight="600">Gemini 4 Argon</text>
+<title>Gemini 4 Argon: 1,550.88; Gemini 4 Argon (High); 95% CI: 1,530.10 to 1,571.08</title>
+<path d="M463.24,461 H481.28 M463.24,456 V466 M481.28,456 V466" fill="none" stroke="#4d7b16" stroke-width="2"/>
+<circle cx="472.39" cy="461" r="7" fill="#4d7b16"/>
+<text x="805" y="466" font-size="17" font-weight="600">1,550.88</text>
+</g>
+<g class="task-series" data-model="10">
+<text x="18" y="510" font-size="17" font-weight="600">Grok 4.7</text>
+<title>Grok 4.7: 1,933.69; Grok 4.7 (Xhigh); 95% CI: 1,917.67 to 1,951.53</title>
+<path d="M633.77,505 H648.67 M633.77,500 V510 M648.67,500 V510" fill="none" stroke="#be3042" stroke-width="2"/>
+<circle cx="640.82" cy="505" r="7" fill="#be3042"/>
+<text x="805" y="510" font-size="17" font-weight="600">1,933.69</text>
+</g>
+<text x="505" y="592" text-anchor="middle" font-size="14">Elo / higher is better / native benchmark scale</text></svg></div><div data-document-metric="presentation" hidden><h3>Presentation: all deliverable types</h3><p>Presentation pairwise Elo across all deliverable types (Word, PDF, slides, spreadsheets, and others), not Word-only.</p><svg class="task-plot" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 610" role="img" aria-labelledby="task-presentation-title task-presentation-desc">
+<title id="task-presentation-title">Presentation: all deliverable types</title>
+<desc id="task-presentation-desc">11 selected model families. Horizontal axis: Elo from 1000 to 2000, higher is better. Exact scores and configurations are in the table below. Whiskers are published 95% confidence intervals where available; missing results are labeled, not plotted as zero.</desc>
+<style>text{font-family:Segoe UI,Arial,sans-serif;fill:#192740}</style>
+<rect width="1000" height="610" rx="10" fill="#ffffff" stroke="#d1d9e0"/>
+<line x1="230.0" y1="38" x2="230.0" y2="530" stroke="#dde4ee"/>
+<text x="230.0" y="560" text-anchor="middle" font-size="14">1,000</text>
+<line x1="367.5" y1="38" x2="367.5" y2="530" stroke="#dde4ee"/>
+<text x="367.5" y="560" text-anchor="middle" font-size="14">1,250</text>
+<line x1="505.0" y1="38" x2="505.0" y2="530" stroke="#dde4ee"/>
+<text x="505.0" y="560" text-anchor="middle" font-size="14">1,500</text>
+<line x1="642.5" y1="38" x2="642.5" y2="530" stroke="#dde4ee"/>
+<text x="642.5" y="560" text-anchor="middle" font-size="14">1,750</text>
+<line x1="780.0" y1="38" x2="780.0" y2="530" stroke="#dde4ee"/>
+<text x="780.0" y="560" text-anchor="middle" font-size="14">2,000</text>
+<g class="task-series" data-model="0">
+<text x="18" y="70" font-size="17" font-weight="600">Claude Opus 5.5</text>
+<title>Claude Opus 5.5: 1,715.10; Claude Opus 5.5 (Max, Default Fallback); 95% CI: 1,696.04 to 1,737.45</title>
+<path d="M612.82,65 H635.60 M612.82,60 V70 M635.60,60 V70" fill="none" stroke="#a34415" stroke-width="2"/>
+<circle cx="623.30" cy="65" r="7" fill="#a34415"/>
+<text x="805" y="70" font-size="17" font-weight="600">1,715.10</text>
+</g>
+<g class="task-series" data-model="1">
+<text x="18" y="114" font-size="17" font-weight="600">Claude Sonnet 5.5</text>
+<title>Claude Sonnet 5.5: 1,711.94; Claude Sonnet 5.5 (Max, Default Fallback); 95% CI: 1,691.60 to 1,734.75</title>
+<path d="M610.38,109 H634.11 M610.38,104 V114 M634.11,104 V114" fill="none" stroke="#d17908" stroke-width="2"/>
+<circle cx="621.57" cy="109" r="7" fill="#d17908"/>
+<text x="805" y="114" font-size="17" font-weight="600">1,711.94</text>
+</g>
+<g class="task-series" data-model="2">
+<text x="18" y="158" font-size="17" font-weight="600">GPT-6 Astra</text>
+<title>GPT-6 Astra: 1,553.29; GPT-6 Astra (Max); 95% CI: 1,538.19 to 1,570.19</title>
+<path d="M526.00,153 H543.60 M526.00,148 V158 M543.60,148 V158" fill="none" stroke="#5144c7" stroke-width="2"/>
+<circle cx="534.31" cy="153" r="7" fill="#5144c7"/>
+<text x="805" y="158" font-size="17" font-weight="600">1,553.29</text>
+</g>
+<g class="task-series" data-model="3">
+<text x="18" y="202" font-size="17" font-weight="600">GPT-6.1 Sol</text>
+<title>GPT-6.1 Sol: 1,452.57; GPT-6.1 Sol (Max); 95% CI: 1,434.41 to 1,471.42</title>
+<path d="M468.93,197 H489.28 M468.93,192 V202 M489.28,192 V202" fill="none" stroke="#1878ba" stroke-width="2"/>
+<circle cx="478.91" cy="197" r="7" fill="#1878ba"/>
+<text x="805" y="202" font-size="17" font-weight="600">1,452.57</text>
+</g>
+<g class="task-series" data-model="4">
+<text x="18" y="246" font-size="17" font-weight="600">GPT-5.6 Sol</text>
+<text x="805" y="246" font-size="15" fill="#56647a">No result</text>
+</g>
+<g class="task-series" data-model="5">
+<text x="18" y="290" font-size="17" font-weight="600">Gemini 3.8 Flash</text>
+<title>Gemini 3.8 Flash: 1,224.82; Gemini 3.8 Flash (High); 95% CI: 1,210.65 to 1,239.22</title>
+<path d="M345.86,285 H361.57 M345.86,280 V290 M361.57,280 V290" fill="none" stroke="#07816c" stroke-width="2"/>
+<circle cx="353.65" cy="285" r="7" fill="#07816c"/>
+<text x="805" y="290" font-size="17" font-weight="600">1,224.82</text>
+</g>
+<g class="task-series" data-model="6">
+<text x="18" y="334" font-size="17" font-weight="600">GPT-6 Luna</text>
+<title>GPT-6 Luna: 1,395.16; GPT-6 Luna (Max); 95% CI: 1,379.49 to 1,409.96</title>
+<path d="M438.72,329 H455.48 M438.72,324 V334 M455.48,324 V334" fill="none" stroke="#6e7889" stroke-width="2"/>
+<circle cx="447.34" cy="329" r="7" fill="#6e7889"/>
+<text x="805" y="334" font-size="17" font-weight="600">1,395.16</text>
+</g>
+<g class="task-series" data-model="7">
+<text x="18" y="378" font-size="17" font-weight="600">GPT-5.6 Sol Fast</text>
+<text x="805" y="378" font-size="15" fill="#56647a">No result</text>
+</g>
+<g class="task-series" data-model="8">
+<text x="18" y="422" font-size="17" font-weight="600">GPT-6.1 Terra</text>
+<title>GPT-6.1 Terra: 1,463.42; GPT-6.1 Terra (Max); 95% CI: 1,446.17 to 1,483.14</title>
+<path d="M475.39,417 H495.73 M475.39,412 V422 M495.73,412 V422" fill="none" stroke="#9744a0" stroke-width="2"/>
+<circle cx="484.88" cy="417" r="7" fill="#9744a0"/>
+<text x="805" y="422" font-size="17" font-weight="600">1,463.42</text>
+</g>
+<g class="task-series" data-model="9">
+<text x="18" y="466" font-size="17" font-weight="600">Gemini 4 Argon</text>
+<title>Gemini 4 Argon: 1,305.21; Gemini 4 Argon (High); 95% CI: 1,287.98 to 1,321.34</title>
+<path d="M388.39,461 H406.74 M388.39,456 V466 M406.74,456 V466" fill="none" stroke="#4d7b16" stroke-width="2"/>
+<circle cx="397.87" cy="461" r="7" fill="#4d7b16"/>
+<text x="805" y="466" font-size="17" font-weight="600">1,305.21</text>
+</g>
+<g class="task-series" data-model="10">
+<text x="18" y="510" font-size="17" font-weight="600">Grok 4.7</text>
+<title>Grok 4.7: 1,502.89; Grok 4.7 (Xhigh); 95% CI: 1,487.69 to 1,520.09</title>
+<path d="M498.23,505 H516.05 M498.23,500 V510 M516.05,500 V510" fill="none" stroke="#be3042" stroke-width="2"/>
+<circle cx="506.59" cy="505" r="7" fill="#be3042"/>
+<text x="805" y="510" font-size="17" font-weight="600">1,502.89</text>
+</g>
+<text x="505" y="592" text-anchor="middle" font-size="14">Elo / higher is better / native benchmark scale</text></svg></div><div data-document-metric="professional" hidden><h3>Professional work: broader deliverables</h3><p>Pairwise Elo for professional deliverables, including documents, slides, diagrams, and spreadsheets. Whiskers show the source&#x27;s 95% CI.</p><svg class="task-plot" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 610" role="img" aria-labelledby="task-professional-title task-professional-desc">
+<title id="task-professional-title">Professional work: broader deliverables</title>
+<desc id="task-professional-desc">11 selected model families. Horizontal axis: Elo from 1000 to 2000, higher is better. Exact scores and configurations are in the table below. Whiskers are published 95% confidence intervals where available; missing results are labeled, not plotted as zero.</desc>
+<style>text{font-family:Segoe UI,Arial,sans-serif;fill:#192740}</style>
+<rect width="1000" height="610" rx="10" fill="#ffffff" stroke="#d1d9e0"/>
+<line x1="230.0" y1="38" x2="230.0" y2="530" stroke="#dde4ee"/>
+<text x="230.0" y="560" text-anchor="middle" font-size="14">1,000</text>
+<line x1="367.5" y1="38" x2="367.5" y2="530" stroke="#dde4ee"/>
+<text x="367.5" y="560" text-anchor="middle" font-size="14">1,250</text>
+<line x1="505.0" y1="38" x2="505.0" y2="530" stroke="#dde4ee"/>
+<text x="505.0" y="560" text-anchor="middle" font-size="14">1,500</text>
+<line x1="642.5" y1="38" x2="642.5" y2="530" stroke="#dde4ee"/>
+<text x="642.5" y="560" text-anchor="middle" font-size="14">1,750</text>
+<line x1="780.0" y1="38" x2="780.0" y2="530" stroke="#dde4ee"/>
+<text x="780.0" y="560" text-anchor="middle" font-size="14">2,000</text>
+<g class="task-series" data-model="0">
+<text x="18" y="70" font-size="17" font-weight="600">Claude Opus 5.5</text>
+<title>Claude Opus 5.5: 1,866.27; Claude Opus 5.5 (Max, Default Fallback); 95% CI: -26 / +26 Elo (source-rounded)</title>
+<path d="M692.15,65 H720.75 M692.15,60 V70 M720.75,60 V70" fill="none" stroke="#a34415" stroke-width="2"/>
+<circle cx="706.45" cy="65" r="7" fill="#a34415"/>
+<text x="805" y="70" font-size="17" font-weight="600">1,866.27</text>
+</g>
+<g class="task-series" data-model="1">
+<text x="18" y="114" font-size="17" font-weight="600">Claude Sonnet 5.5</text>
+<title>Claude Sonnet 5.5: 1,837.82; Claude Sonnet 5.5 (Max, Default Fallback); 95% CI: -23 / +23 Elo (source-rounded)</title>
+<path d="M678.15,109 H703.45 M678.15,104 V114 M703.45,104 V114" fill="none" stroke="#d17908" stroke-width="2"/>
+<circle cx="690.80" cy="109" r="7" fill="#d17908"/>
+<text x="805" y="114" font-size="17" font-weight="600">1,837.82</text>
+</g>
+<g class="task-series" data-model="2">
+<text x="18" y="158" font-size="17" font-weight="600">GPT-6 Astra</text>
+<title>GPT-6 Astra: 1,584.40; GPT-6 Astra (Max); 95% CI: -19 / +19 Elo (source-rounded)</title>
+<path d="M540.97,153 H561.87 M540.97,148 V158 M561.87,148 V158" fill="none" stroke="#5144c7" stroke-width="2"/>
+<circle cx="551.42" cy="153" r="7" fill="#5144c7"/>
+<text x="805" y="158" font-size="17" font-weight="600">1,584.40</text>
+</g>
+<g class="task-series" data-model="3">
+<text x="18" y="202" font-size="17" font-weight="600">GPT-6.1 Sol</text>
+<title>GPT-6.1 Sol: 1,607.61; GPT-6.1 Sol (Max); 95% CI: -22 / +22 Elo (source-rounded)</title>
+<path d="M552.09,197 H576.29 M552.09,192 V202 M576.29,192 V202" fill="none" stroke="#1878ba" stroke-width="2"/>
+<circle cx="564.19" cy="197" r="7" fill="#1878ba"/>
+<text x="805" y="202" font-size="17" font-weight="600">1,607.61</text>
+</g>
+<g class="task-series" data-model="4">
+<text x="18" y="246" font-size="17" font-weight="600">GPT-5.6 Sol</text>
+<title>GPT-5.6 Sol: 1,618.27; GPT-5.6 Sol (Max); 95% CI: -16 / +16 Elo (source-rounded)</title>
+<path d="M561.25,241 H578.85 M561.25,236 V246 M578.85,236 V246" fill="none" stroke="#bf3c85" stroke-width="2"/>
+<circle cx="570.05" cy="241" r="7" fill="#bf3c85"/>
+<text x="805" y="246" font-size="17" font-weight="600">1,618.27</text>
+</g>
+<g class="task-series" data-model="5">
+<text x="18" y="290" font-size="17" font-weight="600">Gemini 3.8 Flash</text>
+<title>Gemini 3.8 Flash: 1,445.40; Gemini 3.8 Flash (High); 95% CI: -19 / +19 Elo (source-rounded)</title>
+<path d="M464.52,285 H485.42 M464.52,280 V290 M485.42,280 V290" fill="none" stroke="#07816c" stroke-width="2"/>
+<circle cx="474.97" cy="285" r="7" fill="#07816c"/>
+<text x="805" y="290" font-size="17" font-weight="600">1,445.40</text>
+</g>
+<g class="task-series" data-model="6">
+<text x="18" y="334" font-size="17" font-weight="600">GPT-6 Luna</text>
+<title>GPT-6 Luna: 1,444.72; GPT-6 Luna (Max); 95% CI: -21 / +20 Elo (source-rounded)</title>
+<path d="M463.05,329 H485.60 M463.05,324 V334 M485.60,324 V334" fill="none" stroke="#6e7889" stroke-width="2"/>
+<circle cx="474.60" cy="329" r="7" fill="#6e7889"/>
+<text x="805" y="334" font-size="17" font-weight="600">1,444.72</text>
+</g>
+<g class="task-series" data-model="7">
+<text x="18" y="378" font-size="17" font-weight="600">GPT-5.6 Sol Fast</text>
+<text x="805" y="378" font-size="15" fill="#56647a">No result</text>
+</g>
+<g class="task-series" data-model="8">
+<text x="18" y="422" font-size="17" font-weight="600">GPT-6.1 Terra</text>
+<title>GPT-6.1 Terra: 1,476.05; GPT-6.1 Terra (Max); 95% CI: -23 / +23 Elo (source-rounded)</title>
+<path d="M479.18,417 H504.48 M479.18,412 V422 M504.48,412 V422" fill="none" stroke="#9744a0" stroke-width="2"/>
+<circle cx="491.83" cy="417" r="7" fill="#9744a0"/>
+<text x="805" y="422" font-size="17" font-weight="600">1,476.05</text>
+</g>
+<g class="task-series" data-model="9">
+<text x="18" y="466" font-size="17" font-weight="600">Gemini 4 Argon</text>
+<title>Gemini 4 Argon: 1,631.09; Gemini 4 Argon (High); 95% CI: -20 / +20 Elo (source-rounded)</title>
+<path d="M566.10,461 H588.10 M566.10,456 V466 M588.10,456 V466" fill="none" stroke="#4d7b16" stroke-width="2"/>
+<circle cx="577.10" cy="461" r="7" fill="#4d7b16"/>
+<text x="805" y="466" font-size="17" font-weight="600">1,631.09</text>
+</g>
+<g class="task-series" data-model="10">
+<text x="18" y="510" font-size="17" font-weight="600">Grok 4.7</text>
+<title>Grok 4.7: 1,721.59; Grok 4.7 (Xhigh); 95% CI: -21 / +21 Elo (source-rounded)</title>
+<path d="M615.32,505 H638.42 M615.32,500 V510 M638.42,500 V510" fill="none" stroke="#be3042" stroke-width="2"/>
+<circle cx="626.87" cy="505" r="7" fill="#be3042"/>
+<text x="805" y="510" font-size="17" font-weight="600">1,721.59</text>
+</g>
+<text x="505" y="592" text-anchor="middle" font-size="14">Elo / higher is better / native benchmark scale</text></svg></div></section>
+    </section>
 
-<p>This avoids two common mistakes:</p><ul><li>Choosing a cheap model that cannot handle the problem reliably.</li><li>Using the most expensive model for every step, even after the task has become predictable and constrained.</li></ul>
+<h3 id="h-2-smartness-vs-cost">3. Efficiency: optimize cost, latency, and reasoning effort</h3>
+<p>After filtering by capability bar and task fit, the final step is picking the most efficient model and reasoning effort tier (<strong>1 Low to 5 Max</strong>). This avoids two common traps: picking a cheap model that fails the quality bar, or paying flagship <code>Max</code> prices and multi-minute wait times after the task is already constrained.</p>
 
-<div class="box"><p><strong>High-impact decision:</strong> I am willing to pay more and wait longer when deeper reasoning can change the outcome.</p><p><strong>High-frequency execution:</strong> Once the direction is clear, I optimize for faster responses and lower cost.</p></div>
+<h4>Capability vs. cost across reasoning efforts</h4>
+<p>In the chart below, the <strong>vertical axis represents model capability (benchmark score)</strong> and the <strong>horizontal axis represents average USD cost per task (log scale)</strong>—so <strong>upper-left means higher capability at lower cost</strong>:</p>
 
-<h3>How the decision changes within one task</h3>
-<div class="visual"><h4>One project, multiple model choices</h4><p class="sub">The model can change as uncertainty falls and the work becomes more constrained.</p>
-<svg viewBox="0 0 900 280" role="img" aria-label="A workflow moving from strong general capability to specialized fit to efficient implementation"><defs><marker id="arrow2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#59636e"/></marker></defs>
-<rect x="25" y="50" width="245" height="150" rx="14" fill="#ddf4ff" stroke="#0969da"/><text x="147" y="85" text-anchor="middle" font-size="20" font-weight="700" fill="#0969da">Explore and design</text><text x="147" y="120" text-anchor="middle" font-size="15" fill="currentColor">High uncertainty</text><text x="147" y="146" text-anchor="middle" font-size="15" fill="currentColor">Use strong overall capability</text><text x="147" y="172" text-anchor="middle" font-size="14" fill="currentColor">Example: architecture or mockup</text>
-<line x1="278" y1="125" x2="325" y2="125" stroke="#59636e" stroke-width="3" marker-end="url(#arrow2)"/>
-<rect x="335" y="50" width="245" height="150" rx="14" fill="#f6f8fa" stroke="#8250df"/><text x="457" y="85" text-anchor="middle" font-size="20" font-weight="700" fill="#8250df">Shape the artifact</text><text x="457" y="120" text-anchor="middle" font-size="15" fill="currentColor">Choose a best-fit strength</text><text x="457" y="146" text-anchor="middle" font-size="15" fill="currentColor">UI, coding, or writing</text><text x="457" y="172" text-anchor="middle" font-size="14" fill="currentColor">Example: design doc or prototype</text>
-<line x1="588" y1="125" x2="635" y2="125" stroke="#59636e" stroke-width="3" marker-end="url(#arrow2)"/>
-<rect x="645" y="50" width="230" height="150" rx="14" fill="#dafbe1" stroke="#1a7f37"/><text x="760" y="85" text-anchor="middle" font-size="20" font-weight="700" fill="#1a7f37">Implement and iterate</text><text x="760" y="120" text-anchor="middle" font-size="15" fill="currentColor">Low uncertainty</text><text x="760" y="146" text-anchor="middle" font-size="15" fill="currentColor">Optimize cost and latency</text><text x="760" y="172" text-anchor="middle" font-size="14" fill="currentColor">Example: scoped code changes</text>
-<text x="450" y="245" text-anchor="middle" font-size="16" font-weight="650" fill="currentColor">As uncertainty decreases, efficiency becomes more important.</text></svg></div>
-
-<h3>Use benchmark data as a filter, not a universal ranking</h3>
-<p>To compare qualifying models, I created a view that combines public benchmark performance, estimated cost, and response time. The purpose is not to crown one universal winner. It is to help answer a narrower question: among models that are capable and suitable for this work, which configuration offers the best efficiency?</p>
-
-    <h3 id="h-2-smartness-vs-cost">Capability vs. cost across reasoning efforts</h3>
-
-    <p class="wp-block-paragraph">In this chart, the <strong>vertical axis represents model capability (benchmark score)</strong> and the <strong>horizontal axis represents average USD cost per task (log scale)</strong> across reasoning efforts <strong>1 (Low) to 5 (Max)</strong>—so <strong>upper-left means higher capability at lower cost</strong>.</p>
-
-    <div class="blog-chart-controls" role="region" aria-label="Interactive chart controls">
+<div class="blog-chart-controls" role="region" aria-label="Interactive chart controls">
       <div class="ctrl-group">
         <label for="cost-benchmark">Benchmark:</label>
         <select id="cost-benchmark">
@@ -1191,12 +1689,10 @@ Do not implement the full solution yet. Recommend which approaches are worth pro
       </div>
     </div>
 
-    <!-- 3. SMARTNESS VS PERFORMANCE (SPEED) -->
-    <h3 id="h-3-smartness-vs-perf">Capability vs. end-to-end response time</h3>
+<h4 id="h-3-smartness-vs-perf">Capability vs. end-to-end response time</h4>
+<p>Output tokens per second hides internal thinking time. Plotting <strong>median end-to-end response time (seconds, log scale)</strong> against capability shows the real interactive latency cost of stepping up reasoning effort:</p>
 
-    <p class="wp-block-paragraph">Output tokens per second hides internal thinking time. Plotting <strong>median end-to-end response time (seconds, log scale)</strong> against capability reveals the true latency cost of higher reasoning effort:</p>
-
-    <div id="time" class="gh-benchmark-panel">
+<div id="time" class="gh-benchmark-panel">
   <div class="gh-chart-header">
     <h3>Artificial Analysis Intelligence Index v5.0: score vs. execution speed</h3>
     <p class="muted">Same benchmark, same published model configuration across reasoning efforts (1 Low to 5 Max). Upper-left is better.</p>
@@ -1506,536 +2002,10 @@ Do not implement the full solution yet. Recommend which approaches are worth pro
       </div>
     </div>
 
-    <!-- 4. BEST AT TASK -->
-    <h3 id="h-4-best-at-task">Task specialization across UI, engineering, and documents</h3>
+<h4>Quick decision guide by task and phase</h4>
+<p>Combining all three layers—capability bar, task fit, and cost/latency efficiency—yields a practical lookup for daily Copilot workflows:</p>
 
-    <p class="wp-block-paragraph">Aggregate scores do not show domain fit. Switch tabs below to compare models across <strong>UI / frontend design</strong>, <strong>terminal engineering</strong>, and <strong>document generation</strong>:</p>
-
-    <section id="tasks" class="card task-section" style="margin-bottom: 20px;">
-      <div class="task-tabs" role="tablist" aria-label="Task-specific benchmark details">
-<button type="button" id="tab-frontend" role="tab" aria-selected="true" aria-controls="panel-frontend" tabindex="0">UI / frontend</button>
-<button type="button" id="tab-engineering" role="tab" aria-selected="false" aria-controls="panel-engineering" tabindex="-1">Engineering / backend proxy</button>
-<button type="button" id="tab-documents" role="tab" aria-selected="false" aria-controls="panel-documents" tabindex="-1">Documents / writing</button>
-</div>
-<section id="panel-frontend" role="tabpanel" aria-labelledby="tab-frontend" tabindex="0"><h3>Website / frontend design</h3><p>Blind human preferences between websites generated from the same prompt. Bradley-Terry ratings are displayed as Elo.</p><svg class="task-plot" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 610" role="img" aria-labelledby="task-website-title task-website-desc">
-<title id="task-website-title">Website / frontend design</title>
-<desc id="task-website-desc">11 selected model families. Horizontal axis: Elo from 1200 to 1400, higher is better. Exact scores and configurations are in the table below. Whiskers are published 95% confidence intervals where available; missing results are labeled, not plotted as zero.</desc>
-<style>text{font-family:Segoe UI,Arial,sans-serif;fill:#192740}</style>
-<rect width="1000" height="610" rx="10" fill="#ffffff" stroke="#d1d9e0"/>
-<line x1="230.0" y1="38" x2="230.0" y2="530" stroke="#dde4ee"/>
-<text x="230.0" y="560" text-anchor="middle" font-size="14">1,200</text>
-<line x1="367.5" y1="38" x2="367.5" y2="530" stroke="#dde4ee"/>
-<text x="367.5" y="560" text-anchor="middle" font-size="14">1,250</text>
-<line x1="505.0" y1="38" x2="505.0" y2="530" stroke="#dde4ee"/>
-<text x="505.0" y="560" text-anchor="middle" font-size="14">1,300</text>
-<line x1="642.5" y1="38" x2="642.5" y2="530" stroke="#dde4ee"/>
-<text x="642.5" y="560" text-anchor="middle" font-size="14">1,350</text>
-<line x1="780.0" y1="38" x2="780.0" y2="530" stroke="#dde4ee"/>
-<text x="780.0" y="560" text-anchor="middle" font-size="14">1,400</text>
-<g class="task-series" data-model="0">
-<text x="18" y="70" font-size="17" font-weight="600">Claude Opus 5.5</text>
-<title>Claude Opus 5.5: 1,325.00; Effort not stated; 95% CI: Not published in captured record</title>
-<circle cx="573.75" cy="65" r="7" fill="#a34415"/>
-<text x="805" y="70" font-size="17" font-weight="600">1,325.00</text>
-</g>
-<g class="task-series" data-model="1">
-<text x="18" y="114" font-size="17" font-weight="600">Claude Sonnet 5.5</text>
-<title>Claude Sonnet 5.5: 1,322.00; Effort not stated; 95% CI: Not published in captured record</title>
-<circle cx="565.50" cy="109" r="7" fill="#d17908"/>
-<text x="805" y="114" font-size="17" font-weight="600">1,322.00</text>
-</g>
-<g class="task-series" data-model="2">
-<text x="18" y="158" font-size="17" font-weight="600">GPT-6 Astra</text>
-<title>GPT-6 Astra: 1,339.00; Max; 95% CI: Not published in captured record</title>
-<circle cx="612.25" cy="153" r="7" fill="#5144c7"/>
-<text x="805" y="158" font-size="17" font-weight="600">1,339.00</text>
-</g>
-<g class="task-series" data-model="3">
-<text x="18" y="202" font-size="17" font-weight="600">GPT-6.1 Sol</text>
-<title>GPT-6.1 Sol: 1,315.00; Effort not stated; 95% CI: Not published in captured record</title>
-<circle cx="546.25" cy="197" r="7" fill="#1878ba"/>
-<text x="805" y="202" font-size="17" font-weight="600">1,315.00</text>
-</g>
-<g class="task-series" data-model="4">
-<text x="18" y="246" font-size="17" font-weight="600">GPT-5.6 Sol</text>
-<title>GPT-5.6 Sol: 1,320.00; Xhigh; 95% CI: Not published in captured record</title>
-<circle cx="560.00" cy="241" r="7" fill="#bf3c85"/>
-<text x="805" y="246" font-size="17" font-weight="600">1,320.00</text>
-</g>
-<g class="task-series" data-model="5">
-<text x="18" y="290" font-size="17" font-weight="600">Gemini 3.8 Flash</text>
-<title>Gemini 3.8 Flash: 1,299.00; Effort not stated; 95% CI: Not published in captured record</title>
-<circle cx="502.25" cy="285" r="7" fill="#07816c"/>
-<text x="805" y="290" font-size="17" font-weight="600">1,299.00</text>
-</g>
-<g class="task-series" data-model="6">
-<text x="18" y="334" font-size="17" font-weight="600">GPT-6 Luna</text>
-<title>GPT-6 Luna: 1,266.00; Effort not stated; 95% CI: Not published in captured record</title>
-<circle cx="411.50" cy="329" r="7" fill="#6e7889"/>
-<text x="805" y="334" font-size="17" font-weight="600">1,266.00</text>
-</g>
-<g class="task-series" data-model="7">
-<text x="18" y="378" font-size="17" font-weight="600">GPT-5.6 Sol Fast</text>
-<text x="805" y="378" font-size="15" fill="#56647a">No result</text>
-</g>
-<g class="task-series" data-model="8">
-<text x="18" y="422" font-size="17" font-weight="600">GPT-6.1 Terra</text>
-<title>GPT-6.1 Terra: 1,284.00; Effort not stated; 95% CI: Not published in captured record</title>
-<circle cx="461.00" cy="417" r="7" fill="#9744a0"/>
-<text x="805" y="422" font-size="17" font-weight="600">1,284.00</text>
-</g>
-<g class="task-series" data-model="9">
-<text x="18" y="466" font-size="17" font-weight="600">Gemini 4 Argon</text>
-<title>Gemini 4 Argon: 1,316.00; Effort not stated; 95% CI: Not published in captured record</title>
-<circle cx="549.00" cy="461" r="7" fill="#4d7b16"/>
-<text x="805" y="466" font-size="17" font-weight="600">1,316.00</text>
-</g>
-<g class="task-series" data-model="10">
-<text x="18" y="510" font-size="17" font-weight="600">Grok 4.7</text>
-<title>Grok 4.7: 1,251.00; Effort not stated; 95% CI: Not published in captured record</title>
-<circle cx="370.25" cy="505" r="7" fill="#be3042"/>
-<text x="805" y="510" font-size="17" font-weight="600">1,251.00</text>
-</g>
-<text x="505" y="592" text-anchor="middle" font-size="14">Elo / higher is better / native benchmark scale</text></svg></section>
-<section id="panel-engineering" role="tabpanel" aria-labelledby="tab-engineering" tabindex="0" hidden><h3>Software engineering / terminal tasks</h3><p>Resolution rate on executable terminal tasks. Each row identifies the actual agent and reasoning effort; whiskers show the source&#x27;s 95% CI.</p><svg class="task-plot" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 610" role="img" aria-labelledby="task-engineering-title task-engineering-desc">
-<title id="task-engineering-title">Software engineering / terminal tasks</title>
-<desc id="task-engineering-desc">11 selected model families. Horizontal axis: % from 0 to 100, higher is better. Exact scores and configurations are in the table below. Whiskers are published 95% confidence intervals where available; missing results are labeled, not plotted as zero.</desc>
-<style>text{font-family:Segoe UI,Arial,sans-serif;fill:#192740}</style>
-<rect width="1000" height="610" rx="10" fill="#ffffff" stroke="#d1d9e0"/>
-<line x1="230.0" y1="38" x2="230.0" y2="530" stroke="#dde4ee"/>
-<text x="230.0" y="560" text-anchor="middle" font-size="14">0</text>
-<line x1="340.0" y1="38" x2="340.0" y2="530" stroke="#dde4ee"/>
-<text x="340.0" y="560" text-anchor="middle" font-size="14">20</text>
-<line x1="450.0" y1="38" x2="450.0" y2="530" stroke="#dde4ee"/>
-<text x="450.0" y="560" text-anchor="middle" font-size="14">40</text>
-<line x1="560.0" y1="38" x2="560.0" y2="530" stroke="#dde4ee"/>
-<text x="560.0" y="560" text-anchor="middle" font-size="14">60</text>
-<line x1="670.0" y1="38" x2="670.0" y2="530" stroke="#dde4ee"/>
-<text x="670.0" y="560" text-anchor="middle" font-size="14">80</text>
-<line x1="780.0" y1="38" x2="780.0" y2="530" stroke="#dde4ee"/>
-<text x="780.0" y="560" text-anchor="middle" font-size="14">100</text>
-<g class="task-series" data-model="0">
-<text x="18" y="70" font-size="17" font-weight="600">Claude Opus 5.5</text>
-<title>Claude Opus 5.5: 64.85%; Max / Claude Code; 95% CI: 61.74% to 67.96%</title>
-<path d="M569.57,65 H603.78 M569.57,60 V70 M603.78,60 V70" fill="none" stroke="#a34415" stroke-width="2"/>
-<circle cx="586.67" cy="65" r="7" fill="#a34415"/>
-<text x="805" y="70" font-size="17" font-weight="600">64.85%</text>
-</g>
-<g class="task-series" data-model="1">
-<text x="18" y="114" font-size="17" font-weight="600">Claude Sonnet 5.5</text>
-<title>Claude Sonnet 5.5: 61.82%; Max / Claude Code; 95% CI: 58.88% to 64.76%</title>
-<path d="M553.84,109 H586.18 M553.84,104 V114 M586.18,104 V114" fill="none" stroke="#d17908" stroke-width="2"/>
-<circle cx="570.01" cy="109" r="7" fill="#d17908"/>
-<text x="805" y="114" font-size="17" font-weight="600">61.82%</text>
-</g>
-<g class="task-series" data-model="2">
-<text x="18" y="158" font-size="17" font-weight="600">GPT-6 Astra</text>
-<title>GPT-6 Astra: 58.18%; Max / Codex; 95% CI: 55.39% to 60.97%</title>
-<path d="M534.64,153 H565.34 M534.64,148 V158 M565.34,148 V158" fill="none" stroke="#5144c7" stroke-width="2"/>
-<circle cx="549.99" cy="153" r="7" fill="#5144c7"/>
-<text x="805" y="158" font-size="17" font-weight="600">58.18%</text>
-</g>
-<g class="task-series" data-model="3">
-<text x="18" y="202" font-size="17" font-weight="600">GPT-6.1 Sol</text>
-<title>GPT-6.1 Sol: 58.18%; Max / Codex; 95% CI: 55.07% to 61.29%</title>
-<path d="M532.88,197 H567.10 M532.88,192 V202 M567.10,192 V202" fill="none" stroke="#1878ba" stroke-width="2"/>
-<circle cx="549.99" cy="197" r="7" fill="#1878ba"/>
-<text x="805" y="202" font-size="17" font-weight="600">58.18%</text>
-</g>
-<g class="task-series" data-model="4">
-<text x="18" y="246" font-size="17" font-weight="600">GPT-5.6 Sol</text>
-<title>GPT-5.6 Sol: 37.27%; Max / Codex; 95% CI: 33.49% to 41.05%</title>
-<path d="M414.20,241 H455.77 M414.20,236 V246 M455.77,236 V246" fill="none" stroke="#bf3c85" stroke-width="2"/>
-<circle cx="434.99" cy="241" r="7" fill="#bf3c85"/>
-<text x="805" y="246" font-size="17" font-weight="600">37.27%</text>
-</g>
-<g class="task-series" data-model="5">
-<text x="18" y="290" font-size="17" font-weight="600">Gemini 3.8 Flash</text>
-<title>Gemini 3.8 Flash: 19.09%; High / mini-SWE-agent; 95% CI: 15.73% to 22.45%</title>
-<path d="M316.51,285 H353.48 M316.51,280 V290 M353.48,280 V290" fill="none" stroke="#07816c" stroke-width="2"/>
-<circle cx="335.00" cy="285" r="7" fill="#07816c"/>
-<text x="805" y="290" font-size="17" font-weight="600">19.09%</text>
-</g>
-<g class="task-series" data-model="6">
-<text x="18" y="334" font-size="17" font-weight="600">GPT-6 Luna</text>
-<title>GPT-6 Luna: 16.36%; Max / Codex; 95% CI: 13.64% to 19.08%</title>
-<path d="M305.02,329 H334.94 M305.02,324 V334 M334.94,324 V334" fill="none" stroke="#6e7889" stroke-width="2"/>
-<circle cx="319.98" cy="329" r="7" fill="#6e7889"/>
-<text x="805" y="334" font-size="17" font-weight="600">16.36%</text>
-</g>
-<g class="task-series" data-model="7">
-<text x="18" y="378" font-size="17" font-weight="600">GPT-5.6 Sol Fast</text>
-<text x="805" y="378" font-size="15" fill="#56647a">No result</text>
-</g>
-<g class="task-series" data-model="8">
-<text x="18" y="422" font-size="17" font-weight="600">GPT-6.1 Terra</text>
-<text x="805" y="422" font-size="15" fill="#56647a">No result</text>
-</g>
-<g class="task-series" data-model="9">
-<text x="18" y="466" font-size="17" font-weight="600">Gemini 4 Argon</text>
-<text x="805" y="466" font-size="15" fill="#56647a">No result</text>
-</g>
-<g class="task-series" data-model="10">
-<text x="18" y="510" font-size="17" font-weight="600">Grok 4.7</text>
-<title>Grok 4.7: 37.58%; Xhigh / Grok Build; 95% CI: 34.04% to 41.12%</title>
-<path d="M417.22,505 H456.16 M417.22,500 V510 M456.16,500 V510" fill="none" stroke="#be3042" stroke-width="2"/>
-<circle cx="436.69" cy="505" r="7" fill="#be3042"/>
-<text x="805" y="510" font-size="17" font-weight="600">37.58%</text>
-</g>
-<text x="505" y="592" text-anchor="middle" font-size="14">% / higher is better / native benchmark scale</text></svg></section>
-<section id="panel-documents" role="tabpanel" aria-labelledby="tab-documents" tabindex="0" hidden>
-<label class="metric-control">Document metric:
-<select id="document-metric">
-<option value="word">Word deliverables / rubric checks met</option>
-<option value="analysis">Analytical quality / all artifact types</option>
-<option value="presentation">Presentation quality / all artifact types</option>
-<option value="professional">Professional work / GDPval-AA</option>
-</select></label><div data-document-metric="word"><h3>Document writing: Word deliverables</h3><p>Raw Word (.docx) rubric-check pass rate, extracted from briefcaseBreakdown.rubricByFileType.docx. Each captured run contains 17 Word tasks; this is checks satisfied, not whole documents passed.</p><svg class="task-plot" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 610" role="img" aria-labelledby="task-word-title task-word-desc">
-<title id="task-word-title">Document writing: Word deliverables</title>
-<desc id="task-word-desc">11 selected model families. Horizontal axis: % from 0 to 100, higher is better. Exact scores and configurations are in the table below. Whiskers are published 95% confidence intervals where available; missing results are labeled, not plotted as zero.</desc>
-<style>text{font-family:Segoe UI,Arial,sans-serif;fill:#192740}</style>
-<rect width="1000" height="610" rx="10" fill="#ffffff" stroke="#d1d9e0"/>
-<line x1="230.0" y1="38" x2="230.0" y2="530" stroke="#dde4ee"/>
-<text x="230.0" y="560" text-anchor="middle" font-size="14">0</text>
-<line x1="340.0" y1="38" x2="340.0" y2="530" stroke="#dde4ee"/>
-<text x="340.0" y="560" text-anchor="middle" font-size="14">20</text>
-<line x1="450.0" y1="38" x2="450.0" y2="530" stroke="#dde4ee"/>
-<text x="450.0" y="560" text-anchor="middle" font-size="14">40</text>
-<line x1="560.0" y1="38" x2="560.0" y2="530" stroke="#dde4ee"/>
-<text x="560.0" y="560" text-anchor="middle" font-size="14">60</text>
-<line x1="670.0" y1="38" x2="670.0" y2="530" stroke="#dde4ee"/>
-<text x="670.0" y="560" text-anchor="middle" font-size="14">80</text>
-<line x1="780.0" y1="38" x2="780.0" y2="530" stroke="#dde4ee"/>
-<text x="780.0" y="560" text-anchor="middle" font-size="14">100</text>
-<g class="task-series" data-model="0">
-<text x="18" y="70" font-size="17" font-weight="600">Claude Opus 5.5</text>
-<title>Claude Opus 5.5: 60.36%; Claude Opus 5.5 (Max, Default Fallback); 95% CI: Not published in captured record</title>
-<circle cx="561.95" cy="65" r="7" fill="#a34415"/>
-<text x="805" y="70" font-size="17" font-weight="600">60.36%</text>
-</g>
-<g class="task-series" data-model="1">
-<text x="18" y="114" font-size="17" font-weight="600">Claude Sonnet 5.5</text>
-<title>Claude Sonnet 5.5: 60.95%; Claude Sonnet 5.5 (Max, Default Fallback); 95% CI: Not published in captured record</title>
-<circle cx="565.21" cy="109" r="7" fill="#d17908"/>
-<text x="805" y="114" font-size="17" font-weight="600">60.95%</text>
-</g>
-<g class="task-series" data-model="2">
-<text x="18" y="158" font-size="17" font-weight="600">GPT-6 Astra</text>
-<title>GPT-6 Astra: 52.07%; GPT-6 Astra (Max); 95% CI: Not published in captured record</title>
-<circle cx="516.39" cy="153" r="7" fill="#5144c7"/>
-<text x="805" y="158" font-size="17" font-weight="600">52.07%</text>
-</g>
-<g class="task-series" data-model="3">
-<text x="18" y="202" font-size="17" font-weight="600">GPT-6.1 Sol</text>
-<title>GPT-6.1 Sol: 52.07%; GPT-6.1 Sol (Max); 95% CI: Not published in captured record</title>
-<circle cx="516.39" cy="197" r="7" fill="#1878ba"/>
-<text x="805" y="202" font-size="17" font-weight="600">52.07%</text>
-</g>
-<g class="task-series" data-model="4">
-<text x="18" y="246" font-size="17" font-weight="600">GPT-5.6 Sol</text>
-<text x="805" y="246" font-size="15" fill="#56647a">No result</text>
-</g>
-<g class="task-series" data-model="5">
-<text x="18" y="290" font-size="17" font-weight="600">Gemini 3.8 Flash</text>
-<title>Gemini 3.8 Flash: 44.97%; Gemini 3.8 Flash (High); 95% CI: Not published in captured record</title>
-<circle cx="477.34" cy="285" r="7" fill="#07816c"/>
-<text x="805" y="290" font-size="17" font-weight="600">44.97%</text>
-</g>
-<g class="task-series" data-model="6">
-<text x="18" y="334" font-size="17" font-weight="600">GPT-6 Luna</text>
-<title>GPT-6 Luna: 44.38%; GPT-6 Luna (Max); 95% CI: Not published in captured record</title>
-<circle cx="474.08" cy="329" r="7" fill="#6e7889"/>
-<text x="805" y="334" font-size="17" font-weight="600">44.38%</text>
-</g>
-<g class="task-series" data-model="7">
-<text x="18" y="378" font-size="17" font-weight="600">GPT-5.6 Sol Fast</text>
-<text x="805" y="378" font-size="15" fill="#56647a">No result</text>
-</g>
-<g class="task-series" data-model="8">
-<text x="18" y="422" font-size="17" font-weight="600">GPT-6.1 Terra</text>
-<title>GPT-6.1 Terra: 37.28%; GPT-6.1 Terra (Max); 95% CI: Not published in captured record</title>
-<circle cx="435.03" cy="417" r="7" fill="#9744a0"/>
-<text x="805" y="422" font-size="17" font-weight="600">37.28%</text>
-</g>
-<g class="task-series" data-model="9">
-<text x="18" y="466" font-size="17" font-weight="600">Gemini 4 Argon</text>
-<title>Gemini 4 Argon: 62.13%; Gemini 4 Argon (High); 95% CI: Not published in captured record</title>
-<circle cx="571.72" cy="461" r="7" fill="#4d7b16"/>
-<text x="805" y="466" font-size="17" font-weight="600">62.13%</text>
-</g>
-<g class="task-series" data-model="10">
-<text x="18" y="510" font-size="17" font-weight="600">Grok 4.7</text>
-<title>Grok 4.7: 57.40%; Grok 4.7 (Xhigh); 95% CI: Not published in captured record</title>
-<circle cx="545.68" cy="505" r="7" fill="#be3042"/>
-<text x="805" y="510" font-size="17" font-weight="600">57.40%</text>
-</g>
-<text x="505" y="592" text-anchor="middle" font-size="14">% / higher is better / native benchmark scale</text></svg></div><div data-document-metric="analysis" hidden><h3>Analytical quality: all deliverable types</h3><p>Analytical quality pairwise Elo across all deliverable types (Word, PDF, slides, spreadsheets, and others), not Word-only.</p><svg class="task-plot" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 610" role="img" aria-labelledby="task-analysis-title task-analysis-desc">
-<title id="task-analysis-title">Analytical quality: all deliverable types</title>
-<desc id="task-analysis-desc">11 selected model families. Horizontal axis: Elo from 1000 to 2250, higher is better. Exact scores and configurations are in the table below. Whiskers are published 95% confidence intervals where available; missing results are labeled, not plotted as zero.</desc>
-<style>text{font-family:Segoe UI,Arial,sans-serif;fill:#192740}</style>
-<rect width="1000" height="610" rx="10" fill="#ffffff" stroke="#d1d9e0"/>
-<line x1="230.0" y1="38" x2="230.0" y2="530" stroke="#dde4ee"/>
-<text x="230.0" y="560" text-anchor="middle" font-size="14">1,000</text>
-<line x1="340.0" y1="38" x2="340.0" y2="530" stroke="#dde4ee"/>
-<text x="340.0" y="560" text-anchor="middle" font-size="14">1,250</text>
-<line x1="450.0" y1="38" x2="450.0" y2="530" stroke="#dde4ee"/>
-<text x="450.0" y="560" text-anchor="middle" font-size="14">1,500</text>
-<line x1="560.0" y1="38" x2="560.0" y2="530" stroke="#dde4ee"/>
-<text x="560.0" y="560" text-anchor="middle" font-size="14">1,750</text>
-<line x1="670.0" y1="38" x2="670.0" y2="530" stroke="#dde4ee"/>
-<text x="670.0" y="560" text-anchor="middle" font-size="14">2,000</text>
-<line x1="780.0" y1="38" x2="780.0" y2="530" stroke="#dde4ee"/>
-<text x="780.0" y="560" text-anchor="middle" font-size="14">2,250</text>
-<g class="task-series" data-model="0">
-<text x="18" y="70" font-size="17" font-weight="600">Claude Opus 5.5</text>
-<title>Claude Opus 5.5: 2,135.15; Claude Opus 5.5 (Max, Default Fallback); 95% CI: 2,111.93 to 2,160.57</title>
-<path d="M719.25,65 H740.65 M719.25,60 V70 M740.65,60 V70" fill="none" stroke="#a34415" stroke-width="2"/>
-<circle cx="729.47" cy="65" r="7" fill="#a34415"/>
-<text x="805" y="70" font-size="17" font-weight="600">2,135.15</text>
-</g>
-<g class="task-series" data-model="1">
-<text x="18" y="114" font-size="17" font-weight="600">Claude Sonnet 5.5</text>
-<title>Claude Sonnet 5.5: 2,104.30; Claude Sonnet 5.5 (Max, Default Fallback); 95% CI: 2,083.51 to 2,127.26</title>
-<path d="M706.74,109 H725.99 M706.74,104 V114 M725.99,104 V114" fill="none" stroke="#d17908" stroke-width="2"/>
-<circle cx="715.89" cy="109" r="7" fill="#d17908"/>
-<text x="805" y="114" font-size="17" font-weight="600">2,104.30</text>
-</g>
-<g class="task-series" data-model="2">
-<text x="18" y="158" font-size="17" font-weight="600">GPT-6 Astra</text>
-<title>GPT-6 Astra: 1,752.19; GPT-6 Astra (Max); 95% CI: 1,736.55 to 1,768.94</title>
-<path d="M554.08,153 H568.33 M554.08,148 V158 M568.33,148 V158" fill="none" stroke="#5144c7" stroke-width="2"/>
-<circle cx="560.96" cy="153" r="7" fill="#5144c7"/>
-<text x="805" y="158" font-size="17" font-weight="600">1,752.19</text>
-</g>
-<g class="task-series" data-model="3">
-<text x="18" y="202" font-size="17" font-weight="600">GPT-6.1 Sol</text>
-<title>GPT-6.1 Sol: 1,766.62; GPT-6.1 Sol (Max); 95% CI: 1,751.28 to 1,782.49</title>
-<path d="M560.56,197 H574.30 M560.56,192 V202 M574.30,192 V202" fill="none" stroke="#1878ba" stroke-width="2"/>
-<circle cx="567.31" cy="197" r="7" fill="#1878ba"/>
-<text x="805" y="202" font-size="17" font-weight="600">1,766.62</text>
-</g>
-<g class="task-series" data-model="4">
-<text x="18" y="246" font-size="17" font-weight="600">GPT-5.6 Sol</text>
-<text x="805" y="246" font-size="15" fill="#56647a">No result</text>
-</g>
-<g class="task-series" data-model="5">
-<text x="18" y="290" font-size="17" font-weight="600">Gemini 3.8 Flash</text>
-<title>Gemini 3.8 Flash: 1,136.55; Gemini 3.8 Flash (High); 95% CI: 1,119.49 to 1,151.98</title>
-<path d="M282.58,285 H296.87 M282.58,280 V290 M296.87,280 V290" fill="none" stroke="#07816c" stroke-width="2"/>
-<circle cx="290.08" cy="285" r="7" fill="#07816c"/>
-<text x="805" y="290" font-size="17" font-weight="600">1,136.55</text>
-</g>
-<g class="task-series" data-model="6">
-<text x="18" y="334" font-size="17" font-weight="600">GPT-6 Luna</text>
-<title>GPT-6 Luna: 1,376.09; GPT-6 Luna (Max); 95% CI: 1,358.18 to 1,395.26</title>
-<path d="M387.60,329 H403.91 M387.60,324 V334 M403.91,324 V334" fill="none" stroke="#6e7889" stroke-width="2"/>
-<circle cx="395.48" cy="329" r="7" fill="#6e7889"/>
-<text x="805" y="334" font-size="17" font-weight="600">1,376.09</text>
-</g>
-<g class="task-series" data-model="7">
-<text x="18" y="378" font-size="17" font-weight="600">GPT-5.6 Sol Fast</text>
-<text x="805" y="378" font-size="15" fill="#56647a">No result</text>
-</g>
-<g class="task-series" data-model="8">
-<text x="18" y="422" font-size="17" font-weight="600">GPT-6.1 Terra</text>
-<title>GPT-6.1 Terra: 1,491.89; GPT-6.1 Terra (Max); 95% CI: 1,471.30 to 1,514.37</title>
-<path d="M437.37,417 H456.32 M437.37,412 V422 M456.32,412 V422" fill="none" stroke="#9744a0" stroke-width="2"/>
-<circle cx="446.43" cy="417" r="7" fill="#9744a0"/>
-<text x="805" y="422" font-size="17" font-weight="600">1,491.89</text>
-</g>
-<g class="task-series" data-model="9">
-<text x="18" y="466" font-size="17" font-weight="600">Gemini 4 Argon</text>
-<title>Gemini 4 Argon: 1,550.88; Gemini 4 Argon (High); 95% CI: 1,530.10 to 1,571.08</title>
-<path d="M463.24,461 H481.28 M463.24,456 V466 M481.28,456 V466" fill="none" stroke="#4d7b16" stroke-width="2"/>
-<circle cx="472.39" cy="461" r="7" fill="#4d7b16"/>
-<text x="805" y="466" font-size="17" font-weight="600">1,550.88</text>
-</g>
-<g class="task-series" data-model="10">
-<text x="18" y="510" font-size="17" font-weight="600">Grok 4.7</text>
-<title>Grok 4.7: 1,933.69; Grok 4.7 (Xhigh); 95% CI: 1,917.67 to 1,951.53</title>
-<path d="M633.77,505 H648.67 M633.77,500 V510 M648.67,500 V510" fill="none" stroke="#be3042" stroke-width="2"/>
-<circle cx="640.82" cy="505" r="7" fill="#be3042"/>
-<text x="805" y="510" font-size="17" font-weight="600">1,933.69</text>
-</g>
-<text x="505" y="592" text-anchor="middle" font-size="14">Elo / higher is better / native benchmark scale</text></svg></div><div data-document-metric="presentation" hidden><h3>Presentation: all deliverable types</h3><p>Presentation pairwise Elo across all deliverable types (Word, PDF, slides, spreadsheets, and others), not Word-only.</p><svg class="task-plot" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 610" role="img" aria-labelledby="task-presentation-title task-presentation-desc">
-<title id="task-presentation-title">Presentation: all deliverable types</title>
-<desc id="task-presentation-desc">11 selected model families. Horizontal axis: Elo from 1000 to 2000, higher is better. Exact scores and configurations are in the table below. Whiskers are published 95% confidence intervals where available; missing results are labeled, not plotted as zero.</desc>
-<style>text{font-family:Segoe UI,Arial,sans-serif;fill:#192740}</style>
-<rect width="1000" height="610" rx="10" fill="#ffffff" stroke="#d1d9e0"/>
-<line x1="230.0" y1="38" x2="230.0" y2="530" stroke="#dde4ee"/>
-<text x="230.0" y="560" text-anchor="middle" font-size="14">1,000</text>
-<line x1="367.5" y1="38" x2="367.5" y2="530" stroke="#dde4ee"/>
-<text x="367.5" y="560" text-anchor="middle" font-size="14">1,250</text>
-<line x1="505.0" y1="38" x2="505.0" y2="530" stroke="#dde4ee"/>
-<text x="505.0" y="560" text-anchor="middle" font-size="14">1,500</text>
-<line x1="642.5" y1="38" x2="642.5" y2="530" stroke="#dde4ee"/>
-<text x="642.5" y="560" text-anchor="middle" font-size="14">1,750</text>
-<line x1="780.0" y1="38" x2="780.0" y2="530" stroke="#dde4ee"/>
-<text x="780.0" y="560" text-anchor="middle" font-size="14">2,000</text>
-<g class="task-series" data-model="0">
-<text x="18" y="70" font-size="17" font-weight="600">Claude Opus 5.5</text>
-<title>Claude Opus 5.5: 1,715.10; Claude Opus 5.5 (Max, Default Fallback); 95% CI: 1,696.04 to 1,737.45</title>
-<path d="M612.82,65 H635.60 M612.82,60 V70 M635.60,60 V70" fill="none" stroke="#a34415" stroke-width="2"/>
-<circle cx="623.30" cy="65" r="7" fill="#a34415"/>
-<text x="805" y="70" font-size="17" font-weight="600">1,715.10</text>
-</g>
-<g class="task-series" data-model="1">
-<text x="18" y="114" font-size="17" font-weight="600">Claude Sonnet 5.5</text>
-<title>Claude Sonnet 5.5: 1,711.94; Claude Sonnet 5.5 (Max, Default Fallback); 95% CI: 1,691.60 to 1,734.75</title>
-<path d="M610.38,109 H634.11 M610.38,104 V114 M634.11,104 V114" fill="none" stroke="#d17908" stroke-width="2"/>
-<circle cx="621.57" cy="109" r="7" fill="#d17908"/>
-<text x="805" y="114" font-size="17" font-weight="600">1,711.94</text>
-</g>
-<g class="task-series" data-model="2">
-<text x="18" y="158" font-size="17" font-weight="600">GPT-6 Astra</text>
-<title>GPT-6 Astra: 1,553.29; GPT-6 Astra (Max); 95% CI: 1,538.19 to 1,570.19</title>
-<path d="M526.00,153 H543.60 M526.00,148 V158 M543.60,148 V158" fill="none" stroke="#5144c7" stroke-width="2"/>
-<circle cx="534.31" cy="153" r="7" fill="#5144c7"/>
-<text x="805" y="158" font-size="17" font-weight="600">1,553.29</text>
-</g>
-<g class="task-series" data-model="3">
-<text x="18" y="202" font-size="17" font-weight="600">GPT-6.1 Sol</text>
-<title>GPT-6.1 Sol: 1,452.57; GPT-6.1 Sol (Max); 95% CI: 1,434.41 to 1,471.42</title>
-<path d="M468.93,197 H489.28 M468.93,192 V202 M489.28,192 V202" fill="none" stroke="#1878ba" stroke-width="2"/>
-<circle cx="478.91" cy="197" r="7" fill="#1878ba"/>
-<text x="805" y="202" font-size="17" font-weight="600">1,452.57</text>
-</g>
-<g class="task-series" data-model="4">
-<text x="18" y="246" font-size="17" font-weight="600">GPT-5.6 Sol</text>
-<text x="805" y="246" font-size="15" fill="#56647a">No result</text>
-</g>
-<g class="task-series" data-model="5">
-<text x="18" y="290" font-size="17" font-weight="600">Gemini 3.8 Flash</text>
-<title>Gemini 3.8 Flash: 1,224.82; Gemini 3.8 Flash (High); 95% CI: 1,210.65 to 1,239.22</title>
-<path d="M345.86,285 H361.57 M345.86,280 V290 M361.57,280 V290" fill="none" stroke="#07816c" stroke-width="2"/>
-<circle cx="353.65" cy="285" r="7" fill="#07816c"/>
-<text x="805" y="290" font-size="17" font-weight="600">1,224.82</text>
-</g>
-<g class="task-series" data-model="6">
-<text x="18" y="334" font-size="17" font-weight="600">GPT-6 Luna</text>
-<title>GPT-6 Luna: 1,395.16; GPT-6 Luna (Max); 95% CI: 1,379.49 to 1,409.96</title>
-<path d="M438.72,329 H455.48 M438.72,324 V334 M455.48,324 V334" fill="none" stroke="#6e7889" stroke-width="2"/>
-<circle cx="447.34" cy="329" r="7" fill="#6e7889"/>
-<text x="805" y="334" font-size="17" font-weight="600">1,395.16</text>
-</g>
-<g class="task-series" data-model="7">
-<text x="18" y="378" font-size="17" font-weight="600">GPT-5.6 Sol Fast</text>
-<text x="805" y="378" font-size="15" fill="#56647a">No result</text>
-</g>
-<g class="task-series" data-model="8">
-<text x="18" y="422" font-size="17" font-weight="600">GPT-6.1 Terra</text>
-<title>GPT-6.1 Terra: 1,463.42; GPT-6.1 Terra (Max); 95% CI: 1,446.17 to 1,483.14</title>
-<path d="M475.39,417 H495.73 M475.39,412 V422 M495.73,412 V422" fill="none" stroke="#9744a0" stroke-width="2"/>
-<circle cx="484.88" cy="417" r="7" fill="#9744a0"/>
-<text x="805" y="422" font-size="17" font-weight="600">1,463.42</text>
-</g>
-<g class="task-series" data-model="9">
-<text x="18" y="466" font-size="17" font-weight="600">Gemini 4 Argon</text>
-<title>Gemini 4 Argon: 1,305.21; Gemini 4 Argon (High); 95% CI: 1,287.98 to 1,321.34</title>
-<path d="M388.39,461 H406.74 M388.39,456 V466 M406.74,456 V466" fill="none" stroke="#4d7b16" stroke-width="2"/>
-<circle cx="397.87" cy="461" r="7" fill="#4d7b16"/>
-<text x="805" y="466" font-size="17" font-weight="600">1,305.21</text>
-</g>
-<g class="task-series" data-model="10">
-<text x="18" y="510" font-size="17" font-weight="600">Grok 4.7</text>
-<title>Grok 4.7: 1,502.89; Grok 4.7 (Xhigh); 95% CI: 1,487.69 to 1,520.09</title>
-<path d="M498.23,505 H516.05 M498.23,500 V510 M516.05,500 V510" fill="none" stroke="#be3042" stroke-width="2"/>
-<circle cx="506.59" cy="505" r="7" fill="#be3042"/>
-<text x="805" y="510" font-size="17" font-weight="600">1,502.89</text>
-</g>
-<text x="505" y="592" text-anchor="middle" font-size="14">Elo / higher is better / native benchmark scale</text></svg></div><div data-document-metric="professional" hidden><h3>Professional work: broader deliverables</h3><p>Pairwise Elo for professional deliverables, including documents, slides, diagrams, and spreadsheets. Whiskers show the source&#x27;s 95% CI.</p><svg class="task-plot" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 610" role="img" aria-labelledby="task-professional-title task-professional-desc">
-<title id="task-professional-title">Professional work: broader deliverables</title>
-<desc id="task-professional-desc">11 selected model families. Horizontal axis: Elo from 1000 to 2000, higher is better. Exact scores and configurations are in the table below. Whiskers are published 95% confidence intervals where available; missing results are labeled, not plotted as zero.</desc>
-<style>text{font-family:Segoe UI,Arial,sans-serif;fill:#192740}</style>
-<rect width="1000" height="610" rx="10" fill="#ffffff" stroke="#d1d9e0"/>
-<line x1="230.0" y1="38" x2="230.0" y2="530" stroke="#dde4ee"/>
-<text x="230.0" y="560" text-anchor="middle" font-size="14">1,000</text>
-<line x1="367.5" y1="38" x2="367.5" y2="530" stroke="#dde4ee"/>
-<text x="367.5" y="560" text-anchor="middle" font-size="14">1,250</text>
-<line x1="505.0" y1="38" x2="505.0" y2="530" stroke="#dde4ee"/>
-<text x="505.0" y="560" text-anchor="middle" font-size="14">1,500</text>
-<line x1="642.5" y1="38" x2="642.5" y2="530" stroke="#dde4ee"/>
-<text x="642.5" y="560" text-anchor="middle" font-size="14">1,750</text>
-<line x1="780.0" y1="38" x2="780.0" y2="530" stroke="#dde4ee"/>
-<text x="780.0" y="560" text-anchor="middle" font-size="14">2,000</text>
-<g class="task-series" data-model="0">
-<text x="18" y="70" font-size="17" font-weight="600">Claude Opus 5.5</text>
-<title>Claude Opus 5.5: 1,866.27; Claude Opus 5.5 (Max, Default Fallback); 95% CI: -26 / +26 Elo (source-rounded)</title>
-<path d="M692.15,65 H720.75 M692.15,60 V70 M720.75,60 V70" fill="none" stroke="#a34415" stroke-width="2"/>
-<circle cx="706.45" cy="65" r="7" fill="#a34415"/>
-<text x="805" y="70" font-size="17" font-weight="600">1,866.27</text>
-</g>
-<g class="task-series" data-model="1">
-<text x="18" y="114" font-size="17" font-weight="600">Claude Sonnet 5.5</text>
-<title>Claude Sonnet 5.5: 1,837.82; Claude Sonnet 5.5 (Max, Default Fallback); 95% CI: -23 / +23 Elo (source-rounded)</title>
-<path d="M678.15,109 H703.45 M678.15,104 V114 M703.45,104 V114" fill="none" stroke="#d17908" stroke-width="2"/>
-<circle cx="690.80" cy="109" r="7" fill="#d17908"/>
-<text x="805" y="114" font-size="17" font-weight="600">1,837.82</text>
-</g>
-<g class="task-series" data-model="2">
-<text x="18" y="158" font-size="17" font-weight="600">GPT-6 Astra</text>
-<title>GPT-6 Astra: 1,584.40; GPT-6 Astra (Max); 95% CI: -19 / +19 Elo (source-rounded)</title>
-<path d="M540.97,153 H561.87 M540.97,148 V158 M561.87,148 V158" fill="none" stroke="#5144c7" stroke-width="2"/>
-<circle cx="551.42" cy="153" r="7" fill="#5144c7"/>
-<text x="805" y="158" font-size="17" font-weight="600">1,584.40</text>
-</g>
-<g class="task-series" data-model="3">
-<text x="18" y="202" font-size="17" font-weight="600">GPT-6.1 Sol</text>
-<title>GPT-6.1 Sol: 1,607.61; GPT-6.1 Sol (Max); 95% CI: -22 / +22 Elo (source-rounded)</title>
-<path d="M552.09,197 H576.29 M552.09,192 V202 M576.29,192 V202" fill="none" stroke="#1878ba" stroke-width="2"/>
-<circle cx="564.19" cy="197" r="7" fill="#1878ba"/>
-<text x="805" y="202" font-size="17" font-weight="600">1,607.61</text>
-</g>
-<g class="task-series" data-model="4">
-<text x="18" y="246" font-size="17" font-weight="600">GPT-5.6 Sol</text>
-<title>GPT-5.6 Sol: 1,618.27; GPT-5.6 Sol (Max); 95% CI: -16 / +16 Elo (source-rounded)</title>
-<path d="M561.25,241 H578.85 M561.25,236 V246 M578.85,236 V246" fill="none" stroke="#bf3c85" stroke-width="2"/>
-<circle cx="570.05" cy="241" r="7" fill="#bf3c85"/>
-<text x="805" y="246" font-size="17" font-weight="600">1,618.27</text>
-</g>
-<g class="task-series" data-model="5">
-<text x="18" y="290" font-size="17" font-weight="600">Gemini 3.8 Flash</text>
-<title>Gemini 3.8 Flash: 1,445.40; Gemini 3.8 Flash (High); 95% CI: -19 / +19 Elo (source-rounded)</title>
-<path d="M464.52,285 H485.42 M464.52,280 V290 M485.42,280 V290" fill="none" stroke="#07816c" stroke-width="2"/>
-<circle cx="474.97" cy="285" r="7" fill="#07816c"/>
-<text x="805" y="290" font-size="17" font-weight="600">1,445.40</text>
-</g>
-<g class="task-series" data-model="6">
-<text x="18" y="334" font-size="17" font-weight="600">GPT-6 Luna</text>
-<title>GPT-6 Luna: 1,444.72; GPT-6 Luna (Max); 95% CI: -21 / +20 Elo (source-rounded)</title>
-<path d="M463.05,329 H485.60 M463.05,324 V334 M485.60,324 V334" fill="none" stroke="#6e7889" stroke-width="2"/>
-<circle cx="474.60" cy="329" r="7" fill="#6e7889"/>
-<text x="805" y="334" font-size="17" font-weight="600">1,444.72</text>
-</g>
-<g class="task-series" data-model="7">
-<text x="18" y="378" font-size="17" font-weight="600">GPT-5.6 Sol Fast</text>
-<text x="805" y="378" font-size="15" fill="#56647a">No result</text>
-</g>
-<g class="task-series" data-model="8">
-<text x="18" y="422" font-size="17" font-weight="600">GPT-6.1 Terra</text>
-<title>GPT-6.1 Terra: 1,476.05; GPT-6.1 Terra (Max); 95% CI: -23 / +23 Elo (source-rounded)</title>
-<path d="M479.18,417 H504.48 M479.18,412 V422 M504.48,412 V422" fill="none" stroke="#9744a0" stroke-width="2"/>
-<circle cx="491.83" cy="417" r="7" fill="#9744a0"/>
-<text x="805" y="422" font-size="17" font-weight="600">1,476.05</text>
-</g>
-<g class="task-series" data-model="9">
-<text x="18" y="466" font-size="17" font-weight="600">Gemini 4 Argon</text>
-<title>Gemini 4 Argon: 1,631.09; Gemini 4 Argon (High); 95% CI: -20 / +20 Elo (source-rounded)</title>
-<path d="M566.10,461 H588.10 M566.10,456 V466 M588.10,456 V466" fill="none" stroke="#4d7b16" stroke-width="2"/>
-<circle cx="577.10" cy="461" r="7" fill="#4d7b16"/>
-<text x="805" y="466" font-size="17" font-weight="600">1,631.09</text>
-</g>
-<g class="task-series" data-model="10">
-<text x="18" y="510" font-size="17" font-weight="600">Grok 4.7</text>
-<title>Grok 4.7: 1,721.59; Grok 4.7 (Xhigh); 95% CI: -21 / +21 Elo (source-rounded)</title>
-<path d="M615.32,505 H638.42 M615.32,500 V510 M638.42,500 V510" fill="none" stroke="#be3042" stroke-width="2"/>
-<circle cx="626.87" cy="505" r="7" fill="#be3042"/>
-<text x="805" y="510" font-size="17" font-weight="600">1,721.59</text>
-</g>
-<text x="505" y="592" text-anchor="middle" font-size="14">Elo / higher is better / native benchmark scale</text></svg></div></section>
-    </section>
-
-    <figure class="wp-block-table">
+<figure class="wp-block-table">
       <table>
         <caption>Quick decision guide: which model and effort to pick by task.</caption>
         <thead>
@@ -2069,11 +2039,7 @@ Do not implement the full solution yet. Recommend which approaches are worth pro
       </table>
     </figure>
 
-    <!-- 5. DATA SOURCES -->
-
-
-<div class="takeaway">Selection rule: start with overall capability for difficult work, refine by task-specific fit, then choose the lowest-cost and lowest-latency option that reliably meets the quality bar.</div>
-<p>The goal is not to find one best model for the entire project. It is to use the right level and type of intelligence for each part of the workflow.</p>
+<div class="takeaway">Set the capability bar for the current step's uncertainty, refine by task fit, and pick the lowest-cost, lowest-latency configuration that clears the bar.</div>
 
 <h2>Putting it all together</h2><div class="flow"><div>Design</div><div>Explore</div><div>Choose capability</div><div>Match task fit</div><div>Optimize execution</div></div><p>For complex, long-running work, the best results came from making the design explicit, exploring alternatives before committing, and matching the model configuration to the task. The agent can still do substantial work, but clear checkpoints let a human verify direction before the cost of being wrong grows.</p>
 <h2>Final thoughts</h2><p>The biggest lesson from my overnight experiment was not that GitHub Copilot could not handle a complex task. It was that I needed to work with it differently.</p><blockquote>The goal is not to write one perfect prompt and walk away. It is to structure the work so that Copilot has the context, boundaries, and direction it needs to succeed.</blockquote>    <h2 id="h-5-data-sources">Data sources</h2>
