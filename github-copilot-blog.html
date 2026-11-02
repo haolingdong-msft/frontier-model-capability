@@ -43,7 +43,7 @@ caption{text-align:left;color:var(--muted);font-size:14px;padding:10px 12px;back
 @media(max-width:760px){.gh-chart-grid,.takeaway-visual-grid{grid-template-columns:1fr}}
 </style></head><body><main><article>
 <div class="eyebrow">GitHub Copilot</div><h1>How to tackle complex, long-running tasks with GitHub Copilot</h1><p class="dek">Three practices that helped me turn an unsuccessful 12-hour attempt into a more reliable workflow for AI-assisted engineering.</p>
-<p>I once left GitHub Copilot working overnight on a complex performance optimization task. More than 12 hours later, I came back to a reassuring message: the task was complete.</p><p>There was just one problem. It was not.</p><p>The implementation missed the performance target and introduced regressions. That experience changed how I approach complex, long-running work with AI agents. For a focused coding task, describing the desired change may be enough. For work spanning architecture, experimentation, implementation, and validation, how we structure the journey matters just as much as the destination.</p><p>I eventually resolved the performance issue in the TypeSpec assessment skill. Looking back, three practices made the biggest difference:</p><ol><li>Get the design clear before implementation.</li><li>Explore multiple approaches before committing.</li><li>Choose the right model by balancing task type, latency, and cost.</li></ol>
+<p>I once left GitHub Copilot working overnight on a complex performance optimization task. More than 12 hours later, I came back to a reassuring message: the task was complete.</p><p>There was just one problem. It was not.</p><p>The implementation missed the performance target and introduced regressions. That experience changed how I approach complex, long-running work with AI agents. For a focused coding task, describing the desired change may be enough. For work spanning architecture, experimentation, implementation, and validation, how we structure the journey matters just as much as the destination.</p><p>I eventually resolved the performance issue in the TypeSpec assessment skill. Looking back, three practices made the biggest difference:</p><ol><li>Get the design clear before implementation.</li><li>Explore multiple approaches before committing.</li><li>Design with high-capability task specialists, then implement with faster, lower-cost models.</li></ol>
 <h2>1. Get the design clear before implementation</h2><p>My first attempt focused heavily on the outcome: improve performance while preserving existing behavior. That left too many interconnected decisions open during implementation. Small assumptions compounded, and the agent produced substantial work that still moved in the wrong direction.</p><p>What worked better was separating design from implementation. Before changing code, I worked with Copilot to clarify the architecture, component responsibilities, interactions, API contracts, invariants, and measurable success criteria.</p><div class="prompt"><strong>Example prompt</strong><pre>Before making code changes, analyze the current architecture and propose a design for improving performance.
 
 Identify component responsibilities, interactions, affected API contracts, behavior that must not change, likely bottlenecks, measurable success criteria, and a validation plan.
@@ -52,32 +52,47 @@ Call out assumptions, risks, and open questions. Do not implement anything yet.<
 <h2>2. Explore multiple approaches before committing</h2><p>An agent can make the first plausible solution feel surprisingly complete. That momentum is useful, but it can lead us to commit too early. Instead of asking Copilot to find and implement one solution, I found it more effective to ask it to explore the solution space first.</p><div class="prompt"><strong>Example prompt</strong><pre>Propose three viable approaches to this performance bottleneck. For each, include the expected impact, implementation complexity, compatibility risks, a quick experiment, and evidence that would cause us to reject it.
 
 Do not implement the full solution yet. Recommend which approaches are worth prototyping in parallel.</pre></div><p>Small prototypes helped answer specific questions before I invested in a production implementation. This changed the interaction from “implement this solution” to “help me explore the solution space.”</p><div class="takeaway">Use Copilot as a design exploration partner. Ask for alternatives, test the strongest assumptions, and let evidence guide the final choice.</div>
-<h2>3. Choose models in layers: capability, fit, then efficiency</h2>
-<p>When choosing a model, I used to frame the decision as a choice between the “smartest” model and a model that was particularly good at a certain task. In practice, those ideas are not contradictory—they belong at different layers of the decision. And the first layer is not “always pick the strongest model,” but setting the right <strong>capability bar</strong> for the current step.</p>
+<h2>3. Design with high-capability specialists; implement with fast, lower-cost models</h2>
+<p>Separating design from implementation (Practice 1) and exploring options upfront (Practice 2) unlocks a major advantage for model selection: <strong>you do not need the same model—or the same reasoning effort—for the entire long-running task.</strong></p>
 
-<div class="takeaway">Capability bar first. Task fit second. Efficiency third.</div>
+<div class="takeaway">Design with high-capability, high-reasoning models that specialize in the task. Once the design is locked, implement with faster, lower-reasoning, lower-cost models.</div>
 
-<div class="visual"><h4>A layered model-selection framework</h4><p class="sub">Move from left to right. Each step narrows the candidate models.</p>
-<svg viewBox="0 0 900 300" role="img" aria-label="Capability bar first, task fit second, efficiency third"><defs><marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#59636e"/></marker></defs>
-<rect x="25" y="45" width="245" height="180" rx="16" fill="#ddf4ff" stroke="#0969da"/><text x="147" y="82" text-anchor="middle" font-size="21" font-weight="700" fill="#0969da">1. Capability bar</text><text x="147" y="115" text-anchor="middle" font-size="15" font-style="italic" fill="currentColor">What level of capability</text><text x="147" y="138" text-anchor="middle" font-size="15" font-style="italic" fill="currentColor">does this work require?</text><text x="147" y="178" text-anchor="middle" font-size="13.5" fill="currentColor">Difficulty · uncertainty</text><text x="147" y="200" text-anchor="middle" font-size="13.5" fill="currentColor">decision impact</text>
-<line x1="278" y1="135" x2="325" y2="135" stroke="#59636e" stroke-width="3" marker-end="url(#arrow)"/>
-<rect x="335" y="45" width="245" height="180" rx="16" fill="#f6f8fa" stroke="#8250df"/><text x="457" y="82" text-anchor="middle" font-size="21" font-weight="700" fill="#8250df">2. Task fit</text><text x="457" y="115" text-anchor="middle" font-size="15" font-style="italic" fill="currentColor">Among models that clear the bar,</text><text x="457" y="138" text-anchor="middle" font-size="15" font-style="italic" fill="currentColor">which best fits the work?</text><text x="457" y="178" text-anchor="middle" font-size="13.5" fill="currentColor">UI · coding · writing</text><text x="457" y="200" text-anchor="middle" font-size="13.5" fill="currentColor">visual reasoning</text>
-<line x1="588" y1="135" x2="635" y2="135" stroke="#59636e" stroke-width="3" marker-end="url(#arrow)"/>
-<rect x="645" y="45" width="230" height="180" rx="16" fill="#dafbe1" stroke="#1a7f37"/><text x="760" y="82" text-anchor="middle" font-size="21" font-weight="700" fill="#1a7f37">3. Efficiency</text><text x="760" y="115" text-anchor="middle" font-size="15" font-style="italic" fill="currentColor">Among good-fit models,</text><text x="760" y="138" text-anchor="middle" font-size="15" font-style="italic" fill="currentColor">which is most efficient?</text><text x="760" y="178" text-anchor="middle" font-size="13.5" fill="currentColor">Cost · latency</text><text x="760" y="200" text-anchor="middle" font-size="13.5" fill="currentColor">reasoning effort</text>
-<text x="450" y="270" text-anchor="middle" font-size="16" font-weight="650" fill="currentColor">Choose for capability, refine for fit, optimize for efficiency.</text></svg></div>
+<div class="visual"><h4>Model strategy across a complex, long-running task</h4><p class="sub">Shift from high-reasoning specialists during design to fast, cost-efficient models once the spec is locked.</p>
+<svg viewBox="0 0 900 305" role="img" aria-label="Phase 1 Design with high-capability task specialists, then Phase 2 Implement with fast lower-cost models"><defs><marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#59636e"/></marker></defs>
+<rect x="25" y="38" width="370" height="195" rx="16" fill="#ddf4ff" stroke="#0969da" stroke-width="1.5"/>
+<text x="210" y="74" text-anchor="middle" font-size="21" font-weight="700" fill="#0969da">Phase 1: Design &amp; explore</text>
+<text x="210" y="103" text-anchor="middle" font-size="14.5" font-style="italic" fill="#1f2328">High uncertainty · high decision impact</text>
+<line x1="55" y1="118" x2="365" y2="118" stroke="#b6e3ff" stroke-width="1"/>
+<text x="210" y="143" text-anchor="middle" font-size="15" font-weight="700" fill="#0969da">High capability + High reasoning effort</text>
+<text x="210" y="168" text-anchor="middle" font-size="14" fill="#1f2328">+ Pick the model specialized in the artifact:</text>
+<text x="210" y="191" text-anchor="middle" font-size="13.5" font-weight="600" fill="#59636e">UI mockup · system architecture · design doc</text>
+<text x="210" y="214" text-anchor="middle" font-size="12.5" fill="#59636e">(Worth paying &amp; waiting for deeper reasoning)</text>
 
-<h3>1. Capability bar: set the quality threshold by problem uncertainty</h3>
-<p>Task fit and low cost cannot compensate for insufficient reasoning when a problem is ambiguous or cross-cutting. Before asking what category of task you are doing, ask how much uncertainty and decision impact the current step carries:</p>
+<line x1="405" y1="135" x2="495" y2="135" stroke="#59636e" stroke-width="3" marker-end="url(#arrow)"/>
+<text x="450" y="112" text-anchor="middle" font-size="12.5" font-weight="700" fill="currentColor">Reviewed spec</text>
+<text x="450" y="127" text-anchor="middle" font-size="12.5" font-weight="700" fill="currentColor">or mockup</text>
+<text x="450" y="158" text-anchor="middle" font-size="12" fill="#59636e">Uncertainty drops</text>
 
-<div class="box">
-  <p><strong>High capability bar (open-ended exploration &amp; architecture):</strong> When requirements are ambiguous, tradeoffs span multiple components, or a flawed decision will invalidate hours of downstream work, set a high bar (e.g., AA Intelligence Index v5.0 &ge; 50)—filtered to frontier tiers such as <strong>Claude Opus 5.5</strong>, <strong>GPT-6 Astra</strong>, <strong>GPT-6.1 Sol</strong> (High/Max), and <strong>Gemini 4 Argon</strong>.</p>
-  <p style="margin-bottom:0"><strong>Lower capability bar (constrained implementation &amp; iteration):</strong> Once the architecture is captured in a reviewed design doc or the UI is locked in a mockup, the problem is bounded. The capability bar drops (e.g., AA v5.0 40–46), opening the candidate pool to faster, lower-cost configurations like <strong>GPT-6.1 Sol</strong> (Medium), <strong>GPT-6.1 Terra</strong> (High), and <strong>Claude Sonnet 5.5</strong> (High).</p>
-</div>
+<rect x="505" y="38" width="370" height="195" rx="16" fill="#dafbe1" stroke="#1a7f37" stroke-width="1.5"/>
+<text x="690" y="74" text-anchor="middle" font-size="21" font-weight="700" fill="#1a7f37">Phase 2: Implement &amp; iterate</text>
+<text x="690" y="103" text-anchor="middle" font-size="14.5" font-style="italic" fill="#1f2328">Constrained scope · high-frequency loops</text>
+<line x1="535" y1="118" x2="845" y2="118" stroke="#aceebb" stroke-width="1"/>
+<text x="690" y="143" text-anchor="middle" font-size="15" font-weight="700" fill="#1a7f37">Lower capability + Lower reasoning effort</text>
+<text x="690" y="168" text-anchor="middle" font-size="14" fill="#1f2328">+ Optimize for speed &amp; cost efficiency:</text>
+<text x="690" y="191" text-anchor="middle" font-size="13.5" font-weight="600" fill="#59636e">Fast 7–15s turns · $0.17–$0.59 per task</text>
+<text x="690" y="214" text-anchor="middle" font-size="12.5" fill="#59636e">(Avoid Max-tier cost spikes &amp; multi-minute waits)</text>
 
-<blockquote>Design does not always require an expensive model—rather, unresolved design carries higher uncertainty, which raises the capability bar. As the task becomes better defined, the capability bar drops.</blockquote>
+<text x="450" y="274" text-anchor="middle" font-size="16" font-weight="650" fill="currentColor">Invest in capability and task fit during design; optimize for speed and cost during implementation.</text></svg></div>
 
-<h3 id="h-4-best-at-task">2. Task fit: match domain strengths among models that clear the bar</h3>
-<p>Once you know which models clear the capability bar for your current step, aggregate scores are no longer enough. Models with similar overall intelligence diverge sharply across specialized deliverables. Switch tabs below to compare domain fit across <strong>UI / frontend design</strong>, <strong>terminal &amp; systems engineering</strong>, and <strong>document generation</strong>:</p>
+<h3 id="h-4-best-at-task">Phase 1 — Design: choose a high-capability, high-reasoning model that excels at your task</h3>
+<p>At the start of a complex task, ambiguity is at its peak. A flawed architectural choice, a weak UI layout, or an incomplete design doc will invalidate hours of downstream coding. In this phase, I use <strong>high-capability models at high reasoning effort</strong>—and among those frontier models, I pick the one whose <strong>domain specialization</strong> matches what I am designing:</p>
+<ul>
+  <li><strong>Designing UI &amp; frontend mockups:</strong> <strong>GPT-6 Astra</strong> (1,339 Elo), <strong>Claude Opus 5.5</strong> (1,325 Elo), and <strong>Claude Sonnet 5.5</strong> (1,322 Elo) lead blind human preference on DesignArena Website.</li>
+  <li><strong>Designing backend &amp; system architecture:</strong> <strong>Claude Opus 5.5</strong> (64.85%), <strong>Claude Sonnet 5.5</strong> (61.82%), and <strong>GPT-6.1 Sol / GPT-6 Astra</strong> (58.18%) lead executable systems tasks on Terminal-Bench.</li>
+  <li><strong>Structuring design docs &amp; technical specs:</strong> <strong>Gemini 4 Argon</strong> leads Word deliverable rubric checks (62.13%), while <strong>Claude Opus 5.5</strong> (2,135 Elo) and <strong>Sonnet 5.5</strong> (2,104 Elo) lead analytical quality.</li>
+</ul>
+
+<p>Switch tabs below to compare how the 11 frontier model families specialize across <strong>UI / frontend design</strong>, <strong>software &amp; terminal engineering</strong>, and <strong>documents / writing</strong>:</p>
 
 <section id="tasks" class="card task-section" style="margin-bottom: 20px;">
       <div class="task-tabs" role="tablist" aria-label="Task-specific benchmark details">
@@ -603,11 +618,11 @@ Do not implement the full solution yet. Recommend which approaches are worth pro
 <text x="505" y="592" text-anchor="middle" font-size="14">Elo / higher is better / native benchmark scale</text></svg></div></section>
     </section>
 
-<h3 id="h-2-smartness-vs-cost">3. Efficiency: at your capability bar, look left for lower cost and faster turns</h3>
-<p>After narrowing to models that clear the capability bar and fit the task domain, the final step is optimizing <strong>cost</strong>, <strong>latency</strong>, and <strong>reasoning effort (1 Low to 5 Max)</strong>. In both charts below, the vertical axis is the <strong>capability bar</strong>—so once you set your horizontal quality threshold, <strong>move as far left as possible</strong> to minimize cost and wait time without dropping below your bar.</p>
+<h3 id="h-2-smartness-vs-cost">Phase 2 — Implementation: switch to faster, lower-reasoning, lower-cost models</h3>
+<p>Once the design doc, API contract, or UI mockup is reviewed and locked in, the hard ambiguity is gone. Implementation breaks down into dozens of scoped coding, testing, and refinement turns. Continuing to use a flagship model at <code>Max (5)</code> reasoning effort during implementation is both slow and expensive—and often unnecessary once the design constrains the work.</p>
 
-<h4>Cost efficiency across reasoning efforts</h4>
-<p>Plotting capability (vertical axis) against average USD cost per task (horizontal axis, log scale) shows where higher reasoning effort pays off—and where <code>Max (5)</code> triggers a steep cost spike or over-thinking penalty:</p>
+<h4>Why stepping down model tier and reasoning effort saves 80%–95% of cost</h4>
+<p>In the chart below, the <strong>vertical axis is model capability (benchmark score)</strong> and the <strong>horizontal axis is average USD cost per task (log scale)</strong> across reasoning efforts <strong>1 (Low) to 5 (Max)</strong>. Moving from a flagship <code>Max</code> configuration during design to a cost-efficient model at <code>Medium (2)</code> or <code>High (3)</code> during implementation keeps most of the capability at a fraction of the cost:</p>
 
 <div class="blog-chart-controls" role="region" aria-label="Interactive chart controls">
       <div class="ctrl-group">
@@ -1687,8 +1702,8 @@ Do not implement the full solution yet. Recommend which approaches are worth pro
       </div>
     </div>
 
-<h4 id="h-3-smartness-vs-perf">Response-time efficiency across reasoning efforts</h4>
-<p>Output tokens per second hides internal thinking time. Plotting <strong>median end-to-end response time (seconds, log scale)</strong> against capability reveals which configurations stay inside the 15-second interactive loop and which stretch into multi-minute waits:</p>
+<h4 id="h-3-smartness-vs-perf">Why lower reasoning effort keeps implementation loops interactive (7–15s vs. 5–12 min)</h4>
+<p>During implementation, fast feedback loops matter more than squeezing out the last 2 points of abstract reasoning. Plotting <strong>median end-to-end response time (seconds, log scale)</strong> against capability shows why stepping down from <code>Max (5)</code> to <code>Medium (2)</code> or <code>High (3)</code> turns 5–12 minute waits back into 7–15 second interactive turns:</p>
 
 <div id="time" class="gh-benchmark-panel">
   <div class="gh-chart-header">
@@ -2000,46 +2015,40 @@ Do not implement the full solution yet. Recommend which approaches are worth pro
       </div>
     </div>
 
-<h3>Summary: applying all three layers across a project</h3>
-<p>Combining all three filters—setting the capability bar by uncertainty, matching task fit, and picking the most efficient model and reasoning effort—yields a single lookup across a project's lifecycle:</p>
+<h3>Summary: how to pair design and implementation models by workflow</h3>
+<p>Putting both phases together gives a simple playbook for complex, long-running tasks in GitHub Copilot:</p>
 
 <figure class="wp-block-table">
   <table>
-    <caption>Model selection across the three layers as work moves from high-uncertainty exploration to constrained execution.</caption>
+    <caption>Pair a high-reasoning domain specialist during design with a fast, lower-reasoning workhorse during implementation.</caption>
     <thead>
       <tr>
-        <th scope="col">Workflow &amp; phase</th>
-        <th scope="col">1. Capability bar</th>
-        <th scope="col">2. Task-fit leaders</th>
-        <th scope="col">3. Most efficient pick (cost &amp; latency)</th>
+        <th scope="col">Task domain</th>
+        <th scope="col">Phase 1: Design &amp; explore<br><span class="note">High capability · High reasoning · Task specialist</span></th>
+        <th scope="col">Phase 2: Implement &amp; iterate<br><span class="note">Lower capability &amp; reasoning · Fast &amp; cost-efficient</span></th>
       </tr>
     </thead>
     <tbody>
       <tr>
-        <th scope="row"><strong>UI / frontend</strong><br><span class="note">UX exploration &amp; mockup &rarr; component coding</span></th>
-        <td><strong>High bar</strong> for new layout/UX direction;<br><strong>Lower bar</strong> once mockup &amp; props are fixed.</td>
-        <td><strong>GPT-6 Astra</strong> (1,339 Elo), <strong>Claude Opus 5.5</strong> (1,325), <strong>Claude Sonnet 5.5</strong> (1,322) on DesignArena Website.</td>
-        <td>Use <strong>GPT-6 Astra (Medium/High)</strong> or <strong>Opus 5.5 (High)</strong> for the initial mockup; switch to <strong>GPT-6.1 Sol (Medium)</strong> or <strong>GPT-6.1 Terra (High)</strong> for fast component iteration.</td>
+        <th scope="row"><strong>UI &amp; frontend</strong></th>
+        <td>Use <strong>GPT-6 Astra (High/Max)</strong> or <strong>Claude Opus 5.5 (High)</strong> to explore UX flows, compare layouts, and generate the visual mockup (1,325–1,339 DesignArena Elo).</td>
+        <td>Once the mockup and component structure are fixed, switch to <strong>GPT-6.1 Sol (Medium, 12.1s, $0.36)</strong> or <strong>GPT-6.1 Terra (High, 11.2s, $0.26)</strong> to wire up components and styles.</td>
       </tr>
       <tr>
-        <th scope="row"><strong>Backend &amp; systems</strong><br><span class="note">Architecture design &rarr; scoped implementation</span></th>
-        <td><strong>High bar</strong> for cross-service architecture &amp; root-cause debugging;<br><strong>Lower bar</strong> after design doc review.</td>
-        <td><strong>Claude Opus 5.5</strong> (64.85%), <strong>Claude Sonnet 5.5</strong> (61.82%), <strong>GPT-6.1 Sol</strong> &amp; <strong>GPT-6 Astra</strong> (58.18%) on Terminal-Bench.</td>
-        <td>Use <strong>Opus 5.5 (High)</strong> or <strong>GPT-6.1 Sol (High, $0.59/task)</strong> for architecture; drop to <strong>GPT-6.1 Sol (Medium, 12.1s, $0.36)</strong> or <strong>Terra (High, 11.2s, $0.26)</strong> for scoped coding &amp; tests.</td>
+        <th scope="row"><strong>Backend &amp; systems</strong></th>
+        <td>Use <strong>Claude Opus 5.5 (High/Max)</strong>, <strong>GPT-6 Astra (High)</strong>, or <strong>GPT-6.1 Sol (High)</strong> to analyze bottlenecks, explore 3 candidate designs, and lock the architecture.</td>
+        <td>With the design doc approved, run scoped code changes, migrations, and test fixes on <strong>GPT-6.1 Sol (Low/Medium)</strong> or <strong>GPT-6.1 Terra (Medium/High)</strong> at 6%–10% of flagship cost.</td>
       </tr>
       <tr>
-        <th scope="row"><strong>Docs &amp; reports</strong><br><span class="note">Technical tradeoffs &rarr; structured writing</span></th>
-        <td><strong>High bar</strong> when resolving open technical tradeoffs;<br><strong>Medium bar</strong> when polishing settled content.</td>
-        <td><strong>Gemini 4 Argon</strong> (62.13% Word rubric checks); <strong>Claude Opus 5.5</strong> (2,135 Elo) &amp; <strong>Sonnet 5.5</strong> (2,104 Elo) on analytical quality.</td>
-        <td>Use <strong>Opus 5.5 (High)</strong> or <strong>Gemini 4 Argon (High)</strong> to structure complex design docs; use <strong>Grok 4.7 (Xhigh)</strong> or <strong>GPT-6.1 Sol (Medium/High)</strong> for cost-efficient drafting.</td>
+        <th scope="row"><strong>Design docs &amp; specs</strong></th>
+        <td>Use <strong>Claude Opus 5.5 (High)</strong> or <strong>Gemini 4 Argon (High)</strong> to work through open technical tradeoffs, invariants, and document structure.</td>
+        <td>Once the technical decisions are settled, use <strong>Grok 4.7 (High)</strong>, <strong>GPT-6.1 Sol (Medium)</strong>, or <strong>Claude Sonnet 5.5 (Medium)</strong> for fast section drafting, formatting, and edits.</td>
       </tr>
     </tbody>
   </table>
 </figure>
 
-<div class="takeaway">Set the capability bar for the current step's uncertainty, refine by task fit, and pick the lowest-cost, lowest-latency configuration that clears the bar.</div>
-
-<h2>Putting it all together</h2><div class="flow"><div>Design</div><div>Explore</div><div>Choose capability</div><div>Match task fit</div><div>Optimize execution</div></div><p>For complex, long-running work, the best results came from making the design explicit, exploring alternatives before committing, and matching the model configuration to the task. The agent can still do substantial work, but clear checkpoints let a human verify direction before the cost of being wrong grows.</p>
+<h2>Putting it all together</h2><div class="flow"><div>1. Clarify design</div><div>2. Explore options</div><div>3. Design with specialists</div><div>4. Lock the spec</div><div>5. Implement fast &amp; cheap</div></div><p>For complex, long-running work, the best results came from making the design explicit, exploring alternatives before committing, and shifting from high-reasoning task specialists during design to fast, cost-efficient models during implementation. Clear checkpoints let a human verify direction before the cost of being wrong grows.</p>
 <h2>Final thoughts</h2><p>The biggest lesson from my overnight experiment was not that GitHub Copilot could not handle a complex task. It was that I needed to work with it differently.</p><blockquote>The goal is not to write one perfect prompt and walk away. It is to structure the work so that Copilot has the context, boundaries, and direction it needs to succeed.</blockquote>    <h2 id="h-5-data-sources">Data sources</h2>
 
     <p class="wp-block-paragraph">All charts and tables in this post are generated from primary public benchmark snapshots captured on <strong>October 28, 2026</strong> (and verified against upstream leaderboards on October 30, 2026). Each benchmark is plotted on its native scale without mixing incompatible composite versions or inferring missing effort tiers:</p>
