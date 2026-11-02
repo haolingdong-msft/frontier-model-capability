@@ -66,20 +66,18 @@ Do not implement the full solution yet. Recommend which approaches are worth pro
 <rect x="645" y="45" width="230" height="180" rx="16" fill="#dafbe1" stroke="#1a7f37"/><text x="760" y="82" text-anchor="middle" font-size="21" font-weight="700" fill="#1a7f37">3. Efficiency</text><text x="760" y="115" text-anchor="middle" font-size="15" font-style="italic" fill="currentColor">Among good-fit models,</text><text x="760" y="138" text-anchor="middle" font-size="15" font-style="italic" fill="currentColor">which is most efficient?</text><text x="760" y="178" text-anchor="middle" font-size="13.5" fill="currentColor">Cost · latency</text><text x="760" y="200" text-anchor="middle" font-size="13.5" fill="currentColor">reasoning effort</text>
 <text x="450" y="270" text-anchor="middle" font-size="16" font-weight="650" fill="currentColor">Choose for capability, refine for fit, optimize for efficiency.</text></svg></div>
 
-<h3>1. Capability bar: set the quality threshold for the problem</h3>
-<p>Task fit cannot compensate for insufficient reasoning when a problem is ambiguous or cross-cutting. For complex architecture, new UX flows, or high-impact decisions, the capability bar is high—a model needs enough reasoning strength and instruction-following reliability before specialization, price, or speed matters.</p>
+<h3>1. Capability bar: set the quality threshold by problem uncertainty</h3>
+<p>Task fit and low cost cannot compensate for insufficient reasoning when a problem is ambiguous or cross-cutting. Before asking what category of task you are doing, ask how much uncertainty and decision impact the current step carries:</p>
 
-<p>This does not mean design always requires the most expensive model; it means open-ended design carries higher uncertainty. Once those decisions are locked into a mockup or reviewed design doc, the problem is constrained, the capability bar drops, and more models can clear it:</p>
+<div class="box">
+  <p><strong>High capability bar (open-ended exploration &amp; architecture):</strong> When requirements are ambiguous, tradeoffs span multiple components, or a flawed decision will invalidate hours of downstream work, set a high bar (e.g., AA Intelligence Index v5.0 &ge; 50)—filtered to frontier tiers such as <strong>Claude Opus 5.5</strong>, <strong>GPT-6 Astra</strong>, <strong>GPT-6.1 Sol</strong> (High/Max), and <strong>Gemini 4 Argon</strong>.</p>
+  <p style="margin-bottom:0"><strong>Lower capability bar (constrained implementation &amp; iteration):</strong> Once the architecture is captured in a reviewed design doc or the UI is locked in a mockup, the problem is bounded. The capability bar drops (e.g., AA v5.0 40–46), opening the candidate pool to faster, lower-cost configurations like <strong>GPT-6.1 Sol</strong> (Medium), <strong>GPT-6.1 Terra</strong> (High), and <strong>Claude Sonnet 5.5</strong> (High).</p>
+</div>
 
-<table><thead><tr><th>Workflow</th><th>High-uncertainty step (higher capability bar)</th><th>Constrained execution (lower capability bar)</th></tr></thead><tbody>
-<tr><td><strong>UI</strong></td><td>Explore the user experience, compare layout directions, and create an initial mockup with a strong reasoning + visual model.</td><td>Once the mockup and component behavior are fixed, switch to a faster, lower-cost coding model to implement and iterate.</td></tr>
-<tr><td><strong>Backend or service</strong></td><td>Design architecture, API contracts, data flow, failure modes, and compatibility boundaries with a high-capability reasoning model.</td><td>After capturing decisions in a reviewed design doc, use a cost-efficient coding model for scoped implementation tasks.</td></tr>
-<tr><td><strong>Design documentation</strong></td><td>Work through unresolved technical tradeoffs, invariants, and document structure with a strong reasoning model.</td><td>Once the technical substance is settled, use a model specialized in clear writing, structure, and tone.</td></tr>
-<tr><td><strong>Routine coding</strong></td><td>A separate high-bar design pass is unnecessary when requirements are already clear and low risk.</td><td>Use a fast, low-cost model directly for repetitive edits, tests, and small fixes.</td></tr>
-</tbody></table>
+<blockquote>Design does not always require an expensive model—rather, unresolved design carries higher uncertainty, which raises the capability bar. As the task becomes better defined, the capability bar drops.</blockquote>
 
 <h3 id="h-4-best-at-task">2. Task fit: match domain strengths among models that clear the bar</h3>
-<p>Once multiple models clear the capability bar for your step, aggregate benchmark scores are not enough—models have distinct domain strengths. Switch tabs below to compare how the 11 frontier model families perform across <strong>UI / frontend design</strong>, <strong>terminal &amp; systems engineering</strong>, and <strong>document generation</strong>:</p>
+<p>Once you know which models clear the capability bar for your current step, aggregate scores are no longer enough. Models with similar overall intelligence diverge sharply across specialized deliverables. Switch tabs below to compare domain fit across <strong>UI / frontend design</strong>, <strong>terminal &amp; systems engineering</strong>, and <strong>document generation</strong>:</p>
 
 <section id="tasks" class="card task-section" style="margin-bottom: 20px;">
       <div class="task-tabs" role="tablist" aria-label="Task-specific benchmark details">
@@ -605,11 +603,11 @@ Do not implement the full solution yet. Recommend which approaches are worth pro
 <text x="505" y="592" text-anchor="middle" font-size="14">Elo / higher is better / native benchmark scale</text></svg></div></section>
     </section>
 
-<h3 id="h-2-smartness-vs-cost">3. Efficiency: optimize cost, latency, and reasoning effort</h3>
-<p>After filtering by capability bar and task fit, the final step is picking the most efficient model and reasoning effort tier (<strong>1 Low to 5 Max</strong>). This avoids two common traps: picking a cheap model that fails the quality bar, or paying flagship <code>Max</code> prices and multi-minute wait times after the task is already constrained.</p>
+<h3 id="h-2-smartness-vs-cost">3. Efficiency: at your capability bar, look left for lower cost and faster turns</h3>
+<p>After narrowing to models that clear the capability bar and fit the task domain, the final step is optimizing <strong>cost</strong>, <strong>latency</strong>, and <strong>reasoning effort (1 Low to 5 Max)</strong>. In both charts below, the vertical axis is the <strong>capability bar</strong>—so once you set your horizontal quality threshold, <strong>move as far left as possible</strong> to minimize cost and wait time without dropping below your bar.</p>
 
-<h4>Capability vs. cost across reasoning efforts</h4>
-<p>In the chart below, the <strong>vertical axis represents model capability (benchmark score)</strong> and the <strong>horizontal axis represents average USD cost per task (log scale)</strong>—so <strong>upper-left means higher capability at lower cost</strong>:</p>
+<h4>Cost efficiency across reasoning efforts</h4>
+<p>Plotting capability (vertical axis) against average USD cost per task (horizontal axis, log scale) shows where higher reasoning effort pays off—and where <code>Max (5)</code> triggers a steep cost spike or over-thinking penalty:</p>
 
 <div class="blog-chart-controls" role="region" aria-label="Interactive chart controls">
       <div class="ctrl-group">
@@ -1689,8 +1687,8 @@ Do not implement the full solution yet. Recommend which approaches are worth pro
       </div>
     </div>
 
-<h4 id="h-3-smartness-vs-perf">Capability vs. end-to-end response time</h4>
-<p>Output tokens per second hides internal thinking time. Plotting <strong>median end-to-end response time (seconds, log scale)</strong> against capability shows the real interactive latency cost of stepping up reasoning effort:</p>
+<h4 id="h-3-smartness-vs-perf">Response-time efficiency across reasoning efforts</h4>
+<p>Output tokens per second hides internal thinking time. Plotting <strong>median end-to-end response time (seconds, log scale)</strong> against capability reveals which configurations stay inside the 15-second interactive loop and which stretch into multi-minute waits:</p>
 
 <div id="time" class="gh-benchmark-panel">
   <div class="gh-chart-header">
@@ -2002,42 +2000,42 @@ Do not implement the full solution yet. Recommend which approaches are worth pro
       </div>
     </div>
 
-<h4>Quick decision guide by task and phase</h4>
-<p>Combining all three layers—capability bar, task fit, and cost/latency efficiency—yields a practical lookup for daily Copilot workflows:</p>
+<h3>Putting the three layers together: a practical selection guide</h3>
+<p>Combining all three filters—setting the capability bar by uncertainty, matching task fit, and picking the most efficient model and reasoning effort—yields a single lookup across a project's lifecycle:</p>
 
 <figure class="wp-block-table">
-      <table>
-        <caption>Quick decision guide: which model and effort to pick by task.</caption>
-        <thead>
-          <tr>
-            <th scope="col">Task type</th>
-            <th scope="col">Best overall ceiling</th>
-            <th scope="col">Best cost / speed efficiency</th>
-            <th scope="col">Key benchmark takeaway</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th scope="row">UI / frontend design</th>
-            <td><strong>GPT-6 Astra</strong> (Max), <strong>Claude Opus 5.5</strong>, <strong>Claude Sonnet 5.5</strong></td>
-            <td><strong>GPT-5.6 Sol</strong> (Xhigh), <strong>Gemini 4 Argon</strong>, <strong>GPT-6.1 Sol</strong></td>
-            <td>GPT-6 Astra leads DesignArena Website (1,339 Elo), closely followed by Opus (1,325) and Sonnet (1,322).</td>
-          </tr>
-          <tr>
-            <th scope="row">Terminal engineering &amp; coding</th>
-            <td><strong>Claude Opus 5.5</strong> (High/Max), <strong>Claude Sonnet 5.5</strong> (High/Max)</td>
-            <td><strong>GPT-6.1 Sol</strong> (Medium/High), <strong>GPT-6.1 Terra</strong> (High)</td>
-            <td>Opus (64.85%) and Sonnet (61.82%) lead Terminal-Bench; GPT-6.1 Sol ties GPT-6 Astra (58.18%) at a fraction of the cost.</td>
-          </tr>
-          <tr>
-            <th scope="row">Documents &amp; professional reports</th>
-            <td><strong>Gemini 4 Argon</strong> (High), <strong>Claude Opus 5.5</strong> (Max), <strong>Claude Sonnet 5.5</strong> (Max)</td>
-            <td><strong>Grok 4.7</strong> (Xhigh), <strong>GPT-6.1 Sol</strong> (Max)</td>
-            <td>Gemini 4 Argon leads Word rubric compliance (62.13%); Opus (2,135 Elo) and Sonnet (2,104 Elo) lead analytical quality.</td>
-          </tr>
-        </tbody>
-      </table>
-    </figure>
+  <table>
+    <caption>Model selection across the three layers as work moves from high-uncertainty exploration to constrained execution.</caption>
+    <thead>
+      <tr>
+        <th scope="col">Workflow &amp; phase</th>
+        <th scope="col">1. Capability bar</th>
+        <th scope="col">2. Task-fit leaders</th>
+        <th scope="col">3. Most efficient pick (cost &amp; latency)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row"><strong>UI / frontend</strong><br><span class="note">UX exploration &amp; mockup &rarr; component coding</span></th>
+        <td><strong>High bar</strong> for new layout/UX direction;<br><strong>Lower bar</strong> once mockup &amp; props are fixed.</td>
+        <td><strong>GPT-6 Astra</strong> (1,339 Elo), <strong>Claude Opus 5.5</strong> (1,325), <strong>Claude Sonnet 5.5</strong> (1,322) on DesignArena Website.</td>
+        <td>Use <strong>GPT-6 Astra (Medium/High)</strong> or <strong>Opus 5.5 (High)</strong> for the initial mockup; switch to <strong>GPT-6.1 Sol (Medium)</strong> or <strong>GPT-6.1 Terra (High)</strong> for fast component iteration.</td>
+      </tr>
+      <tr>
+        <th scope="row"><strong>Backend &amp; systems</strong><br><span class="note">Architecture design &rarr; scoped implementation</span></th>
+        <td><strong>High bar</strong> for cross-service architecture &amp; root-cause debugging;<br><strong>Lower bar</strong> after design doc review.</td>
+        <td><strong>Claude Opus 5.5</strong> (64.85%), <strong>Claude Sonnet 5.5</strong> (61.82%), <strong>GPT-6.1 Sol</strong> &amp; <strong>GPT-6 Astra</strong> (58.18%) on Terminal-Bench.</td>
+        <td>Use <strong>Opus 5.5 (High)</strong> or <strong>GPT-6.1 Sol (High, $0.59/task)</strong> for architecture; drop to <strong>GPT-6.1 Sol (Medium, 12.1s, $0.36)</strong> or <strong>Terra (High, 11.2s, $0.26)</strong> for scoped coding &amp; tests.</td>
+      </tr>
+      <tr>
+        <th scope="row"><strong>Docs &amp; reports</strong><br><span class="note">Technical tradeoffs &rarr; structured writing</span></th>
+        <td><strong>High bar</strong> when resolving open technical tradeoffs;<br><strong>Medium bar</strong> when polishing settled content.</td>
+        <td><strong>Gemini 4 Argon</strong> (62.13% Word rubric checks); <strong>Claude Opus 5.5</strong> (2,135 Elo) &amp; <strong>Sonnet 5.5</strong> (2,104 Elo) on analytical quality.</td>
+        <td>Use <strong>Opus 5.5 (High)</strong> or <strong>Gemini 4 Argon (High)</strong> to structure complex design docs; use <strong>Grok 4.7 (Xhigh)</strong> or <strong>GPT-6.1 Sol (Medium/High)</strong> for cost-efficient drafting.</td>
+      </tr>
+    </tbody>
+  </table>
+</figure>
 
 <div class="takeaway">Set the capability bar for the current step's uncertainty, refine by task fit, and pick the lowest-cost, lowest-latency configuration that clears the bar.</div>
 
