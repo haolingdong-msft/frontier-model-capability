@@ -1,0 +1,2256 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>How to tackle complex, long-running tasks with GitHub Copilot</title><style>:root{color-scheme:light dark;--bg:#fff;--fg:#1f2328;--muted:#59636e;--card:#f6f8fa;--line:#d1d9e0;--blue:#0969da;--soft:#ddf4ff} @media(prefers-color-scheme:dark){:root{--bg:#0d1117;--fg:#f0f6fc;--muted:#9198a1;--card:#161b22;--line:#3d444d;--blue:#58a6ff;--soft:#12233b}}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:18px/1.7 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif}main{max-width:800px;margin:auto;padding:64px 24px 96px}h1{font-size:clamp(40px,7vw,62px);line-height:1.08;letter-spacing:-.035em;margin:.2em 0}h2{font-size:34px;line-height:1.2;margin:2em 0 .6em}h3{font-size:24px;margin:1.7em 0 .4em}h4{font-size:20px;margin:1.5em 0 .4em}.eyebrow,a{color:var(--blue)}.eyebrow{font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:.08em}.dek{font-size:22px;color:var(--muted)}.byline,.note{color:var(--muted);font-size:15px}p{margin:0 0 22px}li{margin:8px 0}.box,.prompt,.takeaway{padding:22px;margin:28px 0;border:1px solid var(--line);border-radius:12px;background:var(--card)}.takeaway{border-left:5px solid var(--blue);background:var(--soft);font-weight:650;font-size:20px}pre{white-space:pre-wrap;overflow:auto;font:15px/1.55 ui-monospace,SFMono-Regular,Menlo,monospace}table{width:100%;border-collapse:collapse;margin:24px 0 34px;font-size:16px}th,td{border:1px solid var(--line);padding:13px;text-align:left;vertical-align:top}th{background:var(--card)}blockquote{border-left:4px solid #8250df;margin:30px 0;padding-left:22px;color:var(--muted);font-size:21px}.flow{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}.flow div{border:1px solid var(--line);background:var(--card);padding:14px 8px;border-radius:9px;text-align:center;font-weight:650}.visual{margin:30px 0;padding:20px;border:1px solid var(--line);border-radius:14px;background:var(--card)}.visual h4{margin:0 0 4px;font-size:19px}.visual .sub{margin:0 0 16px;color:var(--muted);font-size:14px}.visual svg{display:block;width:100%;height:auto;background:var(--bg);border:1px solid var(--line);border-radius:10px}.model-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:22px 0}.model-card{padding:18px;border:1px solid var(--line);border-radius:12px;background:var(--card)}.model-card strong{display:block;margin-bottom:8px}.model-card .pick{margin-top:10px;color:var(--blue);font-weight:700}.legend{display:flex;flex-wrap:wrap;gap:12px;margin-top:12px;color:var(--muted);font-size:13px}.dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:5px}.source{color:var(--muted);font-size:13px;margin-top:10px}@media(max-width:640px){main{padding-top:36px}.flow,.model-grid{grid-template-columns:1fr}body{font-size:17px}}
+main{max-width:880px}
+figure.wp-block-table{margin:24px 0 34px}
+.card{background:#ffffff;color:#1f2328;border:1px solid var(--line);border-radius:14px;padding:20px 22px;margin:20px 0}
+.gh-chart-header h3,.task-section h3{margin:0 0 6px;font-size:20px;line-height:1.3;color:#1f2328}
+.gh-chart-header p.muted,.task-section p.muted{margin:0 0 14px;color:#59636e;font-size:14.5px}
+.gh-chart-grid{display:grid;grid-template-columns:minmax(0,1fr) 215px;gap:14px;align-items:stretch}
+.gh-plot-box{border:1px solid #d1d9e0;border-radius:10px;background:#ffffff;overflow:hidden;display:flex;align-items:center}
+.gh-plot-box svg,.task-plot svg{display:block;width:100%;height:auto}
+.gh-chart-legend{background:#f6f8fa;color:#1f2328;border:1px solid #d1d9e0;border-radius:10px;padding:10px 12px;font-size:12px;display:flex;flex-direction:column;justify-content:space-between}
+.gh-legend-Title{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:10.5px;font-weight:700;letter-spacing:.05em;color:#59636e;margin-bottom:4px}
+.gh-legend-list{list-style:none;padding:0;margin:0}
+.gh-legend-item{display:flex;align-items:center;gap:6px;height:17.5px;margin:0 0 1.5px;font-weight:600;line-height:1;white-space:nowrap}
+.gh-legend-item.is-missing{opacity:.55}
+.gh-legend-swatch{width:12px;height:3px;border-radius:2px;flex-shrink:0}
+.gh-legend-name{overflow:hidden;text-overflow:ellipsis}
+.gh-legend-na{margin-left:auto;font-size:10px;font-weight:500;color:#59636e;background:#eaeef2;padding:1px 4px;border-radius:4px}
+.gh-effort-list{list-style:none;padding:0;margin:0 0 4px;display:grid;grid-template-columns:repeat(3,1fr);gap:3px 4px}
+.gh-effort-list li{margin:0;font-size:11px;display:flex;align-items:center;gap:4px;color:#1f2328}
+.gh-effort-badge{display:inline-flex;align-items:center;justify-content:center;width:15px;height:15px;border-radius:50%;background:#1f2328;color:#ffffff;font-size:9.5px;font-weight:700}
+.gh-legend-note{margin:0;font-size:10.5px;color:#59636e;line-height:1.25}
+.blog-chart-controls{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px 18px;padding:12px 16px;margin:20px 0 12px;background:var(--card);border:1px solid var(--line);border-radius:10px;font-size:14px}
+.blog-chart-controls .ctrl-group{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.blog-chart-controls label{font-weight:600;color:var(--fg)}
+.blog-chart-controls select,.metric-control select{padding:6px 10px;border-radius:6px;border:1px solid var(--line);background:var(--bg);color:var(--fg);font-size:14px;font-weight:500}
+.status-banner{padding:10px 14px;background:var(--card);border-left:4px solid var(--blue);border-radius:6px;font-size:14px;margin:10px 0}
+.takeaway-visual-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:18px 0 28px}
+.takeaway-visual-card{background:#ffffff;color:#1f2328;border:1px solid var(--line);border-radius:12px;padding:14px 16px 12px;box-shadow:0 1px 2px rgba(31,35,40,.04)}
+.takeaway-visual-card.full-span{grid-column:1 / -1}
+.takeaway-visual-card h4{margin:0 0 4px;font-size:15px;font-weight:700;color:#1f2328;display:flex;align-items:center;justify-content:space-between;gap:8px}
+.takeaway-visual-card .takeaway-badge{font-size:11.5px;font-weight:700;padding:2px 8px;border-radius:999px;background:#ddf4ff;color:#0969da;white-space:nowrap}
+.takeaway-visual-card .takeaway-badge.warn{background:#fff8c5;color:#9a6700}
+.takeaway-visual-card .takeaway-badge.danger{background:#ffebe9;color:#cf222e}
+.takeaway-visual-card p.takeaway-sub{margin:0 0 10px;font-size:13px;color:#57606a;line-height:1.4}
+.takeaway-visual-card svg{width:100%;height:auto;display:block}
+.task-tabs{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0 14px;border-bottom:1px solid var(--line);padding-bottom:12px}
+.task-tabs button{font:inherit;font-size:14px;font-weight:600;padding:8px 14px;border-radius:6px;border:1px solid var(--line);color:var(--fg);background:var(--card);cursor:pointer}
+.task-tabs button[aria-selected="true"]{background:var(--blue);color:#ffffff;border-color:var(--blue)}
+.metric-control{display:block;margin-bottom:14px;font-size:15px;font-weight:600;color:#1f2328}
+.metric-control select{margin-left:8px;background:#ffffff;color:#1f2328;border-color:#d1d9e0}
+.source-line{font-size:14px;color:var(--muted)}
+caption{text-align:left;color:var(--muted);font-size:14px;padding:10px 12px;background:var(--card);border:1px solid var(--line);border-bottom:0;font-weight:600}
+details.benchmark-deep-dive{margin:24px 0;border:1px solid var(--line);border-radius:12px;background:var(--card);padding:14px 18px}
+details.benchmark-deep-dive>summary{cursor:pointer;font-weight:700;font-size:16.5px;color:var(--blue);list-style:revert;padding:4px 0}
+details.benchmark-deep-dive[open]>summary{margin-bottom:14px;border-bottom:1px solid var(--line);padding-bottom:12px}
+.transition-strip{display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;margin:22px 0;padding:16px 20px;border:1px solid var(--line);border-radius:12px;background:var(--card);font-weight:700;font-size:16px}
+.transition-strip .t-step{padding:8px 14px;border-radius:8px;background:var(--bg);border:1px solid var(--line)}
+.transition-strip .t-mid{background:#fbefff;border-color:#8250df;color:#8250df}
+.transition-strip .t-arrow{color:var(--muted);font-size:18px}
+@media(max-width:760px){.gh-chart-grid,.takeaway-visual-grid{grid-template-columns:1fr}}
+
+.task-head-block{margin:2px 0 12px}
+.task-head-top{margin:0 0 3px}
+.task-section .task-head-top h3{margin:0;font-size:17px;font-weight:700;color:#1f2328;line-height:1.3}
+.task-section p.task-sub{margin:0;font-size:13.5px;line-height:1.45;color:#59636e}
+.task-foot-source,.gh-bench-footnote{margin:8px 2px 0;text-align:right;font-size:12px;color:#59636e}
+.task-foot-source a,.gh-bench-footnote a{color:#0969da;font-weight:600;text-decoration:none}
+.task-foot-source a:hover,.gh-bench-footnote a:hover{text-decoration:underline}
+</style></head><body><main><article>
+<div class="eyebrow">GitHub Copilot</div>
+<h1>How to tackle complex, long-running tasks with GitHub Copilot</h1>
+<p class="dek">Three practices that helped me escape the rework-and-regression loop and turn an unsuccessful 12-hour attempt into a reliable workflow for AI-assisted engineering.</p>
+
+<p>Have you ever handed a complex task to GitHub Copilot, only to watch it stall out, get trapped in endless rework, or declare the job “complete” while introducing a wave of new bugs where fixing one bug breaks two more?</p>
+<p>I hit that exact wall when I left Copilot working overnight on a complex performance optimization task. More than 12 hours later, I came back to a reassuring message: the task was complete.</p>
+<p>There was just one problem. It was not. The implementation missed the performance target, introduced regressions, and every follow-up fix seemed to unravel something else.</p>
+<p>That experience changed how I approach complex, long-running work with AI agents. For a small, self-contained edit, describing the desired outcome is usually enough. For work spanning architecture, experimentation, multi-file implementation, and validation, how we structure the workflow and allocate model capability across it matters just as much as the prompt itself.</p>
+<p>I eventually resolved the performance issue. Looking back, three practices made the biggest difference:</p>
+<ol>
+  <li>Get the design clear before implementation.</li>
+  <li>Explore multiple approaches before committing.</li>
+  <li>Invest model capability in those design decisions, then optimize implementation.</li>
+</ol>
+
+<h2>1. Get the design clear before implementation</h2>
+<p>My first attempt focused heavily on the outcome: improve performance while preserving existing behavior. That left too many interconnected decisions open during implementation. Small assumptions compounded, and the agent produced substantial work that still moved in the wrong direction.</p>
+<p>What worked better was separating design from implementation. Before changing code, I worked with Copilot to clarify the architecture, component responsibilities, interactions, API contracts, invariants, and measurable success criteria.</p>
+<div class="prompt"><strong>Example prompt</strong><pre>Before making code changes, analyze the current architecture and propose a design for improving performance.
+
+Identify component responsibilities, interactions, affected API contracts, behavior that must not change, likely bottlenecks, measurable success criteria, and a validation plan.
+
+Call out assumptions, risks, and open questions. Do not implement anything yet.</pre></div>
+<div class="takeaway">Do not treat design as an implicit part of implementation. Make it a separate deliverable and review it before code changes begin.</div>
+
+<h2>2. Explore multiple approaches before committing</h2>
+<p>An agent can make the first plausible solution feel surprisingly complete. That momentum is useful, but it can lead us to commit too early. Instead of asking Copilot to find and implement one solution, I found it more effective to ask it to explore the solution space first.</p>
+<div class="prompt"><strong>Example prompt</strong><pre>Propose three viable approaches to this performance bottleneck. For each, include the expected impact, implementation complexity, compatibility risks, a quick experiment, and evidence that would cause us to reject it.
+
+Do not implement the full solution yet. Recommend which approaches are worth prototyping in parallel.</pre></div>
+<p>Small prototypes helped answer specific questions before I invested in a production implementation. This changed the interaction from “implement this solution” to “help me explore the solution space.”</p>
+<div class="takeaway">Use Copilot as a design exploration partner. Ask for alternatives, test the strongest assumptions, and let evidence guide the final choice.</div>
+<h2 id="section-3">3. Use stronger reasoning for design, then optimize for implementation</h2>
+<p>Practices 1 and 2 establish why upfront design and exploration are critical for a complex, long-running task. That leads directly to the next question: <strong>since design is where the highest-leverage decisions happen, how should I allocate AI capability across the workflow?</strong></p>
+<p>Instead of using a single model configuration from start to finish, I invest my strongest reasoning in the design decisions, capture those decisions in a concrete artifact, and then switch to a faster, more cost-efficient model for implementation.</p>
+
+<div class="visual"><h4>How to allocate model capability across a complex, long-running task</h4><p class="sub">Start with high capability and task fit during design, lock the decisions into an artifact, and then optimize for speed and cost during implementation.</p>
+<svg viewBox="0 0 820 556" role="img" aria-label="Complex, long-running task flow: Design and explore with high capability and high reasoning chosen for task fit, Capture the decisions in a mockup, design doc, API contract, or plan, then Implement and iterate with a faster, lower-reasoning, lower-cost model"><defs><marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#59636e"/></marker></defs>
+<!-- Top Task Pill -->
+<rect x="240" y="14" width="340" height="36" rx="18" fill="#f6f8fa" stroke="#59636e" stroke-width="1.5"/>
+<text x="410" y="37" text-anchor="middle" font-size="15" font-weight="700" style="fill:#1f2328" letter-spacing=".03em">Complex, long-running task</text>
+<line x1="410" y1="50" x2="410" y2="72" stroke="#59636e" stroke-width="2.5" marker-end="url(#arrow)"/>
+
+<!-- Stage 1: DESIGN & EXPLORE -->
+<rect x="90" y="76" width="640" height="168" rx="16" fill="#ddf4ff" stroke="#0969da" stroke-width="1.8"/>
+<text x="410" y="108" text-anchor="middle" font-size="19" font-weight="800" style="fill:#0969da" letter-spacing=".04em">DESIGN &amp; EXPLORE</text>
+<text x="410" y="134" text-anchor="middle" font-size="15.5" font-weight="700" style="fill:#1f2328">High capability · High reasoning</text>
+<text x="410" y="154" text-anchor="middle" font-size="14" font-weight="700" style="fill:#0969da">↓</text>
+<rect x="135" y="162" width="550" height="66" rx="10" fill="#ffffff" stroke="#80ccff" stroke-width="1.2"/>
+<text x="410" y="187" text-anchor="middle" font-size="14" font-style="italic" font-weight="600" style="fill:#0969da">Among strong models, choose for task fit</text>
+<text x="410" y="212" text-anchor="middle" font-size="13.5" font-weight="700" style="fill:#1f2328">UI &amp; frontend · Backend &amp; app coding · Systems &amp; CLI · Writing &amp; research</text>
+
+<line x1="410" y1="244" x2="410" y2="278" stroke="#59636e" stroke-width="2.5" marker-end="url(#arrow)"/>
+
+<!-- Stage 2: CAPTURE THE DECISIONS -->
+<rect x="130" y="282" width="560" height="96" rx="14" fill="#fbefff" stroke="#8250df" stroke-width="1.8"/>
+<text x="410" y="314" text-anchor="middle" font-size="18" font-weight="800" style="fill:#8250df" letter-spacing=".04em">CAPTURE THE DECISIONS</text>
+<text x="410" y="341" text-anchor="middle" font-size="15.5" font-weight="700" style="fill:#1f2328">Mockup · Design doc · API contract · Implementation plan</text>
+<text x="410" y="363" text-anchor="middle" font-size="13" style="fill:#59636e">Important decisions are locked; the implementation problem is now constrained</text>
+
+<line x1="410" y1="378" x2="410" y2="412" stroke="#59636e" stroke-width="2.5" marker-end="url(#arrow)"/>
+
+<!-- Stage 3: IMPLEMENT & ITERATE -->
+<rect x="90" y="416" width="640" height="124" rx="16" fill="#dafbe1" stroke="#1a7f37" stroke-width="1.8"/>
+<text x="410" y="448" text-anchor="middle" font-size="19" font-weight="800" style="fill:#1a7f37" letter-spacing=".04em">IMPLEMENT &amp; ITERATE</text>
+<text x="410" y="476" text-anchor="middle" font-size="15.5" font-weight="700" style="fill:#1f2328">Faster model · Lower reasoning · Lower cost + latency</text>
+<text x="410" y="501" text-anchor="middle" font-size="14" font-weight="600" style="fill:#1a7f37">Execute the reviewed design reliably and efficiently (7–15s turns · 80%–95% lower cost)</text>
+<text x="410" y="523" text-anchor="middle" font-size="12.5" style="fill:#59636e">No need to re-architect, re-explore the solution space, or re-decide contracts</text>
+</svg></div>
+
+<h3 id="h-4-best-at-task">Design &amp; exploration: optimize for decision quality</h3>
+<p>For a complex, long-running task, the design phase carries the highest uncertainty and the highest downstream impact: a flawed architecture or direction will invalidate hours of downstream work. My default starting point for design is therefore a <strong>high-capability model with strong reasoning</strong>, and only then do I ask: <em>among strong models, which one is particularly good at this task?</em></p>
+<blockquote><strong>High capability is the baseline. Task fit determines which high-capability model I choose.</strong></blockquote>
+<p>Across public benchmarks, complex software and knowledge work generally falls into four categories, each with different frontier leaders:</p>
+<ul>
+  <li><strong>UI &amp; frontend design:</strong> designing web interfaces, visual layouts, component hierarchies, and interactive user experiences. <strong>GPT-6 Astra</strong> and <strong>Claude Opus 5.5</strong> rank highest here.</li>
+  <li><strong>Backend &amp; application coding:</strong> writing service and business logic in existing repositories, cross-file refactoring, fixing PR bugs, and migrating code across languages or frameworks. <strong>Claude Opus 5.5</strong> and <strong>GPT-6.1 Sol</strong> perform best in this category.</li>
+  <li><strong>Systems, CLI &amp; DevOps:</strong> running shell scripts, configuring environments, troubleshooting in terminal or container workflows, and tuning system-level performance. <strong>Claude Opus 5.5</strong> and <strong>GPT-6 Astra</strong> lead this category.</li>
+  <li><strong>Writing, research &amp; design docs:</strong> open-ended technical research, architecture trade-off analysis, design documents, and structured reports or presentations. <strong>Claude Opus 5.5</strong> and <strong>Gemini 4 Argon</strong> lead this category.</li>
+</ul>
+<p>Switch tabs below to compare how the 10 frontier model families perform across these four task types on public benchmarks:</p>
+
+<section id="tasks" class="card task-section" style="margin-bottom: 20px;">
+      <div class="task-tabs" role="tablist" aria-label="Task-specific benchmark details">
+<button type="button" id="tab-frontend" role="tab" aria-selected="true" aria-controls="panel-frontend" tabindex="0">UI / Frontend</button>
+<button type="button" id="tab-coding" role="tab" aria-selected="false" aria-controls="panel-coding" tabindex="-1">Backend &amp; App Coding</button>
+<button type="button" id="tab-engineering" role="tab" aria-selected="false" aria-controls="panel-engineering" tabindex="-1">Systems, CLI &amp; DevOps</button>
+<button type="button" id="tab-documents" role="tab" aria-selected="false" aria-controls="panel-documents" tabindex="-1">Research &amp; Analysis</button>
+</div>
+<section id="panel-frontend" role="tabpanel" aria-labelledby="tab-frontend" tabindex="0">
+<div class="task-head-block"><div class="task-head-top"><h3>Website &amp; frontend design</h3></div><p class="task-sub">Blind human preferences between websites generated from the same prompt; Bradley-Terry ratings displayed as Elo.</p></div>
+<svg class="task-plot" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 566" role="img" aria-labelledby="task-website-title task-website-desc">
+<title id="task-website-title">Website / frontend design</title>
+<desc id="task-website-desc">10 selected model families. Horizontal axis: Elo from 1200 to 1400, higher is better. Exact scores and configurations are in the table below. Whiskers are published 95% confidence intervals where available; missing results are labeled, not plotted as zero.</desc>
+<style>text{font-family:Segoe UI,Arial,sans-serif;fill:#192740}</style>
+<rect width="1000" height="566" rx="10" fill="#ffffff" stroke="#dce3ee"/>
+<line x1="230.0" y1="38" x2="230.0" y2="486" stroke="#dde4ee"/>
+<text x="230.0" y="516" text-anchor="middle" font-size="14">1,200</text>
+<line x1="367.5" y1="38" x2="367.5" y2="486" stroke="#dde4ee"/>
+<text x="367.5" y="516" text-anchor="middle" font-size="14">1,250</text>
+<line x1="505.0" y1="38" x2="505.0" y2="486" stroke="#dde4ee"/>
+<text x="505.0" y="516" text-anchor="middle" font-size="14">1,300</text>
+<line x1="642.5" y1="38" x2="642.5" y2="486" stroke="#dde4ee"/>
+<text x="642.5" y="516" text-anchor="middle" font-size="14">1,350</text>
+<line x1="780.0" y1="38" x2="780.0" y2="486" stroke="#dde4ee"/>
+<text x="780.0" y="516" text-anchor="middle" font-size="14">1,400</text>
+<g class="task-series" data-model="0">
+<text x="18" y="70" font-size="17" font-weight="600">Claude Opus 5.5</text>
+<title>Claude Opus 5.5: 1,325.00; Effort not stated; 95% CI: Not published in captured record</title>
+<circle cx="573.75" cy="65" r="7" fill="#a34415"/>
+<text x="805" y="70" font-size="17" font-weight="600">1,325.00</text>
+</g>
+<g class="task-series" data-model="1">
+<text x="18" y="114" font-size="17" font-weight="600">Claude Sonnet 5.5</text>
+<title>Claude Sonnet 5.5: 1,322.00; Effort not stated; 95% CI: Not published in captured record</title>
+<circle cx="565.50" cy="109" r="7" fill="#d17908"/>
+<text x="805" y="114" font-size="17" font-weight="600">1,322.00</text>
+</g>
+<g class="task-series" data-model="2">
+<text x="18" y="158" font-size="17" font-weight="600">GPT-6 Astra</text>
+<title>GPT-6 Astra: 1,339.00; Max; 95% CI: Not published in captured record</title>
+<circle cx="612.25" cy="153" r="7" fill="#5144c7"/>
+<text x="805" y="158" font-size="17" font-weight="600">1,339.00</text>
+</g>
+<g class="task-series" data-model="3">
+<text x="18" y="202" font-size="17" font-weight="600">GPT-6.1 Sol</text>
+<title>GPT-6.1 Sol: 1,315.00; Effort not stated; 95% CI: Not published in captured record</title>
+<circle cx="546.25" cy="197" r="7" fill="#1878ba"/>
+<text x="805" y="202" font-size="17" font-weight="600">1,315.00</text>
+</g>
+<g class="task-series" data-model="4">
+<text x="18" y="246" font-size="17" font-weight="600">GPT-5.6 Sol</text>
+<title>GPT-5.6 Sol: 1,320.00; Xhigh; 95% CI: Not published in captured record</title>
+<circle cx="560.00" cy="241" r="7" fill="#bf3c85"/>
+<text x="805" y="246" font-size="17" font-weight="600">1,320.00</text>
+</g>
+<g class="task-series" data-model="5">
+<text x="18" y="290" font-size="17" font-weight="600">Gemini 3.8 Flash</text>
+<title>Gemini 3.8 Flash: 1,299.00; Effort not stated; 95% CI: Not published in captured record</title>
+<circle cx="502.25" cy="285" r="7" fill="#07816c"/>
+<text x="805" y="290" font-size="17" font-weight="600">1,299.00</text>
+</g>
+<g class="task-series" data-model="6">
+<text x="18" y="334" font-size="17" font-weight="600">GPT-6 Luna</text>
+<title>GPT-6 Luna: 1,266.00; Effort not stated; 95% CI: Not published in captured record</title>
+<circle cx="411.50" cy="329" r="7" fill="#6e7889"/>
+<text x="805" y="334" font-size="17" font-weight="600">1,266.00</text>
+</g>
+<g class="task-series" data-model="8">
+<text x="18" y="378" font-size="17" font-weight="600">GPT-6.1 Terra</text>
+<title>GPT-6.1 Terra: 1,284.00; Effort not stated; 95% CI: Not published in captured record</title>
+<circle cx="461.00" cy="373" r="7" fill="#9744a0"/>
+<text x="805" y="378" font-size="17" font-weight="600">1,284.00</text>
+</g>
+<g class="task-series" data-model="9">
+<text x="18" y="422" font-size="17" font-weight="600">Gemini 4 Argon</text>
+<title>Gemini 4 Argon: 1,316.00; Effort not stated; 95% CI: Not published in captured record</title>
+<circle cx="549.00" cy="417" r="7" fill="#4d7b16"/>
+<text x="805" y="422" font-size="17" font-weight="600">1,316.00</text>
+</g>
+<g class="task-series" data-model="10">
+<text x="18" y="466" font-size="17" font-weight="600">Grok 4.7</text>
+<title>Grok 4.7: 1,251.00; Effort not stated; 95% CI: Not published in captured record</title>
+<circle cx="370.25" cy="461" r="7" fill="#be3042"/>
+<text x="805" y="466" font-size="17" font-weight="600">1,251.00</text>
+</g>
+<text x="505" y="548" text-anchor="middle" font-size="14">Elo / higher is better / native benchmark scale</text></svg>
+<div class="task-foot-source">Benchmark source: <a href="https://www.designarena.ai/leaderboard/website" target="_blank" rel="noopener">DesignArena Website ↗</a></div>
+</section>
+<section id="panel-coding" role="tabpanel" aria-labelledby="tab-coding" tabindex="0" hidden>
+<label class="metric-control">Backend &amp; codebase benchmark:
+<select id="coding-metric">
+<option value="live-coding">LiveBench 2.0: Coding / real merged PR tasks on frozen codebases</option>
+<option value="cursor">CursorBench 4.0 / multi-file service edits &amp; refactoring</option>
+<option value="migration">Vals Code Migration v1.1 / behavior-preserving repo migration</option>
+</select></label>
+<div data-coding-metric="live-coding">
+<div class="task-head-block"><div class="task-head-top"><h3>PR bug fixes &amp; feature coding</h3></div><p class="task-sub">Real merged pull request tasks on frozen codebases; regressions score zero; 0–100 mean task score.</p></div>
+<svg class="task-plot" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 566" role="img" aria-labelledby="task-live-coding-title task-live-coding-desc">
+<title id="task-live-coding-title">LiveBench: Coding</title>
+<desc id="task-live-coding-desc">10 selected model families. Horizontal axis: Score / 100 from 0 to 100, higher is better. Exact scores and configurations are in the table below. Whiskers are published 95% confidence intervals where available; missing results are labeled, not plotted as zero.</desc>
+<style>text{font-family:Segoe UI,Arial,sans-serif;fill:#192740}</style>
+<rect width="1000" height="566" rx="10" fill="#ffffff" stroke="#dce3ee"/>
+<line x1="230.0" y1="38" x2="230.0" y2="486" stroke="#dde4ee"/>
+<text x="230.0" y="516" text-anchor="middle" font-size="14">0</text>
+<line x1="340.0" y1="38" x2="340.0" y2="486" stroke="#dde4ee"/>
+<text x="340.0" y="516" text-anchor="middle" font-size="14">20</text>
+<line x1="450.0" y1="38" x2="450.0" y2="486" stroke="#dde4ee"/>
+<text x="450.0" y="516" text-anchor="middle" font-size="14">40</text>
+<line x1="560.0" y1="38" x2="560.0" y2="486" stroke="#dde4ee"/>
+<text x="560.0" y="516" text-anchor="middle" font-size="14">60</text>
+<line x1="670.0" y1="38" x2="670.0" y2="486" stroke="#dde4ee"/>
+<text x="670.0" y="516" text-anchor="middle" font-size="14">80</text>
+<line x1="780.0" y1="38" x2="780.0" y2="486" stroke="#dde4ee"/>
+<text x="780.0" y="516" text-anchor="middle" font-size="14">100</text>
+<g class="task-series" data-model="0">
+<text x="18" y="70" font-size="17" font-weight="600">Claude Opus 5.5</text>
+<title>Claude Opus 5.5: 96.30; Max / LiveBench suite; 95% CI: Not published in captured record</title>
+<circle cx="759.65" cy="65" r="7" fill="#a34415"/>
+<text x="805" y="70" font-size="17" font-weight="600">96.30</text>
+</g>
+<g class="task-series" data-model="1">
+<text x="18" y="114" font-size="17" font-weight="600">Claude Sonnet 5.5</text>
+<title>Claude Sonnet 5.5: 94.70; Max / LiveBench suite; 95% CI: Not published in captured record</title>
+<circle cx="750.85" cy="109" r="7" fill="#d17908"/>
+<text x="805" y="114" font-size="17" font-weight="600">94.70</text>
+</g>
+<g class="task-series" data-model="2">
+<text x="18" y="158" font-size="17" font-weight="600">GPT-6 Astra</text>
+<title>GPT-6 Astra: 93.70; Max / LiveBench suite; 95% CI: Not published in captured record</title>
+<circle cx="745.35" cy="153" r="7" fill="#5144c7"/>
+<text x="805" y="158" font-size="17" font-weight="600">93.70</text>
+</g>
+<g class="task-series" data-model="3">
+<text x="18" y="202" font-size="17" font-weight="600">GPT-6.1 Sol</text>
+<title>GPT-6.1 Sol: 96.00; Max / LiveBench suite; 95% CI: Not published in captured record</title>
+<circle cx="758.00" cy="197" r="7" fill="#1878ba"/>
+<text x="805" y="202" font-size="17" font-weight="600">96.00</text>
+</g>
+<g class="task-series" data-model="4">
+<text x="18" y="246" font-size="17" font-weight="600">GPT-5.6 Sol</text>
+<text x="805" y="246" font-size="15" fill="#56647a">No result</text>
+</g>
+<g class="task-series" data-model="5">
+<text x="18" y="290" font-size="17" font-weight="600">Gemini 3.8 Flash</text>
+<title>Gemini 3.8 Flash: 82.20; High / LiveBench suite; 95% CI: Not published in captured record</title>
+<circle cx="682.10" cy="285" r="7" fill="#07816c"/>
+<text x="805" y="290" font-size="17" font-weight="600">82.20</text>
+</g>
+<g class="task-series" data-model="6">
+<text x="18" y="334" font-size="17" font-weight="600">GPT-6 Luna</text>
+<title>GPT-6 Luna: 84.50; Max / LiveBench suite; 95% CI: Not published in captured record</title>
+<circle cx="694.75" cy="329" r="7" fill="#6e7889"/>
+<text x="805" y="334" font-size="17" font-weight="600">84.50</text>
+</g>
+<g class="task-series" data-model="8">
+<text x="18" y="378" font-size="17" font-weight="600">GPT-6.1 Terra</text>
+<title>GPT-6.1 Terra: 94.30; Max / LiveBench suite; 95% CI: Not published in captured record</title>
+<circle cx="748.65" cy="373" r="7" fill="#9744a0"/>
+<text x="805" y="378" font-size="17" font-weight="600">94.30</text>
+</g>
+<g class="task-series" data-model="9">
+<text x="18" y="422" font-size="17" font-weight="600">Gemini 4 Argon</text>
+<title>Gemini 4 Argon: 89.70; High / LiveBench suite; 95% CI: Not published in captured record</title>
+<circle cx="723.35" cy="417" r="7" fill="#4d7b16"/>
+<text x="805" y="422" font-size="17" font-weight="600">89.70</text>
+</g>
+<g class="task-series" data-model="10">
+<text x="18" y="466" font-size="17" font-weight="600">Grok 4.7</text>
+<title>Grok 4.7: 84.50; Xhigh / LiveBench suite; 95% CI: Not published in captured record</title>
+<circle cx="694.75" cy="461" r="7" fill="#be3042"/>
+<text x="805" y="466" font-size="17" font-weight="600">84.50</text>
+</g>
+<text x="505" y="548" text-anchor="middle" font-size="14">Score / 100 / higher is better / native benchmark scale</text></svg>
+<div class="task-foot-source">Benchmark source: <a href="https://livebench.ai/" target="_blank" rel="noopener">LiveBench 2.0: Coding ↗</a></div>
+</div>
+<div data-coding-metric="cursor" hidden>
+<div class="task-head-block"><div class="task-head-top"><h3>Multi-file service edits &amp; refactoring</h3></div><p class="task-sub">Correctness on real multi-file coding sessions, including refactoring, investigation, and design adherence.</p></div>
+<svg class="task-plot" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 566" role="img" aria-labelledby="task-cursor-title task-cursor-desc">
+<title id="task-cursor-title">Coding agents: ambiguous, multi-file tasks</title>
+<desc id="task-cursor-desc">10 selected model families. Horizontal axis: % from 0 to 100, higher is better. Exact scores and configurations are in the table below. Whiskers are published 95% confidence intervals where available; missing results are labeled, not plotted as zero.</desc>
+<style>text{font-family:Segoe UI,Arial,sans-serif;fill:#192740}</style>
+<rect width="1000" height="566" rx="10" fill="#ffffff" stroke="#dce3ee"/>
+<line x1="230.0" y1="38" x2="230.0" y2="486" stroke="#dde4ee"/>
+<text x="230.0" y="516" text-anchor="middle" font-size="14">0</text>
+<line x1="340.0" y1="38" x2="340.0" y2="486" stroke="#dde4ee"/>
+<text x="340.0" y="516" text-anchor="middle" font-size="14">20</text>
+<line x1="450.0" y1="38" x2="450.0" y2="486" stroke="#dde4ee"/>
+<text x="450.0" y="516" text-anchor="middle" font-size="14">40</text>
+<line x1="560.0" y1="38" x2="560.0" y2="486" stroke="#dde4ee"/>
+<text x="560.0" y="516" text-anchor="middle" font-size="14">60</text>
+<line x1="670.0" y1="38" x2="670.0" y2="486" stroke="#dde4ee"/>
+<text x="670.0" y="516" text-anchor="middle" font-size="14">80</text>
+<line x1="780.0" y1="38" x2="780.0" y2="486" stroke="#dde4ee"/>
+<text x="780.0" y="516" text-anchor="middle" font-size="14">100</text>
+<g class="task-series" data-model="0">
+<text x="18" y="70" font-size="17" font-weight="600">Claude Opus 5.5</text>
+<title>Claude Opus 5.5: 57.80%; Max / Cursor agent; 95% CI: Not published in captured record</title>
+<circle cx="547.90" cy="65" r="7" fill="#a34415"/>
+<text x="805" y="70" font-size="17" font-weight="600">57.80%</text>
+</g>
+<g class="task-series" data-model="1">
+<text x="18" y="114" font-size="17" font-weight="600">Claude Sonnet 5.5</text>
+<title>Claude Sonnet 5.5: 55.50%; Max / Cursor agent; 95% CI: Not published in captured record</title>
+<circle cx="535.25" cy="109" r="7" fill="#d17908"/>
+<text x="805" y="114" font-size="17" font-weight="600">55.50%</text>
+</g>
+<g class="task-series" data-model="2">
+<text x="18" y="158" font-size="17" font-weight="600">GPT-6 Astra</text>
+<text x="805" y="158" font-size="15" fill="#56647a">No result</text>
+</g>
+<g class="task-series" data-model="3">
+<text x="18" y="202" font-size="17" font-weight="600">GPT-6.1 Sol</text>
+<text x="805" y="202" font-size="15" fill="#56647a">No result</text>
+</g>
+<g class="task-series" data-model="4">
+<text x="18" y="246" font-size="17" font-weight="600">GPT-5.6 Sol</text>
+<title>GPT-5.6 Sol: 41.70%; Max / Cursor agent; 95% CI: Not published in captured record</title>
+<circle cx="459.35" cy="241" r="7" fill="#bf3c85"/>
+<text x="805" y="246" font-size="17" font-weight="600">41.70%</text>
+</g>
+<g class="task-series" data-model="5">
+<text x="18" y="290" font-size="17" font-weight="600">Gemini 3.8 Flash</text>
+<title>Gemini 3.8 Flash: 39.60%; High / Cursor agent; 95% CI: Not published in captured record</title>
+<circle cx="447.80" cy="285" r="7" fill="#07816c"/>
+<text x="805" y="290" font-size="17" font-weight="600">39.60%</text>
+</g>
+<g class="task-series" data-model="6">
+<text x="18" y="334" font-size="17" font-weight="600">GPT-6 Luna</text>
+<text x="805" y="334" font-size="15" fill="#56647a">No result</text>
+</g>
+<g class="task-series" data-model="8">
+<text x="18" y="378" font-size="17" font-weight="600">GPT-6.1 Terra</text>
+<text x="805" y="378" font-size="15" fill="#56647a">No result</text>
+</g>
+<g class="task-series" data-model="9">
+<text x="18" y="422" font-size="17" font-weight="600">Gemini 4 Argon</text>
+<title>Gemini 4 Argon: 52.90%; High / Cursor agent; 95% CI: Not published in captured record</title>
+<circle cx="520.95" cy="417" r="7" fill="#4d7b16"/>
+<text x="805" y="422" font-size="17" font-weight="600">52.90%</text>
+</g>
+<g class="task-series" data-model="10">
+<text x="18" y="466" font-size="17" font-weight="600">Grok 4.7</text>
+<title>Grok 4.7: 46.30%; Xhigh / Cursor agent; 95% CI: Not published in captured record</title>
+<circle cx="484.65" cy="461" r="7" fill="#be3042"/>
+<text x="805" y="466" font-size="17" font-weight="600">46.30%</text>
+</g>
+<text x="505" y="548" text-anchor="middle" font-size="14">% / higher is better / native benchmark scale</text></svg>
+<div class="task-foot-source">Benchmark source: <a href="https://cursor.com/cursorbench" target="_blank" rel="noopener">CursorBench 4.0 ↗</a></div>
+</div>
+<div data-coding-metric="migration" hidden>
+<div class="task-head-block"><div class="task-head-top"><h3>Codebase &amp; language migration</h3></div><p class="task-sub">Hidden behavior-test pass rate across 120 repository migrations and 10 COBOL-to-Java tasks.</p></div>
+<svg class="task-plot" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 566" role="img" aria-labelledby="task-migration-title task-migration-desc">
+<title id="task-migration-title">Code migration: behavior preservation</title>
+<desc id="task-migration-desc">10 selected model families. Horizontal axis: % from 0 to 100, higher is better. Exact scores and configurations are in the table below. Whiskers are published 95% confidence intervals where available; missing results are labeled, not plotted as zero.</desc>
+<style>text{font-family:Segoe UI,Arial,sans-serif;fill:#192740}</style>
+<rect width="1000" height="566" rx="10" fill="#ffffff" stroke="#dce3ee"/>
+<line x1="230.0" y1="38" x2="230.0" y2="486" stroke="#dde4ee"/>
+<text x="230.0" y="516" text-anchor="middle" font-size="14">0</text>
+<line x1="340.0" y1="38" x2="340.0" y2="486" stroke="#dde4ee"/>
+<text x="340.0" y="516" text-anchor="middle" font-size="14">20</text>
+<line x1="450.0" y1="38" x2="450.0" y2="486" stroke="#dde4ee"/>
+<text x="450.0" y="516" text-anchor="middle" font-size="14">40</text>
+<line x1="560.0" y1="38" x2="560.0" y2="486" stroke="#dde4ee"/>
+<text x="560.0" y="516" text-anchor="middle" font-size="14">60</text>
+<line x1="670.0" y1="38" x2="670.0" y2="486" stroke="#dde4ee"/>
+<text x="670.0" y="516" text-anchor="middle" font-size="14">80</text>
+<line x1="780.0" y1="38" x2="780.0" y2="486" stroke="#dde4ee"/>
+<text x="780.0" y="516" text-anchor="middle" font-size="14">100</text>
+<g class="task-series" data-model="0">
+<text x="18" y="70" font-size="17" font-weight="600">Claude Opus 5.5</text>
+<title>Claude Opus 5.5: 81.01%; Max / Pi; 95% CI: Not published in captured record</title>
+<circle cx="675.57" cy="65" r="7" fill="#a34415"/>
+<text x="805" y="70" font-size="17" font-weight="600">81.01%</text>
+</g>
+<g class="task-series" data-model="1">
+<text x="18" y="114" font-size="17" font-weight="600">Claude Sonnet 5.5</text>
+<title>Claude Sonnet 5.5: 86.88%; Max / Pi; 95% CI: Not published in captured record</title>
+<circle cx="707.81" cy="109" r="7" fill="#d17908"/>
+<text x="805" y="114" font-size="17" font-weight="600">86.88%</text>
+</g>
+<g class="task-series" data-model="2">
+<text x="18" y="158" font-size="17" font-weight="600">GPT-6 Astra</text>
+<title>GPT-6 Astra: 80.58%; Max / Pi; 95% CI: Not published in captured record</title>
+<circle cx="673.18" cy="153" r="7" fill="#5144c7"/>
+<text x="805" y="158" font-size="17" font-weight="600">80.58%</text>
+</g>
+<g class="task-series" data-model="3">
+<text x="18" y="202" font-size="17" font-weight="600">GPT-6.1 Sol</text>
+<title>GPT-6.1 Sol: 77.32%; Max / Pi; 95% CI: Not published in captured record</title>
+<circle cx="655.28" cy="197" r="7" fill="#1878ba"/>
+<text x="805" y="202" font-size="17" font-weight="600">77.32%</text>
+</g>
+<g class="task-series" data-model="4">
+<text x="18" y="246" font-size="17" font-weight="600">GPT-5.6 Sol</text>
+<text x="805" y="246" font-size="15" fill="#56647a">No result</text>
+</g>
+<g class="task-series" data-model="5">
+<text x="18" y="290" font-size="17" font-weight="600">Gemini 3.8 Flash</text>
+<title>Gemini 3.8 Flash: 38.65%; High / Pi; 95% CI: Not published in captured record</title>
+<circle cx="442.55" cy="285" r="7" fill="#07816c"/>
+<text x="805" y="290" font-size="17" font-weight="600">38.65%</text>
+</g>
+<g class="task-series" data-model="6">
+<text x="18" y="334" font-size="17" font-weight="600">GPT-6 Luna</text>
+<title>GPT-6 Luna: 46.67%; Max / Pi; 95% CI: Not published in captured record</title>
+<circle cx="486.68" cy="329" r="7" fill="#6e7889"/>
+<text x="805" y="334" font-size="17" font-weight="600">46.67%</text>
+</g>
+<g class="task-series" data-model="8">
+<text x="18" y="378" font-size="17" font-weight="600">GPT-6.1 Terra</text>
+<text x="805" y="378" font-size="15" fill="#56647a">No result</text>
+</g>
+<g class="task-series" data-model="9">
+<text x="18" y="422" font-size="17" font-weight="600">Gemini 4 Argon</text>
+<title>Gemini 4 Argon: 70.80%; High / Pi; 95% CI: Not published in captured record</title>
+<circle cx="619.38" cy="417" r="7" fill="#4d7b16"/>
+<text x="805" y="422" font-size="17" font-weight="600">70.80%</text>
+</g>
+<g class="task-series" data-model="10">
+<text x="18" y="466" font-size="17" font-weight="600">Grok 4.7</text>
+<title>Grok 4.7: 53.22%; Xhigh / Pi; 95% CI: Not published in captured record</title>
+<circle cx="522.69" cy="461" r="7" fill="#be3042"/>
+<text x="805" y="466" font-size="17" font-weight="600">53.22%</text>
+</g>
+<text x="505" y="548" text-anchor="middle" font-size="14">% / higher is better / native benchmark scale</text></svg>
+<div class="task-foot-source">Benchmark source: <a href="https://www.vals.ai/benchmarks/code-migration-v1-1" target="_blank" rel="noopener">Vals Code Migration v1.1 ↗</a></div>
+</div>
+</section>
+<section id="panel-engineering" role="tabpanel" aria-labelledby="tab-engineering" tabindex="0" hidden>
+<label class="metric-control">Systems &amp; CLI benchmark:
+<select id="engineering-metric">
+<option value="tbench">Terminal-Bench 4.0 / executable CLI &amp; systems tasks</option>
+<option value="long-agentic">LiveBench 2.0: Long Agentic / operations &amp; optimization</option>
+</select></label>
+<div data-engineering-metric="tbench">
+<div class="task-head-block"><div class="task-head-top"><h3>Executable terminal &amp; container tasks</h3></div><p class="task-sub">Resolution rate on executable CLI, container, and systems engineering tasks; whiskers show 95% CI.</p></div>
+<svg class="task-plot" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 566" role="img" aria-labelledby="task-engineering-title task-engineering-desc">
+<title id="task-engineering-title">Software engineering / terminal tasks</title>
+<desc id="task-engineering-desc">10 selected model families. Horizontal axis: % from 0 to 100, higher is better. Exact scores and configurations are in the table below. Whiskers are published 95% confidence intervals where available; missing results are labeled, not plotted as zero.</desc>
+<style>text{font-family:Segoe UI,Arial,sans-serif;fill:#192740}</style>
+<rect width="1000" height="566" rx="10" fill="#ffffff" stroke="#dce3ee"/>
+<line x1="230.0" y1="38" x2="230.0" y2="486" stroke="#dde4ee"/>
+<text x="230.0" y="516" text-anchor="middle" font-size="14">0</text>
+<line x1="340.0" y1="38" x2="340.0" y2="486" stroke="#dde4ee"/>
+<text x="340.0" y="516" text-anchor="middle" font-size="14">20</text>
+<line x1="450.0" y1="38" x2="450.0" y2="486" stroke="#dde4ee"/>
+<text x="450.0" y="516" text-anchor="middle" font-size="14">40</text>
+<line x1="560.0" y1="38" x2="560.0" y2="486" stroke="#dde4ee"/>
+<text x="560.0" y="516" text-anchor="middle" font-size="14">60</text>
+<line x1="670.0" y1="38" x2="670.0" y2="486" stroke="#dde4ee"/>
+<text x="670.0" y="516" text-anchor="middle" font-size="14">80</text>
+<line x1="780.0" y1="38" x2="780.0" y2="486" stroke="#dde4ee"/>
+<text x="780.0" y="516" text-anchor="middle" font-size="14">100</text>
+<g class="task-series" data-model="0">
+<text x="18" y="70" font-size="17" font-weight="600">Claude Opus 5.5</text>
+<title>Claude Opus 5.5: 64.85%; Max / Claude Code; 95% CI: 61.74% to 67.96%</title>
+<path d="M569.57,65 H603.78 M569.57,60 V70 M603.78,60 V70" fill="none" stroke="#a34415" stroke-width="2"/>
+<circle cx="586.67" cy="65" r="7" fill="#a34415"/>
+<text x="805" y="70" font-size="17" font-weight="600">64.85%</text>
+</g>
+<g class="task-series" data-model="1">
+<text x="18" y="114" font-size="17" font-weight="600">Claude Sonnet 5.5</text>
+<title>Claude Sonnet 5.5: 61.82%; Max / Claude Code; 95% CI: 58.88% to 64.76%</title>
+<path d="M553.84,109 H586.18 M553.84,104 V114 M586.18,104 V114" fill="none" stroke="#d17908" stroke-width="2"/>
+<circle cx="570.01" cy="109" r="7" fill="#d17908"/>
+<text x="805" y="114" font-size="17" font-weight="600">61.82%</text>
+</g>
+<g class="task-series" data-model="2">
+<text x="18" y="158" font-size="17" font-weight="600">GPT-6 Astra</text>
+<title>GPT-6 Astra: 58.18%; Max / Codex; 95% CI: 55.39% to 60.97%</title>
+<path d="M534.64,153 H565.34 M534.64,148 V158 M565.34,148 V158" fill="none" stroke="#5144c7" stroke-width="2"/>
+<circle cx="549.99" cy="153" r="7" fill="#5144c7"/>
+<text x="805" y="158" font-size="17" font-weight="600">58.18%</text>
+</g>
+<g class="task-series" data-model="3">
+<text x="18" y="202" font-size="17" font-weight="600">GPT-6.1 Sol</text>
+<title>GPT-6.1 Sol: 58.18%; Max / Codex; 95% CI: 55.07% to 61.29%</title>
+<path d="M532.88,197 H567.10 M532.88,192 V202 M567.10,192 V202" fill="none" stroke="#1878ba" stroke-width="2"/>
+<circle cx="549.99" cy="197" r="7" fill="#1878ba"/>
+<text x="805" y="202" font-size="17" font-weight="600">58.18%</text>
+</g>
+<g class="task-series" data-model="4">
+<text x="18" y="246" font-size="17" font-weight="600">GPT-5.6 Sol</text>
+<title>GPT-5.6 Sol: 37.27%; Max / Codex; 95% CI: 33.49% to 41.05%</title>
+<path d="M414.20,241 H455.77 M414.20,236 V246 M455.77,236 V246" fill="none" stroke="#bf3c85" stroke-width="2"/>
+<circle cx="434.99" cy="241" r="7" fill="#bf3c85"/>
+<text x="805" y="246" font-size="17" font-weight="600">37.27%</text>
+</g>
+<g class="task-series" data-model="5">
+<text x="18" y="290" font-size="17" font-weight="600">Gemini 3.8 Flash</text>
+<title>Gemini 3.8 Flash: 19.09%; High / mini-SWE-agent; 95% CI: 15.73% to 22.45%</title>
+<path d="M316.51,285 H353.48 M316.51,280 V290 M353.48,280 V290" fill="none" stroke="#07816c" stroke-width="2"/>
+<circle cx="335.00" cy="285" r="7" fill="#07816c"/>
+<text x="805" y="290" font-size="17" font-weight="600">19.09%</text>
+</g>
+<g class="task-series" data-model="6">
+<text x="18" y="334" font-size="17" font-weight="600">GPT-6 Luna</text>
+<title>GPT-6 Luna: 16.36%; Max / Codex; 95% CI: 13.64% to 19.08%</title>
+<path d="M305.02,329 H334.94 M305.02,324 V334 M334.94,324 V334" fill="none" stroke="#6e7889" stroke-width="2"/>
+<circle cx="319.98" cy="329" r="7" fill="#6e7889"/>
+<text x="805" y="334" font-size="17" font-weight="600">16.36%</text>
+</g>
+<g class="task-series" data-model="8">
+<text x="18" y="378" font-size="17" font-weight="600">GPT-6.1 Terra</text>
+<text x="805" y="378" font-size="15" fill="#56647a">No result</text>
+</g>
+<g class="task-series" data-model="9">
+<text x="18" y="422" font-size="17" font-weight="600">Gemini 4 Argon</text>
+<text x="805" y="422" font-size="15" fill="#56647a">No result</text>
+</g>
+<g class="task-series" data-model="10">
+<text x="18" y="466" font-size="17" font-weight="600">Grok 4.7</text>
+<title>Grok 4.7: 37.58%; Xhigh / Grok Build; 95% CI: 34.04% to 41.12%</title>
+<path d="M417.22,461 H456.16 M417.22,456 V466 M456.16,456 V466" fill="none" stroke="#be3042" stroke-width="2"/>
+<circle cx="436.69" cy="461" r="7" fill="#be3042"/>
+<text x="805" y="466" font-size="17" font-weight="600">37.58%</text>
+</g>
+<text x="505" y="548" text-anchor="middle" font-size="14">% / higher is better / native benchmark scale</text></svg>
+<div class="task-foot-source">Benchmark source: <a href="https://www.tbench.ai/" target="_blank" rel="noopener">Terminal-Bench 4.0 ↗</a></div>
+</div>
+<div data-engineering-metric="long-agentic" hidden>
+<div class="task-head-block"><div class="task-head-top"><h3>Long-horizon operations &amp; performance tuning</h3></div><p class="task-sub">Long-running operations, systems engineering, and performance optimization; 0–100 mean task score.</p></div>
+<svg class="task-plot" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 566" role="img" aria-labelledby="task-live-long-agentic-title task-live-long-agentic-desc">
+<title id="task-live-long-agentic-title">LiveBench: Long Agentic</title>
+<desc id="task-live-long-agentic-desc">10 selected model families. Horizontal axis: Score / 100 from 0 to 100, higher is better. Exact scores and configurations are in the table below. Whiskers are published 95% confidence intervals where available; missing results are labeled, not plotted as zero.</desc>
+<style>text{font-family:Segoe UI,Arial,sans-serif;fill:#192740}</style>
+<rect width="1000" height="566" rx="10" fill="#ffffff" stroke="#dce3ee"/>
+<line x1="230.0" y1="38" x2="230.0" y2="486" stroke="#dde4ee"/>
+<text x="230.0" y="516" text-anchor="middle" font-size="14">0</text>
+<line x1="340.0" y1="38" x2="340.0" y2="486" stroke="#dde4ee"/>
+<text x="340.0" y="516" text-anchor="middle" font-size="14">20</text>
+<line x1="450.0" y1="38" x2="450.0" y2="486" stroke="#dde4ee"/>
+<text x="450.0" y="516" text-anchor="middle" font-size="14">40</text>
+<line x1="560.0" y1="38" x2="560.0" y2="486" stroke="#dde4ee"/>
+<text x="560.0" y="516" text-anchor="middle" font-size="14">60</text>
+<line x1="670.0" y1="38" x2="670.0" y2="486" stroke="#dde4ee"/>
+<text x="670.0" y="516" text-anchor="middle" font-size="14">80</text>
+<line x1="780.0" y1="38" x2="780.0" y2="486" stroke="#dde4ee"/>
+<text x="780.0" y="516" text-anchor="middle" font-size="14">100</text>
+<g class="task-series" data-model="0">
+<text x="18" y="70" font-size="17" font-weight="600">Claude Opus 5.5</text>
+<title>Claude Opus 5.5: 72.80; Max / LiveBench suite; 95% CI: Not published in captured record</title>
+<circle cx="630.40" cy="65" r="7" fill="#a34415"/>
+<text x="805" y="70" font-size="17" font-weight="600">72.80</text>
+</g>
+<g class="task-series" data-model="1">
+<text x="18" y="114" font-size="17" font-weight="600">Claude Sonnet 5.5</text>
+<title>Claude Sonnet 5.5: 63.40; Max / LiveBench suite; 95% CI: Not published in captured record</title>
+<circle cx="578.70" cy="109" r="7" fill="#d17908"/>
+<text x="805" y="114" font-size="17" font-weight="600">63.40</text>
+</g>
+<g class="task-series" data-model="2">
+<text x="18" y="158" font-size="17" font-weight="600">GPT-6 Astra</text>
+<title>GPT-6 Astra: 77.50; Max / LiveBench suite; 95% CI: Not published in captured record</title>
+<circle cx="656.25" cy="153" r="7" fill="#5144c7"/>
+<text x="805" y="158" font-size="17" font-weight="600">77.50</text>
+</g>
+<g class="task-series" data-model="3">
+<text x="18" y="202" font-size="17" font-weight="600">GPT-6.1 Sol</text>
+<title>GPT-6.1 Sol: 68.70; Max / LiveBench suite; 95% CI: Not published in captured record</title>
+<circle cx="607.85" cy="197" r="7" fill="#1878ba"/>
+<text x="805" y="202" font-size="17" font-weight="600">68.70</text>
+</g>
+<g class="task-series" data-model="4">
+<text x="18" y="246" font-size="17" font-weight="600">GPT-5.6 Sol</text>
+<text x="805" y="246" font-size="15" fill="#56647a">No result</text>
+</g>
+<g class="task-series" data-model="5">
+<text x="18" y="290" font-size="17" font-weight="600">Gemini 3.8 Flash</text>
+<title>Gemini 3.8 Flash: 16.50; High / LiveBench suite; 95% CI: Not published in captured record</title>
+<circle cx="320.75" cy="285" r="7" fill="#07816c"/>
+<text x="805" y="290" font-size="17" font-weight="600">16.50</text>
+</g>
+<g class="task-series" data-model="6">
+<text x="18" y="334" font-size="17" font-weight="600">GPT-6 Luna</text>
+<title>GPT-6 Luna: 30.90; Max / LiveBench suite; 95% CI: Not published in captured record</title>
+<circle cx="399.95" cy="329" r="7" fill="#6e7889"/>
+<text x="805" y="334" font-size="17" font-weight="600">30.90</text>
+</g>
+<g class="task-series" data-model="8">
+<text x="18" y="378" font-size="17" font-weight="600">GPT-6.1 Terra</text>
+<title>GPT-6.1 Terra: 48.60; Max / LiveBench suite; 95% CI: Not published in captured record</title>
+<circle cx="497.30" cy="373" r="7" fill="#9744a0"/>
+<text x="805" y="378" font-size="17" font-weight="600">48.60</text>
+</g>
+<g class="task-series" data-model="9">
+<text x="18" y="422" font-size="17" font-weight="600">Gemini 4 Argon</text>
+<title>Gemini 4 Argon: 61.20; High / LiveBench suite; 95% CI: Not published in captured record</title>
+<circle cx="566.60" cy="417" r="7" fill="#4d7b16"/>
+<text x="805" y="422" font-size="17" font-weight="600">61.20</text>
+</g>
+<g class="task-series" data-model="10">
+<text x="18" y="466" font-size="17" font-weight="600">Grok 4.7</text>
+<title>Grok 4.7: 46.10; Xhigh / LiveBench suite; 95% CI: Not published in captured record</title>
+<circle cx="483.55" cy="461" r="7" fill="#be3042"/>
+<text x="805" y="466" font-size="17" font-weight="600">46.10</text>
+</g>
+<text x="505" y="548" text-anchor="middle" font-size="14">Score / 100 / higher is better / native benchmark scale</text></svg>
+<div class="task-foot-source">Benchmark source: <a href="https://livebench.ai/" target="_blank" rel="noopener">LiveBench 2.0: Long Agentic ↗</a></div>
+</div>
+</section>
+<section id="panel-documents" role="tabpanel" aria-labelledby="tab-documents" tabindex="0" hidden>
+<label class="metric-control">Research &amp; deliverable benchmark:
+<select id="document-metric">
+<option value="word">AA-Briefcase v1.1: Word deliverables (rubric checks met)</option>
+<option value="analysis">AA-Briefcase v1.1: Analytical quality (all deliverable types)</option>
+<option value="research">LiveBench 2.0: Research (open-ended research briefs)</option>
+<option value="presentation">AA-Briefcase v1.1: Presentation quality (all deliverable types)</option>
+<option value="professional">GDPval-AA: Professional work (broader deliverables)</option>
+</select></label>
+<div data-document-metric="word">
+<div class="task-head-block"><div class="task-head-top"><h3>Structured Word deliverables</h3></div><p class="task-sub">Rubric-check pass rate across 17 professional Word <code>.docx</code> report tasks.</p></div>
+<svg class="task-plot" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 566" role="img" aria-labelledby="task-word-title task-word-desc">
+<title id="task-word-title">Document writing: Word deliverables</title>
+<desc id="task-word-desc">10 selected model families. Horizontal axis: % from 0 to 100, higher is better. Exact scores and configurations are in the table below. Whiskers are published 95% confidence intervals where available; missing results are labeled, not plotted as zero.</desc>
+<style>text{font-family:Segoe UI,Arial,sans-serif;fill:#192740}</style>
+<rect width="1000" height="566" rx="10" fill="#ffffff" stroke="#dce3ee"/>
+<line x1="230.0" y1="38" x2="230.0" y2="486" stroke="#dde4ee"/>
+<text x="230.0" y="516" text-anchor="middle" font-size="14">0</text>
+<line x1="340.0" y1="38" x2="340.0" y2="486" stroke="#dde4ee"/>
+<text x="340.0" y="516" text-anchor="middle" font-size="14">20</text>
+<line x1="450.0" y1="38" x2="450.0" y2="486" stroke="#dde4ee"/>
+<text x="450.0" y="516" text-anchor="middle" font-size="14">40</text>
+<line x1="560.0" y1="38" x2="560.0" y2="486" stroke="#dde4ee"/>
+<text x="560.0" y="516" text-anchor="middle" font-size="14">60</text>
+<line x1="670.0" y1="38" x2="670.0" y2="486" stroke="#dde4ee"/>
+<text x="670.0" y="516" text-anchor="middle" font-size="14">80</text>
+<line x1="780.0" y1="38" x2="780.0" y2="486" stroke="#dde4ee"/>
+<text x="780.0" y="516" text-anchor="middle" font-size="14">100</text>
+<g class="task-series" data-model="0">
+<text x="18" y="70" font-size="17" font-weight="600">Claude Opus 5.5</text>
+<title>Claude Opus 5.5: 60.36%; Claude Opus 5.5 (Max, Default Fallback); 95% CI: Not published in captured record</title>
+<circle cx="561.95" cy="65" r="7" fill="#a34415"/>
+<text x="805" y="70" font-size="17" font-weight="600">60.36%</text>
+</g>
+<g class="task-series" data-model="1">
+<text x="18" y="114" font-size="17" font-weight="600">Claude Sonnet 5.5</text>
+<title>Claude Sonnet 5.5: 60.95%; Claude Sonnet 5.5 (Max, Default Fallback); 95% CI: Not published in captured record</title>
+<circle cx="565.21" cy="109" r="7" fill="#d17908"/>
+<text x="805" y="114" font-size="17" font-weight="600">60.95%</text>
+</g>
+<g class="task-series" data-model="2">
+<text x="18" y="158" font-size="17" font-weight="600">GPT-6 Astra</text>
+<title>GPT-6 Astra: 52.07%; GPT-6 Astra (Max); 95% CI: Not published in captured record</title>
+<circle cx="516.39" cy="153" r="7" fill="#5144c7"/>
+<text x="805" y="158" font-size="17" font-weight="600">52.07%</text>
+</g>
+<g class="task-series" data-model="3">
+<text x="18" y="202" font-size="17" font-weight="600">GPT-6.1 Sol</text>
+<title>GPT-6.1 Sol: 52.07%; GPT-6.1 Sol (Max); 95% CI: Not published in captured record</title>
+<circle cx="516.39" cy="197" r="7" fill="#1878ba"/>
+<text x="805" y="202" font-size="17" font-weight="600">52.07%</text>
+</g>
+<g class="task-series" data-model="4">
+<text x="18" y="246" font-size="17" font-weight="600">GPT-5.6 Sol</text>
+<text x="805" y="246" font-size="15" fill="#56647a">No result</text>
+</g>
+<g class="task-series" data-model="5">
+<text x="18" y="290" font-size="17" font-weight="600">Gemini 3.8 Flash</text>
+<title>Gemini 3.8 Flash: 44.97%; Gemini 3.8 Flash (High); 95% CI: Not published in captured record</title>
+<circle cx="477.34" cy="285" r="7" fill="#07816c"/>
+<text x="805" y="290" font-size="17" font-weight="600">44.97%</text>
+</g>
+<g class="task-series" data-model="6">
+<text x="18" y="334" font-size="17" font-weight="600">GPT-6 Luna</text>
+<title>GPT-6 Luna: 44.38%; GPT-6 Luna (Max); 95% CI: Not published in captured record</title>
+<circle cx="474.08" cy="329" r="7" fill="#6e7889"/>
+<text x="805" y="334" font-size="17" font-weight="600">44.38%</text>
+</g>
+<g class="task-series" data-model="8">
+<text x="18" y="378" font-size="17" font-weight="600">GPT-6.1 Terra</text>
+<title>GPT-6.1 Terra: 37.28%; GPT-6.1 Terra (Max); 95% CI: Not published in captured record</title>
+<circle cx="435.03" cy="373" r="7" fill="#9744a0"/>
+<text x="805" y="378" font-size="17" font-weight="600">37.28%</text>
+</g>
+<g class="task-series" data-model="9">
+<text x="18" y="422" font-size="17" font-weight="600">Gemini 4 Argon</text>
+<title>Gemini 4 Argon: 62.13%; Gemini 4 Argon (High); 95% CI: Not published in captured record</title>
+<circle cx="571.72" cy="417" r="7" fill="#4d7b16"/>
+<text x="805" y="422" font-size="17" font-weight="600">62.13%</text>
+</g>
+<g class="task-series" data-model="10">
+<text x="18" y="466" font-size="17" font-weight="600">Grok 4.7</text>
+<title>Grok 4.7: 57.40%; Grok 4.7 (Xhigh); 95% CI: Not published in captured record</title>
+<circle cx="545.68" cy="461" r="7" fill="#be3042"/>
+<text x="805" y="466" font-size="17" font-weight="600">57.40%</text>
+</g>
+<text x="505" y="548" text-anchor="middle" font-size="14">% / higher is better / native benchmark scale</text></svg>
+<div class="task-foot-source">Benchmark source: <a href="https://artificialanalysis.ai/evaluations/aa-briefcase" target="_blank" rel="noopener">AA-Briefcase v1.1 (Word) ↗</a></div>
+</div>
+<div data-document-metric="analysis" hidden>
+<div class="task-head-block"><div class="task-head-top"><h3>Analytical quality across deliverables</h3></div><p class="task-sub">Blind pairwise Elo across Word, PDF, slide, and spreadsheet deliverables.</p></div>
+<svg class="task-plot" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 566" role="img" aria-labelledby="task-analysis-title task-analysis-desc">
+<title id="task-analysis-title">Analytical quality: all deliverable types</title>
+<desc id="task-analysis-desc">10 selected model families. Horizontal axis: Elo from 1000 to 2250, higher is better. Exact scores and configurations are in the table below. Whiskers are published 95% confidence intervals where available; missing results are labeled, not plotted as zero.</desc>
+<style>text{font-family:Segoe UI,Arial,sans-serif;fill:#192740}</style>
+<rect width="1000" height="566" rx="10" fill="#ffffff" stroke="#dce3ee"/>
+<line x1="230.0" y1="38" x2="230.0" y2="486" stroke="#dde4ee"/>
+<text x="230.0" y="516" text-anchor="middle" font-size="14">1,000</text>
+<line x1="340.0" y1="38" x2="340.0" y2="486" stroke="#dde4ee"/>
+<text x="340.0" y="516" text-anchor="middle" font-size="14">1,250</text>
+<line x1="450.0" y1="38" x2="450.0" y2="486" stroke="#dde4ee"/>
+<text x="450.0" y="516" text-anchor="middle" font-size="14">1,500</text>
+<line x1="560.0" y1="38" x2="560.0" y2="486" stroke="#dde4ee"/>
+<text x="560.0" y="516" text-anchor="middle" font-size="14">1,750</text>
+<line x1="670.0" y1="38" x2="670.0" y2="486" stroke="#dde4ee"/>
+<text x="670.0" y="516" text-anchor="middle" font-size="14">2,000</text>
+<line x1="780.0" y1="38" x2="780.0" y2="486" stroke="#dde4ee"/>
+<text x="780.0" y="516" text-anchor="middle" font-size="14">2,250</text>
+<g class="task-series" data-model="0">
+<text x="18" y="70" font-size="17" font-weight="600">Claude Opus 5.5</text>
+<title>Claude Opus 5.5: 2,135.15; Claude Opus 5.5 (Max, Default Fallback); 95% CI: 2,111.93 to 2,160.57</title>
+<path d="M719.25,65 H740.65 M719.25,60 V70 M740.65,60 V70" fill="none" stroke="#a34415" stroke-width="2"/>
+<circle cx="729.47" cy="65" r="7" fill="#a34415"/>
+<text x="805" y="70" font-size="17" font-weight="600">2,135.15</text>
+</g>
+<g class="task-series" data-model="1">
+<text x="18" y="114" font-size="17" font-weight="600">Claude Sonnet 5.5</text>
+<title>Claude Sonnet 5.5: 2,104.30; Claude Sonnet 5.5 (Max, Default Fallback); 95% CI: 2,083.51 to 2,127.26</title>
+<path d="M706.74,109 H725.99 M706.74,104 V114 M725.99,104 V114" fill="none" stroke="#d17908" stroke-width="2"/>
+<circle cx="715.89" cy="109" r="7" fill="#d17908"/>
+<text x="805" y="114" font-size="17" font-weight="600">2,104.30</text>
+</g>
+<g class="task-series" data-model="2">
+<text x="18" y="158" font-size="17" font-weight="600">GPT-6 Astra</text>
+<title>GPT-6 Astra: 1,752.19; GPT-6 Astra (Max); 95% CI: 1,736.55 to 1,768.94</title>
+<path d="M554.08,153 H568.33 M554.08,148 V158 M568.33,148 V158" fill="none" stroke="#5144c7" stroke-width="2"/>
+<circle cx="560.96" cy="153" r="7" fill="#5144c7"/>
+<text x="805" y="158" font-size="17" font-weight="600">1,752.19</text>
+</g>
+<g class="task-series" data-model="3">
+<text x="18" y="202" font-size="17" font-weight="600">GPT-6.1 Sol</text>
+<title>GPT-6.1 Sol: 1,766.62; GPT-6.1 Sol (Max); 95% CI: 1,751.28 to 1,782.49</title>
+<path d="M560.56,197 H574.30 M560.56,192 V202 M574.30,192 V202" fill="none" stroke="#1878ba" stroke-width="2"/>
+<circle cx="567.31" cy="197" r="7" fill="#1878ba"/>
+<text x="805" y="202" font-size="17" font-weight="600">1,766.62</text>
+</g>
+<g class="task-series" data-model="4">
+<text x="18" y="246" font-size="17" font-weight="600">GPT-5.6 Sol</text>
+<text x="805" y="246" font-size="15" fill="#56647a">No result</text>
+</g>
+<g class="task-series" data-model="5">
+<text x="18" y="290" font-size="17" font-weight="600">Gemini 3.8 Flash</text>
+<title>Gemini 3.8 Flash: 1,136.55; Gemini 3.8 Flash (High); 95% CI: 1,119.49 to 1,151.98</title>
+<path d="M282.58,285 H296.87 M282.58,280 V290 M296.87,280 V290" fill="none" stroke="#07816c" stroke-width="2"/>
+<circle cx="290.08" cy="285" r="7" fill="#07816c"/>
+<text x="805" y="290" font-size="17" font-weight="600">1,136.55</text>
+</g>
+<g class="task-series" data-model="6">
+<text x="18" y="334" font-size="17" font-weight="600">GPT-6 Luna</text>
+<title>GPT-6 Luna: 1,376.09; GPT-6 Luna (Max); 95% CI: 1,358.18 to 1,395.26</title>
+<path d="M387.60,329 H403.91 M387.60,324 V334 M403.91,324 V334" fill="none" stroke="#6e7889" stroke-width="2"/>
+<circle cx="395.48" cy="329" r="7" fill="#6e7889"/>
+<text x="805" y="334" font-size="17" font-weight="600">1,376.09</text>
+</g>
+<g class="task-series" data-model="8">
+<text x="18" y="378" font-size="17" font-weight="600">GPT-6.1 Terra</text>
+<title>GPT-6.1 Terra: 1,491.89; GPT-6.1 Terra (Max); 95% CI: 1,471.30 to 1,514.37</title>
+<path d="M437.37,373 H456.32 M437.37,368 V378 M456.32,368 V378" fill="none" stroke="#9744a0" stroke-width="2"/>
+<circle cx="446.43" cy="373" r="7" fill="#9744a0"/>
+<text x="805" y="378" font-size="17" font-weight="600">1,491.89</text>
+</g>
+<g class="task-series" data-model="9">
+<text x="18" y="422" font-size="17" font-weight="600">Gemini 4 Argon</text>
+<title>Gemini 4 Argon: 1,550.88; Gemini 4 Argon (High); 95% CI: 1,530.10 to 1,571.08</title>
+<path d="M463.24,417 H481.28 M463.24,412 V422 M481.28,412 V422" fill="none" stroke="#4d7b16" stroke-width="2"/>
+<circle cx="472.39" cy="417" r="7" fill="#4d7b16"/>
+<text x="805" y="422" font-size="17" font-weight="600">1,550.88</text>
+</g>
+<g class="task-series" data-model="10">
+<text x="18" y="466" font-size="17" font-weight="600">Grok 4.7</text>
+<title>Grok 4.7: 1,933.69; Grok 4.7 (Xhigh); 95% CI: 1,917.67 to 1,951.53</title>
+<path d="M633.77,461 H648.67 M633.77,456 V466 M648.67,456 V466" fill="none" stroke="#be3042" stroke-width="2"/>
+<circle cx="640.82" cy="461" r="7" fill="#be3042"/>
+<text x="805" y="466" font-size="17" font-weight="600">1,933.69</text>
+</g>
+<text x="505" y="548" text-anchor="middle" font-size="14">Elo / higher is better / native benchmark scale</text></svg>
+<div class="task-foot-source">Benchmark source: <a href="https://artificialanalysis.ai/evaluations/aa-briefcase" target="_blank" rel="noopener">AA-Briefcase v1.1 (Analytical Quality) ↗</a></div>
+</div>
+<div data-document-metric="research" hidden>
+<div class="task-head-block"><div class="task-head-top"><h3>Open-ended research synthesis</h3></div><p class="task-sub">Open-ended research briefs graded against a multi-criterion rubric; 0–100 mean task score.</p></div>
+<svg class="task-plot" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 566" role="img" aria-labelledby="task-live-research-title task-live-research-desc">
+<title id="task-live-research-title">LiveBench: Research</title>
+<desc id="task-live-research-desc">10 selected model families. Horizontal axis: Score / 100 from 0 to 100, higher is better. Exact scores and configurations are in the table below. Whiskers are published 95% confidence intervals where available; missing results are labeled, not plotted as zero.</desc>
+<style>text{font-family:Segoe UI,Arial,sans-serif;fill:#192740}</style>
+<rect width="1000" height="566" rx="10" fill="#ffffff" stroke="#dce3ee"/>
+<line x1="230.0" y1="38" x2="230.0" y2="486" stroke="#dde4ee"/>
+<text x="230.0" y="516" text-anchor="middle" font-size="14">0</text>
+<line x1="340.0" y1="38" x2="340.0" y2="486" stroke="#dde4ee"/>
+<text x="340.0" y="516" text-anchor="middle" font-size="14">20</text>
+<line x1="450.0" y1="38" x2="450.0" y2="486" stroke="#dde4ee"/>
+<text x="450.0" y="516" text-anchor="middle" font-size="14">40</text>
+<line x1="560.0" y1="38" x2="560.0" y2="486" stroke="#dde4ee"/>
+<text x="560.0" y="516" text-anchor="middle" font-size="14">60</text>
+<line x1="670.0" y1="38" x2="670.0" y2="486" stroke="#dde4ee"/>
+<text x="670.0" y="516" text-anchor="middle" font-size="14">80</text>
+<line x1="780.0" y1="38" x2="780.0" y2="486" stroke="#dde4ee"/>
+<text x="780.0" y="516" text-anchor="middle" font-size="14">100</text>
+<g class="task-series" data-model="0">
+<text x="18" y="70" font-size="17" font-weight="600">Claude Opus 5.5</text>
+<title>Claude Opus 5.5: 85.00; Max / LiveBench suite; 95% CI: Not published in captured record</title>
+<circle cx="697.50" cy="65" r="7" fill="#a34415"/>
+<text x="805" y="70" font-size="17" font-weight="600">85.00</text>
+</g>
+<g class="task-series" data-model="1">
+<text x="18" y="114" font-size="17" font-weight="600">Claude Sonnet 5.5</text>
+<title>Claude Sonnet 5.5: 83.60; Max / LiveBench suite; 95% CI: Not published in captured record</title>
+<circle cx="689.80" cy="109" r="7" fill="#d17908"/>
+<text x="805" y="114" font-size="17" font-weight="600">83.60</text>
+</g>
+<g class="task-series" data-model="2">
+<text x="18" y="158" font-size="17" font-weight="600">GPT-6 Astra</text>
+<title>GPT-6 Astra: 85.20; Max / LiveBench suite; 95% CI: Not published in captured record</title>
+<circle cx="698.60" cy="153" r="7" fill="#5144c7"/>
+<text x="805" y="158" font-size="17" font-weight="600">85.20</text>
+</g>
+<g class="task-series" data-model="3">
+<text x="18" y="202" font-size="17" font-weight="600">GPT-6.1 Sol</text>
+<title>GPT-6.1 Sol: 83.50; Max / LiveBench suite; 95% CI: Not published in captured record</title>
+<circle cx="689.25" cy="197" r="7" fill="#1878ba"/>
+<text x="805" y="202" font-size="17" font-weight="600">83.50</text>
+</g>
+<g class="task-series" data-model="4">
+<text x="18" y="246" font-size="17" font-weight="600">GPT-5.6 Sol</text>
+<text x="805" y="246" font-size="15" fill="#56647a">No result</text>
+</g>
+<g class="task-series" data-model="5">
+<text x="18" y="290" font-size="17" font-weight="600">Gemini 3.8 Flash</text>
+<title>Gemini 3.8 Flash: 79.10; High / LiveBench suite; 95% CI: Not published in captured record</title>
+<circle cx="665.05" cy="285" r="7" fill="#07816c"/>
+<text x="805" y="290" font-size="17" font-weight="600">79.10</text>
+</g>
+<g class="task-series" data-model="6">
+<text x="18" y="334" font-size="17" font-weight="600">GPT-6 Luna</text>
+<title>GPT-6 Luna: 43.50; Max / LiveBench suite; 95% CI: Not published in captured record</title>
+<circle cx="469.25" cy="329" r="7" fill="#6e7889"/>
+<text x="805" y="334" font-size="17" font-weight="600">43.50</text>
+</g>
+<g class="task-series" data-model="8">
+<text x="18" y="378" font-size="17" font-weight="600">GPT-6.1 Terra</text>
+<title>GPT-6.1 Terra: 73.90; Max / LiveBench suite; 95% CI: Not published in captured record</title>
+<circle cx="636.45" cy="373" r="7" fill="#9744a0"/>
+<text x="805" y="378" font-size="17" font-weight="600">73.90</text>
+</g>
+<g class="task-series" data-model="9">
+<text x="18" y="422" font-size="17" font-weight="600">Gemini 4 Argon</text>
+<title>Gemini 4 Argon: 83.10; High / LiveBench suite; 95% CI: Not published in captured record</title>
+<circle cx="687.05" cy="417" r="7" fill="#4d7b16"/>
+<text x="805" y="422" font-size="17" font-weight="600">83.10</text>
+</g>
+<g class="task-series" data-model="10">
+<text x="18" y="466" font-size="17" font-weight="600">Grok 4.7</text>
+<title>Grok 4.7: 86.40; Xhigh / LiveBench suite; 95% CI: Not published in captured record</title>
+<circle cx="705.20" cy="461" r="7" fill="#be3042"/>
+<text x="805" y="466" font-size="17" font-weight="600">86.40</text>
+</g>
+<text x="505" y="548" text-anchor="middle" font-size="14">Score / 100 / higher is better / native benchmark scale</text></svg>
+<div class="task-foot-source">Benchmark source: <a href="https://livebench.ai/" target="_blank" rel="noopener">LiveBench 2.0: Research ↗</a></div>
+</div>
+<div data-document-metric="presentation" hidden>
+<div class="task-head-block"><div class="task-head-top"><h3>Presentation quality across deliverables</h3></div><p class="task-sub">Blind pairwise Elo for structure and visual presentation across deliverables.</p></div>
+<svg class="task-plot" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 566" role="img" aria-labelledby="task-presentation-title task-presentation-desc">
+<title id="task-presentation-title">Presentation: all deliverable types</title>
+<desc id="task-presentation-desc">10 selected model families. Horizontal axis: Elo from 1000 to 2000, higher is better. Exact scores and configurations are in the table below. Whiskers are published 95% confidence intervals where available; missing results are labeled, not plotted as zero.</desc>
+<style>text{font-family:Segoe UI,Arial,sans-serif;fill:#192740}</style>
+<rect width="1000" height="566" rx="10" fill="#ffffff" stroke="#dce3ee"/>
+<line x1="230.0" y1="38" x2="230.0" y2="486" stroke="#dde4ee"/>
+<text x="230.0" y="516" text-anchor="middle" font-size="14">1,000</text>
+<line x1="367.5" y1="38" x2="367.5" y2="486" stroke="#dde4ee"/>
+<text x="367.5" y="516" text-anchor="middle" font-size="14">1,250</text>
+<line x1="505.0" y1="38" x2="505.0" y2="486" stroke="#dde4ee"/>
+<text x="505.0" y="516" text-anchor="middle" font-size="14">1,500</text>
+<line x1="642.5" y1="38" x2="642.5" y2="486" stroke="#dde4ee"/>
+<text x="642.5" y="516" text-anchor="middle" font-size="14">1,750</text>
+<line x1="780.0" y1="38" x2="780.0" y2="486" stroke="#dde4ee"/>
+<text x="780.0" y="516" text-anchor="middle" font-size="14">2,000</text>
+<g class="task-series" data-model="0">
+<text x="18" y="70" font-size="17" font-weight="600">Claude Opus 5.5</text>
+<title>Claude Opus 5.5: 1,715.10; Claude Opus 5.5 (Max, Default Fallback); 95% CI: 1,696.04 to 1,737.45</title>
+<path d="M612.82,65 H635.60 M612.82,60 V70 M635.60,60 V70" fill="none" stroke="#a34415" stroke-width="2"/>
+<circle cx="623.30" cy="65" r="7" fill="#a34415"/>
+<text x="805" y="70" font-size="17" font-weight="600">1,715.10</text>
+</g>
+<g class="task-series" data-model="1">
+<text x="18" y="114" font-size="17" font-weight="600">Claude Sonnet 5.5</text>
+<title>Claude Sonnet 5.5: 1,711.94; Claude Sonnet 5.5 (Max, Default Fallback); 95% CI: 1,691.60 to 1,734.75</title>
+<path d="M610.38,109 H634.11 M610.38,104 V114 M634.11,104 V114" fill="none" stroke="#d17908" stroke-width="2"/>
+<circle cx="621.57" cy="109" r="7" fill="#d17908"/>
+<text x="805" y="114" font-size="17" font-weight="600">1,711.94</text>
+</g>
+<g class="task-series" data-model="2">
+<text x="18" y="158" font-size="17" font-weight="600">GPT-6 Astra</text>
+<title>GPT-6 Astra: 1,553.29; GPT-6 Astra (Max); 95% CI: 1,538.19 to 1,570.19</title>
+<path d="M526.00,153 H543.60 M526.00,148 V158 M543.60,148 V158" fill="none" stroke="#5144c7" stroke-width="2"/>
+<circle cx="534.31" cy="153" r="7" fill="#5144c7"/>
+<text x="805" y="158" font-size="17" font-weight="600">1,553.29</text>
+</g>
+<g class="task-series" data-model="3">
+<text x="18" y="202" font-size="17" font-weight="600">GPT-6.1 Sol</text>
+<title>GPT-6.1 Sol: 1,452.57; GPT-6.1 Sol (Max); 95% CI: 1,434.41 to 1,471.42</title>
+<path d="M468.93,197 H489.28 M468.93,192 V202 M489.28,192 V202" fill="none" stroke="#1878ba" stroke-width="2"/>
+<circle cx="478.91" cy="197" r="7" fill="#1878ba"/>
+<text x="805" y="202" font-size="17" font-weight="600">1,452.57</text>
+</g>
+<g class="task-series" data-model="4">
+<text x="18" y="246" font-size="17" font-weight="600">GPT-5.6 Sol</text>
+<text x="805" y="246" font-size="15" fill="#56647a">No result</text>
+</g>
+<g class="task-series" data-model="5">
+<text x="18" y="290" font-size="17" font-weight="600">Gemini 3.8 Flash</text>
+<title>Gemini 3.8 Flash: 1,224.82; Gemini 3.8 Flash (High); 95% CI: 1,210.65 to 1,239.22</title>
+<path d="M345.86,285 H361.57 M345.86,280 V290 M361.57,280 V290" fill="none" stroke="#07816c" stroke-width="2"/>
+<circle cx="353.65" cy="285" r="7" fill="#07816c"/>
+<text x="805" y="290" font-size="17" font-weight="600">1,224.82</text>
+</g>
+<g class="task-series" data-model="6">
+<text x="18" y="334" font-size="17" font-weight="600">GPT-6 Luna</text>
+<title>GPT-6 Luna: 1,395.16; GPT-6 Luna (Max); 95% CI: 1,379.49 to 1,409.96</title>
+<path d="M438.72,329 H455.48 M438.72,324 V334 M455.48,324 V334" fill="none" stroke="#6e7889" stroke-width="2"/>
+<circle cx="447.34" cy="329" r="7" fill="#6e7889"/>
+<text x="805" y="334" font-size="17" font-weight="600">1,395.16</text>
+</g>
+<g class="task-series" data-model="8">
+<text x="18" y="378" font-size="17" font-weight="600">GPT-6.1 Terra</text>
+<title>GPT-6.1 Terra: 1,463.42; GPT-6.1 Terra (Max); 95% CI: 1,446.17 to 1,483.14</title>
+<path d="M475.39,373 H495.73 M475.39,368 V378 M495.73,368 V378" fill="none" stroke="#9744a0" stroke-width="2"/>
+<circle cx="484.88" cy="373" r="7" fill="#9744a0"/>
+<text x="805" y="378" font-size="17" font-weight="600">1,463.42</text>
+</g>
+<g class="task-series" data-model="9">
+<text x="18" y="422" font-size="17" font-weight="600">Gemini 4 Argon</text>
+<title>Gemini 4 Argon: 1,305.21; Gemini 4 Argon (High); 95% CI: 1,287.98 to 1,321.34</title>
+<path d="M388.39,417 H406.74 M388.39,412 V422 M406.74,412 V422" fill="none" stroke="#4d7b16" stroke-width="2"/>
+<circle cx="397.87" cy="417" r="7" fill="#4d7b16"/>
+<text x="805" y="422" font-size="17" font-weight="600">1,305.21</text>
+</g>
+<g class="task-series" data-model="10">
+<text x="18" y="466" font-size="17" font-weight="600">Grok 4.7</text>
+<title>Grok 4.7: 1,502.89; Grok 4.7 (Xhigh); 95% CI: 1,487.69 to 1,520.09</title>
+<path d="M498.23,461 H516.05 M498.23,456 V466 M516.05,456 V466" fill="none" stroke="#be3042" stroke-width="2"/>
+<circle cx="506.59" cy="461" r="7" fill="#be3042"/>
+<text x="805" y="466" font-size="17" font-weight="600">1,502.89</text>
+</g>
+<text x="505" y="548" text-anchor="middle" font-size="14">Elo / higher is better / native benchmark scale</text></svg>
+<div class="task-foot-source">Benchmark source: <a href="https://artificialanalysis.ai/evaluations/aa-briefcase" target="_blank" rel="noopener">AA-Briefcase v1.1 (Presentation Quality) ↗</a></div>
+</div>
+<div data-document-metric="professional" hidden>
+<div class="task-head-block"><div class="task-head-top"><h3>Broader professional deliverables</h3></div><p class="task-sub">Blind pairwise Elo for professional documents, slides, diagrams, and spreadsheets; whiskers show 95% CI.</p></div>
+<svg class="task-plot" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 566" role="img" aria-labelledby="task-professional-title task-professional-desc">
+<title id="task-professional-title">Professional work: broader deliverables</title>
+<desc id="task-professional-desc">10 selected model families. Horizontal axis: Elo from 1000 to 2000, higher is better. Exact scores and configurations are in the table below. Whiskers are published 95% confidence intervals where available; missing results are labeled, not plotted as zero.</desc>
+<style>text{font-family:Segoe UI,Arial,sans-serif;fill:#192740}</style>
+<rect width="1000" height="566" rx="10" fill="#ffffff" stroke="#dce3ee"/>
+<line x1="230.0" y1="38" x2="230.0" y2="486" stroke="#dde4ee"/>
+<text x="230.0" y="516" text-anchor="middle" font-size="14">1,000</text>
+<line x1="367.5" y1="38" x2="367.5" y2="486" stroke="#dde4ee"/>
+<text x="367.5" y="516" text-anchor="middle" font-size="14">1,250</text>
+<line x1="505.0" y1="38" x2="505.0" y2="486" stroke="#dde4ee"/>
+<text x="505.0" y="516" text-anchor="middle" font-size="14">1,500</text>
+<line x1="642.5" y1="38" x2="642.5" y2="486" stroke="#dde4ee"/>
+<text x="642.5" y="516" text-anchor="middle" font-size="14">1,750</text>
+<line x1="780.0" y1="38" x2="780.0" y2="486" stroke="#dde4ee"/>
+<text x="780.0" y="516" text-anchor="middle" font-size="14">2,000</text>
+<g class="task-series" data-model="0">
+<text x="18" y="70" font-size="17" font-weight="600">Claude Opus 5.5</text>
+<title>Claude Opus 5.5: 1,866.27; Claude Opus 5.5 (Max, Default Fallback); 95% CI: -26 / +26 Elo (source-rounded)</title>
+<path d="M692.15,65 H720.75 M692.15,60 V70 M720.75,60 V70" fill="none" stroke="#a34415" stroke-width="2"/>
+<circle cx="706.45" cy="65" r="7" fill="#a34415"/>
+<text x="805" y="70" font-size="17" font-weight="600">1,866.27</text>
+</g>
+<g class="task-series" data-model="1">
+<text x="18" y="114" font-size="17" font-weight="600">Claude Sonnet 5.5</text>
+<title>Claude Sonnet 5.5: 1,837.82; Claude Sonnet 5.5 (Max, Default Fallback); 95% CI: -23 / +23 Elo (source-rounded)</title>
+<path d="M678.15,109 H703.45 M678.15,104 V114 M703.45,104 V114" fill="none" stroke="#d17908" stroke-width="2"/>
+<circle cx="690.80" cy="109" r="7" fill="#d17908"/>
+<text x="805" y="114" font-size="17" font-weight="600">1,837.82</text>
+</g>
+<g class="task-series" data-model="2">
+<text x="18" y="158" font-size="17" font-weight="600">GPT-6 Astra</text>
+<title>GPT-6 Astra: 1,584.40; GPT-6 Astra (Max); 95% CI: -19 / +19 Elo (source-rounded)</title>
+<path d="M540.97,153 H561.87 M540.97,148 V158 M561.87,148 V158" fill="none" stroke="#5144c7" stroke-width="2"/>
+<circle cx="551.42" cy="153" r="7" fill="#5144c7"/>
+<text x="805" y="158" font-size="17" font-weight="600">1,584.40</text>
+</g>
+<g class="task-series" data-model="3">
+<text x="18" y="202" font-size="17" font-weight="600">GPT-6.1 Sol</text>
+<title>GPT-6.1 Sol: 1,607.61; GPT-6.1 Sol (Max); 95% CI: -22 / +22 Elo (source-rounded)</title>
+<path d="M552.09,197 H576.29 M552.09,192 V202 M576.29,192 V202" fill="none" stroke="#1878ba" stroke-width="2"/>
+<circle cx="564.19" cy="197" r="7" fill="#1878ba"/>
+<text x="805" y="202" font-size="17" font-weight="600">1,607.61</text>
+</g>
+<g class="task-series" data-model="4">
+<text x="18" y="246" font-size="17" font-weight="600">GPT-5.6 Sol</text>
+<title>GPT-5.6 Sol: 1,618.27; GPT-5.6 Sol (Max); 95% CI: -16 / +16 Elo (source-rounded)</title>
+<path d="M561.25,241 H578.85 M561.25,236 V246 M578.85,236 V246" fill="none" stroke="#bf3c85" stroke-width="2"/>
+<circle cx="570.05" cy="241" r="7" fill="#bf3c85"/>
+<text x="805" y="246" font-size="17" font-weight="600">1,618.27</text>
+</g>
+<g class="task-series" data-model="5">
+<text x="18" y="290" font-size="17" font-weight="600">Gemini 3.8 Flash</text>
+<title>Gemini 3.8 Flash: 1,445.40; Gemini 3.8 Flash (High); 95% CI: -19 / +19 Elo (source-rounded)</title>
+<path d="M464.52,285 H485.42 M464.52,280 V290 M485.42,280 V290" fill="none" stroke="#07816c" stroke-width="2"/>
+<circle cx="474.97" cy="285" r="7" fill="#07816c"/>
+<text x="805" y="290" font-size="17" font-weight="600">1,445.40</text>
+</g>
+<g class="task-series" data-model="6">
+<text x="18" y="334" font-size="17" font-weight="600">GPT-6 Luna</text>
+<title>GPT-6 Luna: 1,444.72; GPT-6 Luna (Max); 95% CI: -21 / +20 Elo (source-rounded)</title>
+<path d="M463.05,329 H485.60 M463.05,324 V334 M485.60,324 V334" fill="none" stroke="#6e7889" stroke-width="2"/>
+<circle cx="474.60" cy="329" r="7" fill="#6e7889"/>
+<text x="805" y="334" font-size="17" font-weight="600">1,444.72</text>
+</g>
+<g class="task-series" data-model="8">
+<text x="18" y="378" font-size="17" font-weight="600">GPT-6.1 Terra</text>
+<title>GPT-6.1 Terra: 1,476.05; GPT-6.1 Terra (Max); 95% CI: -23 / +23 Elo (source-rounded)</title>
+<path d="M479.18,373 H504.48 M479.18,368 V378 M504.48,368 V378" fill="none" stroke="#9744a0" stroke-width="2"/>
+<circle cx="491.83" cy="373" r="7" fill="#9744a0"/>
+<text x="805" y="378" font-size="17" font-weight="600">1,476.05</text>
+</g>
+<g class="task-series" data-model="9">
+<text x="18" y="422" font-size="17" font-weight="600">Gemini 4 Argon</text>
+<title>Gemini 4 Argon: 1,631.09; Gemini 4 Argon (High); 95% CI: -20 / +20 Elo (source-rounded)</title>
+<path d="M566.10,417 H588.10 M566.10,412 V422 M588.10,412 V422" fill="none" stroke="#4d7b16" stroke-width="2"/>
+<circle cx="577.10" cy="417" r="7" fill="#4d7b16"/>
+<text x="805" y="422" font-size="17" font-weight="600">1,631.09</text>
+</g>
+<g class="task-series" data-model="10">
+<text x="18" y="466" font-size="17" font-weight="600">Grok 4.7</text>
+<title>Grok 4.7: 1,721.59; Grok 4.7 (Xhigh); 95% CI: -21 / +21 Elo (source-rounded)</title>
+<path d="M615.32,461 H638.42 M615.32,456 V466 M638.42,456 V466" fill="none" stroke="#be3042" stroke-width="2"/>
+<circle cx="626.87" cy="461" r="7" fill="#be3042"/>
+<text x="805" y="466" font-size="17" font-weight="600">1,721.59</text>
+</g>
+<text x="505" y="548" text-anchor="middle" font-size="14">Elo / higher is better / native benchmark scale</text></svg>
+<div class="task-foot-source">Benchmark source: <a href="https://artificialanalysis.ai/evaluations/gdpval-aa" target="_blank" rel="noopener">GDPval-AA ↗</a></div>
+</div>
+</section>
+    </section>
+
+<h3>Capture the design</h3>
+<p>Before switching models for implementation, lock the decisions from exploration into a concrete, reviewable artifact: a <strong>UI mockup</strong>, a <strong>design doc (<code>design.md</code>)</strong>, an <strong>API contract</strong>, or an <strong>implementation plan</strong>.</p>
+<blockquote><strong>Once the important decisions are captured in a concrete design artifact, the implementation problem becomes much more constrained.</strong></blockquote>
+
+<h3 id="h-2-smartness-vs-cost">Implementation &amp; iteration: optimize for efficiency</h3>
+<p>With the design artifact locked, you can switch to a <strong>faster model with lower reasoning effort and lower cost</strong>. Because the implementation model no longer needs to re-architect the system, re-explore the solution space, re-decide API contracts, or re-interpret the UI direction, its job is simple:</p>
+<blockquote><strong>Execute the reviewed design reliably and efficiently.</strong></blockquote>
+<p>During implementation, you are running dozens of scoped coding, script-running, and test-fixing turns, so <strong>latency and cost</strong> become the primary optimization criteria:</p>
+<ul>
+  <li><strong>Cost sweet spot (80%–95% lower cost):</strong> Stepping down from flagship <code>Max (5)</code> to <strong>GPT-6.1 Sol (Medium: $0.36/task)</strong> or <strong>GPT-6.1 Terra (High: $0.26/task)</strong> retains 80%–90% of flagship capability at 6%–10% of the cost of <code>Claude Opus 5.5 (Max: $4.26/task)</code>.</li>
+  <li><strong>Speed sweet spot (7–15s interactive turns):</strong> <code>Medium (2)</code> and <code>High (3)</code> keep coding and verification turns under 15 seconds, whereas <code>Max (5)</code> stretches single-turn wait times to 4.6–11.8 minutes and can even score slightly lower on reasoning benchmarks due to over-thinking.</li>
+</ul>
+<p>Use the tabs below to inspect how capability scales against <strong>per-task cost (USD)</strong> and <strong>median execution speed (seconds)</strong> across reasoning efforts <code>1 (Low)</code> to <code>5 (Max)</code>:</p>
+
+<div class="card" style="margin: 22px 0;">
+  <div class="task-tabs" role="tablist" aria-label="Implementation efficiency metrics" style="margin-top:0;">
+    <button type="button" id="eff-tab-cost" role="tab" aria-selected="true" aria-controls="eff-panel-cost" tabindex="0">Capability vs. Cost (USD / task)</button>
+    <button type="button" id="eff-tab-speed" role="tab" aria-selected="false" aria-controls="eff-panel-speed" tabindex="-1">Capability vs. Execution Speed (seconds)</button>
+  </div>
+  <div id="eff-panel-cost" role="tabpanel" aria-labelledby="eff-tab-cost" tabindex="0">
+    <div class="blog-chart-controls" role="region" aria-label="Interactive chart controls">
+      <div class="ctrl-group">
+        <label for="cost-benchmark">Benchmark:</label>
+        <select id="cost-benchmark">
+          <option value="aa">Intelligence Index v5.0 (score vs. cost)</option>
+          <option value="cursor">CursorBench 4.0 (coding % vs. cost)</option>
+          <option value="arc1">ARC-AGI-1 (score % vs. cost)</option>
+          <option value="arc2">ARC-AGI-2 (score % vs. cost)</option>
+        </select>
+        <button type="button" id="plot-argon" class="argon-btn" hidden>Argon</button>
+        <a id="cost-download" href="llm-cost-capability.svg" hidden>Download</a>
+      </div>
+      <div class="ctrl-group">
+        <label for="model">Highlight model:</label>
+        <select id="model">
+          <option value="all">All 10 models</option>
+          <option value="0">Claude Opus 5.5</option>
+          <option value="1">Claude Sonnet 5.5</option>
+          <option value="2">GPT-6 Astra</option>
+          <option value="3">GPT-6.1 Sol</option>
+          <option value="4">GPT-5.6 Sol</option>
+          <option value="5">Gemini 3.8 Flash</option>
+          <option value="6">GPT-6 Luna</option>
+          <option value="8">GPT-6.1 Terra</option>
+          <option value="9">Gemini 4 Argon</option>
+          <option value="10">Grok 4.7</option>
+        </select>
+      </div>
+    </div>
+    <p id="model-status" class="status-banner" aria-live="polite" hidden></p>
+    <p id="cost-status" class="status-banner" aria-live="polite" hidden></p>
+    <p id="cost-error" class="status-banner" role="alert" hidden></p>
+
+    <section id="cost" style="margin: 0 0 18px;">
+      <div data-cost-benchmark="aa" class="gh-benchmark-panel">
+    <div class="gh-chart-header">
+      <h3>Artificial Analysis Intelligence Index v5.0: score vs. cost</h3>
+      <p class="muted">Same benchmark, same published model configuration across reasoning efforts (1 Low to 5 Max). Upper-left is better.</p>
+      
+    </div>
+    <div class="gh-chart-grid">
+      <div class="gh-plot-box"><svg xmlns="http://www.w3.org/2000/svg" viewBox="48 197 1185 752" role="img" aria-labelledby="title desc">
+<title id="title">LLM capability versus cost, by reasoning effort</title>
+<desc id="desc">The horizontal axis is average US dollar cost per Artificial Analysis Intelligence Index task, on a logarithmic scale. The vertical axis is the Intelligence Index v5.0 score from zero to sixty. 11 model families are listed; numbered points indicate measured low to max reasoning effort. Upper left is better on these two metrics. Missing measurements are not plotted. Historical v4.3.2 scores are separate and are never mixed with current scores.</desc>
+<style>text{font-family:Segoe UI,Arial,sans-serif;fill:#192740}</style>
+<rect x="48" y="197" width="1185" height="752" rx="10" fill="#ffffff"/>
+<text x="77" y="225" font-size="17" style="fill:#56647a" font-weight="400" text-anchor="start">Capability / Artificial Analysis Intelligence Index v5.0</text>
+<line x1="120" y1="875.0" x2="1210" y2="875.0" stroke="#e4e9f1" stroke-width="1"/>
+<text x="103" y="880.0" font-size="15" style="fill:#68768b" font-weight="400" text-anchor="end">0</text>
+<line x1="120" y1="768.6666666666666" x2="1210" y2="768.6666666666666" stroke="#e4e9f1" stroke-width="1"/>
+<text x="103" y="773.6666666666666" font-size="15" style="fill:#68768b" font-weight="400" text-anchor="end">10</text>
+<line x1="120" y1="662.3333333333334" x2="1210" y2="662.3333333333334" stroke="#e4e9f1" stroke-width="1"/>
+<text x="103" y="667.3333333333334" font-size="15" style="fill:#68768b" font-weight="400" text-anchor="end">20</text>
+<line x1="120" y1="556.0" x2="1210" y2="556.0" stroke="#e4e9f1" stroke-width="1"/>
+<text x="103" y="561.0" font-size="15" style="fill:#68768b" font-weight="400" text-anchor="end">30</text>
+<line x1="120" y1="449.6666666666667" x2="1210" y2="449.6666666666667" stroke="#e4e9f1" stroke-width="1"/>
+<text x="103" y="454.6666666666667" font-size="15" style="fill:#68768b" font-weight="400" text-anchor="end">40</text>
+<line x1="120" y1="343.33333333333326" x2="1210" y2="343.33333333333326" stroke="#e4e9f1" stroke-width="1"/>
+<text x="103" y="348.33333333333326" font-size="15" style="fill:#68768b" font-weight="400" text-anchor="end">50</text>
+<line x1="120" y1="237.0" x2="1210" y2="237.0" stroke="#e4e9f1" stroke-width="1"/>
+<text x="103" y="242.0" font-size="15" style="fill:#68768b" font-weight="400" text-anchor="end">60</text>
+<line x1="183.2376851708317" y1="237" x2="183.2376851708317" y2="875" stroke="#eff2f7" stroke-width="1"/>
+<text x="183.2376851708317" y="902" font-size="16" style="fill:#56647a" font-weight="400" text-anchor="middle">$0.005</text>
+<line x1="269.0458771290711" y1="237" x2="269.0458771290711" y2="875" stroke="#eff2f7" stroke-width="1"/>
+<text x="269.0458771290711" y="902" font-size="16" style="fill:#56647a" font-weight="400" text-anchor="middle">$0.01</text>
+<line x1="405.04864363756315" y1="237" x2="405.04864363756315" y2="875" stroke="#eff2f7" stroke-width="1"/>
+<text x="405.04864363756315" y="902" font-size="16" style="fill:#56647a" font-weight="400" text-anchor="middle">$0.03</text>
+<line x1="554.0945207666343" y1="237" x2="554.0945207666343" y2="875" stroke="#eff2f7" stroke-width="1"/>
+<text x="554.0945207666343" y="902" font-size="16" style="fill:#56647a" font-weight="400" text-anchor="middle">$0.10</text>
+<line x1="690.0972872751263" y1="237" x2="690.0972872751263" y2="875" stroke="#eff2f7" stroke-width="1"/>
+<text x="690.0972872751263" y="902" font-size="16" style="fill:#56647a" font-weight="400" text-anchor="middle">$0.30</text>
+<line x1="839.1431644041975" y1="237" x2="839.1431644041975" y2="875" stroke="#eff2f7" stroke-width="1"/>
+<text x="839.1431644041975" y="902" font-size="16" style="fill:#56647a" font-weight="400" text-anchor="middle">$1</text>
+<line x1="975.1459309126896" y1="237" x2="975.1459309126896" y2="875" stroke="#eff2f7" stroke-width="1"/>
+<text x="975.1459309126896" y="902" font-size="16" style="fill:#56647a" font-weight="400" text-anchor="middle">$3</text>
+<line x1="1124.1918080417604" y1="237" x2="1124.1918080417604" y2="875" stroke="#eff2f7" stroke-width="1"/>
+<text x="1124.1918080417604" y="902" font-size="16" style="fill:#56647a" font-weight="400" text-anchor="middle">$10</text>
+<line x1="1210.0" y1="237" x2="1210.0" y2="875" stroke="#eff2f7" stroke-width="1"/>
+<text x="1210.0" y="902" font-size="16" style="fill:#56647a" font-weight="400" text-anchor="middle">$20</text>
+<text x="655" y="933" font-size="16" style="fill:#56647a" font-weight="400" text-anchor="middle">Average cost per benchmark task (USD)  |  logarithmic scale: equal spacing means equal cost ratios</text>
+<path d="M225 297 L167 254 M167 254 L187 257 M167 254 L175 274" fill="none" stroke="#465b76" stroke-width="2"/>
+<text x="234" y="302" font-size="16" style="fill:#465b76" font-weight="400" text-anchor="start">Prefer this direction</text>
+<g class=" series-callout" aria-hidden="true">
+  <line x1="712.46" y1="384.30" x2="950.13" y2="363.98" stroke="#0969da" stroke-width="2" stroke-dasharray="6,4"/>
+  <circle cx="712.46" cy="384.30" r="15" fill="none" stroke="#1878ba" stroke-width="2.2" stroke-dasharray="3,2"/>
+  <circle cx="950.13" cy="363.98" r="15" fill="none" stroke="#a34415" stroke-width="2.2" stroke-dasharray="3,2"/>
+</g>
+<g class="series" data-model="0">
+<polyline points="836.08,508.12 950.13,363.98 992.97,325.41 1061.92,268.96 1124.64,253.95" fill="none" stroke="#a34415" stroke-width="3.2" stroke-linejoin="round"/>
+<g><title>Claude Opus 5.5 / Low: score 34.5, cost $0.98 per task</title><circle cx="836.08" cy="508.12" r="10" fill="#a34415" stroke="white" stroke-width="1.5"/>
+<text x="836.08" y="512.12" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">1</text>
+</g>
+<g><title>Claude Opus 5.5 / Medium: score 48.1, cost $2.45 per task</title><circle cx="950.13" cy="363.98" r="10" fill="#a34415" stroke="white" stroke-width="1.5"/>
+<text x="950.13" y="367.98" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">2</text>
+</g>
+<g><title>Claude Opus 5.5 / High: score 51.7, cost $3.46 per task</title><circle cx="992.97" cy="325.41" r="10" fill="#a34415" stroke="white" stroke-width="1.5"/>
+<text x="992.97" y="329.41" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">3</text>
+</g>
+<g><title>Claude Opus 5.5 / Xhigh: score 57.0, cost $6.05 per task</title><circle cx="1061.92" cy="268.96" r="10" fill="#a34415" stroke="white" stroke-width="1.5"/>
+<text x="1061.92" y="272.96" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">4</text>
+</g>
+<g><title>Claude Opus 5.5 / Max: score 58.4, cost $10.04 per task</title><circle cx="1124.64" cy="253.95" r="10" fill="#a34415" stroke="white" stroke-width="1.5"/>
+<text x="1124.64" y="257.95" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">5</text>
+</g>
+</g>
+<g class="series" data-model="1">
+<polyline points="756.11,605.98 808.49,552.60 900.09,437.81 1013.57,347.86 1124.45,298.23" fill="none" stroke="#d17908" stroke-width="3.2" stroke-linejoin="round"/>
+<g><title>Claude Sonnet 5.5 / Low: score 25.3, cost $0.51 per task</title><circle cx="756.11" cy="605.98" r="10" fill="#d17908" stroke="white" stroke-width="1.5"/>
+<text x="756.11" y="609.98" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">1</text>
+</g>
+<g><title>Claude Sonnet 5.5 / Medium: score 30.3, cost $0.78 per task</title><circle cx="808.49" cy="552.60" r="10" fill="#d17908" stroke="white" stroke-width="1.5"/>
+<text x="808.49" y="556.60" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">2</text>
+</g>
+<g><title>Claude Sonnet 5.5 / High: score 41.1, cost $1.64 per task</title><circle cx="900.09" cy="437.81" r="10" fill="#d17908" stroke="white" stroke-width="1.5"/>
+<text x="900.09" y="441.81" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">3</text>
+</g>
+<g><title>Claude Sonnet 5.5 / Xhigh: score 49.6, cost $4.09 per task</title><circle cx="1013.57" cy="347.86" r="10" fill="#d17908" stroke="white" stroke-width="1.5"/>
+<text x="1013.57" y="351.86" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">4</text>
+</g>
+<g><title>Claude Sonnet 5.5 / Max: score 54.2, cost $10.02 per task</title><circle cx="1124.45" cy="298.23" r="10" fill="#d17908" stroke="white" stroke-width="1.5"/>
+<text x="1124.45" y="302.23" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">5</text>
+</g>
+</g>
+<g class="series" data-model="2">
+<polyline points="882.88,417.39 963.58,327.86 984.62,291.76 999.73,287.45 1065.90,270.45" fill="none" stroke="#5144c7" stroke-width="3.2" stroke-linejoin="round"/>
+<g><title>GPT-6 Astra / Low: score 43.0, cost $1.42 per task</title><circle cx="882.88" cy="417.39" r="10" fill="#5144c7" stroke="white" stroke-width="1.5"/>
+<text x="882.88" y="421.39" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">1</text>
+</g>
+<g><title>GPT-6 Astra / Medium: score 51.5, cost $2.73 per task</title><circle cx="963.58" cy="327.86" r="10" fill="#5144c7" stroke="white" stroke-width="1.5"/>
+<text x="963.58" y="331.86" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">2</text>
+</g>
+<g><title>GPT-6 Astra / High: score 54.8, cost $3.24 per task</title><circle cx="984.62" cy="291.76" r="10" fill="#5144c7" stroke="white" stroke-width="1.5"/>
+<text x="984.62" y="295.76" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">3</text>
+</g>
+<g><title>GPT-6 Astra / Xhigh: score 55.3, cost $3.66 per task</title><circle cx="999.73" cy="287.45" r="10" fill="#5144c7" stroke="white" stroke-width="1.5"/>
+<text x="999.73" y="291.45" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">4</text>
+</g>
+<g><title>GPT-6 Astra / Max: score 56.9, cost $6.24 per task</title><circle cx="1065.90" cy="270.45" r="10" fill="#5144c7" stroke="white" stroke-width="1.5"/>
+<text x="1065.90" y="274.45" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">5</text>
+</g>
+</g>
+<g class="series" data-model="3">
+<polyline points="613.41,508.12 712.46,384.30 774.03,340.90 805.82,318.79 868.93,295.39" fill="none" stroke="#1878ba" stroke-width="3.2" stroke-linejoin="round"/>
+<g><title>GPT-6.1 Sol / Low: score 34.5, cost $0.16 per task</title><circle cx="613.41" cy="508.12" r="10" fill="#1878ba" stroke="white" stroke-width="1.5"/>
+<text x="613.41" y="512.12" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">1</text>
+</g>
+<g><title>GPT-6.1 Sol / Medium: score 46.1, cost $0.36 per task</title><circle cx="712.46" cy="384.30" r="10" fill="#1878ba" stroke="white" stroke-width="1.5"/>
+<text x="712.46" y="388.30" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">2</text>
+</g>
+<g><title>GPT-6.1 Sol / High: score 50.2, cost $0.59 per task</title><circle cx="774.03" cy="340.90" r="10" fill="#1878ba" stroke="white" stroke-width="1.5"/>
+<text x="774.03" y="344.90" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">3</text>
+</g>
+<g><title>GPT-6.1 Sol / Xhigh: score 52.3, cost $0.76 per task</title><circle cx="805.82" cy="318.79" r="10" fill="#1878ba" stroke="white" stroke-width="1.5"/>
+<text x="805.82" y="322.79" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">4</text>
+</g>
+<g><title>GPT-6.1 Sol / Max: score 54.5, cost $1.27 per task</title><circle cx="868.93" cy="295.39" r="10" fill="#1878ba" stroke="white" stroke-width="1.5"/>
+<text x="868.93" y="299.39" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">5</text>
+</g>
+</g>
+<g class="series" data-model="4">
+</g>
+<g class="series" data-model="5">
+<polyline points="1066.18,556.23 1092.89,550.19" fill="none" stroke="#07816c" stroke-width="3.2" stroke-linejoin="round"/>
+<g><title>Gemini 3.8 Flash / Medium: score 30.0, cost $6.26 per task</title><circle cx="1066.18" cy="556.23" r="10" fill="#07816c" stroke="white" stroke-width="1.5"/>
+<text x="1066.18" y="560.23" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">2</text>
+</g>
+<g><title>Gemini 3.8 Flash / High: score 30.5, cost $7.77 per task</title><circle cx="1092.89" cy="550.19" r="10" fill="#07816c" stroke="white" stroke-width="1.5"/>
+<text x="1092.89" y="554.19" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">3</text>
+</g>
+</g>
+<g class="series" data-model="6">
+<polyline points="186.06,772.22 447.30,680.37 515.05,647.67 559.06,627.23 605.89,579.87" fill="none" stroke="#6e7889" stroke-width="3.2" stroke-linejoin="round"/>
+<g><title>GPT-6 Luna / Low: score 9.7, cost $0.005 per task</title><circle cx="186.06" cy="772.22" r="10" fill="#6e7889" stroke="white" stroke-width="1.5"/>
+<text x="186.06" y="776.22" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">1</text>
+</g>
+<g><title>GPT-6 Luna / Medium: score 18.3, cost $0.042 per task</title><circle cx="447.30" cy="680.37" r="10" fill="#6e7889" stroke="white" stroke-width="1.5"/>
+<text x="447.30" y="684.37" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">2</text>
+</g>
+<g><title>GPT-6 Luna / High: score 21.4, cost $0.073 per task</title><circle cx="515.05" cy="647.67" r="10" fill="#6e7889" stroke="white" stroke-width="1.5"/>
+<text x="515.05" y="651.67" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">3</text>
+</g>
+<g><title>GPT-6 Luna / Xhigh: score 23.3, cost $0.10 per task</title><circle cx="559.06" cy="627.23" r="10" fill="#6e7889" stroke="white" stroke-width="1.5"/>
+<text x="559.06" y="631.23" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">4</text>
+</g>
+<g><title>GPT-6 Luna / Max: score 27.8, cost $0.15 per task</title><circle cx="605.89" cy="579.87" r="10" fill="#6e7889" stroke="white" stroke-width="1.5"/>
+<text x="605.89" y="583.87" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">5</text>
+</g>
+</g>
+<g class="series" data-model="8">
+<polyline points="512.28,564.33 618.91,469.71 672.04,424.84 725.92,397.03 834.23,332.95" fill="none" stroke="#9744a0" stroke-width="3.2" stroke-linejoin="round"/>
+<g><title>GPT-6.1 Terra / Low: score 29.2, cost $0.071 per task</title><circle cx="512.28" cy="564.33" r="10" fill="#9744a0" stroke="white" stroke-width="1.5"/>
+<text x="512.28" y="568.33" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">1</text>
+</g>
+<g><title>GPT-6.1 Terra / Medium: score 38.1, cost $0.17 per task</title><circle cx="618.91" cy="469.71" r="10" fill="#9744a0" stroke="white" stroke-width="1.5"/>
+<text x="618.91" y="473.71" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">2</text>
+</g>
+<g><title>GPT-6.1 Terra / High: score 42.3, cost $0.26 per task</title><circle cx="672.04" cy="424.84" r="10" fill="#9744a0" stroke="white" stroke-width="1.5"/>
+<text x="672.04" y="428.84" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">3</text>
+</g>
+<g><title>GPT-6.1 Terra / Xhigh: score 45.0, cost $0.40 per task</title><circle cx="725.92" cy="397.03" r="10" fill="#9744a0" stroke="white" stroke-width="1.5"/>
+<text x="725.92" y="401.03" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">4</text>
+</g>
+<g><title>GPT-6.1 Terra / Max: score 51.0, cost $0.96 per task</title><circle cx="834.23" cy="332.95" r="10" fill="#9744a0" stroke="white" stroke-width="1.5"/>
+<text x="834.23" y="336.95" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">5</text>
+</g>
+</g>
+<g class="series" data-model="9">
+<g><title>Gemini 4 Argon / High: score 50.4, cost $3.84 per task</title><circle cx="1005.75" cy="338.95" r="10" fill="#4d7b16" stroke="white" stroke-width="1.5"/>
+<text x="1005.75" y="342.95" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">3</text>
+</g>
+</g>
+<g class="series" data-model="10">
+<polyline points="1064.69,502.70 1088.77,509.90" fill="none" stroke="#be3042" stroke-width="3.2" stroke-linejoin="round"/>
+<g><title>Grok 4.7 / Low: score 30.9, cost $2.92 per task</title><circle cx="971.89" cy="546.62" r="10" fill="#be3042" stroke="white" stroke-width="1.5"/>
+<text x="971.89" y="550.62" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">1</text>
+</g>
+<g><title>Grok 4.7 / High: score 35.0, cost $6.18 per task</title><circle cx="1064.69" cy="502.70" r="10" fill="#be3042" stroke="white" stroke-width="1.5"/>
+<text x="1064.69" y="506.70" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">3</text>
+</g>
+<g><title>Grok 4.7 / Xhigh: score 34.3, cost $7.51 per task</title><circle cx="1088.77" cy="509.90" r="10" fill="#be3042" stroke="white" stroke-width="1.5"/>
+<text x="1088.77" y="513.90" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">4</text>
+</g>
+</g>
+</svg></div>
+      
+    <aside class="gh-chart-legend" aria-label="Model color and reasoning effort legend">
+      <div class="gh-legend-Title">MODEL COLOR</div>
+      <ul class="gh-legend-list">
+        <li class="gh-legend-item task-series" data-model="0"><span class="gh-legend-swatch" style="background:#a34415"></span><span class="gh-legend-name" style="color:#a34415">Claude Opus 5.5</span></li><li class="gh-legend-item task-series" data-model="1"><span class="gh-legend-swatch" style="background:#d17908"></span><span class="gh-legend-name" style="color:#d17908">Claude Sonnet 5.5</span></li><li class="gh-legend-item task-series" data-model="2"><span class="gh-legend-swatch" style="background:#5144c7"></span><span class="gh-legend-name" style="color:#5144c7">GPT-6 Astra</span></li><li class="gh-legend-item task-series" data-model="3"><span class="gh-legend-swatch" style="background:#1878ba"></span><span class="gh-legend-name" style="color:#1878ba">GPT-6.1 Sol</span></li><li class="gh-legend-item task-series is-missing" data-model="4"><span class="gh-legend-swatch" style="background:#bf3c85"></span><span class="gh-legend-name" style="color:#bf3c85">GPT-5.6 Sol</span><span class="gh-legend-na">No data</span></li><li class="gh-legend-item task-series" data-model="5"><span class="gh-legend-swatch" style="background:#07816c"></span><span class="gh-legend-name" style="color:#07816c">Gemini 3.8 Flash</span></li><li class="gh-legend-item task-series" data-model="6"><span class="gh-legend-swatch" style="background:#6e7889"></span><span class="gh-legend-name" style="color:#6e7889">GPT-6 Luna</span></li><li class="gh-legend-item task-series" data-model="8"><span class="gh-legend-swatch" style="background:#9744a0"></span><span class="gh-legend-name" style="color:#9744a0">GPT-6.1 Terra</span></li><li class="gh-legend-item task-series" data-model="9"><span class="gh-legend-swatch" style="background:#4d7b16"></span><span class="gh-legend-name" style="color:#4d7b16">Gemini 4 Argon</span></li><li class="gh-legend-item task-series" data-model="10"><span class="gh-legend-swatch" style="background:#be3042"></span><span class="gh-legend-name" style="color:#be3042">Grok 4.7</span></li>
+      </ul>
+      <div class="gh-legend-Title" style="margin-top:12px;">EFFORT / POINT NUMBER</div>
+      <ol class="gh-effort-list">
+        <li><span class="gh-effort-badge">1</span> Low</li>
+        <li><span class="gh-effort-badge">2</span> Medium</li>
+        <li><span class="gh-effort-badge">3</span> High</li>
+        <li><span class="gh-effort-badge">4</span> Xhigh</li>
+        <li><span class="gh-effort-badge">5</span> Max</li>
+      </ol>
+      <p class="gh-legend-note">Hover points for exact values. Missing efforts are not inferred.</p>
+    </aside>
+    
+    </div>
+    <p class="gh-bench-footnote">Benchmark source: <a href="https://artificialanalysis.ai/leaderboards/models" target="_blank" rel="noopener">Artificial Analysis Intelligence Index v5.0 &nearr;</a></p>
+  </div>
+      <div data-cost-benchmark="cursor" class="gh-benchmark-panel" hidden>
+    <div class="gh-chart-header">
+      <h3>CursorBench 4.0: score vs. cost</h3>
+      <p class="muted">Same benchmark, same published model configuration across reasoning efforts (1 Low to 5 Max). Upper-left is better.</p>
+      
+    </div>
+    <div class="gh-chart-grid">
+      <div class="gh-plot-box"><svg xmlns="http://www.w3.org/2000/svg" viewBox="48 197 1185 752" role="img" aria-labelledby="cost-cursor-title cost-cursor-desc">
+<title id="cost-cursor-title">CursorBench 4.0: score versus cost by effort</title>
+<desc id="cost-cursor-desc">X: USD per task, logarithmic. Y: native CursorBench 4.0 percentage score, zero to 100. Each point is an exact published model and effort configuration. Label leaders do not move the underlying measured points. No Artificial Analysis scores are mixed in.</desc>
+<style>text{font-family:Segoe UI,Arial,sans-serif;fill:#192740}</style>
+<rect x="48" y="197" width="1185" height="752" rx="10" fill="#ffffff"/>
+<text x="77.00" y="225.00" font-size="17" style="fill:#56647a" font-weight="400" text-anchor="start">CursorBench 4.0 score (%)</text>
+<path d="M120,875.00 H1210" stroke="#e4e9f1"/>
+<text x="103.00" y="880.00" font-size="15" style="fill:#68768b" font-weight="400" text-anchor="end">0</text>
+<path d="M120,747.40 H1210" stroke="#e4e9f1"/>
+<text x="103.00" y="752.40" font-size="15" style="fill:#68768b" font-weight="400" text-anchor="end">20</text>
+<path d="M120,619.80 H1210" stroke="#e4e9f1"/>
+<text x="103.00" y="624.80" font-size="15" style="fill:#68768b" font-weight="400" text-anchor="end">40</text>
+<path d="M120,492.20 H1210" stroke="#e4e9f1"/>
+<text x="103.00" y="497.20" font-size="15" style="fill:#68768b" font-weight="400" text-anchor="end">60</text>
+<path d="M120,364.60 H1210" stroke="#e4e9f1"/>
+<text x="103.00" y="369.60" font-size="15" style="fill:#68768b" font-weight="400" text-anchor="end">80</text>
+<path d="M120,237.00 H1210" stroke="#e4e9f1"/>
+<text x="103.00" y="242.00" font-size="15" style="fill:#68768b" font-weight="400" text-anchor="end">100</text>
+<path d="M120.00,237 V875" stroke="#eff2f7"/>
+<text x="120.00" y="902.00" font-size="16" style="fill:#56647a" font-weight="400" text-anchor="middle">$0.10</text>
+<path d="M329.95,237 V875" stroke="#eff2f7"/>
+<text x="329.95" y="902.00" font-size="16" style="fill:#56647a" font-weight="400" text-anchor="middle">$0.30</text>
+<path d="M560.03,237 V875" stroke="#eff2f7"/>
+<text x="560.03" y="902.00" font-size="16" style="fill:#56647a" font-weight="400" text-anchor="middle">$1.00</text>
+<path d="M769.97,237 V875" stroke="#eff2f7"/>
+<text x="769.97" y="902.00" font-size="16" style="fill:#56647a" font-weight="400" text-anchor="middle">$3.00</text>
+<path d="M1000.05,237 V875" stroke="#eff2f7"/>
+<text x="1000.05" y="902.00" font-size="16" style="fill:#56647a" font-weight="400" text-anchor="middle">$10.00</text>
+<path d="M1210.00,237 V875" stroke="#eff2f7"/>
+<text x="1210.00" y="902.00" font-size="16" style="fill:#56647a" font-weight="400" text-anchor="middle">$30.00</text>
+<text x="655.00" y="933.00" font-size="17" style="fill:#56647a" font-weight="400" text-anchor="middle">Average USD cost per task / logarithmic scale / lower is cheaper</text>
+<path d="M225 297 L167 254 M167 254 L187 257 M167 254 L175 274" fill="none" stroke="#465b76" stroke-width="2"/>
+<text x="234" y="302" font-size="16" style="fill:#465b76" font-weight="400" text-anchor="start">Prefer this direction</text>
+<g class="series" data-model="0">
+<polyline points="590.03,596.19 764.15,540.05 823.51,517.72 931.35,517.72 1056.41,506.24" fill="none" stroke="#a34415" stroke-width="3.2" stroke-linejoin="round"/>
+<g class="effort-point" data-effort="max"><title>Claude Opus 5.5 / Max: 57.80%, $13.43 per task</title><circle cx="1056.41" cy="506.24" r="10" fill="#a34415" stroke="white" stroke-width="1.5"/>
+<text x="1056.41" y="510.24" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">5</text>
+</g>
+<g class="effort-point" data-effort="xhigh"><title>Claude Opus 5.5 / Xhigh: 56.00%, $6.98 per task</title><circle cx="931.35" cy="517.72" r="10" fill="#a34415" stroke="white" stroke-width="1.5"/>
+<text x="931.35" y="521.72" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">4</text>
+</g>
+<g class="effort-point" data-effort="high"><title>Claude Opus 5.5 / High: 56.00%, $3.97 per task</title><circle cx="823.51" cy="517.72" r="10" fill="#a34415" stroke="white" stroke-width="1.5"/>
+<text x="823.51" y="521.72" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">3</text>
+</g>
+<g class="effort-point" data-effort="medium"><title>Claude Opus 5.5 / Medium: 52.50%, $2.91 per task</title><circle cx="764.15" cy="540.05" r="10" fill="#a34415" stroke="white" stroke-width="1.5"/>
+<text x="764.15" y="544.05" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">2</text>
+</g>
+<g class="effort-point" data-effort="low"><title>Claude Opus 5.5 / Low: 43.70%, $1.17 per task</title><circle cx="590.03" cy="596.19" r="10" fill="#a34415" stroke="white" stroke-width="1.5"/>
+<text x="590.03" y="600.19" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">1</text>
+</g>
+</g>
+<g class="series" data-model="1">
+<polyline points="370.02,646.60 435.06,624.90 594.87,570.04 757.47,536.22 933.25,520.91" fill="none" stroke="#d17908" stroke-width="3.2" stroke-linejoin="round"/>
+<g class="effort-point" data-effort="max"><title>Claude Sonnet 5.5 / Max: 55.50%, $7.05 per task</title><circle cx="933.25" cy="520.91" r="10" fill="#d17908" stroke="white" stroke-width="1.5"/>
+<text x="933.25" y="524.91" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">5</text>
+</g>
+<g class="effort-point" data-effort="xhigh"><title>Claude Sonnet 5.5 / Xhigh: 53.10%, $2.81 per task</title><circle cx="757.47" cy="536.22" r="10" fill="#d17908" stroke="white" stroke-width="1.5"/>
+<text x="757.47" y="540.22" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">4</text>
+</g>
+<g class="effort-point" data-effort="high"><title>Claude Sonnet 5.5 / High: 47.80%, $1.20 per task</title><circle cx="594.87" cy="570.04" r="10" fill="#d17908" stroke="white" stroke-width="1.5"/>
+<text x="594.87" y="574.04" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">3</text>
+</g>
+<g class="effort-point" data-effort="medium"><title>Claude Sonnet 5.5 / Medium: 39.20%, $0.52 per task</title><circle cx="435.06" cy="624.90" r="10" fill="#d17908" stroke="white" stroke-width="1.5"/>
+<text x="435.06" y="628.90" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">2</text>
+</g>
+<g class="effort-point" data-effort="low"><title>Claude Sonnet 5.5 / Low: 35.80%, $0.37 per task</title><circle cx="370.02" cy="646.60" r="10" fill="#d17908" stroke="white" stroke-width="1.5"/>
+<text x="370.02" y="650.60" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">1</text>
+</g>
+</g>
+<g class="series" data-model="2">
+</g>
+<g class="series" data-model="3">
+</g>
+<g class="series" data-model="4">
+<polyline points="533.41,718.05 669.14,676.58 760.17,647.23 843.16,634.47 962.83,608.95" fill="none" stroke="#bf3c85" stroke-width="3.2" stroke-linejoin="round"/>
+<g class="effort-point" data-effort="max"><title>GPT-5.6 Sol / Max: 41.70%, $8.23 per task</title><circle cx="962.83" cy="608.95" r="10" fill="#bf3c85" stroke="white" stroke-width="1.5"/>
+<text x="962.83" y="612.95" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">5</text>
+</g>
+<g class="effort-point" data-effort="xhigh"><title>GPT-5.6 Sol / Xhigh: 37.70%, $4.40 per task</title><circle cx="843.16" cy="634.47" r="10" fill="#bf3c85" stroke="white" stroke-width="1.5"/>
+<text x="843.16" y="638.47" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">4</text>
+</g>
+<g class="effort-point" data-effort="high"><title>GPT-5.6 Sol / High: 35.70%, $2.85 per task</title><circle cx="760.17" cy="647.23" r="10" fill="#bf3c85" stroke="white" stroke-width="1.5"/>
+<text x="760.17" y="651.23" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">3</text>
+</g>
+<g class="effort-point" data-effort="medium"><title>GPT-5.6 Sol / Medium: 31.10%, $1.77 per task</title><circle cx="669.14" cy="676.58" r="10" fill="#bf3c85" stroke="white" stroke-width="1.5"/>
+<text x="669.14" y="680.58" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">2</text>
+</g>
+<g class="effort-point" data-effort="low"><title>GPT-5.6 Sol / Low: 24.60%, $0.87 per task</title><circle cx="533.41" cy="718.05" r="10" fill="#bf3c85" stroke="white" stroke-width="1.5"/>
+<text x="533.41" y="722.05" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">1</text>
+</g>
+</g>
+<g class="series" data-model="5">
+<polyline points="827.79,637.03 855.77,622.35" fill="none" stroke="#07816c" stroke-width="3.2" stroke-linejoin="round"/>
+<g class="effort-point" data-effort="high"><title>Gemini 3.8 Flash / High: 39.60%, $4.70 per task</title><circle cx="855.77" cy="622.35" r="10" fill="#07816c" stroke="white" stroke-width="1.5"/>
+<text x="855.77" y="626.35" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">3</text>
+</g>
+<g class="effort-point" data-effort="medium"><title>Gemini 3.8 Flash / Medium: 37.30%, $4.06 per task</title><circle cx="827.79" cy="637.03" r="10" fill="#07816c" stroke="white" stroke-width="1.5"/>
+<text x="827.79" y="641.03" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">2</text>
+</g>
+</g>
+<g class="series" data-model="6">
+</g>
+<g class="series" data-model="8">
+</g>
+<g class="series" data-model="9">
+<polyline points="829.20,552.17 842.73,538.14 850.41,537.50" fill="none" stroke="#4d7b16" stroke-width="3.2" stroke-linejoin="round"/>
+<g class="effort-point" data-effort="high"><title>Gemini 4 Argon / High: 52.90%, $4.57 per task</title><circle cx="850.41" cy="537.50" r="10" fill="#4d7b16" stroke="white" stroke-width="1.5"/>
+<text x="850.41" y="541.50" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">3</text>
+</g>
+<g class="effort-point" data-effort="medium"><title>Gemini 4 Argon / Medium: 52.80%, $4.39 per task</title><circle cx="842.73" cy="538.14" r="10" fill="#4d7b16" stroke="white" stroke-width="1.5"/>
+<text x="842.73" y="542.14" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">2</text>
+</g>
+<g class="effort-point" data-effort="low"><title>Gemini 4 Argon / Low: 50.60%, $4.09 per task</title><circle cx="829.20" cy="552.17" r="10" fill="#4d7b16" stroke="white" stroke-width="1.5"/>
+<text x="829.20" y="556.17" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">1</text>
+</g>
+</g>
+<g class="series" data-model="10">
+<polyline points="647.44,663.82 798.88,609.59 855.36,594.92 902.75,579.61" fill="none" stroke="#be3042" stroke-width="3.2" stroke-linejoin="round"/>
+<g class="effort-point" data-effort="xhigh"><title>Grok 4.7 / Xhigh: 46.30%, $6.01 per task</title><circle cx="902.75" cy="579.61" r="10" fill="#be3042" stroke="white" stroke-width="1.5"/>
+<text x="902.75" y="583.61" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">4</text>
+</g>
+<g class="effort-point" data-effort="high"><title>Grok 4.7 / High: 43.90%, $4.69 per task</title><circle cx="855.36" cy="594.92" r="10" fill="#be3042" stroke="white" stroke-width="1.5"/>
+<text x="855.36" y="598.92" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">3</text>
+</g>
+<g class="effort-point" data-effort="medium"><title>Grok 4.7 / Medium: 41.60%, $3.49 per task</title><circle cx="798.88" cy="609.59" r="10" fill="#be3042" stroke="white" stroke-width="1.5"/>
+<text x="798.88" y="613.59" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">2</text>
+</g>
+<g class="effort-point" data-effort="low"><title>Grok 4.7 / Low: 33.10%, $1.58 per task</title><circle cx="647.44" cy="663.82" r="10" fill="#be3042" stroke="white" stroke-width="1.5"/>
+<text x="647.44" y="667.82" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">1</text>
+</g>
+</g>
+</svg></div>
+      
+    <aside class="gh-chart-legend" aria-label="Model color and reasoning effort legend">
+      <div class="gh-legend-Title">MODEL COLOR</div>
+      <ul class="gh-legend-list">
+        <li class="gh-legend-item task-series" data-model="0"><span class="gh-legend-swatch" style="background:#a34415"></span><span class="gh-legend-name" style="color:#a34415">Claude Opus 5.5</span></li><li class="gh-legend-item task-series" data-model="1"><span class="gh-legend-swatch" style="background:#d17908"></span><span class="gh-legend-name" style="color:#d17908">Claude Sonnet 5.5</span></li><li class="gh-legend-item task-series is-missing" data-model="2"><span class="gh-legend-swatch" style="background:#5144c7"></span><span class="gh-legend-name" style="color:#5144c7">GPT-6 Astra</span><span class="gh-legend-na">No data</span></li><li class="gh-legend-item task-series is-missing" data-model="3"><span class="gh-legend-swatch" style="background:#1878ba"></span><span class="gh-legend-name" style="color:#1878ba">GPT-6.1 Sol</span><span class="gh-legend-na">No data</span></li><li class="gh-legend-item task-series" data-model="4"><span class="gh-legend-swatch" style="background:#bf3c85"></span><span class="gh-legend-name" style="color:#bf3c85">GPT-5.6 Sol</span></li><li class="gh-legend-item task-series" data-model="5"><span class="gh-legend-swatch" style="background:#07816c"></span><span class="gh-legend-name" style="color:#07816c">Gemini 3.8 Flash</span></li><li class="gh-legend-item task-series is-missing" data-model="6"><span class="gh-legend-swatch" style="background:#6e7889"></span><span class="gh-legend-name" style="color:#6e7889">GPT-6 Luna</span><span class="gh-legend-na">No data</span></li><li class="gh-legend-item task-series is-missing" data-model="8"><span class="gh-legend-swatch" style="background:#9744a0"></span><span class="gh-legend-name" style="color:#9744a0">GPT-6.1 Terra</span><span class="gh-legend-na">No data</span></li><li class="gh-legend-item task-series" data-model="9"><span class="gh-legend-swatch" style="background:#4d7b16"></span><span class="gh-legend-name" style="color:#4d7b16">Gemini 4 Argon</span></li><li class="gh-legend-item task-series" data-model="10"><span class="gh-legend-swatch" style="background:#be3042"></span><span class="gh-legend-name" style="color:#be3042">Grok 4.7</span></li>
+      </ul>
+      <div class="gh-legend-Title" style="margin-top:12px;">EFFORT / POINT NUMBER</div>
+      <ol class="gh-effort-list">
+        <li><span class="gh-effort-badge">1</span> Low</li>
+        <li><span class="gh-effort-badge">2</span> Medium</li>
+        <li><span class="gh-effort-badge">3</span> High</li>
+        <li><span class="gh-effort-badge">4</span> Xhigh</li>
+        <li><span class="gh-effort-badge">5</span> Max</li>
+      </ol>
+      <p class="gh-legend-note">Hover points for exact values. Missing efforts are not inferred.</p>
+    </aside>
+    
+    </div>
+    <p class="gh-bench-footnote">Benchmark source: <a href="https://cursor.com/cursorbench" target="_blank" rel="noopener">CursorBench 4.0 &nearr;</a></p>
+  </div>
+      <div data-cost-benchmark="arc1" class="gh-benchmark-panel" hidden>
+    <div class="gh-chart-header">
+      <h3>ARC-AGI-1 / Semi-Private: score vs. cost</h3>
+      <p class="muted">Same benchmark, same published model configuration across reasoning efforts (1 Low to 5 Max). Upper-left is better.</p>
+      
+    </div>
+    <div class="gh-chart-grid">
+      <div class="gh-plot-box"><svg xmlns="http://www.w3.org/2000/svg" viewBox="48 197 1185 752" role="img" aria-labelledby="cost-arc1-title cost-arc1-desc">
+<title id="cost-arc1-title">ARC-AGI-1 / Semi-Private: score versus cost by effort</title>
+<desc id="cost-arc1-desc">X: USD per task, logarithmic. Y: native ARC-AGI-1 / Semi-Private percentage score, zero to 100. Each point is an exact published model and effort configuration. Label leaders do not move the underlying measured points. No Artificial Analysis scores are mixed in.</desc>
+<style>text{font-family:Segoe UI,Arial,sans-serif;fill:#192740}</style>
+<rect x="48" y="197" width="1185" height="752" rx="10" fill="#ffffff"/>
+<text x="77.00" y="225.00" font-size="17" style="fill:#56647a" font-weight="400" text-anchor="start">ARC-AGI-1 / Semi-Private score (%)</text>
+<path d="M120,875.00 H1210" stroke="#e4e9f1"/>
+<text x="103.00" y="880.00" font-size="15" style="fill:#68768b" font-weight="400" text-anchor="end">0</text>
+<path d="M120,747.40 H1210" stroke="#e4e9f1"/>
+<text x="103.00" y="752.40" font-size="15" style="fill:#68768b" font-weight="400" text-anchor="end">20</text>
+<path d="M120,619.80 H1210" stroke="#e4e9f1"/>
+<text x="103.00" y="624.80" font-size="15" style="fill:#68768b" font-weight="400" text-anchor="end">40</text>
+<path d="M120,492.20 H1210" stroke="#e4e9f1"/>
+<text x="103.00" y="497.20" font-size="15" style="fill:#68768b" font-weight="400" text-anchor="end">60</text>
+<path d="M120,364.60 H1210" stroke="#e4e9f1"/>
+<text x="103.00" y="369.60" font-size="15" style="fill:#68768b" font-weight="400" text-anchor="end">80</text>
+<path d="M120,237.00 H1210" stroke="#e4e9f1"/>
+<text x="103.00" y="242.00" font-size="15" style="fill:#68768b" font-weight="400" text-anchor="end">100</text>
+<path d="M120.00,237 V875" stroke="#eff2f7"/>
+<text x="120.00" y="902.00" font-size="16" style="fill:#56647a" font-weight="400" text-anchor="middle">$0.001</text>
+<path d="M269.57,237 V875" stroke="#eff2f7"/>
+<text x="269.57" y="902.00" font-size="16" style="fill:#56647a" font-weight="400" text-anchor="middle">$0.003</text>
+<path d="M433.48,237 V875" stroke="#eff2f7"/>
+<text x="433.48" y="902.00" font-size="16" style="fill:#56647a" font-weight="400" text-anchor="middle">$0.010</text>
+<path d="M583.04,237 V875" stroke="#eff2f7"/>
+<text x="583.04" y="902.00" font-size="16" style="fill:#56647a" font-weight="400" text-anchor="middle">$0.030</text>
+<path d="M746.96,237 V875" stroke="#eff2f7"/>
+<text x="746.96" y="902.00" font-size="16" style="fill:#56647a" font-weight="400" text-anchor="middle">$0.10</text>
+<path d="M896.52,237 V875" stroke="#eff2f7"/>
+<text x="896.52" y="902.00" font-size="16" style="fill:#56647a" font-weight="400" text-anchor="middle">$0.30</text>
+<path d="M1060.43,237 V875" stroke="#eff2f7"/>
+<text x="1060.43" y="902.00" font-size="16" style="fill:#56647a" font-weight="400" text-anchor="middle">$1.00</text>
+<path d="M1210.00,237 V875" stroke="#eff2f7"/>
+<text x="1210.00" y="902.00" font-size="16" style="fill:#56647a" font-weight="400" text-anchor="middle">$3.00</text>
+<text x="655.00" y="933.00" font-size="17" style="fill:#56647a" font-weight="400" text-anchor="middle">Average USD cost per task / logarithmic scale / lower is cheaper</text>
+<path d="M225 297 L167 254 M167 254 L187 257 M167 254 L175 274" fill="none" stroke="#465b76" stroke-width="2"/>
+<text x="234" y="302" font-size="16" style="fill:#465b76" font-weight="400" text-anchor="start">Prefer this direction</text>
+<g class="series" data-model="0">
+<polyline points="771.87,310.37 804.21,252.95 809.22,246.57 856.17,252.95 999.83,252.95" fill="none" stroke="#a34415" stroke-width="3.2" stroke-linejoin="round"/>
+<g class="effort-point" data-effort="max"><title>Claude Opus 5.5 / Max: 97.50%, $0.64 per task</title><circle cx="999.83" cy="252.95" r="10" fill="#a34415" stroke="white" stroke-width="1.5"/>
+<text x="999.83" y="256.95" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">5</text>
+</g>
+<g class="effort-point" data-effort="xhigh"><title>Claude Opus 5.5 / Xhigh: 97.50%, $0.22 per task</title><circle cx="856.17" cy="252.95" r="10" fill="#a34415" stroke="white" stroke-width="1.5"/>
+<text x="856.17" y="256.95" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">4</text>
+</g>
+<g class="effort-point" data-effort="high"><title>Claude Opus 5.5 / High: 98.50%, $0.16 per task</title><circle cx="809.22" cy="246.57" r="10" fill="#a34415" stroke="white" stroke-width="1.5"/>
+<text x="809.22" y="250.57" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">3</text>
+</g>
+<g class="effort-point" data-effort="medium"><title>Claude Opus 5.5 / Medium: 97.50%, $0.15 per task</title><circle cx="804.21" cy="252.95" r="10" fill="#a34415" stroke="white" stroke-width="1.5"/>
+<text x="804.21" y="256.95" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">2</text>
+</g>
+<g class="effort-point" data-effort="low"><title>Claude Opus 5.5 / Low: 88.50%, $0.12 per task</title><circle cx="771.87" cy="310.37" r="10" fill="#a34415" stroke="white" stroke-width="1.5"/>
+<text x="771.87" y="314.37" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">1</text>
+</g>
+</g>
+<g class="series" data-model="1">
+<polyline points="679.16,447.54 699.29,428.40 753.79,288.04 795.97,259.33 966.58,259.33" fill="none" stroke="#d17908" stroke-width="3.2" stroke-linejoin="round"/>
+<g class="effort-point" data-effort="max"><title>Claude Sonnet 5.5 / Max: 96.50%, $0.50 per task</title><circle cx="966.58" cy="259.33" r="10" fill="#d17908" stroke="white" stroke-width="1.5"/>
+<text x="966.58" y="263.33" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">5</text>
+</g>
+<g class="effort-point" data-effort="xhigh"><title>Claude Sonnet 5.5 / Xhigh: 96.50%, $0.14 per task</title><circle cx="795.97" cy="259.33" r="10" fill="#d17908" stroke="white" stroke-width="1.5"/>
+<text x="795.97" y="263.33" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">4</text>
+</g>
+<g class="effort-point" data-effort="high"><title>Claude Sonnet 5.5 / High: 92.00%, $0.11 per task</title><circle cx="753.79" cy="288.04" r="10" fill="#d17908" stroke="white" stroke-width="1.5"/>
+<text x="753.79" y="292.04" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">3</text>
+</g>
+<g class="effort-point" data-effort="medium"><title>Claude Sonnet 5.5 / Medium: 70.00%, $0.070 per task</title><circle cx="699.29" cy="428.40" r="10" fill="#d17908" stroke="white" stroke-width="1.5"/>
+<text x="699.29" y="432.40" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">2</text>
+</g>
+<g class="effort-point" data-effort="low"><title>Claude Sonnet 5.5 / Low: 67.00%, $0.061 per task</title><circle cx="679.16" cy="447.54" r="10" fill="#d17908" stroke="white" stroke-width="1.5"/>
+<text x="679.16" y="451.54" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">1</text>
+</g>
+</g>
+<g class="series" data-model="2">
+<polyline points="858.27,259.33 866.05,252.95 888.92,246.57 916.36,246.57 946.44,252.95" fill="none" stroke="#5144c7" stroke-width="3.2" stroke-linejoin="round"/>
+<g class="effort-point" data-effort="max"><title>GPT-6 Astra / Max: 97.50%, $0.43 per task</title><circle cx="946.44" cy="252.95" r="10" fill="#5144c7" stroke="white" stroke-width="1.5"/>
+<text x="946.44" y="256.95" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">5</text>
+</g>
+<g class="effort-point" data-effort="xhigh"><title>GPT-6 Astra / Xhigh: 98.50%, $0.35 per task</title><circle cx="916.36" cy="246.57" r="10" fill="#5144c7" stroke="white" stroke-width="1.5"/>
+<text x="916.36" y="250.57" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">4</text>
+</g>
+<g class="effort-point" data-effort="high"><title>GPT-6 Astra / High: 98.50%, $0.28 per task</title><circle cx="888.92" cy="246.57" r="10" fill="#5144c7" stroke="white" stroke-width="1.5"/>
+<text x="888.92" y="250.57" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">3</text>
+</g>
+<g class="effort-point" data-effort="medium"><title>GPT-6 Astra / Medium: 97.50%, $0.24 per task</title><circle cx="866.05" cy="252.95" r="10" fill="#5144c7" stroke="white" stroke-width="1.5"/>
+<text x="866.05" y="256.95" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">2</text>
+</g>
+<g class="effort-point" data-effort="low"><title>GPT-6 Astra / Low: 96.50%, $0.23 per task</title><circle cx="858.27" cy="259.33" r="10" fill="#5144c7" stroke="white" stroke-width="1.5"/>
+<text x="858.27" y="263.33" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">1</text>
+</g>
+</g>
+<g class="series" data-model="3">
+<polyline points="643.79,278.47 652.38,265.71 675.71,246.57 705.49,246.57 740.60,259.33" fill="none" stroke="#1878ba" stroke-width="3.2" stroke-linejoin="round"/>
+<g class="effort-point" data-effort="max"><title>GPT-6.1 Sol / Max: 96.50%, $0.095 per task</title><circle cx="740.60" cy="259.33" r="10" fill="#1878ba" stroke="white" stroke-width="1.5"/>
+<text x="740.60" y="263.33" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">5</text>
+</g>
+<g class="effort-point" data-effort="xhigh"><title>GPT-6.1 Sol / Xhigh: 98.50%, $0.074 per task</title><circle cx="705.49" cy="246.57" r="10" fill="#1878ba" stroke="white" stroke-width="1.5"/>
+<text x="705.49" y="250.57" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">4</text>
+</g>
+<g class="effort-point" data-effort="high"><title>GPT-6.1 Sol / High: 98.50%, $0.059 per task</title><circle cx="675.71" cy="246.57" r="10" fill="#1878ba" stroke="white" stroke-width="1.5"/>
+<text x="675.71" y="250.57" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">3</text>
+</g>
+<g class="effort-point" data-effort="medium"><title>GPT-6.1 Sol / Medium: 95.50%, $0.050 per task</title><circle cx="652.38" cy="265.71" r="10" fill="#1878ba" stroke="white" stroke-width="1.5"/>
+<text x="652.38" y="269.71" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">2</text>
+</g>
+<g class="effort-point" data-effort="low"><title>GPT-6.1 Sol / Low: 93.50%, $0.047 per task</title><circle cx="643.79" cy="278.47" r="10" fill="#1878ba" stroke="white" stroke-width="1.5"/>
+<text x="643.79" y="282.47" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">1</text>
+</g>
+</g>
+<g class="series" data-model="4">
+<polyline points="819.20,399.69 854.30,284.85 896.52,256.14 935.69,252.95 976.54,259.33" fill="none" stroke="#bf3c85" stroke-width="3.2" stroke-linejoin="round"/>
+<g class="effort-point" data-effort="low"><title>GPT-5.6 Sol / Low: 74.50%, $0.17 per task</title><circle cx="819.20" cy="399.69" r="10" fill="#bf3c85" stroke="white" stroke-width="1.5"/>
+<text x="819.20" y="403.69" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">1</text>
+</g>
+<g class="effort-point" data-effort="medium"><title>GPT-5.6 Sol / Medium: 92.50%, $0.22 per task</title><circle cx="854.30" cy="284.85" r="10" fill="#bf3c85" stroke="white" stroke-width="1.5"/>
+<text x="854.30" y="288.85" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">2</text>
+</g>
+<g class="effort-point" data-effort="high"><title>GPT-5.6 Sol / High: 97.00%, $0.30 per task</title><circle cx="896.52" cy="256.14" r="10" fill="#bf3c85" stroke="white" stroke-width="1.5"/>
+<text x="896.52" y="260.14" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">3</text>
+</g>
+<g class="effort-point" data-effort="xhigh"><title>GPT-5.6 Sol / Xhigh: 97.50%, $0.40 per task</title><circle cx="935.69" cy="252.95" r="10" fill="#bf3c85" stroke="white" stroke-width="1.5"/>
+<text x="935.69" y="256.95" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">4</text>
+</g>
+<g class="effort-point" data-effort="max"><title>GPT-5.6 Sol / Max: 96.50%, $0.54 per task</title><circle cx="976.54" cy="259.33" r="10" fill="#bf3c85" stroke="white" stroke-width="1.5"/>
+<text x="976.54" y="263.33" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">5</text>
+</g>
+</g>
+<g class="series" data-model="5">
+<polyline points="691.64,297.61 756.86,252.95 845.15,246.57" fill="none" stroke="#07816c" stroke-width="3.2" stroke-linejoin="round"/>
+<g class="effort-point" data-effort="high"><title>Gemini 3.8 Flash / High: 98.50%, $0.21 per task</title><circle cx="845.15" cy="246.57" r="10" fill="#07816c" stroke="white" stroke-width="1.5"/>
+<text x="845.15" y="250.57" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">3</text>
+</g>
+<g class="effort-point" data-effort="medium"><title>Gemini 3.8 Flash / Medium: 97.50%, $0.11 per task</title><circle cx="756.86" cy="252.95" r="10" fill="#07816c" stroke="white" stroke-width="1.5"/>
+<text x="756.86" y="256.95" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">2</text>
+</g>
+<g class="effort-point" data-effort="low"><title>Gemini 3.8 Flash / Low: 90.50%, $0.067 per task</title><circle cx="691.64" cy="297.61" r="10" fill="#07816c" stroke="white" stroke-width="1.5"/>
+<text x="691.64" y="301.61" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">1</text>
+</g>
+</g>
+<g class="series" data-model="6">
+<polyline points="278.78,634.69 366.37,485.82 426.45,426.27 460.24,409.26 516.41,322.07" fill="none" stroke="#6e7889" stroke-width="3.2" stroke-linejoin="round"/>
+<g class="effort-point" data-effort="max"><title>GPT-6 Luna / Max: 86.67%, $0.018 per task</title><circle cx="516.41" cy="322.07" r="10" fill="#6e7889" stroke="white" stroke-width="1.5"/>
+<text x="516.41" y="326.07" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">5</text>
+</g>
+<g class="effort-point" data-effort="xhigh"><title>GPT-6 Luna / Xhigh: 73.00%, $0.012 per task</title><circle cx="460.24" cy="409.26" r="10" fill="#6e7889" stroke="white" stroke-width="1.5"/>
+<text x="460.24" y="413.26" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">4</text>
+</g>
+<g class="effort-point" data-effort="high"><title>GPT-6 Luna / High: 70.33%, $0.009 per task</title><circle cx="426.45" cy="426.27" r="10" fill="#6e7889" stroke="white" stroke-width="1.5"/>
+<text x="426.45" y="430.27" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">3</text>
+</g>
+<g class="effort-point" data-effort="medium"><title>GPT-6 Luna / Medium: 61.00%, $0.006 per task</title><circle cx="366.37" cy="485.82" r="10" fill="#6e7889" stroke="white" stroke-width="1.5"/>
+<text x="366.37" y="489.82" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">2</text>
+</g>
+<g class="effort-point" data-effort="low"><title>GPT-6 Luna / Low: 37.67%, $0.003 per task</title><circle cx="278.78" cy="634.69" r="10" fill="#6e7889" stroke="white" stroke-width="1.5"/>
+<text x="278.78" y="638.69" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">1</text>
+</g>
+</g>
+<g class="series" data-model="8">
+</g>
+<g class="series" data-model="9">
+<polyline points="631.55,386.93 687.64,246.57 812.36,246.57" fill="none" stroke="#4d7b16" stroke-width="3.2" stroke-linejoin="round"/>
+<g class="effort-point" data-effort="high"><title>Gemini 4 Argon / High: 98.50%, $0.16 per task</title><circle cx="812.36" cy="246.57" r="10" fill="#4d7b16" stroke="white" stroke-width="1.5"/>
+<text x="812.36" y="250.57" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">3</text>
+</g>
+<g class="effort-point" data-effort="medium"><title>Gemini 4 Argon / Medium: 98.50%, $0.065 per task</title><circle cx="687.64" cy="246.57" r="10" fill="#4d7b16" stroke="white" stroke-width="1.5"/>
+<text x="687.64" y="250.57" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">2</text>
+</g>
+<g class="effort-point" data-effort="low"><title>Gemini 4 Argon / Low: 76.50%, $0.043 per task</title><circle cx="631.55" cy="386.93" r="10" fill="#4d7b16" stroke="white" stroke-width="1.5"/>
+<text x="631.55" y="390.93" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">1</text>
+</g>
+</g>
+<g class="series" data-model="10">
+<polyline points="747.21,470.93 971.67,300.80 1000.17,299.74 1026.34,303.99" fill="none" stroke="#be3042" stroke-width="3.2" stroke-linejoin="round"/>
+<g class="effort-point" data-effort="xhigh"><title>Grok 4.7 / Xhigh: 89.50%, $0.78 per task</title><circle cx="1026.34" cy="303.99" r="10" fill="#be3042" stroke="white" stroke-width="1.5"/>
+<text x="1026.34" y="307.99" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">4</text>
+</g>
+<g class="effort-point" data-effort="high"><title>Grok 4.7 / High: 90.17%, $0.64 per task</title><circle cx="1000.17" cy="299.74" r="10" fill="#be3042" stroke="white" stroke-width="1.5"/>
+<text x="1000.17" y="303.74" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">3</text>
+</g>
+<g class="effort-point" data-effort="medium"><title>Grok 4.7 / Medium: 90.00%, $0.52 per task</title><circle cx="971.67" cy="300.80" r="10" fill="#be3042" stroke="white" stroke-width="1.5"/>
+<text x="971.67" y="304.80" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">2</text>
+</g>
+<g class="effort-point" data-effort="low"><title>Grok 4.7 / Low: 63.33%, $0.10 per task</title><circle cx="747.21" cy="470.93" r="10" fill="#be3042" stroke="white" stroke-width="1.5"/>
+<text x="747.21" y="474.93" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">1</text>
+</g>
+</g>
+</svg></div>
+      
+    <aside class="gh-chart-legend" aria-label="Model color and reasoning effort legend">
+      <div class="gh-legend-Title">MODEL COLOR</div>
+      <ul class="gh-legend-list">
+        <li class="gh-legend-item task-series" data-model="0"><span class="gh-legend-swatch" style="background:#a34415"></span><span class="gh-legend-name" style="color:#a34415">Claude Opus 5.5</span></li><li class="gh-legend-item task-series" data-model="1"><span class="gh-legend-swatch" style="background:#d17908"></span><span class="gh-legend-name" style="color:#d17908">Claude Sonnet 5.5</span></li><li class="gh-legend-item task-series" data-model="2"><span class="gh-legend-swatch" style="background:#5144c7"></span><span class="gh-legend-name" style="color:#5144c7">GPT-6 Astra</span></li><li class="gh-legend-item task-series" data-model="3"><span class="gh-legend-swatch" style="background:#1878ba"></span><span class="gh-legend-name" style="color:#1878ba">GPT-6.1 Sol</span></li><li class="gh-legend-item task-series" data-model="4"><span class="gh-legend-swatch" style="background:#bf3c85"></span><span class="gh-legend-name" style="color:#bf3c85">GPT-5.6 Sol</span></li><li class="gh-legend-item task-series" data-model="5"><span class="gh-legend-swatch" style="background:#07816c"></span><span class="gh-legend-name" style="color:#07816c">Gemini 3.8 Flash</span></li><li class="gh-legend-item task-series" data-model="6"><span class="gh-legend-swatch" style="background:#6e7889"></span><span class="gh-legend-name" style="color:#6e7889">GPT-6 Luna</span></li><li class="gh-legend-item task-series is-missing" data-model="8"><span class="gh-legend-swatch" style="background:#9744a0"></span><span class="gh-legend-name" style="color:#9744a0">GPT-6.1 Terra</span><span class="gh-legend-na">No data</span></li><li class="gh-legend-item task-series" data-model="9"><span class="gh-legend-swatch" style="background:#4d7b16"></span><span class="gh-legend-name" style="color:#4d7b16">Gemini 4 Argon</span></li><li class="gh-legend-item task-series" data-model="10"><span class="gh-legend-swatch" style="background:#be3042"></span><span class="gh-legend-name" style="color:#be3042">Grok 4.7</span></li>
+      </ul>
+      <div class="gh-legend-Title" style="margin-top:12px;">EFFORT / POINT NUMBER</div>
+      <ol class="gh-effort-list">
+        <li><span class="gh-effort-badge">1</span> Low</li>
+        <li><span class="gh-effort-badge">2</span> Medium</li>
+        <li><span class="gh-effort-badge">3</span> High</li>
+        <li><span class="gh-effort-badge">4</span> Xhigh</li>
+        <li><span class="gh-effort-badge">5</span> Max</li>
+      </ol>
+      <p class="gh-legend-note">Hover points for exact values. Missing efforts are not inferred.</p>
+    </aside>
+    
+    </div>
+    <p class="gh-bench-footnote">Benchmark source: <a href="https://arcprize.org/leaderboard" target="_blank" rel="noopener">ARC-AGI-1 / Semi-Private &nearr;</a></p>
+  </div>
+      <div data-cost-benchmark="arc2" class="gh-benchmark-panel" hidden>
+    <div class="gh-chart-header">
+      <h3>ARC-AGI-2 / Semi-Private: score vs. cost</h3>
+      <p class="muted">Same benchmark, same published model configuration across reasoning efforts (1 Low to 5 Max). Upper-left is better.</p>
+      
+    </div>
+    <div class="gh-chart-grid">
+      <div class="gh-plot-box"><svg xmlns="http://www.w3.org/2000/svg" viewBox="48 197 1185 752" role="img" aria-labelledby="cost-arc2-title cost-arc2-desc">
+<title id="cost-arc2-title">ARC-AGI-2 / Semi-Private: score versus cost by effort</title>
+<desc id="cost-arc2-desc">X: USD per task, logarithmic. Y: native ARC-AGI-2 / Semi-Private percentage score, zero to 100. Each point is an exact published model and effort configuration. Label leaders do not move the underlying measured points. No Artificial Analysis scores are mixed in.</desc>
+<style>text{font-family:Segoe UI,Arial,sans-serif;fill:#192740}</style>
+<rect x="48" y="197" width="1185" height="752" rx="10" fill="#ffffff"/>
+<text x="77.00" y="225.00" font-size="17" style="fill:#56647a" font-weight="400" text-anchor="start">ARC-AGI-2 / Semi-Private score (%)</text>
+<path d="M120,875.00 H1210" stroke="#e4e9f1"/>
+<text x="103.00" y="880.00" font-size="15" style="fill:#68768b" font-weight="400" text-anchor="end">0</text>
+<path d="M120,747.40 H1210" stroke="#e4e9f1"/>
+<text x="103.00" y="752.40" font-size="15" style="fill:#68768b" font-weight="400" text-anchor="end">20</text>
+<path d="M120,619.80 H1210" stroke="#e4e9f1"/>
+<text x="103.00" y="624.80" font-size="15" style="fill:#68768b" font-weight="400" text-anchor="end">40</text>
+<path d="M120,492.20 H1210" stroke="#e4e9f1"/>
+<text x="103.00" y="497.20" font-size="15" style="fill:#68768b" font-weight="400" text-anchor="end">60</text>
+<path d="M120,364.60 H1210" stroke="#e4e9f1"/>
+<text x="103.00" y="369.60" font-size="15" style="fill:#68768b" font-weight="400" text-anchor="end">80</text>
+<path d="M120,237.00 H1210" stroke="#e4e9f1"/>
+<text x="103.00" y="242.00" font-size="15" style="fill:#68768b" font-weight="400" text-anchor="end">100</text>
+<path d="M120.00,237 V875" stroke="#eff2f7"/>
+<text x="120.00" y="902.00" font-size="16" style="fill:#56647a" font-weight="400" text-anchor="middle">$0.003</text>
+<path d="M309.98,237 V875" stroke="#eff2f7"/>
+<text x="309.98" y="902.00" font-size="16" style="fill:#56647a" font-weight="400" text-anchor="middle">$0.010</text>
+<path d="M483.33,237 V875" stroke="#eff2f7"/>
+<text x="483.33" y="902.00" font-size="16" style="fill:#56647a" font-weight="400" text-anchor="middle">$0.030</text>
+<path d="M673.31,237 V875" stroke="#eff2f7"/>
+<text x="673.31" y="902.00" font-size="16" style="fill:#56647a" font-weight="400" text-anchor="middle">$0.10</text>
+<path d="M846.67,237 V875" stroke="#eff2f7"/>
+<text x="846.67" y="902.00" font-size="16" style="fill:#56647a" font-weight="400" text-anchor="middle">$0.30</text>
+<path d="M1036.65,237 V875" stroke="#eff2f7"/>
+<text x="1036.65" y="902.00" font-size="16" style="fill:#56647a" font-weight="400" text-anchor="middle">$1.00</text>
+<path d="M1210.00,237 V875" stroke="#eff2f7"/>
+<text x="1210.00" y="902.00" font-size="16" style="fill:#56647a" font-weight="400" text-anchor="middle">$3.00</text>
+<text x="655.00" y="933.00" font-size="17" style="fill:#56647a" font-weight="400" text-anchor="middle">Average USD cost per task / logarithmic scale / lower is cheaper</text>
+<path d="M225 297 L167 254 M167 254 L187 257 M167 254 L175 274" fill="none" stroke="#465b76" stroke-width="2"/>
+<text x="234" y="302" font-size="16" style="fill:#465b76" font-weight="400" text-anchor="start">Prefer this direction</text>
+<g class="series" data-model="0">
+<polyline points="812.29,427.51 864.98,316.75 895.15,279.53 973.67,284.85 1133.87,290.17" fill="none" stroke="#a34415" stroke-width="3.2" stroke-linejoin="round"/>
+<g class="effort-point" data-effort="max"><title>Claude Opus 5.5 / Max: 91.67%, $1.85 per task</title><circle cx="1133.87" cy="290.17" r="10" fill="#a34415" stroke="white" stroke-width="1.5"/>
+<text x="1133.87" y="294.17" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">5</text>
+</g>
+<g class="effort-point" data-effort="xhigh"><title>Claude Opus 5.5 / Xhigh: 92.50%, $0.67 per task</title><circle cx="973.67" cy="284.85" r="10" fill="#a34415" stroke="white" stroke-width="1.5"/>
+<text x="973.67" y="288.85" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">4</text>
+</g>
+<g class="effort-point" data-effort="high"><title>Claude Opus 5.5 / High: 93.33%, $0.41 per task</title><circle cx="895.15" cy="279.53" r="10" fill="#a34415" stroke="white" stroke-width="1.5"/>
+<text x="895.15" y="283.53" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">3</text>
+</g>
+<g class="effort-point" data-effort="medium"><title>Claude Opus 5.5 / Medium: 87.50%, $0.34 per task</title><circle cx="864.98" cy="316.75" r="10" fill="#a34415" stroke="white" stroke-width="1.5"/>
+<text x="864.98" y="320.75" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">2</text>
+</g>
+<g class="effort-point" data-effort="low"><title>Claude Opus 5.5 / Low: 70.14%, $0.24 per task</title><circle cx="812.29" cy="427.51" r="10" fill="#a34415" stroke="white" stroke-width="1.5"/>
+<text x="812.29" y="431.51" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">1</text>
+</g>
+</g>
+<g class="series" data-model="1">
+<polyline points="687.25,721.70 742.85,665.88 833.94,445.24 941.22,339.79" fill="none" stroke="#d17908" stroke-width="3.2" stroke-linejoin="round"/>
+<g class="effort-point" data-effort="xhigh"><title>Claude Sonnet 5.5 / Xhigh: 83.89%, $0.55 per task</title><circle cx="941.22" cy="339.79" r="10" fill="#d17908" stroke="white" stroke-width="1.5"/>
+<text x="941.22" y="343.79" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">4</text>
+</g>
+<g class="effort-point" data-effort="high"><title>Claude Sonnet 5.5 / High: 67.36%, $0.28 per task</title><circle cx="833.94" cy="445.24" r="10" fill="#d17908" stroke="white" stroke-width="1.5"/>
+<text x="833.94" y="449.24" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">3</text>
+</g>
+<g class="effort-point" data-effort="medium"><title>Claude Sonnet 5.5 / Medium: 32.78%, $0.16 per task</title><circle cx="742.85" cy="665.88" r="10" fill="#d17908" stroke="white" stroke-width="1.5"/>
+<text x="742.85" y="669.88" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">2</text>
+</g>
+<g class="effort-point" data-effort="low"><title>Claude Sonnet 5.5 / Low: 24.03%, $0.11 per task</title><circle cx="687.25" cy="721.70" r="10" fill="#d17908" stroke="white" stroke-width="1.5"/>
+<text x="687.25" y="725.70" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">1</text>
+</g>
+</g>
+<g class="series" data-model="2">
+<polyline points="898.34,330.04 920.86,287.51 973.00,287.51 1006.99,279.53 1054.45,268.90" fill="none" stroke="#5144c7" stroke-width="3.2" stroke-linejoin="round"/>
+<g class="effort-point" data-effort="max"><title>GPT-6 Astra / Max: 95.00%, $1.12 per task</title><circle cx="1054.45" cy="268.90" r="10" fill="#5144c7" stroke="white" stroke-width="1.5"/>
+<text x="1054.45" y="272.90" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">5</text>
+</g>
+<g class="effort-point" data-effort="xhigh"><title>GPT-6 Astra / Xhigh: 93.33%, $0.83 per task</title><circle cx="1006.99" cy="279.53" r="10" fill="#5144c7" stroke="white" stroke-width="1.5"/>
+<text x="1006.99" y="283.53" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">4</text>
+</g>
+<g class="effort-point" data-effort="high"><title>GPT-6 Astra / High: 92.08%, $0.67 per task</title><circle cx="973.00" cy="287.51" r="10" fill="#5144c7" stroke="white" stroke-width="1.5"/>
+<text x="973.00" y="291.51" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">3</text>
+</g>
+<g class="effort-point" data-effort="medium"><title>GPT-6 Astra / Medium: 92.08%, $0.48 per task</title><circle cx="920.86" cy="287.51" r="10" fill="#5144c7" stroke="white" stroke-width="1.5"/>
+<text x="920.86" y="291.51" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">2</text>
+</g>
+<g class="effort-point" data-effort="low"><title>GPT-6 Astra / Low: 85.42%, $0.42 per task</title><circle cx="898.34" cy="330.04" r="10" fill="#5144c7" stroke="white" stroke-width="1.5"/>
+<text x="898.34" y="334.04" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">1</text>
+</g>
+</g>
+<g class="series" data-model="3">
+<polyline points="648.66,385.87 673.91,322.07 720.30,290.17 764.38,290.17 820.25,274.22" fill="none" stroke="#1878ba" stroke-width="3.2" stroke-linejoin="round"/>
+<g class="effort-point" data-effort="max"><title>GPT-6.1 Sol / Max: 94.17%, $0.25 per task</title><circle cx="820.25" cy="274.22" r="10" fill="#1878ba" stroke="white" stroke-width="1.5"/>
+<text x="820.25" y="278.22" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">5</text>
+</g>
+<g class="effort-point" data-effort="xhigh"><title>GPT-6.1 Sol / Xhigh: 91.67%, $0.18 per task</title><circle cx="764.38" cy="290.17" r="10" fill="#1878ba" stroke="white" stroke-width="1.5"/>
+<text x="764.38" y="294.17" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">4</text>
+</g>
+<g class="effort-point" data-effort="high"><title>GPT-6.1 Sol / High: 91.67%, $0.13 per task</title><circle cx="720.30" cy="290.17" r="10" fill="#1878ba" stroke="white" stroke-width="1.5"/>
+<text x="720.30" y="294.17" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">3</text>
+</g>
+<g class="effort-point" data-effort="medium"><title>GPT-6.1 Sol / Medium: 86.67%, $0.10 per task</title><circle cx="673.91" cy="322.07" r="10" fill="#1878ba" stroke="white" stroke-width="1.5"/>
+<text x="673.91" y="326.07" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">2</text>
+</g>
+<g class="effort-point" data-effort="low"><title>GPT-6.1 Sol / Low: 76.67%, $0.086 per task</title><circle cx="648.66" cy="385.87" r="10" fill="#1878ba" stroke="white" stroke-width="1.5"/>
+<text x="648.66" y="389.87" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">1</text>
+</g>
+</g>
+<g class="series" data-model="4">
+<polyline points="856.85,603.85 917.51,447.03 989.13,330.02 1042.83,300.80 1094.18,284.85" fill="none" stroke="#bf3c85" stroke-width="3.2" stroke-linejoin="round"/>
+<g class="effort-point" data-effort="low"><title>GPT-5.6 Sol / Low: 42.50%, $0.32 per task</title><circle cx="856.85" cy="603.85" r="10" fill="#bf3c85" stroke="white" stroke-width="1.5"/>
+<text x="856.85" y="607.85" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">1</text>
+</g>
+<g class="effort-point" data-effort="medium"><title>GPT-5.6 Sol / Medium: 67.08%, $0.47 per task</title><circle cx="917.51" cy="447.03" r="10" fill="#bf3c85" stroke="white" stroke-width="1.5"/>
+<text x="917.51" y="451.03" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">2</text>
+</g>
+<g class="effort-point" data-effort="high"><title>GPT-5.6 Sol / High: 85.42%, $0.74 per task</title><circle cx="989.13" cy="330.02" r="10" fill="#bf3c85" stroke="white" stroke-width="1.5"/>
+<text x="989.13" y="334.02" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">3</text>
+</g>
+<g class="effort-point" data-effort="xhigh"><title>GPT-5.6 Sol / Xhigh: 90.00%, $1.04 per task</title><circle cx="1042.83" cy="300.80" r="10" fill="#bf3c85" stroke="white" stroke-width="1.5"/>
+<text x="1042.83" y="304.80" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">4</text>
+</g>
+<g class="effort-point" data-effort="max"><title>GPT-5.6 Sol / Max: 92.50%, $1.44 per task</title><circle cx="1094.18" cy="284.85" r="10" fill="#bf3c85" stroke="white" stroke-width="1.5"/>
+<text x="1094.18" y="288.85" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">5</text>
+</g>
+</g>
+<g class="series" data-model="5">
+<polyline points="741.91,380.55 816.49,345.99 891.95,306.12" fill="none" stroke="#07816c" stroke-width="3.2" stroke-linejoin="round"/>
+<g class="effort-point" data-effort="high"><title>Gemini 3.8 Flash / High: 89.17%, $0.40 per task</title><circle cx="891.95" cy="306.12" r="10" fill="#07816c" stroke="white" stroke-width="1.5"/>
+<text x="891.95" y="310.12" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">3</text>
+</g>
+<g class="effort-point" data-effort="medium"><title>Gemini 3.8 Flash / Medium: 82.92%, $0.25 per task</title><circle cx="816.49" cy="345.99" r="10" fill="#07816c" stroke="white" stroke-width="1.5"/>
+<text x="816.49" y="349.99" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">2</text>
+</g>
+<g class="effort-point" data-effort="low"><title>Gemini 3.8 Flash / Low: 77.50%, $0.15 per task</title><circle cx="741.91" cy="380.55" r="10" fill="#07816c" stroke="white" stroke-width="1.5"/>
+<text x="741.91" y="384.55" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">1</text>
+</g>
+</g>
+<g class="series" data-model="6">
+<polyline points="209.02,845.76 341.39,759.81 443.87,674.74 494.98,607.39 597.40,496.63" fill="none" stroke="#6e7889" stroke-width="3.2" stroke-linejoin="round"/>
+<g class="effort-point" data-effort="max"><title>GPT-6 Luna / Max: 59.31%, $0.062 per task</title><circle cx="597.40" cy="496.63" r="10" fill="#6e7889" stroke="white" stroke-width="1.5"/>
+<text x="597.40" y="500.63" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">5</text>
+</g>
+<g class="effort-point" data-effort="xhigh"><title>GPT-6 Luna / Xhigh: 41.94%, $0.032 per task</title><circle cx="494.98" cy="607.39" r="10" fill="#6e7889" stroke="white" stroke-width="1.5"/>
+<text x="494.98" y="611.39" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">4</text>
+</g>
+<g class="effort-point" data-effort="high"><title>GPT-6 Luna / High: 31.39%, $0.023 per task</title><circle cx="443.87" cy="674.74" r="10" fill="#6e7889" stroke="white" stroke-width="1.5"/>
+<text x="443.87" y="678.74" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">3</text>
+</g>
+<g class="effort-point" data-effort="medium"><title>GPT-6 Luna / Medium: 18.06%, $0.012 per task</title><circle cx="341.39" cy="759.81" r="10" fill="#6e7889" stroke="white" stroke-width="1.5"/>
+<text x="341.39" y="763.81" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">2</text>
+</g>
+<g class="effort-point" data-effort="low"><title>GPT-6 Luna / Low: 4.58%, $0.005 per task</title><circle cx="209.02" cy="845.76" r="10" fill="#6e7889" stroke="white" stroke-width="1.5"/>
+<text x="209.02" y="849.76" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">1</text>
+</g>
+</g>
+<g class="series" data-model="8">
+</g>
+<g class="series" data-model="9">
+<polyline points="625.40,606.51 723.36,319.41 859.24,292.83" fill="none" stroke="#4d7b16" stroke-width="3.2" stroke-linejoin="round"/>
+<g class="effort-point" data-effort="high"><title>Gemini 4 Argon / High: 91.25%, $0.32 per task</title><circle cx="859.24" cy="292.83" r="10" fill="#4d7b16" stroke="white" stroke-width="1.5"/>
+<text x="859.24" y="296.83" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">3</text>
+</g>
+<g class="effort-point" data-effort="medium"><title>Gemini 4 Argon / Medium: 87.08%, $0.14 per task</title><circle cx="723.36" cy="319.41" r="10" fill="#4d7b16" stroke="white" stroke-width="1.5"/>
+<text x="723.36" y="323.41" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">2</text>
+</g>
+<g class="effort-point" data-effort="low"><title>Gemini 4 Argon / Low: 42.08%, $0.074 per task</title><circle cx="625.40" cy="606.51" r="10" fill="#4d7b16" stroke="white" stroke-width="1.5"/>
+<text x="625.40" y="610.51" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">1</text>
+</g>
+</g>
+<g class="series" data-model="10">
+<polyline points="760.44,768.67 1098.07,500.18 1105.70,502.83 1147.19,483.34" fill="none" stroke="#be3042" stroke-width="3.2" stroke-linejoin="round"/>
+<g class="effort-point" data-effort="xhigh"><title>Grok 4.7 / Xhigh: 61.39%, $2.01 per task</title><circle cx="1147.19" cy="483.34" r="10" fill="#be3042" stroke="white" stroke-width="1.5"/>
+<text x="1147.19" y="487.34" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">4</text>
+</g>
+<g class="effort-point" data-effort="high"><title>Grok 4.7 / High: 58.33%, $1.55 per task</title><circle cx="1105.70" cy="502.83" r="10" fill="#be3042" stroke="white" stroke-width="1.5"/>
+<text x="1105.70" y="506.83" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">3</text>
+</g>
+<g class="effort-point" data-effort="medium"><title>Grok 4.7 / Medium: 58.75%, $1.48 per task</title><circle cx="1098.07" cy="500.18" r="10" fill="#be3042" stroke="white" stroke-width="1.5"/>
+<text x="1098.07" y="504.18" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">2</text>
+</g>
+<g class="effort-point" data-effort="low"><title>Grok 4.7 / Low: 16.67%, $0.17 per task</title><circle cx="760.44" cy="768.67" r="10" fill="#be3042" stroke="white" stroke-width="1.5"/>
+<text x="760.44" y="772.67" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">1</text>
+</g>
+</g>
+</svg></div>
+      
+    <aside class="gh-chart-legend" aria-label="Model color and reasoning effort legend">
+      <div class="gh-legend-Title">MODEL COLOR</div>
+      <ul class="gh-legend-list">
+        <li class="gh-legend-item task-series" data-model="0"><span class="gh-legend-swatch" style="background:#a34415"></span><span class="gh-legend-name" style="color:#a34415">Claude Opus 5.5</span></li><li class="gh-legend-item task-series" data-model="1"><span class="gh-legend-swatch" style="background:#d17908"></span><span class="gh-legend-name" style="color:#d17908">Claude Sonnet 5.5</span></li><li class="gh-legend-item task-series" data-model="2"><span class="gh-legend-swatch" style="background:#5144c7"></span><span class="gh-legend-name" style="color:#5144c7">GPT-6 Astra</span></li><li class="gh-legend-item task-series" data-model="3"><span class="gh-legend-swatch" style="background:#1878ba"></span><span class="gh-legend-name" style="color:#1878ba">GPT-6.1 Sol</span></li><li class="gh-legend-item task-series" data-model="4"><span class="gh-legend-swatch" style="background:#bf3c85"></span><span class="gh-legend-name" style="color:#bf3c85">GPT-5.6 Sol</span></li><li class="gh-legend-item task-series" data-model="5"><span class="gh-legend-swatch" style="background:#07816c"></span><span class="gh-legend-name" style="color:#07816c">Gemini 3.8 Flash</span></li><li class="gh-legend-item task-series" data-model="6"><span class="gh-legend-swatch" style="background:#6e7889"></span><span class="gh-legend-name" style="color:#6e7889">GPT-6 Luna</span></li><li class="gh-legend-item task-series is-missing" data-model="8"><span class="gh-legend-swatch" style="background:#9744a0"></span><span class="gh-legend-name" style="color:#9744a0">GPT-6.1 Terra</span><span class="gh-legend-na">No data</span></li><li class="gh-legend-item task-series" data-model="9"><span class="gh-legend-swatch" style="background:#4d7b16"></span><span class="gh-legend-name" style="color:#4d7b16">Gemini 4 Argon</span></li><li class="gh-legend-item task-series" data-model="10"><span class="gh-legend-swatch" style="background:#be3042"></span><span class="gh-legend-name" style="color:#be3042">Grok 4.7</span></li>
+      </ul>
+      <div class="gh-legend-Title" style="margin-top:12px;">EFFORT / POINT NUMBER</div>
+      <ol class="gh-effort-list">
+        <li><span class="gh-effort-badge">1</span> Low</li>
+        <li><span class="gh-effort-badge">2</span> Medium</li>
+        <li><span class="gh-effort-badge">3</span> High</li>
+        <li><span class="gh-effort-badge">4</span> Xhigh</li>
+        <li><span class="gh-effort-badge">5</span> Max</li>
+      </ol>
+      <p class="gh-legend-note">Hover points for exact values. Missing efforts are not inferred.</p>
+    </aside>
+    
+    </div>
+    <p class="gh-bench-footnote">Benchmark source: <a href="https://arcprize.org/leaderboard" target="_blank" rel="noopener">ARC-AGI-2 / Semi-Private &nearr;</a></p>
+  </div>
+      <div id="aa-cost-notes" style="margin-top: 12px; padding: 10px 14px; background: #f6f8fa; border-left: 3px solid #0969da; border-radius: 0 6px 6px 0; font-size: 0.92rem; line-height: 1.5; color: #24292f;">
+        <strong>Example:</strong> At <strong>Medium (2)</strong>, <strong>GPT-6.1 Sol</strong> (46.1) and <strong>Claude Opus 5.5</strong> (48.1) achieve nearly the <strong>same score</strong>, but Opus costs <strong>~7&times; more</strong> ($2.45 vs. $0.36/task).
+      </div>
+    </section>
+  </div>
+  <div id="eff-panel-speed" role="tabpanel" aria-labelledby="eff-tab-speed" tabindex="0" hidden>
+    <div id="time" class="gh-benchmark-panel">
+  <div class="gh-chart-header">
+    <h3>Artificial Analysis Intelligence Index v5.0: score vs. execution speed</h3>
+    <p class="muted">Same benchmark, same published model configuration across reasoning efforts (1 Low to 5 Max). Upper-left is better.</p>
+    
+  </div>
+  <div class="gh-chart-grid">
+    <div class="gh-plot-box"><svg xmlns="http://www.w3.org/2000/svg" viewBox="48 197 1185 752" role="img" aria-labelledby="speed-title speed-desc">
+<title id="speed-title">LLM capability versus execution speed, by reasoning effort</title>
+<desc id="speed-desc">The horizontal axis is median end-to-end response time in seconds, shown on a logarithmic scale. The vertical axis is Artificial Analysis Intelligence Index v5.0. Farther left and higher is better. Only model-effort points with published median end-to-end response time are shown.</desc>
+<style>text{font-family:Segoe UI,Arial,sans-serif;fill:#192740}</style>
+<rect x="48" y="197" width="1185" height="752" rx="10" fill="#ffffff"/>
+<text x="77" y="225" font-size="17" style="fill:#56647a" font-weight="400" text-anchor="start">Capability / Artificial Analysis Intelligence Index v5.0</text>
+<line x1="120" y1="875.0" x2="1210" y2="875.0" stroke="#e4e9f1" stroke-width="1"/>
+<text x="103" y="880.0" font-size="15" style="fill:#68768b" font-weight="400" text-anchor="end">0</text>
+<line x1="120" y1="768.6666666666666" x2="1210" y2="768.6666666666666" stroke="#e4e9f1" stroke-width="1"/>
+<text x="103" y="773.6666666666666" font-size="15" style="fill:#68768b" font-weight="400" text-anchor="end">10</text>
+<line x1="120" y1="662.3333333333334" x2="1210" y2="662.3333333333334" stroke="#e4e9f1" stroke-width="1"/>
+<text x="103" y="667.3333333333334" font-size="15" style="fill:#68768b" font-weight="400" text-anchor="end">20</text>
+<line x1="120" y1="556.0" x2="1210" y2="556.0" stroke="#e4e9f1" stroke-width="1"/>
+<text x="103" y="561.0" font-size="15" style="fill:#68768b" font-weight="400" text-anchor="end">30</text>
+<line x1="120" y1="449.6666666666667" x2="1210" y2="449.6666666666667" stroke="#e4e9f1" stroke-width="1"/>
+<text x="103" y="454.6666666666667" font-size="15" style="fill:#68768b" font-weight="400" text-anchor="end">40</text>
+<line x1="120" y1="343.33333333333326" x2="1210" y2="343.33333333333326" stroke="#e4e9f1" stroke-width="1"/>
+<text x="103" y="348.33333333333326" font-size="15" style="fill:#68768b" font-weight="400" text-anchor="end">50</text>
+<line x1="120" y1="237.0" x2="1210" y2="237.0" stroke="#e4e9f1" stroke-width="1"/>
+<text x="103" y="242.0" font-size="15" style="fill:#68768b" font-weight="400" text-anchor="end">60</text>
+<line x1="120.0" y1="237" x2="120.0" y2="875" stroke="#eff2f7" stroke-width="1"/>
+<text x="120.0" y="902" font-size="16" style="fill:#56647a" font-weight="400" text-anchor="middle">5s</text>
+<line x1="262.5981825061159" y1="237" x2="262.5981825061159" y2="875" stroke="#eff2f7" stroke-width="1"/>
+<text x="262.5981825061159" y="902" font-size="16" style="fill:#56647a" font-weight="400" text-anchor="middle">10s</text>
+<line x1="405.1963650122318" y1="237" x2="405.1963650122318" y2="875" stroke="#eff2f7" stroke-width="1"/>
+<text x="405.1963650122318" y="902" font-size="16" style="fill:#56647a" font-weight="400" text-anchor="middle">20s</text>
+<line x1="593.700908746942" y1="237" x2="593.700908746942" y2="875" stroke="#eff2f7" stroke-width="1"/>
+<text x="593.700908746942" y="902" font-size="16" style="fill:#56647a" font-weight="400" text-anchor="middle">50s</text>
+<line x1="736.299091253058" y1="237" x2="736.299091253058" y2="875" stroke="#eff2f7" stroke-width="1"/>
+<text x="736.299091253058" y="902" font-size="16" style="fill:#56647a" font-weight="400" text-anchor="middle">100s</text>
+<line x1="878.8972737591739" y1="237" x2="878.8972737591739" y2="875" stroke="#eff2f7" stroke-width="1"/>
+<text x="878.8972737591739" y="902" font-size="16" style="fill:#56647a" font-weight="400" text-anchor="middle">200s</text>
+<line x1="1067.4018174938842" y1="237" x2="1067.4018174938842" y2="875" stroke="#eff2f7" stroke-width="1"/>
+<text x="1067.4018174938842" y="902" font-size="16" style="fill:#56647a" font-weight="400" text-anchor="middle">500s</text>
+<line x1="1210.0" y1="237" x2="1210.0" y2="875" stroke="#eff2f7" stroke-width="1"/>
+<text x="1210.0" y="902" font-size="16" style="fill:#56647a" font-weight="400" text-anchor="middle">1,000s</text>
+<text x="655" y="933" font-size="16" style="fill:#56647a" font-weight="400" text-anchor="middle">Median end-to-end response time (seconds)  |  lower is faster  |  logarithmic scale</text>
+<path d="M225 297 L167 254 M167 254 L187 257 M167 254 L175 274" fill="none" stroke="#465b76" stroke-width="2"/>
+<text x="234" y="302" font-size="16" style="fill:#465b76" font-weight="400" text-anchor="start">Prefer this direction</text>
+<g class="speed-series" data-model="0">
+<polyline points="288.32,508.12 430.21,363.98 546.65,325.41 782.26,268.96 1138.16,253.95" fill="none" stroke="#a34415" stroke-width="3.2" stroke-linejoin="round"/>
+<g><title>Claude Opus 5.5 / Low: score 34.5, median end-to-end response time 11.3s</title><circle cx="288.32" cy="508.12" r="10" fill="#a34415" stroke="white" stroke-width="1.5"/>
+<text x="288.32" y="512.12" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">1</text>
+</g>
+<g><title>Claude Opus 5.5 / Medium: score 48.1, median end-to-end response time 22.6s</title><circle cx="430.21" cy="363.98" r="10" fill="#a34415" stroke="white" stroke-width="1.5"/>
+<text x="430.21" y="367.98" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">2</text>
+</g>
+<g><title>Claude Opus 5.5 / High: score 51.7, median end-to-end response time 39.8s</title><circle cx="546.65" cy="325.41" r="10" fill="#a34415" stroke="white" stroke-width="1.5"/>
+<text x="546.65" y="329.41" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">3</text>
+</g>
+<g><title>Claude Opus 5.5 / Xhigh: score 57.0, median end-to-end response time 125.0s</title><circle cx="782.26" cy="268.96" r="10" fill="#a34415" stroke="white" stroke-width="1.5"/>
+<text x="782.26" y="272.96" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">4</text>
+</g>
+<g><title>Claude Opus 5.5 / Max: score 58.4, median end-to-end response time 705.2s</title><circle cx="1138.16" cy="253.95" r="10" fill="#a34415" stroke="white" stroke-width="1.5"/>
+<text x="1138.16" y="257.95" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">5</text>
+</g>
+</g>
+<g class="speed-series" data-model="1">
+<polyline points="152.66,605.98 206.57,552.60 351.72,437.81 508.56,347.86 1049.62,298.23" fill="none" stroke="#d17908" stroke-width="3.2" stroke-linejoin="round"/>
+<g><title>Claude Sonnet 5.5 / Low: score 25.3, median end-to-end response time 5.9s</title><circle cx="152.66" cy="605.98" r="10" fill="#d17908" stroke="white" stroke-width="1.5"/>
+<text x="152.66" y="609.98" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">1</text>
+</g>
+<g><title>Claude Sonnet 5.5 / Medium: score 30.3, median end-to-end response time 7.6s</title><circle cx="206.57" cy="552.60" r="10" fill="#d17908" stroke="white" stroke-width="1.5"/>
+<text x="206.57" y="556.60" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">2</text>
+</g>
+<g><title>Claude Sonnet 5.5 / High: score 41.1, median end-to-end response time 15.4s</title><circle cx="351.72" cy="437.81" r="10" fill="#d17908" stroke="white" stroke-width="1.5"/>
+<text x="351.72" y="441.81" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">3</text>
+</g>
+<g><title>Claude Sonnet 5.5 / Xhigh: score 49.6, median end-to-end response time 33.1s</title><circle cx="508.56" cy="347.86" r="10" fill="#d17908" stroke="white" stroke-width="1.5"/>
+<text x="508.56" y="351.86" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">4</text>
+</g>
+<g><title>Claude Sonnet 5.5 / Max: score 54.2, median end-to-end response time 458.6s</title><circle cx="1049.62" cy="298.23" r="10" fill="#d17908" stroke="white" stroke-width="1.5"/>
+<text x="1049.62" y="302.23" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">5</text>
+</g>
+</g>
+<g class="speed-series" data-model="2">
+<polyline points="317.52,417.39 317.24,327.86 601.54,291.76 840.46,287.45 944.99,270.45" fill="none" stroke="#5144c7" stroke-width="3.2" stroke-linejoin="round"/>
+<g><title>GPT-6 Astra / Low: score 43.0, median end-to-end response time 13.1s</title><circle cx="317.52" cy="417.39" r="10" fill="#5144c7" stroke="white" stroke-width="1.5"/>
+<text x="317.52" y="421.39" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">1</text>
+</g>
+<g><title>GPT-6 Astra / Medium: score 51.5, median end-to-end response time 13.0s</title><circle cx="317.24" cy="327.86" r="10" fill="#5144c7" stroke="white" stroke-width="1.5"/>
+<text x="317.24" y="331.86" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">2</text>
+</g>
+<g><title>GPT-6 Astra / High: score 54.8, median end-to-end response time 51.9s</title><circle cx="601.54" cy="291.76" r="10" fill="#5144c7" stroke="white" stroke-width="1.5"/>
+<text x="601.54" y="295.76" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">3</text>
+</g>
+<g><title>GPT-6 Astra / Xhigh: score 55.3, median end-to-end response time 165.9s</title><circle cx="840.46" cy="287.45" r="10" fill="#5144c7" stroke="white" stroke-width="1.5"/>
+<text x="840.46" y="291.45" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">4</text>
+</g>
+<g><title>GPT-6 Astra / Max: score 56.9, median end-to-end response time 275.8s</title><circle cx="944.99" cy="270.45" r="10" fill="#5144c7" stroke="white" stroke-width="1.5"/>
+<text x="944.99" y="274.45" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">5</text>
+</g>
+</g>
+<g class="speed-series" data-model="3">
+<polyline points="274.18,508.12 302.03,384.30 584.93,340.90 762.51,318.79 951.17,295.39" fill="none" stroke="#1878ba" stroke-width="3.2" stroke-linejoin="round"/>
+<g><title>GPT-6.1 Sol / Low: score 34.5, median end-to-end response time 10.6s</title><circle cx="274.18" cy="508.12" r="10" fill="#1878ba" stroke="white" stroke-width="1.5"/>
+<text x="274.18" y="512.12" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">1</text>
+</g>
+<g><title>GPT-6.1 Sol / Medium: score 46.1, median end-to-end response time 12.1s</title><circle cx="302.03" cy="384.30" r="10" fill="#1878ba" stroke="white" stroke-width="1.5"/>
+<text x="302.03" y="388.30" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">2</text>
+</g>
+<g><title>GPT-6.1 Sol / High: score 50.2, median end-to-end response time 47.9s</title><circle cx="584.93" cy="340.90" r="10" fill="#1878ba" stroke="white" stroke-width="1.5"/>
+<text x="584.93" y="344.90" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">3</text>
+</g>
+<g><title>GPT-6.1 Sol / Xhigh: score 52.3, median end-to-end response time 113.6s</title><circle cx="762.51" cy="318.79" r="10" fill="#1878ba" stroke="white" stroke-width="1.5"/>
+<text x="762.51" y="322.79" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">4</text>
+</g>
+<g><title>GPT-6.1 Sol / Max: score 54.5, median end-to-end response time 284.2s</title><circle cx="951.17" cy="295.39" r="10" fill="#1878ba" stroke="white" stroke-width="1.5"/>
+<text x="951.17" y="299.39" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">5</text>
+</g>
+</g>
+<g class="speed-series" data-model="4">
+</g>
+<g class="speed-series" data-model="5">
+<g><title>Gemini 3.8 Flash / High: score 30.5, median end-to-end response time 31.0s</title><circle cx="495.52" cy="550.19" r="10" fill="#07816c" stroke="white" stroke-width="1.5"/>
+<text x="495.52" y="554.19" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">3</text>
+</g>
+</g>
+<g class="speed-series" data-model="6">
+<polyline points="381.42,647.67 414.03,627.23 691.97,579.87" fill="none" stroke="#6e7889" stroke-width="3.2" stroke-linejoin="round"/>
+<g><title>GPT-6 Luna / Low: score 9.7, median end-to-end response time 6.6s</title><circle cx="178.11" cy="772.22" r="10" fill="#6e7889" stroke="white" stroke-width="1.5"/>
+<text x="178.11" y="776.22" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">1</text>
+</g>
+<g><title>GPT-6 Luna / High: score 21.4, median end-to-end response time 17.8s</title><circle cx="381.42" cy="647.67" r="10" fill="#6e7889" stroke="white" stroke-width="1.5"/>
+<text x="381.42" y="651.67" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">3</text>
+</g>
+<g><title>GPT-6 Luna / Xhigh: score 23.3, median end-to-end response time 20.9s</title><circle cx="414.03" cy="627.23" r="10" fill="#6e7889" stroke="white" stroke-width="1.5"/>
+<text x="414.03" y="631.23" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">4</text>
+</g>
+<g><title>GPT-6 Luna / Max: score 27.8, median end-to-end response time 80.6s</title><circle cx="691.97" cy="579.87" r="10" fill="#6e7889" stroke="white" stroke-width="1.5"/>
+<text x="691.97" y="583.87" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">5</text>
+</g>
+</g>
+<g class="speed-series" data-model="8">
+<polyline points="183.00,564.33 193.48,469.71 285.18,424.84 433.92,397.03 699.10,332.95" fill="none" stroke="#9744a0" stroke-width="3.2" stroke-linejoin="round"/>
+<g><title>GPT-6.1 Terra / Low: score 29.2, median end-to-end response time 6.8s</title><circle cx="183.00" cy="564.33" r="10" fill="#9744a0" stroke="white" stroke-width="1.5"/>
+<text x="183.00" y="568.33" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">1</text>
+</g>
+<g><title>GPT-6.1 Terra / Medium: score 38.1, median end-to-end response time 7.1s</title><circle cx="193.48" cy="469.71" r="10" fill="#9744a0" stroke="white" stroke-width="1.5"/>
+<text x="193.48" y="473.71" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">2</text>
+</g>
+<g><title>GPT-6.1 Terra / High: score 42.3, median end-to-end response time 11.2s</title><circle cx="285.18" cy="424.84" r="10" fill="#9744a0" stroke="white" stroke-width="1.5"/>
+<text x="285.18" y="428.84" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">3</text>
+</g>
+<g><title>GPT-6.1 Terra / Xhigh: score 45.0, median end-to-end response time 23.0s</title><circle cx="433.92" cy="397.03" r="10" fill="#9744a0" stroke="white" stroke-width="1.5"/>
+<text x="433.92" y="401.03" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">4</text>
+</g>
+<g><title>GPT-6.1 Terra / Max: score 51.0, median end-to-end response time 83.5s</title><circle cx="699.10" cy="332.95" r="10" fill="#9744a0" stroke="white" stroke-width="1.5"/>
+<text x="699.10" y="336.95" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">5</text>
+</g>
+</g>
+<g class="speed-series" data-model="9">
+<g><title>Gemini 4 Argon / High: score 50.4, median end-to-end response time 52.7s</title><circle cx="604.64" cy="338.95" r="10" fill="#4d7b16" stroke="white" stroke-width="1.5"/>
+<text x="604.64" y="342.95" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">3</text>
+</g>
+</g>
+<g class="speed-series" data-model="10">
+<polyline points="465.27,502.70 629.56,509.90" fill="none" stroke="#be3042" stroke-width="3.2" stroke-linejoin="round"/>
+<g><title>Grok 4.7 / Low: score 30.9, median end-to-end response time 11.9s</title><circle cx="298.36" cy="546.62" r="10" fill="#be3042" stroke="white" stroke-width="1.5"/>
+<text x="298.36" y="550.62" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">1</text>
+</g>
+<g><title>Grok 4.7 / High: score 35.0, median end-to-end response time 26.8s</title><circle cx="465.27" cy="502.70" r="10" fill="#be3042" stroke="white" stroke-width="1.5"/>
+<text x="465.27" y="506.70" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">3</text>
+</g>
+<g><title>Grok 4.7 / Xhigh: score 34.3, median end-to-end response time 59.5s</title><circle cx="629.56" cy="509.90" r="10" fill="#be3042" stroke="white" stroke-width="1.5"/>
+<text x="629.56" y="513.90" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">4</text>
+</g>
+</g>
+</svg></div>
+    
+    <aside class="gh-chart-legend" aria-label="Model color and reasoning effort legend">
+      <div class="gh-legend-Title">MODEL COLOR</div>
+      <ul class="gh-legend-list">
+        <li class="gh-legend-item task-series" data-model="0"><span class="gh-legend-swatch" style="background:#a34415"></span><span class="gh-legend-name" style="color:#a34415">Claude Opus 5.5</span></li><li class="gh-legend-item task-series" data-model="1"><span class="gh-legend-swatch" style="background:#d17908"></span><span class="gh-legend-name" style="color:#d17908">Claude Sonnet 5.5</span></li><li class="gh-legend-item task-series" data-model="2"><span class="gh-legend-swatch" style="background:#5144c7"></span><span class="gh-legend-name" style="color:#5144c7">GPT-6 Astra</span></li><li class="gh-legend-item task-series" data-model="3"><span class="gh-legend-swatch" style="background:#1878ba"></span><span class="gh-legend-name" style="color:#1878ba">GPT-6.1 Sol</span></li><li class="gh-legend-item task-series is-missing" data-model="4"><span class="gh-legend-swatch" style="background:#bf3c85"></span><span class="gh-legend-name" style="color:#bf3c85">GPT-5.6 Sol</span><span class="gh-legend-na">No data</span></li><li class="gh-legend-item task-series" data-model="5"><span class="gh-legend-swatch" style="background:#07816c"></span><span class="gh-legend-name" style="color:#07816c">Gemini 3.8 Flash</span></li><li class="gh-legend-item task-series" data-model="6"><span class="gh-legend-swatch" style="background:#6e7889"></span><span class="gh-legend-name" style="color:#6e7889">GPT-6 Luna</span></li><li class="gh-legend-item task-series" data-model="8"><span class="gh-legend-swatch" style="background:#9744a0"></span><span class="gh-legend-name" style="color:#9744a0">GPT-6.1 Terra</span></li><li class="gh-legend-item task-series" data-model="9"><span class="gh-legend-swatch" style="background:#4d7b16"></span><span class="gh-legend-name" style="color:#4d7b16">Gemini 4 Argon</span></li><li class="gh-legend-item task-series" data-model="10"><span class="gh-legend-swatch" style="background:#be3042"></span><span class="gh-legend-name" style="color:#be3042">Grok 4.7</span></li>
+      </ul>
+      <div class="gh-legend-Title" style="margin-top:12px;">EFFORT / POINT NUMBER</div>
+      <ol class="gh-effort-list">
+        <li><span class="gh-effort-badge">1</span> Low</li>
+        <li><span class="gh-effort-badge">2</span> Medium</li>
+        <li><span class="gh-effort-badge">3</span> High</li>
+        <li><span class="gh-effort-badge">4</span> Xhigh</li>
+        <li><span class="gh-effort-badge">5</span> Max</li>
+      </ol>
+      <p class="gh-legend-note">Hover points for exact values. Missing efforts are not inferred.</p>
+    </aside>
+    
+  </div>
+  <p class="gh-bench-footnote">Benchmark source: <a href="https://artificialanalysis.ai/leaderboards/models" target="_blank" rel="noopener">Artificial Analysis Intelligence Index v5.0 &nearr;</a></p>
+</div>
+  </div>
+</div>
+
+<div class="takeaway">Use your strongest reasoning where decisions are being made. Once those decisions are captured in a clear design, switch to a faster and more efficient model for execution.</div>
+
+<h2>Putting it all together</h2>
+<div class="flow"><div>1. Clarify design</div><div>2. Explore options</div><div>3. High reasoning + fit</div><div>4. Capture the design</div><div>5. Optimize execution</div></div>
+<p>For complex, long-running work, the best results came from making the design explicit, exploring alternatives before committing, investing high capability and task fit in those design decisions, capturing the decisions in a concrete artifact, and then switching to a faster, more cost-efficient model for implementation.</p>
+
+<h2>Final thoughts</h2>
+<p>The biggest lesson from my overnight experiment was not that GitHub Copilot could not handle a complex task. It was that I needed to work with it differently.</p>
+<blockquote>The goal is not to write one perfect prompt and walk away. It is to structure the work so that Copilot has the context, boundaries, and direction it needs to succeed.</blockquote>
+</article></main><script>const modelCoverage={"0": {"name": "Claude Opus 5.5", "slug": "claude-opus-5-5", "cost_points": 5, "time_points": 5, "task_results": 33, "note": ""}, "1": {"name": "Claude Sonnet 5.5", "slug": "claude-sonnet-5-5", "cost_points": 5, "time_points": 5, "task_results": 32, "note": ""}, "2": {"name": "GPT-6 Astra", "slug": "gpt-6-astra", "cost_points": 5, "time_points": 5, "task_results": 35, "note": ""}, "3": {"name": "GPT-6.1 Sol", "slug": "gpt-6-1-sol", "cost_points": 5, "time_points": 5, "task_results": 28, "note": ""}, "4": {"name": "GPT-5.6 Sol", "slug": "gpt-5-6-sol", "cost_points": 0, "time_points": 0, "task_results": 24, "note": "No v5.0 Intelligence Index result in the current leaderboard or model page. Historical v4.3.2 results are retained separately; task-specific results are shown where published."}, "5": {"name": "Gemini 3.8 Flash", "slug": "gemini-3-8-flash", "cost_points": 2, "time_points": 1, "task_results": 24, "note": ""}, "6": {"name": "GPT-6 Luna", "slug": "gpt-6-luna", "cost_points": 5, "time_points": 4, "task_results": 31, "note": ""}, "8": {"name": "GPT-6.1 Terra", "slug": "gpt-6-1-terra", "cost_points": 5, "time_points": 5, "task_results": 17, "note": ""}, "9": {"name": "Gemini 4 Argon", "slug": "gemini-4-argon", "cost_points": 1, "time_points": 1, "task_results": 22, "note": "The AA option has High only; choose CursorBench or ARC-AGI to plot measured Low, Medium, and High points on that benchmark's own scale."}, "10": {"name": "Grok 4.7", "slug": "grok-4-7", "cost_points": 3, "time_points": 3, "task_results": 28, "note": ""}};
+const costMetadata={"aa": {"label": "Artificial Analysis Intelligence Index v5.0", "download": "llm-cost-capability.svg", "counts": {"0": 5, "1": 5, "2": 5, "3": 5, "4": 0, "5": 2, "6": 5, "8": 5, "9": 1, "10": 3}}, "cursor": {"label": "CursorBench 4.0", "download": "llm-cost-cursor.svg", "counts": {"0": 5, "1": 5, "2": 0, "3": 0, "4": 5, "5": 2, "6": 0, "8": 0, "9": 3, "10": 4}}, "arc1": {"label": "ARC-AGI-1 / Semi-Private", "download": "llm-cost-arc1.svg", "counts": {"0": 5, "1": 5, "2": 5, "3": 5, "4": 5, "5": 3, "6": 5, "8": 0, "9": 3, "10": 4}}, "arc2": {"label": "ARC-AGI-2 / Semi-Private", "download": "llm-cost-arc2.svg", "counts": {"0": 5, "1": 4, "2": 5, "3": 5, "4": 5, "5": 3, "6": 5, "8": 0, "9": 3, "10": 4}}};
+const costSelector=document.getElementById('cost-benchmark');
+const modelSelector=document.getElementById('model');
+function updateModel(){
+document.querySelectorAll('.series,.speed-series,.task-series').forEach(group=>{
+group.style.opacity=modelSelector.value==='all'||group.dataset.model===modelSelector.value?'1':'0.12';
+});
+const status=document.getElementById('model-status');
+status.hidden=modelSelector.value==='all';
+if(!status.hidden){
+const coverage=modelCoverage[modelSelector.value];
+const chart=costMetadata[costSelector.value];
+status.textContent=coverage.name+': '+chart.counts[modelSelector.value]+' '+chart.label+' cost/score points; '+
+coverage.time_points+' AA response-time/score points; '+coverage.task_results+
+' task benchmark results. '+coverage.note;
+}
+}
+function saveSelection(){
+const url=new URL(location.href);
+url.searchParams.set('cost',costSelector.value);
+if(modelSelector.value==='all')url.searchParams.delete('model');
+else url.searchParams.set('model',modelCoverage[modelSelector.value].slug);
+history.replaceState(null,'',url);
+}
+function updateCost(){
+const key=costSelector.value;
+document.querySelectorAll('[data-cost-benchmark]').forEach(view=>{
+view.hidden=view.dataset.costBenchmark!==key;
+});
+document.getElementById('aa-cost-notes').hidden=key!=='aa';
+const chart=costMetadata[key];
+document.getElementById('cost-download').href=chart.download;
+document.getElementById('cost-status').textContent='Cost graph: '+chart.label+
+'. Both axes use this same benchmark. Missing model/effort measurements stay missing; '+
+'the AA response-time chart below is unchanged.';
+updateModel();
+}
+costSelector.addEventListener('change',()=>{
+document.getElementById('cost-error').hidden=true;
+updateCost();
+saveSelection();
+});
+modelSelector.addEventListener('change',()=>{
+updateModel();
+saveSelection();
+});
+const initialParams=new URLSearchParams(location.search);
+const requestedCost=initialParams.get('cost');
+if(requestedCost!==null){
+if(Object.hasOwn(costMetadata,requestedCost))costSelector.value=requestedCost;
+else{
+const error=document.getElementById('cost-error');
+error.hidden=false;
+error.textContent='Unknown cost benchmark "'+requestedCost+'". Showing the Artificial Analysis option.';
+}
+}
+const requestedModel=initialParams.get('model');
+if(requestedModel!==null){
+const found=Object.entries(modelCoverage).find(([,coverage])=>coverage.slug===requestedModel);
+if(found)modelSelector.value=found[0];
+else{
+const error=document.getElementById('cost-error');
+error.hidden=false;
+error.textContent+=' Unknown model "'+requestedModel+'". Showing all models.';
+}
+}
+updateCost();
+document.getElementById('plot-argon').addEventListener('click',()=>{
+costSelector.value='cursor';
+modelSelector.value=Object.entries(modelCoverage).find(([,coverage])=>coverage.slug==='gemini-4-argon')[0];
+updateCost();
+saveSelection();
+document.getElementById('cost').scrollIntoView();
+});
+document.querySelectorAll('[role="tablist"]').forEach(tablist=>{
+const tabs=[...tablist.querySelectorAll(':scope > [role="tab"]')];
+function selectTab(tab){
+tabs.forEach(item=>{
+const selected=item===tab;
+item.setAttribute('aria-selected',String(selected));
+item.tabIndex=selected?0:-1;
+const panel=document.getElementById(item.getAttribute('aria-controls'));
+if(panel)panel.hidden=!selected;
+});
+}
+tabs.forEach((tab,index)=>{
+tab.addEventListener('click',()=>selectTab(tab));
+tab.addEventListener('keydown',event=>{
+let next;
+if(event.key==='ArrowRight') next=tabs[(index+1)%tabs.length];
+else if(event.key==='ArrowLeft') next=tabs[(index+tabs.length-1)%tabs.length];
+else if(event.key==='Home') next=tabs[0];
+else if(event.key==='End') next=tabs[tabs.length-1];
+else return;
+event.preventDefault();
+selectTab(next);
+next.focus();
+});
+});
+});
+[['document-metric','data-document-metric','documentMetric'],['engineering-metric','data-engineering-metric','engineeringMetric'],['coding-metric','data-coding-metric','codingMetric']].forEach(([id,attr,prop])=>{
+const el=document.getElementById(id);
+if(el)el.addEventListener('change',event=>{
+document.querySelectorAll('['+attr+']').forEach(view=>{
+view.hidden=view.dataset[prop]!==event.target.value;
+});
+});
+});
+
+
+
+
+</script>
+</body>
+</html>
+
