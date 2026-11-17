@@ -1021,7 +1021,9 @@ Write the comparison to docs/approaches.md. Do not implement anything yet.</pre>
 
 <div class="case-box warn-box">
   <div class="cb-label">Before &middot; Unstructured One-Shot Attempt</div>
-  <p>When I initially gave <strong><code>GPT-6 Astra</code></strong> one open-ended overnight prompt to optimize the skill, it spent <strong>12 hours and 160.5M tokens (1,583 calls)</strong>, hit the <code>&lt; 5 min</code> target on <strong>0/12 cases</strong>, degraded output quality on <strong>11/12 cases</strong> by taking shortcuts, and cost me 2.5 hours the next morning just to audit and <code>git revert</code> the branch.</p>
+  <p>I initially gave <strong><code>GPT-6 Astra</code></strong> a single open-ended overnight prompt:</p>
+  <p><code>"Help me improve the performance to meet 5 mins target, at the same time avoid reports quality regression by running benchmark."</code></p>
+  <p><strong>Result:</strong> After spending <strong>12 hours and 160.5M tokens (1,583 calls)</strong>, it missed the performance target (<strong>0/12 cases</strong> met the <code>&lt; 5 min</code> goal) and degraded report quality across the board (<strong>0/12 reports met quality</strong>) by taking shortcuts, costing me 2.5 hours the next morning just to audit and <code>git revert</code> the branch.</p>
 </div>
 
 <div class="case-box">
