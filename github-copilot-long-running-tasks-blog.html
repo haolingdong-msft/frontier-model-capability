@@ -179,13 +179,14 @@ blockquote{border-left:4px solid #8250df;margin:30px 0;padding-left:22px;color:v
     <div class="ctrl-group">
       <label for="model">Highlight model:</label>
       <select id="model">
-        <option value="all">All 6 models</option>
+        <option value="all">All 7 models</option>
         <option value="0">Claude Opus 5.5</option>
         <option value="1">Claude Sonnet 5.5</option>
         <option value="2">GPT-6 Astra</option>
         <option value="3">GPT-6.1 Sol</option>
         <option value="4">GPT-5.6 Sol</option>
-        <option value="5">Copilot Fusion</option>
+        <option value="5">Copilot Fusion (High)</option>
+        <option value="6">Copilot Fusion (Max)</option>
       </select>
     </div>
     <div class="ctrl-group" style="font-size:13px;color:#59636e;">
@@ -305,11 +306,12 @@ blockquote{border-left:4px solid #8250df;margin:30px 0;padding-left:22px;color:v
 <text x="737.91" y="673.25" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">4</text></g>
 </g>
 <g class="series" data-model="5">
-<polyline points="667.23,459.50 981.83,338.28" fill="none" stroke="#07816c" stroke-width="3.2" stroke-linejoin="round"/>
-<g><title>Copilot Fusion / High: 52.1% resolution, $2.27 per task, Agent Time P50 11m 41s</title><circle cx="667.23" cy="459.50" r="10.5" fill="#07816c" stroke="white" stroke-width="1.5"/>
-<text x="667.23" y="463.50" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">3</text></g>
-<g><title>Copilot Fusion / Max: 67.3% resolution, $6.65 per task, Agent Time P50 27m 06s</title><circle cx="981.83" cy="338.28" r="10.5" fill="#07816c" stroke="white" stroke-width="1.5"/>
-<text x="981.83" y="342.28" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">5</text></g>
+<g><title>Copilot Fusion (High) (dynamic routing): 52.1% resolution, $2.27 per task, Agent Time P50 11m 41s</title><circle cx="667.23" cy="459.50" r="10.5" fill="#07816c" stroke="white" stroke-width="1.5"/>
+<text x="667.23" y="463.50" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">F</text></g>
+</g>
+<g class="series" data-model="6">
+<g><title>Copilot Fusion (Max) (dynamic routing): 67.3% resolution, $6.65 per task, Agent Time P50 27m 06s</title><circle cx="981.83" cy="338.28" r="10.5" fill="#be3042" stroke="white" stroke-width="1.5"/>
+<text x="981.83" y="342.28" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">F</text></g>
 </g>
 </svg></div>
       <aside class="gh-chart-legend" aria-label="Model color and reasoning effort legend">
@@ -321,7 +323,8 @@ blockquote{border-left:4px solid #8250df;margin:30px 0;padding-left:22px;color:v
             <li class="gh-legend-item task-series" data-model="2"><span class="gh-legend-swatch" style="background:#5144c7"></span><span class="gh-legend-name" style="color:#5144c7">GPT-6 Astra</span></li>
             <li class="gh-legend-item task-series" data-model="3"><span class="gh-legend-swatch" style="background:#1878ba"></span><span class="gh-legend-name" style="color:#1878ba">GPT-6.1 Sol</span></li>
             <li class="gh-legend-item task-series" data-model="4"><span class="gh-legend-swatch" style="background:#bf3c85"></span><span class="gh-legend-name" style="color:#bf3c85">GPT-5.6 Sol</span></li>
-            <li class="gh-legend-item task-series" data-model="5"><span class="gh-legend-swatch" style="background:#07816c"></span><span class="gh-legend-name" style="color:#07816c">Copilot Fusion</span></li>
+            <li class="gh-legend-item task-series" data-model="5"><span class="gh-legend-swatch" style="background:#07816c"></span><span class="gh-legend-name" style="color:#07816c">Copilot Fusion (High)</span></li>
+            <li class="gh-legend-item task-series" data-model="6"><span class="gh-legend-swatch" style="background:#be3042"></span><span class="gh-legend-name" style="color:#be3042">Copilot Fusion (Max)</span></li>
           </ul>
         </div>
         <div>
@@ -332,6 +335,7 @@ blockquote{border-left:4px solid #8250df;margin:30px 0;padding-left:22px;color:v
             <li><span class="gh-effort-badge">3</span> High</li>
             <li><span class="gh-effort-badge">4</span> Xhigh</li>
             <li><span class="gh-effort-badge">5</span> Max</li>
+            <li><span class="gh-effort-badge">F</span> Fusion</li>
           </ol>
           <p class="gh-legend-note">Hover points for exact values. Click any model above to highlight.</p>
         </div>
@@ -455,11 +459,12 @@ blockquote{border-left:4px solid #8250df;margin:30px 0;padding-left:22px;color:v
 <text x="633.31" y="673.25" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">4</text></g>
 </g>
 <g class="speed-series" data-model="5">
-<polyline points="643.10,459.50 913.90,338.28" fill="none" stroke="#07816c" stroke-width="3.2" stroke-linejoin="round"/>
-<g><title>Copilot Fusion / High: 52.1% resolution, Agent Time P50 11m 41s ($2.27/task)</title><circle cx="643.10" cy="459.50" r="10.5" fill="#07816c" stroke="white" stroke-width="1.5"/>
-<text x="643.10" y="463.50" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">3</text></g>
-<g><title>Copilot Fusion / Max: 67.3% resolution, Agent Time P50 27m 06s ($6.65/task)</title><circle cx="913.90" cy="338.28" r="10.5" fill="#07816c" stroke="white" stroke-width="1.5"/>
-<text x="913.90" y="342.28" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">5</text></g>
+<g><title>Copilot Fusion (High) (dynamic routing): 52.1% resolution, Agent Time P50 11m 41s ($2.27/task)</title><circle cx="643.10" cy="459.50" r="10.5" fill="#07816c" stroke="white" stroke-width="1.5"/>
+<text x="643.10" y="463.50" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">F</text></g>
+</g>
+<g class="speed-series" data-model="6">
+<g><title>Copilot Fusion (Max) (dynamic routing): 67.3% resolution, Agent Time P50 27m 06s ($6.65/task)</title><circle cx="913.90" cy="338.28" r="10.5" fill="#be3042" stroke="white" stroke-width="1.5"/>
+<text x="913.90" y="342.28" font-size="12" style="fill:white" font-weight="700" text-anchor="middle">F</text></g>
 </g>
 </svg></div>
       <aside class="gh-chart-legend" aria-label="Model color and reasoning effort legend">
@@ -471,7 +476,8 @@ blockquote{border-left:4px solid #8250df;margin:30px 0;padding-left:22px;color:v
             <li class="gh-legend-item task-series" data-model="2"><span class="gh-legend-swatch" style="background:#5144c7"></span><span class="gh-legend-name" style="color:#5144c7">GPT-6 Astra</span></li>
             <li class="gh-legend-item task-series" data-model="3"><span class="gh-legend-swatch" style="background:#1878ba"></span><span class="gh-legend-name" style="color:#1878ba">GPT-6.1 Sol</span></li>
             <li class="gh-legend-item task-series" data-model="4"><span class="gh-legend-swatch" style="background:#bf3c85"></span><span class="gh-legend-name" style="color:#bf3c85">GPT-5.6 Sol</span></li>
-            <li class="gh-legend-item task-series" data-model="5"><span class="gh-legend-swatch" style="background:#07816c"></span><span class="gh-legend-name" style="color:#07816c">Copilot Fusion</span></li>
+            <li class="gh-legend-item task-series" data-model="5"><span class="gh-legend-swatch" style="background:#07816c"></span><span class="gh-legend-name" style="color:#07816c">Copilot Fusion (High)</span></li>
+            <li class="gh-legend-item task-series" data-model="6"><span class="gh-legend-swatch" style="background:#be3042"></span><span class="gh-legend-name" style="color:#be3042">Copilot Fusion (Max)</span></li>
           </ul>
         </div>
         <div>
@@ -482,6 +488,7 @@ blockquote{border-left:4px solid #8250df;margin:30px 0;padding-left:22px;color:v
             <li><span class="gh-effort-badge">3</span> High</li>
             <li><span class="gh-effort-badge">4</span> Xhigh</li>
             <li><span class="gh-effort-badge">5</span> Max</li>
+            <li><span class="gh-effort-badge">F</span> Fusion</li>
           </ol>
           <p class="gh-legend-note">Hover points for exact values. Click any model above to highlight.</p>
         </div>
@@ -496,7 +503,7 @@ blockquote{border-left:4px solid #8250df;margin:30px 0;padding-left:22px;color:v
 
 <p>Two key patterns from the <a href="https://msbenchapp.azurewebsites.net/reports/compete?bin=2026-10-28&amp;benchmark=terminalbench4&amp;view=chart&amp;agent=Copilot+CLI" target="_blank" rel="noopener">Terminal Bench 4.0</a> curves to keep in mind for later steps:</p>
 <ul>
-  <li><strong>Each model's cost and speed profile:</strong> Upper-right configurations (<code>Copilot Fusion</code>, <code>Claude Opus 5.5</code>, <code>GPT-6 Astra</code> at <code>xHigh</code>/<code>Max</code>) reach higher resolution ceilings at higher cost (<code>$4.85&ndash;$11.68/task</code>) and latency (<code>12&ndash;47m</code>), while upper-left configurations (<code>GPT-6.1 Sol</code>, <code>Claude Sonnet 5.5</code> at <code>Medium</code>/<code>High</code>) deliver strong resolution at much lower cost (<code>$0.59&ndash;$1.35/task</code>) and faster turnaround (<code>5&ndash;11m</code>).</li>
+  <li><strong>Each model's cost and speed profile:</strong> Upper-right configurations (<code>Copilot Fusion (Max)</code>, <code>Claude Opus 5.5</code>, <code>GPT-6 Astra</code> at <code>xHigh</code>/<code>Max</code>) reach higher resolution ceilings at higher cost (<code>$4.85&ndash;$11.68/task</code>) and latency (<code>12&ndash;47m</code>), while upper-left configurations (<code>GPT-6.1 Sol</code>, <code>Claude Sonnet 5.5</code> at <code>Medium</code>/<code>High</code>, and <code>Copilot Fusion (High)</code>) deliver strong resolution at much lower cost (<code>$0.59&ndash;$2.27/task</code>) and faster turnaround (<code>5&ndash;12m</code>).</li>
   <li><strong>How reasoning effort scales within a single model:</strong> Raising effort from <code>1 Low</code> &rarr; <code>3 High</code> / <code>4 xHigh</code> unlocks large capability gains (for example, <code>Claude Sonnet 5.5</code> jumps from <code>25.8%</code> to <code>57.9%</code>, and <code>Claude Opus 5.5</code> climbs smoothly from <code>32.7%</code> &rarr; <code>46.4%</code> &rarr; <code>57.9%</code> &rarr; <code>61.5%</code>). Pushing all the way to <code>5 Max</code> hits sharp diminishing returns while multiplying cost and latency (<code>Claude Opus 5.5</code> gains just <code>+0.6</code> points, <code>61.5%</code> &rarr; <code>62.1%</code>, while cost nearly doubles from <code>$6.35</code> to <code>$11.68</code> and time jumps from <code>26m 48s</code> to <code>47m 24s</code>).</li>
 </ul>
 
@@ -513,12 +520,12 @@ blockquote{border-left:4px solid #8250df;margin:30px 0;padding-left:22px;color:v
   <div class="playbook-card">
     <h4>2. Agentic Coding</h4>
     <p>Writing application and domain logic in existing repositories, multi-file refactoring, CLI/systems workflows, and performance tuning.</p>
-    <div class="pb-models"><strong>Copilot Fusion</strong> (<code>max: 67.3%</code>, <code>high: 52.1%</code>), <strong>Claude Opus 5.5</strong> (<code>max: 62.1%</code>, <code>xhigh: 61.5%</code>), and <strong>Claude Sonnet 5.5</strong> (<code>max: 60.6%</code>, <code>xhigh: 57.9%</code>) perform best in this category.</div>
+    <div class="pb-models"><strong>Copilot Fusion (Max)</strong> (<code>67.3%</code>), <strong>Claude Opus 5.5</strong> (<code>max: 62.1%</code>, <code>xhigh: 61.5%</code>), and <strong>Claude Sonnet 5.5</strong> (<code>max: 60.6%</code>, <code>xhigh: 57.9%</code>) perform best in this category.</div>
   </div>
   <div class="playbook-card">
     <h4>3. Data Analysis &amp; Scientific Computing</h4>
     <p>Computational research workflows, quantitative data analysis, numerical simulation, and mathematical or engineering modeling in a terminal environment.</p>
-    <div class="pb-models"><strong>Copilot Fusion</strong> (<code>max: 68.6%</code>, <code>high: 52.3%</code>), <strong>GPT-6 Astra</strong> (<code>max: 62.0%</code>), and <strong>Claude Opus 5.5</strong> (<code>xhigh: 56.4%</code>) perform best in this category.</div>
+    <div class="pb-models"><strong>Copilot Fusion (Max)</strong> (<code>68.6%</code>), <strong>GPT-6 Astra</strong> (<code>max: 62.0%</code>), and <strong>Claude Opus 5.5</strong> (<code>xhigh: 56.4%</code>) perform best in this category.</div>
   </div>
   <div class="playbook-card">
     <h4>4. Agent Skills &amp; Workflows</h4>
@@ -596,35 +603,30 @@ blockquote{border-left:4px solid #8250df;margin:30px 0;padding-left:22px;color:v
   <section id="panel-coding" role="tabpanel" aria-labelledby="tab-coding" tabindex="0" hidden>
     <div class="task-head-block">
       <div class="task-head-top"><h3>Agentic Coding: Terminal Bench 4.0 (Copilot CLI)</h3></div>
-      <p class="task-sub">Resolution rate and cost per task across thinking levels (<code>low</code> to <code>max</code>) in GitHub Copilot CLI.</p>
+      <p class="task-sub">Resolution rate and cost per task across thinking levels (<code>low</code> to <code>max</code>) and Copilot Fusion tiers in GitHub Copilot CLI.</p>
     </div>
-    <svg class="task-plot" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 406" role="img" aria-label="Terminal Bench 4.0 · Copilot CLI">
+    <svg class="task-plot" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 450" role="img" aria-label="Terminal Bench 4.0 · Copilot CLI">
 <style>text{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;fill:#192740}</style>
-<rect width="1000" height="406" rx="10" fill="#ffffff" stroke="#dce3ee"/>
+<rect width="1000" height="450" rx="10" fill="#ffffff" stroke="#dce3ee"/>
 <text x="230" y="25" font-size="12" fill="#59636e" font-weight="600">Range bar spans Low &rarr; Peak thinking level; solid circle marks peak resolution rate (hover any dot for exact effort &amp; cost).</text>
-<line x1="230.0" y1="42" x2="230.0" y2="322" stroke="#dde4ee"/>
-<text x="230.0" y="348" text-anchor="middle" font-size="13.5">0%</text>
-<line x1="357.5" y1="42" x2="357.5" y2="322" stroke="#dde4ee"/>
-<text x="357.5" y="348" text-anchor="middle" font-size="13.5">20%</text>
-<line x1="485.0" y1="42" x2="485.0" y2="322" stroke="#dde4ee"/>
-<text x="485.0" y="348" text-anchor="middle" font-size="13.5">40%</text>
-<line x1="612.5" y1="42" x2="612.5" y2="322" stroke="#dde4ee"/>
-<text x="612.5" y="348" text-anchor="middle" font-size="13.5">60%</text>
-<line x1="740.0" y1="42" x2="740.0" y2="322" stroke="#dde4ee"/>
-<text x="740.0" y="348" text-anchor="middle" font-size="13.5">80%</text>
+<line x1="230.0" y1="42" x2="230.0" y2="366" stroke="#dde4ee"/>
+<text x="230.0" y="392" text-anchor="middle" font-size="13.5">0%</text>
+<line x1="357.5" y1="42" x2="357.5" y2="366" stroke="#dde4ee"/>
+<text x="357.5" y="392" text-anchor="middle" font-size="13.5">20%</text>
+<line x1="485.0" y1="42" x2="485.0" y2="366" stroke="#dde4ee"/>
+<text x="485.0" y="392" text-anchor="middle" font-size="13.5">40%</text>
+<line x1="612.5" y1="42" x2="612.5" y2="366" stroke="#dde4ee"/>
+<text x="612.5" y="392" text-anchor="middle" font-size="13.5">60%</text>
+<line x1="740.0" y1="42" x2="740.0" y2="366" stroke="#dde4ee"/>
+<text x="740.0" y="392" text-anchor="middle" font-size="13.5">80%</text>
 <g class="task-series">
 <line x1="230" y1="69" x2="740" y2="69" stroke="#f0f4f8" stroke-width="1"/>
-<text x="18" y="74" font-size="15.5" font-weight="600">Copilot Fusion</text>
-<line x1="562.14" y1="69" x2="659.04" y2="69" stroke="#07816c" stroke-width="4.5" stroke-opacity="0.25" stroke-linecap="round"/>
-<g><title>Copilot CLI &middot; Copilot Fusion (high): 52.1% resolution, $2.27/task</title>
-<circle cx="562.14" cy="69" r="4.8" fill="#ffffff" stroke="#07816c" stroke-width="2"/>
-<text x="562.14" y="60" text-anchor="middle" font-size="10" font-weight="600" fill="#59636e">H</text>
+<text x="18" y="74" font-size="15.5" font-weight="600">Copilot Fusion (Max)</text>
+<g><title>Copilot CLI &middot; Copilot Fusion (Max) (dynamic routing): 67.3% resolution, $6.65/task</title>
+<circle cx="659.04" cy="69" r="7.5" fill="#be3042"/>
+<text x="659.04" y="59" text-anchor="middle" font-size="10.5" font-weight="700" fill="#be3042">FUSION</text>
 </g>
-<g><title>Copilot CLI &middot; Copilot Fusion (max): 67.3% resolution, $6.65/task</title>
-<circle cx="659.04" cy="69" r="7.5" fill="#07816c"/>
-<text x="659.04" y="59" text-anchor="middle" font-size="10.5" font-weight="700" fill="#07816c">MAX</text>
-</g>
-<text x="756" y="74" font-size="15.5" font-weight="700">67.3%<tspan font-size="12.5" font-weight="500" fill="#59636e"> (max &middot; $6.65)</tspan></text>
+<text x="756" y="74" font-size="15.5" font-weight="700">67.3%<tspan font-size="12.5" font-weight="500" fill="#59636e"> ($6.65)</tspan></text>
 </g>
 <g class="task-series">
 <line x1="230" y1="113" x2="740" y2="113" stroke="#f0f4f8" stroke-width="1"/>
@@ -699,46 +701,55 @@ blockquote{border-left:4px solid #8250df;margin:30px 0;padding-left:22px;color:v
 </g>
 <g class="task-series">
 <line x1="230" y1="245" x2="740" y2="245" stroke="#f0f4f8" stroke-width="1"/>
-<text x="18" y="250" font-size="15.5" font-weight="600">GPT-6.1 Sol</text>
-<line x1="488.83" y1="245" x2="560.22" y2="245" stroke="#1878ba" stroke-width="4.5" stroke-opacity="0.25" stroke-linecap="round"/>
-<g><title>Copilot CLI &middot; GPT-6.1 Sol (low): 40.6% resolution, $0.45/task</title>
-<circle cx="488.83" cy="245" r="4.8" fill="#ffffff" stroke="#1878ba" stroke-width="2"/>
-<text x="488.83" y="236" text-anchor="middle" font-size="10" font-weight="600" fill="#59636e">L</text>
+<text x="18" y="250" font-size="15.5" font-weight="600">Copilot Fusion (High)</text>
+<g><title>Copilot CLI &middot; Copilot Fusion (High) (dynamic routing): 52.1% resolution, $2.27/task</title>
+<circle cx="562.14" cy="245" r="7.5" fill="#07816c"/>
+<text x="562.14" y="235" text-anchor="middle" font-size="10.5" font-weight="700" fill="#07816c">FUSION</text>
 </g>
-<g><title>Copilot CLI &middot; GPT-6.1 Sol (medium): 48.2% resolution, $0.59/task</title>
-<circle cx="537.28" cy="245" r="4.8" fill="#ffffff" stroke="#1878ba" stroke-width="2"/>
-</g>
-<g><title>Copilot CLI &middot; GPT-6.1 Sol (xhigh): 49.4% resolution, $0.81/task</title>
-<circle cx="544.92" cy="245" r="4.8" fill="#ffffff" stroke="#1878ba" stroke-width="2"/>
-</g>
-<g><title>Copilot CLI &middot; GPT-6.1 Sol (high): 50.3% resolution, $0.73/task</title>
-<circle cx="550.66" cy="245" r="4.8" fill="#ffffff" stroke="#1878ba" stroke-width="2"/>
-<text x="550.66" y="236" text-anchor="middle" font-size="10" font-weight="600" fill="#59636e">H</text>
-</g>
-<g><title>Copilot CLI &middot; GPT-6.1 Sol (max): 51.8% resolution, $1.11/task</title>
-<circle cx="560.22" cy="245" r="7.5" fill="#1878ba"/>
-<text x="560.22" y="235" text-anchor="middle" font-size="10.5" font-weight="700" fill="#1878ba">MAX</text>
-</g>
-<text x="756" y="250" font-size="15.5" font-weight="700">51.8%<tspan font-size="12.5" font-weight="500" fill="#59636e"> (max &middot; $1.11)</tspan></text>
+<text x="756" y="250" font-size="15.5" font-weight="700">52.1%<tspan font-size="12.5" font-weight="500" fill="#59636e"> ($2.27)</tspan></text>
 </g>
 <g class="task-series">
 <line x1="230" y1="289" x2="740" y2="289" stroke="#f0f4f8" stroke-width="1"/>
-<text x="18" y="294" font-size="15.5" font-weight="600">GPT-5.6 Sol</text>
-<line x1="266.98" y1="289" x2="394.48" y2="289" stroke="#bf3c85" stroke-width="4.5" stroke-opacity="0.25" stroke-linecap="round"/>
+<text x="18" y="294" font-size="15.5" font-weight="600">GPT-6.1 Sol</text>
+<line x1="488.83" y1="289" x2="560.22" y2="289" stroke="#1878ba" stroke-width="4.5" stroke-opacity="0.25" stroke-linecap="round"/>
+<g><title>Copilot CLI &middot; GPT-6.1 Sol (low): 40.6% resolution, $0.45/task</title>
+<circle cx="488.83" cy="289" r="4.8" fill="#ffffff" stroke="#1878ba" stroke-width="2"/>
+<text x="488.83" y="280" text-anchor="middle" font-size="10" font-weight="600" fill="#59636e">L</text>
+</g>
+<g><title>Copilot CLI &middot; GPT-6.1 Sol (medium): 48.2% resolution, $0.59/task</title>
+<circle cx="537.28" cy="289" r="4.8" fill="#ffffff" stroke="#1878ba" stroke-width="2"/>
+</g>
+<g><title>Copilot CLI &middot; GPT-6.1 Sol (xhigh): 49.4% resolution, $0.81/task</title>
+<circle cx="544.92" cy="289" r="4.8" fill="#ffffff" stroke="#1878ba" stroke-width="2"/>
+</g>
+<g><title>Copilot CLI &middot; GPT-6.1 Sol (high): 50.3% resolution, $0.73/task</title>
+<circle cx="550.66" cy="289" r="4.8" fill="#ffffff" stroke="#1878ba" stroke-width="2"/>
+<text x="550.66" y="280" text-anchor="middle" font-size="10" font-weight="600" fill="#59636e">H</text>
+</g>
+<g><title>Copilot CLI &middot; GPT-6.1 Sol (max): 51.8% resolution, $1.11/task</title>
+<circle cx="560.22" cy="289" r="7.5" fill="#1878ba"/>
+<text x="560.22" y="279" text-anchor="middle" font-size="10.5" font-weight="700" fill="#1878ba">MAX</text>
+</g>
+<text x="756" y="294" font-size="15.5" font-weight="700">51.8%<tspan font-size="12.5" font-weight="500" fill="#59636e"> (max &middot; $1.11)</tspan></text>
+</g>
+<g class="task-series">
+<line x1="230" y1="333" x2="740" y2="333" stroke="#f0f4f8" stroke-width="1"/>
+<text x="18" y="338" font-size="15.5" font-weight="600">GPT-5.6 Sol</text>
+<line x1="266.98" y1="333" x2="394.48" y2="333" stroke="#bf3c85" stroke-width="4.5" stroke-opacity="0.25" stroke-linecap="round"/>
 <g><title>Copilot CLI &middot; GPT-5.6 Sol (low): 5.8% resolution, $0.88/task</title>
-<circle cx="266.98" cy="289" r="4.8" fill="#ffffff" stroke="#bf3c85" stroke-width="2"/>
-<text x="266.98" y="280" text-anchor="middle" font-size="10" font-weight="600" fill="#59636e">L</text>
+<circle cx="266.98" cy="333" r="4.8" fill="#ffffff" stroke="#bf3c85" stroke-width="2"/>
+<text x="266.98" y="324" text-anchor="middle" font-size="10" font-weight="600" fill="#59636e">L</text>
 </g>
 <g><title>Copilot CLI &middot; GPT-5.6 Sol (medium): 15.2% resolution, $1.55/task</title>
-<circle cx="326.90" cy="289" r="4.8" fill="#ffffff" stroke="#bf3c85" stroke-width="2"/>
+<circle cx="326.90" cy="333" r="4.8" fill="#ffffff" stroke="#bf3c85" stroke-width="2"/>
 </g>
 <g><title>Copilot CLI &middot; GPT-5.6 Sol (xhigh): 25.8% resolution, $2.89/task</title>
-<circle cx="394.48" cy="289" r="7.5" fill="#bf3c85"/>
-<text x="394.48" y="279" text-anchor="middle" font-size="10.5" font-weight="700" fill="#bf3c85">XH</text>
+<circle cx="394.48" cy="333" r="7.5" fill="#bf3c85"/>
+<text x="394.48" y="323" text-anchor="middle" font-size="10.5" font-weight="700" fill="#bf3c85">XH</text>
 </g>
-<text x="756" y="294" font-size="15.5" font-weight="700">25.8%<tspan font-size="12.5" font-weight="500" fill="#59636e"> (xhigh &middot; $2.89)</tspan></text>
+<text x="756" y="338" font-size="15.5" font-weight="700">25.8%<tspan font-size="12.5" font-weight="500" fill="#59636e"> (xhigh &middot; $2.89)</tspan></text>
 </g>
-<text x="485" y="382" text-anchor="middle" font-size="13.5" fill="#59636e">Resolution Rate (%) in GitHub Copilot CLI &middot; higher is better (Terminal Bench 4.0 · Copilot CLI)</text>
+<text x="485" y="426" text-anchor="middle" font-size="13.5" fill="#59636e">Resolution Rate (%) in GitHub Copilot CLI &middot; higher is better (Terminal Bench 4.0 · Copilot CLI)</text>
 </svg>
     <div class="task-foot-source">Benchmark source: <a href="https://msbenchapp.azurewebsites.net/reports/compete?bin=2026-10-28&amp;benchmark=terminalbench4&amp;view=chart&amp;agent=Copilot+CLI&amp;model=claude-opus-5.5+%28low%29%2Cclaude-opus-5.5+%28medium%29%2Cclaude-opus-5.5+%28high%29%2Cclaude-opus-5.5+%28xhigh%29%2Cclaude-opus-5.5+%28max%29%2Cclaude-sonnet-5.5+%28low%29%2Cclaude-sonnet-5.5+%28medium%29%2Cclaude-sonnet-5.5+%28high%29%2Cclaude-sonnet-5.5+%28xhigh%29%2Cclaude-sonnet-5.5+%28max%29%2Cgpt-5.6-sol+%28low%29%2Cgpt-5.6-sol+%28medium%29%2Cgpt-5.6-sol+%28xhigh%29%2Cgpt-6-astra+%28low%29%2Cgpt-6-astra+%28medium%29%2Cgpt-6-astra+%28high%29%2Cgpt-6-astra+%28xhigh%29%2Cgpt-6-astra+%28max%29%2Cgpt-6.1-sol+%28low%29%2Cgpt-6.1-sol+%28medium%29%2Cgpt-6.1-sol+%28high%29%2Cgpt-6.1-sol+%28xhigh%29%2Cgpt-6.1-sol+%28max%29%2Chydrafusion%2Chydrafusion-max&amp;chart=expanded&amp;limit=276" target="_blank" rel="noopener">MSBench Reports &middot; Terminal Bench 4.0 (Copilot CLI, 2026-10-28) ↗</a></div>
   </section>
@@ -748,33 +759,28 @@ blockquote{border-left:4px solid #8250df;margin:30px 0;padding-left:22px;color:v
       <div class="task-head-top"><h3>Data Analysis &amp; Scientific Computing: Terminal Bench Science (Copilot CLI)</h3></div>
       <p class="task-sub">Resolution rate and cost per task on scientific computing and data analysis problems in GitHub Copilot CLI across thinking levels.</p>
     </div>
-    <svg class="task-plot" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 406" role="img" aria-label="Terminal Bench Science · Copilot CLI">
+    <svg class="task-plot" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 450" role="img" aria-label="Terminal Bench Science · Copilot CLI">
 <style>text{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;fill:#192740}</style>
-<rect width="1000" height="406" rx="10" fill="#ffffff" stroke="#dce3ee"/>
+<rect width="1000" height="450" rx="10" fill="#ffffff" stroke="#dce3ee"/>
 <text x="230" y="25" font-size="12" fill="#59636e" font-weight="600">Range bar spans Low &rarr; Peak thinking level; solid circle marks peak resolution rate (hover any dot for exact effort &amp; cost).</text>
-<line x1="230.0" y1="42" x2="230.0" y2="322" stroke="#dde4ee"/>
-<text x="230.0" y="348" text-anchor="middle" font-size="13.5">0%</text>
-<line x1="357.5" y1="42" x2="357.5" y2="322" stroke="#dde4ee"/>
-<text x="357.5" y="348" text-anchor="middle" font-size="13.5">20%</text>
-<line x1="485.0" y1="42" x2="485.0" y2="322" stroke="#dde4ee"/>
-<text x="485.0" y="348" text-anchor="middle" font-size="13.5">40%</text>
-<line x1="612.5" y1="42" x2="612.5" y2="322" stroke="#dde4ee"/>
-<text x="612.5" y="348" text-anchor="middle" font-size="13.5">60%</text>
-<line x1="740.0" y1="42" x2="740.0" y2="322" stroke="#dde4ee"/>
-<text x="740.0" y="348" text-anchor="middle" font-size="13.5">80%</text>
+<line x1="230.0" y1="42" x2="230.0" y2="366" stroke="#dde4ee"/>
+<text x="230.0" y="392" text-anchor="middle" font-size="13.5">0%</text>
+<line x1="357.5" y1="42" x2="357.5" y2="366" stroke="#dde4ee"/>
+<text x="357.5" y="392" text-anchor="middle" font-size="13.5">20%</text>
+<line x1="485.0" y1="42" x2="485.0" y2="366" stroke="#dde4ee"/>
+<text x="485.0" y="392" text-anchor="middle" font-size="13.5">40%</text>
+<line x1="612.5" y1="42" x2="612.5" y2="366" stroke="#dde4ee"/>
+<text x="612.5" y="392" text-anchor="middle" font-size="13.5">60%</text>
+<line x1="740.0" y1="42" x2="740.0" y2="366" stroke="#dde4ee"/>
+<text x="740.0" y="392" text-anchor="middle" font-size="13.5">80%</text>
 <g class="task-series">
 <line x1="230" y1="69" x2="740" y2="69" stroke="#f0f4f8" stroke-width="1"/>
-<text x="18" y="74" font-size="15.5" font-weight="600">Copilot Fusion</text>
-<line x1="563.41" y1="69" x2="667.33" y2="69" stroke="#07816c" stroke-width="4.5" stroke-opacity="0.25" stroke-linecap="round"/>
-<g><title>Copilot CLI &middot; Copilot Fusion (high): 52.3% resolution, $3.84/task</title>
-<circle cx="563.41" cy="69" r="4.8" fill="#ffffff" stroke="#07816c" stroke-width="2"/>
-<text x="563.41" y="60" text-anchor="middle" font-size="10" font-weight="600" fill="#59636e">H</text>
+<text x="18" y="74" font-size="15.5" font-weight="600">Copilot Fusion (Max)</text>
+<g><title>Copilot CLI &middot; Copilot Fusion (Max) (dynamic routing): 68.6% resolution, $12.17/task</title>
+<circle cx="667.33" cy="69" r="7.5" fill="#be3042"/>
+<text x="667.33" y="59" text-anchor="middle" font-size="10.5" font-weight="700" fill="#be3042">FUSION</text>
 </g>
-<g><title>Copilot CLI &middot; Copilot Fusion (max): 68.6% resolution, $12.17/task</title>
-<circle cx="667.33" cy="69" r="7.5" fill="#07816c"/>
-<text x="667.33" y="59" text-anchor="middle" font-size="10.5" font-weight="700" fill="#07816c">MAX</text>
-</g>
-<text x="756" y="74" font-size="15.5" font-weight="700">68.6%<tspan font-size="12.5" font-weight="500" fill="#59636e"> (max &middot; $12.17)</tspan></text>
+<text x="756" y="74" font-size="15.5" font-weight="700">68.6%<tspan font-size="12.5" font-weight="500" fill="#59636e"> ($12.17)</tspan></text>
 </g>
 <g class="task-series">
 <line x1="230" y1="113" x2="740" y2="113" stroke="#f0f4f8" stroke-width="1"/>
@@ -832,39 +838,48 @@ blockquote{border-left:4px solid #8250df;margin:30px 0;padding-left:22px;color:v
 </g>
 <g class="task-series">
 <line x1="230" y1="245" x2="740" y2="245" stroke="#f0f4f8" stroke-width="1"/>
-<text x="18" y="250" font-size="15.5" font-weight="600">Claude Sonnet 5.5</text>
-<line x1="288.01" y1="245" x2="523.25" y2="245" stroke="#d17908" stroke-width="4.5" stroke-opacity="0.25" stroke-linecap="round"/>
-<g><title>Copilot CLI &middot; Claude Sonnet 5.5 (low): 9.1% resolution, $1.06/task</title>
-<circle cx="288.01" cy="245" r="4.8" fill="#ffffff" stroke="#d17908" stroke-width="2"/>
-<text x="288.01" y="236" text-anchor="middle" font-size="10" font-weight="600" fill="#59636e">L</text>
+<text x="18" y="250" font-size="15.5" font-weight="600">Copilot Fusion (High)</text>
+<g><title>Copilot CLI &middot; Copilot Fusion (High) (dynamic routing): 52.3% resolution, $3.84/task</title>
+<circle cx="563.41" cy="245" r="7.5" fill="#07816c"/>
+<text x="563.41" y="235" text-anchor="middle" font-size="10.5" font-weight="700" fill="#07816c">FUSION</text>
 </g>
-<g><title>Copilot CLI &middot; Claude Sonnet 5.5 (medium): 12.3% resolution, $1.48/task</title>
-<circle cx="308.41" cy="245" r="4.8" fill="#ffffff" stroke="#d17908" stroke-width="2"/>
-</g>
-<g><title>Copilot CLI &middot; Claude Sonnet 5.5 (xhigh): 46.0% resolution, $6.05/task</title>
-<circle cx="523.25" cy="245" r="7.5" fill="#d17908"/>
-<text x="523.25" y="235" text-anchor="middle" font-size="10.5" font-weight="700" fill="#d17908">XH</text>
-</g>
-<text x="756" y="250" font-size="15.5" font-weight="700">46.0%<tspan font-size="12.5" font-weight="500" fill="#59636e"> (xhigh &middot; $6.05)</tspan></text>
+<text x="756" y="250" font-size="15.5" font-weight="700">52.3%<tspan font-size="12.5" font-weight="500" fill="#59636e"> ($3.84)</tspan></text>
 </g>
 <g class="task-series">
 <line x1="230" y1="289" x2="740" y2="289" stroke="#f0f4f8" stroke-width="1"/>
-<text x="18" y="294" font-size="15.5" font-weight="600">GPT-5.6 Sol</text>
-<line x1="235.74" y1="289" x2="321.16" y2="289" stroke="#bf3c85" stroke-width="4.5" stroke-opacity="0.25" stroke-linecap="round"/>
+<text x="18" y="294" font-size="15.5" font-weight="600">Claude Sonnet 5.5</text>
+<line x1="288.01" y1="289" x2="523.25" y2="289" stroke="#d17908" stroke-width="4.5" stroke-opacity="0.25" stroke-linecap="round"/>
+<g><title>Copilot CLI &middot; Claude Sonnet 5.5 (low): 9.1% resolution, $1.06/task</title>
+<circle cx="288.01" cy="289" r="4.8" fill="#ffffff" stroke="#d17908" stroke-width="2"/>
+<text x="288.01" y="280" text-anchor="middle" font-size="10" font-weight="600" fill="#59636e">L</text>
+</g>
+<g><title>Copilot CLI &middot; Claude Sonnet 5.5 (medium): 12.3% resolution, $1.48/task</title>
+<circle cx="308.41" cy="289" r="4.8" fill="#ffffff" stroke="#d17908" stroke-width="2"/>
+</g>
+<g><title>Copilot CLI &middot; Claude Sonnet 5.5 (xhigh): 46.0% resolution, $6.05/task</title>
+<circle cx="523.25" cy="289" r="7.5" fill="#d17908"/>
+<text x="523.25" y="279" text-anchor="middle" font-size="10.5" font-weight="700" fill="#d17908">XH</text>
+</g>
+<text x="756" y="294" font-size="15.5" font-weight="700">46.0%<tspan font-size="12.5" font-weight="500" fill="#59636e"> (xhigh &middot; $6.05)</tspan></text>
+</g>
+<g class="task-series">
+<line x1="230" y1="333" x2="740" y2="333" stroke="#f0f4f8" stroke-width="1"/>
+<text x="18" y="338" font-size="15.5" font-weight="600">GPT-5.6 Sol</text>
+<line x1="235.74" y1="333" x2="321.16" y2="333" stroke="#bf3c85" stroke-width="4.5" stroke-opacity="0.25" stroke-linecap="round"/>
 <g><title>Copilot CLI &middot; GPT-5.6 Sol (low): 0.9% resolution, $0.82/task</title>
-<circle cx="235.74" cy="289" r="4.8" fill="#ffffff" stroke="#bf3c85" stroke-width="2"/>
-<text x="235.74" y="280" text-anchor="middle" font-size="10" font-weight="600" fill="#59636e">L</text>
+<circle cx="235.74" cy="333" r="4.8" fill="#ffffff" stroke="#bf3c85" stroke-width="2"/>
+<text x="235.74" y="324" text-anchor="middle" font-size="10" font-weight="600" fill="#59636e">L</text>
 </g>
 <g><title>Copilot CLI &middot; GPT-5.6 Sol (medium): 4.3% resolution, $2.03/task</title>
-<circle cx="257.41" cy="289" r="4.8" fill="#ffffff" stroke="#bf3c85" stroke-width="2"/>
+<circle cx="257.41" cy="333" r="4.8" fill="#ffffff" stroke="#bf3c85" stroke-width="2"/>
 </g>
 <g><title>Copilot CLI &middot; GPT-5.6 Sol (xhigh): 14.3% resolution, $4.85/task</title>
-<circle cx="321.16" cy="289" r="7.5" fill="#bf3c85"/>
-<text x="321.16" y="279" text-anchor="middle" font-size="10.5" font-weight="700" fill="#bf3c85">XH</text>
+<circle cx="321.16" cy="333" r="7.5" fill="#bf3c85"/>
+<text x="321.16" y="323" text-anchor="middle" font-size="10.5" font-weight="700" fill="#bf3c85">XH</text>
 </g>
-<text x="756" y="294" font-size="15.5" font-weight="700">14.3%<tspan font-size="12.5" font-weight="500" fill="#59636e"> (xhigh &middot; $4.85)</tspan></text>
+<text x="756" y="338" font-size="15.5" font-weight="700">14.3%<tspan font-size="12.5" font-weight="500" fill="#59636e"> (xhigh &middot; $4.85)</tspan></text>
 </g>
-<text x="485" y="382" text-anchor="middle" font-size="13.5" fill="#59636e">Resolution Rate (%) in GitHub Copilot CLI &middot; higher is better (Terminal Bench Science · Copilot CLI)</text>
+<text x="485" y="426" text-anchor="middle" font-size="13.5" fill="#59636e">Resolution Rate (%) in GitHub Copilot CLI &middot; higher is better (Terminal Bench Science · Copilot CLI)</text>
 </svg>
     <div class="task-foot-source">Benchmark source: <a href="https://msbenchapp.azurewebsites.net/reports/compete?bin=2026-11-16&amp;benchmark=terminal-bench-science&amp;view=chart&amp;agent=Copilot+CLI&amp;model=claude-opus-5.5+%28low%29%2Cclaude-opus-5.5+%28medium%29%2Cclaude-opus-5.5+%28high%29%2Cclaude-opus-5.5+%28xhigh%29%2Cclaude-opus-5.5+%28max%29%2Cclaude-sonnet-5.5+%28low%29%2Cclaude-sonnet-5.5+%28medium%29%2Cclaude-sonnet-5.5+%28high%29%2Cclaude-sonnet-5.5+%28xhigh%29%2Cclaude-sonnet-5.5+%28max%29%2Cgpt-5.6-sol+%28low%29%2Cgpt-5.6-sol+%28medium%29%2Cgpt-5.6-sol+%28xhigh%29%2Cgpt-6-astra+%28low%29%2Cgpt-6-astra+%28medium%29%2Cgpt-6-astra+%28high%29%2Cgpt-6-astra+%28xhigh%29%2Cgpt-6-astra+%28max%29%2Cgpt-6.1-sol+%28low%29%2Cgpt-6.1-sol+%28medium%29%2Cgpt-6.1-sol+%28high%29%2Cgpt-6.1-sol+%28xhigh%29%2Cgpt-6.1-sol+%28max%29%2Chydrafusion%2Chydrafusion-max&amp;chart=expanded&amp;limit=276" target="_blank" rel="noopener">MSBench Reports &middot; Terminal Bench Science (Copilot CLI, 2026-11-16) ↗</a></div>
   </section>
