@@ -593,7 +593,7 @@ blockquote{border-left:4px solid #8250df;margin:30px 0;padding-left:22px;color:v
   <div class="playbook-card">
     <h4>2. Agentic Coding</h4>
     <p>Writing application and domain logic in existing repositories, multi-file refactoring, CLI/systems workflows, and performance tuning.</p>
-    <div class="pb-models"><strong>Copilot Fusion</strong> (<code>max: 80.5%</code> DeepSWE / <code>68.5%</code> TB 4.0), <strong>Claude Fable 5.2</strong> (<code>medium: 75.9%</code>), <strong>Claude Sonnet 5.5</strong> (<code>max: 75.2%</code> / <code>62.1%</code>), and <strong>Claude Opus 5.5</strong> (<code>max: 74.5%</code> / <code>xhigh: 62.1%</code>) lead, with <strong>GPT-6.1 Sol</strong> (<code>high: 74.2%</code> at <code>$0.69</code>) close behind on repo tasks.</div>
+    <div class="pb-models"><strong>Copilot Fusion</strong> (<code>max: 68.5%</code>, <code>high: 54.5%</code>), <strong>Claude Opus 5.5</strong> (<code>xhigh: 62.1%</code>), <strong>Claude Sonnet 5.5</strong> (<code>max: 62.1%</code>, <code>xhigh: 55.5%</code>), and <strong>Claude Fable 5.2</strong> (<code>low: 57.3%</code>) perform best in this category.</div>
   </div>
   <div class="playbook-card">
     <h4>3. Data Analysis &amp; Scientific Computing</h4>
@@ -667,218 +667,10 @@ blockquote{border-left:4px solid #8250df;margin:30px 0;padding-left:22px;color:v
   </section>
 
   <section id="panel-coding" role="tabpanel" aria-labelledby="tab-coding" tabindex="0" hidden>
-    <label class="metric-control" for="coding-metric">Benchmark:
-      <select id="coding-metric">
-        <option value="deepswe">DeepSWE 1.1 (Repo Software Engineering &middot; 113 tasks)</option>
-        <option value="tb4">Terminal-Bench 4.0 (CLI &amp; Systems Tasks &middot; 66 tasks)</option>
-      </select>
-    </label>
-    <div data-coding-metric="deepswe">
-      <div class="task-head-block">
-        <div class="task-head-top"><h3>Agentic Coding: DeepSWE 1.1 (GitHub Copilot)</h3></div>
-        <p class="task-sub">Resolution rate and average cost per task across 113 software engineering tasks in GitHub Copilot&rsquo;s agent harness (5 runs per configuration).</p>
-      </div>
-      <svg class="task-plot" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 491" role="img" aria-label="DeepSWE 1.1 · GitHub Copilot">
-<style>text{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;fill:#192740}</style>
-<rect width="1000" height="491" rx="10" fill="#ffffff" stroke="#dce3ee"/>
-<text x="225" y="25" font-size="12" fill="#59636e" font-weight="600">Range bar spans lowest &rarr; peak configuration; solid circle marks peak resolution rate (hover any dot for exact effort &amp; cost).</text>
-<line x1="225.00" y1="42" x2="225.00" y2="407" stroke="#dde4ee"/>
-<text x="225.00" y="433" text-anchor="middle" font-size="13.5">0%</text>
-<line x1="328.00" y1="42" x2="328.00" y2="407" stroke="#dde4ee"/>
-<text x="328.00" y="433" text-anchor="middle" font-size="13.5">20%</text>
-<line x1="431.00" y1="42" x2="431.00" y2="407" stroke="#dde4ee"/>
-<text x="431.00" y="433" text-anchor="middle" font-size="13.5">40%</text>
-<line x1="534.00" y1="42" x2="534.00" y2="407" stroke="#dde4ee"/>
-<text x="534.00" y="433" text-anchor="middle" font-size="13.5">60%</text>
-<line x1="637.00" y1="42" x2="637.00" y2="407" stroke="#dde4ee"/>
-<text x="637.00" y="433" text-anchor="middle" font-size="13.5">80%</text>
-<line x1="740.00" y1="42" x2="740.00" y2="407" stroke="#dde4ee"/>
-<text x="740.00" y="433" text-anchor="middle" font-size="13.5">100%</text>
-<g class="task-series">
-<line x1="225" y1="69" x2="740" y2="69" stroke="#f0f4f8" stroke-width="1"/>
-<text x="18" y="74" font-size="15.5" font-weight="600">Copilot Fusion</text>
-<line x1="571.60" y1="69" x2="639.58" y2="69" stroke="#1a7f37" stroke-width="4.5" stroke-opacity="0.25" stroke-linecap="round"/>
-<g><title>GitHub Copilot &middot; Copilot Fusion (standard): 67.3% resolution, $0.40/task</title>
-<circle cx="571.60" cy="69" r="4.8" fill="#ffffff" stroke="#1a7f37" stroke-width="2"/>
-<text x="571.60" y="60" text-anchor="middle" font-size="10" font-weight="600" fill="#59636e">STD</text>
-</g>
-<g><title>GitHub Copilot &middot; Copilot Fusion (high): 75.6% resolution, $0.91/task</title>
-<circle cx="614.34" cy="69" r="4.8" fill="#ffffff" stroke="#1a7f37" stroke-width="2"/>
-</g>
-<g><title>GitHub Copilot &middot; Copilot Fusion (max): 80.5% resolution, $4.91/task</title>
-<circle cx="639.58" cy="69" r="7.5" fill="#1a7f37"/>
-<text x="639.58" y="59" text-anchor="middle" font-size="10.5" font-weight="700" fill="#1a7f37">MAX</text>
-</g>
-<text x="756" y="74" font-size="15.5" font-weight="700">80.5%<tspan font-size="12.5" font-weight="500" fill="#59636e"> (max &middot; $4.91)</tspan></text>
-</g>
-<g class="task-series">
-<line x1="225" y1="113" x2="740" y2="113" stroke="#f0f4f8" stroke-width="1"/>
-<text x="18" y="118" font-size="15.5" font-weight="600">Claude Fable 5.2</text>
-<line x1="568.50" y1="113" x2="615.88" y2="113" stroke="#be3042" stroke-width="4.5" stroke-opacity="0.25" stroke-linecap="round"/>
-<g><title>GitHub Copilot &middot; Claude Fable 5.2 (low): 74.0% resolution, $2.11/task</title>
-<circle cx="606.10" cy="113" r="4.8" fill="#ffffff" stroke="#be3042" stroke-width="2"/>
-</g>
-<g><title>GitHub Copilot &middot; Claude Fable 5.2 (high): 75.0% resolution, $7.81/task</title>
-<circle cx="611.25" cy="113" r="4.8" fill="#ffffff" stroke="#be3042" stroke-width="2"/>
-</g>
-<g><title>GitHub Copilot &middot; Claude Fable 5.2 (xhigh): 75.2% resolution, $15.58/task</title>
-<circle cx="612.28" cy="113" r="4.8" fill="#ffffff" stroke="#be3042" stroke-width="2"/>
-</g>
-<g><title>GitHub Copilot &middot; Claude Fable 5.2 (max): 66.7% resolution, $29.91/task</title>
-<circle cx="568.50" cy="113" r="4.8" fill="#ffffff" stroke="#be3042" stroke-width="2"/>
-<text x="568.50" y="104" text-anchor="middle" font-size="10" font-weight="600" fill="#59636e">MAX</text>
-</g>
-<g><title>GitHub Copilot &middot; Claude Fable 5.2 (medium): 75.9% resolution, $2.58/task</title>
-<circle cx="615.88" cy="113" r="7.5" fill="#be3042"/>
-<text x="615.88" y="103" text-anchor="middle" font-size="10.5" font-weight="700" fill="#be3042">M</text>
-</g>
-<text x="756" y="118" font-size="15.5" font-weight="700">75.9%<tspan font-size="12.5" font-weight="500" fill="#59636e"> (medium &middot; $2.58)</tspan></text>
-</g>
-<g class="task-series">
-<line x1="225" y1="157" x2="740" y2="157" stroke="#f0f4f8" stroke-width="1"/>
-<text x="18" y="162" font-size="15.5" font-weight="600">Claude Sonnet 5.5</text>
-<line x1="500.53" y1="157" x2="612.28" y2="157" stroke="#d17908" stroke-width="4.5" stroke-opacity="0.25" stroke-linecap="round"/>
-<g><title>GitHub Copilot &middot; Claude Sonnet 5.5 (low): 53.5% resolution, $0.31/task</title>
-<circle cx="500.53" cy="157" r="4.8" fill="#ffffff" stroke="#d17908" stroke-width="2"/>
-<text x="500.53" y="148" text-anchor="middle" font-size="10" font-weight="600" fill="#59636e">L</text>
-</g>
-<g><title>GitHub Copilot &middot; Claude Sonnet 5.5 (medium): 63.4% resolution, $0.40/task</title>
-<circle cx="551.51" cy="157" r="4.8" fill="#ffffff" stroke="#d17908" stroke-width="2"/>
-</g>
-<g><title>GitHub Copilot &middot; Claude Sonnet 5.5 (high): 70.1% resolution, $0.78/task</title>
-<circle cx="586.01" cy="157" r="4.8" fill="#ffffff" stroke="#d17908" stroke-width="2"/>
-</g>
-<g><title>GitHub Copilot &middot; Claude Sonnet 5.5 (xhigh): 69.7% resolution, $2.03/task</title>
-<circle cx="583.96" cy="157" r="4.8" fill="#ffffff" stroke="#d17908" stroke-width="2"/>
-</g>
-<g><title>GitHub Copilot &middot; Claude Sonnet 5.5 (max): 75.2% resolution, $7.52/task</title>
-<circle cx="612.28" cy="157" r="7.5" fill="#d17908"/>
-<text x="612.28" y="147" text-anchor="middle" font-size="10.5" font-weight="700" fill="#d17908">MAX</text>
-</g>
-<text x="756" y="162" font-size="15.5" font-weight="700">75.2%<tspan font-size="12.5" font-weight="500" fill="#59636e"> (max &middot; $7.52)</tspan></text>
-</g>
-<g class="task-series">
-<line x1="225" y1="201" x2="740" y2="201" stroke="#f0f4f8" stroke-width="1"/>
-<text x="18" y="206" font-size="15.5" font-weight="600">Claude Opus 5.5</text>
-<line x1="574.17" y1="201" x2="608.67" y2="201" stroke="#a34415" stroke-width="4.5" stroke-opacity="0.25" stroke-linecap="round"/>
-<g><title>GitHub Copilot &middot; Claude Opus 5.5 (low): 67.8% resolution, $0.74/task</title>
-<circle cx="574.17" cy="201" r="4.8" fill="#ffffff" stroke="#a34415" stroke-width="2"/>
-<text x="574.17" y="192" text-anchor="middle" font-size="10" font-weight="600" fill="#59636e">L</text>
-</g>
-<g><title>GitHub Copilot &middot; Claude Opus 5.5 (medium): 72.0% resolution, $1.65/task</title>
-<circle cx="595.80" cy="201" r="4.8" fill="#ffffff" stroke="#a34415" stroke-width="2"/>
-</g>
-<g><title>GitHub Copilot &middot; Claude Opus 5.5 (high): 70.4% resolution, $2.35/task</title>
-<circle cx="587.56" cy="201" r="4.8" fill="#ffffff" stroke="#a34415" stroke-width="2"/>
-</g>
-<g><title>GitHub Copilot &middot; Claude Opus 5.5 (xhigh): 71.5% resolution, $4.96/task</title>
-<circle cx="593.22" cy="201" r="4.8" fill="#ffffff" stroke="#a34415" stroke-width="2"/>
-</g>
-<g><title>GitHub Copilot &middot; Claude Opus 5.5 (max): 74.5% resolution, $11.83/task</title>
-<circle cx="608.67" cy="201" r="7.5" fill="#a34415"/>
-<text x="608.67" y="191" text-anchor="middle" font-size="10.5" font-weight="700" fill="#a34415">MAX</text>
-</g>
-<text x="756" y="206" font-size="15.5" font-weight="700">74.5%<tspan font-size="12.5" font-weight="500" fill="#59636e"> (max &middot; $11.83)</tspan></text>
-</g>
-<g class="task-series">
-<line x1="225" y1="245" x2="740" y2="245" stroke="#f0f4f8" stroke-width="1"/>
-<text x="18" y="250" font-size="15.5" font-weight="600">GPT-6.1 Sol</text>
-<line x1="569.54" y1="245" x2="607.13" y2="245" stroke="#0969da" stroke-width="4.5" stroke-opacity="0.25" stroke-linecap="round"/>
-<g><title>GitHub Copilot &middot; GPT-6.1 Sol (low): 66.9% resolution, $0.35/task</title>
-<circle cx="569.54" cy="245" r="4.8" fill="#ffffff" stroke="#0969da" stroke-width="2"/>
-<text x="569.54" y="236" text-anchor="middle" font-size="10" font-weight="600" fill="#59636e">L</text>
-</g>
-<g><title>GitHub Copilot &middot; GPT-6.1 Sol (medium): 72.9% resolution, $0.54/task</title>
-<circle cx="600.44" cy="245" r="4.8" fill="#ffffff" stroke="#0969da" stroke-width="2"/>
-</g>
-<g><title>GitHub Copilot &middot; GPT-6.1 Sol (xhigh): 73.1% resolution, $0.76/task</title>
-<circle cx="601.46" cy="245" r="4.8" fill="#ffffff" stroke="#0969da" stroke-width="2"/>
-</g>
-<g><title>GitHub Copilot &middot; GPT-6.1 Sol (max): 72.7% resolution, $1.43/task</title>
-<circle cx="599.40" cy="245" r="4.8" fill="#ffffff" stroke="#0969da" stroke-width="2"/>
-</g>
-<g><title>GitHub Copilot &middot; GPT-6.1 Sol (high): 74.2% resolution, $0.69/task</title>
-<circle cx="607.13" cy="245" r="7.5" fill="#0969da"/>
-<text x="607.13" y="235" text-anchor="middle" font-size="10.5" font-weight="700" fill="#0969da">H</text>
-</g>
-<text x="756" y="250" font-size="15.5" font-weight="700">74.2%<tspan font-size="12.5" font-weight="500" fill="#59636e"> (high &middot; $0.69)</tspan></text>
-</g>
-<g class="task-series">
-<line x1="225" y1="289" x2="740" y2="289" stroke="#f0f4f8" stroke-width="1"/>
-<text x="18" y="294" font-size="15.5" font-weight="600">GPT-6 Astra</text>
-<line x1="587.56" y1="289" x2="606.10" y2="289" stroke="#5144c7" stroke-width="4.5" stroke-opacity="0.25" stroke-linecap="round"/>
-<g><title>GitHub Copilot &middot; GPT-6 Astra (low): 70.4% resolution, $2.30/task</title>
-<circle cx="587.56" cy="289" r="4.8" fill="#ffffff" stroke="#5144c7" stroke-width="2"/>
-</g>
-<g><title>GitHub Copilot &middot; GPT-6 Astra (medium): 73.6% resolution, $3.27/task</title>
-<circle cx="604.04" cy="289" r="4.8" fill="#ffffff" stroke="#5144c7" stroke-width="2"/>
-</g>
-<g><title>GitHub Copilot &middot; GPT-6 Astra (xhigh): 73.5% resolution, $4.10/task</title>
-<circle cx="603.52" cy="289" r="4.8" fill="#ffffff" stroke="#5144c7" stroke-width="2"/>
-</g>
-<g><title>GitHub Copilot &middot; GPT-6 Astra (max): 71.7% resolution, $6.44/task</title>
-<circle cx="594.26" cy="289" r="4.8" fill="#ffffff" stroke="#5144c7" stroke-width="2"/>
-</g>
-<g><title>GitHub Copilot &middot; GPT-6 Astra (high): 74.0% resolution, $3.82/task</title>
-<circle cx="606.10" cy="289" r="7.5" fill="#5144c7"/>
-<text x="606.10" y="279" text-anchor="middle" font-size="10.5" font-weight="700" fill="#5144c7">H</text>
-</g>
-<text x="756" y="294" font-size="15.5" font-weight="700">74.0%<tspan font-size="12.5" font-weight="500" fill="#59636e"> (high &middot; $3.82)</tspan></text>
-</g>
-<g class="task-series">
-<line x1="225" y1="333" x2="740" y2="333" stroke="#f0f4f8" stroke-width="1"/>
-<text x="18" y="338" font-size="15.5" font-weight="600">GPT-6.1 Terra</text>
-<line x1="535.03" y1="333" x2="589.62" y2="333" stroke="#0e7490" stroke-width="4.5" stroke-opacity="0.25" stroke-linecap="round"/>
-<g><title>GitHub Copilot &middot; GPT-6.1 Terra (low): 60.2% resolution, $0.16/task</title>
-<circle cx="535.03" cy="333" r="4.8" fill="#ffffff" stroke="#0e7490" stroke-width="2"/>
-<text x="535.03" y="324" text-anchor="middle" font-size="10" font-weight="600" fill="#59636e">L</text>
-</g>
-<g><title>GitHub Copilot &middot; GPT-6.1 Terra (medium): 69.0% resolution, $0.28/task</title>
-<circle cx="580.35" cy="333" r="4.8" fill="#ffffff" stroke="#0e7490" stroke-width="2"/>
-</g>
-<g><title>GitHub Copilot &middot; GPT-6.1 Terra (high): 67.3% resolution, $0.37/task</title>
-<circle cx="571.60" cy="333" r="4.8" fill="#ffffff" stroke="#0e7490" stroke-width="2"/>
-</g>
-<g><title>GitHub Copilot &middot; GPT-6.1 Terra (xhigh): 68.7% resolution, $0.59/task</title>
-<circle cx="578.81" cy="333" r="4.8" fill="#ffffff" stroke="#0e7490" stroke-width="2"/>
-</g>
-<g><title>GitHub Copilot &middot; GPT-6.1 Terra (max): 70.8% resolution, $1.20/task</title>
-<circle cx="589.62" cy="333" r="7.5" fill="#0e7490"/>
-<text x="589.62" y="323" text-anchor="middle" font-size="10.5" font-weight="700" fill="#0e7490">MAX</text>
-</g>
-<text x="756" y="338" font-size="15.5" font-weight="700">70.8%<tspan font-size="12.5" font-weight="500" fill="#59636e"> (max &middot; $1.20)</tspan></text>
-</g>
-<g class="task-series">
-<line x1="225" y1="377" x2="740" y2="377" stroke="#f0f4f8" stroke-width="1"/>
-<text x="18" y="382" font-size="15.5" font-weight="600">GPT-6 Luna</text>
-<line x1="289.89" y1="377" x2="543.27" y2="377" stroke="#57606a" stroke-width="4.5" stroke-opacity="0.25" stroke-linecap="round"/>
-<g><title>GitHub Copilot &middot; GPT-6 Luna (low): 12.6% resolution, $0.021/task</title>
-<circle cx="289.89" cy="377" r="4.8" fill="#ffffff" stroke="#57606a" stroke-width="2"/>
-<text x="289.89" y="368" text-anchor="middle" font-size="10" font-weight="600" fill="#59636e">L</text>
-</g>
-<g><title>GitHub Copilot &middot; GPT-6 Luna (medium): 49.4% resolution, $0.082/task</title>
-<circle cx="479.41" cy="377" r="4.8" fill="#ffffff" stroke="#57606a" stroke-width="2"/>
-</g>
-<g><title>GitHub Copilot &middot; GPT-6 Luna (high): 54.3% resolution, $0.096/task</title>
-<circle cx="504.64" cy="377" r="4.8" fill="#ffffff" stroke="#57606a" stroke-width="2"/>
-</g>
-<g><title>GitHub Copilot &middot; GPT-6 Luna (xhigh): 56.5% resolution, $0.11/task</title>
-<circle cx="515.97" cy="377" r="4.8" fill="#ffffff" stroke="#57606a" stroke-width="2"/>
-</g>
-<g><title>GitHub Copilot &middot; GPT-6 Luna (max): 61.8% resolution, $0.15/task</title>
-<circle cx="543.27" cy="377" r="7.5" fill="#57606a"/>
-<text x="543.27" y="367" text-anchor="middle" font-size="10.5" font-weight="700" fill="#57606a">MAX</text>
-</g>
-<text x="756" y="382" font-size="15.5" font-weight="700">61.8%<tspan font-size="12.5" font-weight="500" fill="#59636e"> (max &middot; $0.15)</tspan></text>
-</g>
-<text x="482" y="467" text-anchor="middle" font-size="13.5" fill="#59636e">Resolution Rate (%) in GitHub Copilot &middot; higher is better (DeepSWE 1.1 · GitHub Copilot)</text>
-</svg>
+    <div class="task-head-block">
+      <div class="task-head-top"><h3>Agentic Coding: Terminal-Bench 4.0 (GitHub Copilot)</h3></div>
+      <p class="task-sub">Resolution rate and average cost per task across 66 terminal, CLI, and systems engineering tasks in GitHub Copilot&rsquo;s agent harness (5 runs per configuration).</p>
     </div>
-    <div data-coding-metric="tb4" hidden>
-      <div class="task-head-block">
-        <div class="task-head-top"><h3>Agentic Coding: Terminal-Bench 4.0 (GitHub Copilot)</h3></div>
-        <p class="task-sub">Resolution rate and average cost per task across 66 terminal, CLI, and systems engineering tasks in GitHub Copilot&rsquo;s agent harness (5 runs per configuration).</p>
-      </div>
       <svg class="task-plot" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 491" role="img" aria-label="Terminal-Bench 4.0 · GitHub Copilot">
 <style>text{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;fill:#192740}</style>
 <rect width="1000" height="491" rx="10" fill="#ffffff" stroke="#dce3ee"/>
@@ -1073,8 +865,7 @@ blockquote{border-left:4px solid #8250df;margin:30px 0;padding-left:22px;color:v
 </g>
 <text x="482" y="467" text-anchor="middle" font-size="13.5" fill="#59636e">Resolution Rate (%) in GitHub Copilot &middot; higher is better (Terminal-Bench 4.0 · GitHub Copilot)</text>
 </svg>
-    </div>
-    <div class="task-foot-source">Benchmark source: <a href="https://benchmarks.github.com/" target="_blank" rel="noopener">GitHub Copilot Benchmarks &middot; DeepSWE 1.1 &amp; Terminal-Bench 4.0 (benchmarks.github.com) &nearr;</a></div>
+    <div class="task-foot-source">Benchmark source: <a href="https://benchmarks.github.com/" target="_blank" rel="noopener">GitHub Copilot Benchmarks &middot; Terminal-Bench 4.0 (benchmarks.github.com) &nearr;</a></div>
   </section>
 
   <section id="panel-documents" role="tabpanel" aria-labelledby="tab-documents" tabindex="0" hidden>
@@ -1345,7 +1136,7 @@ blockquote{border-left:4px solid #8250df;margin:30px 0;padding-left:22px;color:v
   </section>
 </section>
 
-<div class="takeaway">Shortlist the top-performing models for your task type at their sweet-spot effort (typically <code>Medium</code> to <code>xHigh</code>, or <code>Copilot Fusion</code> at <code>High</code>/<code>Max</code>). When two candidates achieve similar capability&mdash;such as <code>Claude Opus 5.5</code> (<code>74.5%</code>, <code>$11.83</code>) and <code>GPT-6.1 Sol</code> (<code>74.2%</code>, <code>$0.69</code>) on <code>DeepSWE 1.1</code>&mdash;use the <a href="#step-1">Step 1</a> cost and speed profiles to pick the faster or cheaper one.</div>
+<div class="takeaway">Shortlist the top-performing models for your task type at their sweet-spot effort (typically <code>Medium</code> to <code>xHigh</code>, or <code>Copilot Fusion</code> at <code>High</code>/<code>Max</code>). When two candidates achieve similar capability&mdash;such as <code>Claude Opus 5.5</code> (<code>high: 54.5%</code>, <code>$3.97</code>) and <code>GPT-6.1 Sol</code> (<code>high: 50.0%</code>, <code>$0.86</code>; <code>max: 54.2%</code>, <code>$1.39</code>) on <code>Terminal-Bench 4.0</code>&mdash;use the <a href="#step-1">Step 1</a> cost and speed profiles to pick the faster or cheaper one.</div>
 
 <!-- ==================== STEP 3 ==================== -->
 <h2 id="step-3">Step 3: Explore approaches and write bounded design specs</h2>
@@ -1381,7 +1172,7 @@ Write the comparison to docs/approaches.md. Do not implement anything yet.</pre>
 <div class="eff-summary-grid">
   <div class="eff-box">
     <h4>1. Pick a faster, lower-cost model</h4>
-    <p>On <code>DeepSWE 1.1</code> (<a href="https://benchmarks.github.com/" target="_blank" rel="noopener">GitHub Copilot Benchmarks</a>), configurations like <strong>GPT-6.1 Sol</strong> (<code>72.9%&ndash;74.2%</code> at <code>$0.54&ndash;$0.69/task</code>), <strong>GPT-6.1 Terra</strong> (<code>69.0%</code> at <code>$0.28/task</code>), <strong>Claude Sonnet 5.5</strong> (<code>63.4%&ndash;70.1%</code> at <code>$0.40&ndash;$0.78/task</code>), and <strong>Copilot Fusion (High)</strong> (<code>75.6%</code> at <code>$0.91/task</code>) retain high coding accuracy while cutting cost by <strong>80% to 95%</strong> vs. <code>Max</code> tiers&mdash;and finish in <strong>4 to 15 minutes</strong> on <code>Terminal-Bench 4.0</code>.</p>
+    <p>On <code>Terminal-Bench 4.0</code> (<a href="https://benchmarks.github.com/" target="_blank" rel="noopener">GitHub Copilot Benchmarks</a>), configurations like <strong>GPT-6.1 Sol</strong> (<code>47.3%&ndash;50.0%</code> at <code>$0.63&ndash;$0.86/task</code>), <strong>GPT-6.1 Terra</strong> (<code>38.2%&ndash;39.7%</code> at <code>$0.33&ndash;$0.48/task</code>), and <strong>Copilot Fusion (High)</strong> (<code>54.5%</code> at <code>$1.77/task</code>) cut cost by <strong>75% to 90%</strong> vs. <code>xHigh</code>/<code>Max</code> frontier models while finishing in <strong>6 to 15 minutes</strong>.</p>
   </div>
   <div class="eff-box">
     <h4>2. Medium effort is enough (at most High)</h4>
