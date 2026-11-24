@@ -576,8 +576,8 @@ blockquote{border-left:4px solid #8250df;margin:30px 0;padding-left:22px;color:v
 
 <p>Two key patterns from the <a href="https://benchmarks.github.com/" target="_blank" rel="noopener">GitHub Copilot Benchmarks</a> curves to keep in mind for later steps:</p>
 <ul>
-  <li><strong>Each model's cost and speed profile:</strong> Upper-right configurations (<code>Copilot Fusion</code> at <code>Max</code>, <code>Claude Opus 5.5</code>, <code>Claude Fable 5.2</code>, and <code>GPT-6 Astra</code>) reach higher resolution ceilings at higher cost (<code>$4.43&ndash;$32.67/task</code>) and latency (<code>11&ndash;66m</code>), while upper-left configurations (<code>GPT-6.1 Sol</code>, <code>GPT-6.1 Terra</code>, <code>Claude Sonnet 5.5</code> at <code>Medium</code>/<code>High</code>, and <code>Copilot Fusion</code> at <code>High</code>) deliver strong resolution at much lower cost (<code>$0.33&ndash;$1.77/task</code>) and faster turnaround (<code>4&ndash;15m</code>).</li>
-  <li><strong>How reasoning effort scales within a single model:</strong> Raising effort from <code>1 Low</code> &rarr; <code>3 High</code> / <code>4 xHigh</code> unlocks major capability gains on most models (for example, <code>Claude Sonnet 5.5</code> jumps from <code>21.8%</code> to <code>55.5%</code>, and <code>Claude Opus 5.5</code> climbs smoothly from <code>36.4%</code> &rarr; <code>48.8%</code> &rarr; <code>54.5%</code> &rarr; <code>62.1%</code>). Pushing all the way to <code>5 Max</code> often hits diminishing returns&mdash;or even slight regressions&mdash;while multiplying cost and latency (<code>Claude Opus 5.5</code> goes from <code>$7.64</code> to <code>$13.40</code> while dipping from <code>62.1%</code> to <code>60.6%</code>).</li>
+  <li><strong>Each model's cost and speed profile:</strong> On <code>Terminal-Bench 4.0</code>, upper-right configurations (<code>Copilot Fusion</code> at <code>Max</code> <code>68.5%</code>, <code>Claude Opus 5.5</code> <code>xHigh</code> <code>62.1%</code>, <code>Claude Sonnet 5.5</code> <code>Max</code> <code>62.1%</code>, and <code>Claude Fable 5.2</code> <code>57.3%</code>) reach the highest resolution ceilings at higher cost (<code>$4.43&ndash;$32.67/task</code>) and longer runtimes (<code>8&ndash;66m</code>). Upper-left configurations (<code>GPT-6.1 Sol</code> <code>47.3%&ndash;54.2%</code>, <code>Copilot Fusion</code> at <code>High</code> <code>54.5%</code>, and <code>GPT-6.1 Terra</code> <code>38.2%&ndash;50.9%</code>) deliver strong resolution at a fraction of the cost (<code>$0.33&ndash;$1.77/task</code>) and faster turnaround (<code>6&ndash;21m</code>)&mdash;matching or beating <code>GPT-6 Astra</code> (<code>53.9%</code> at <code>$6.99</code>). At the far bottom-left, ultra-low-cost <code>GPT-6 Luna</code> (<code>0.6%&ndash;14.2%</code> at <code>$0.02&ndash;$0.18/task</code>) shows why lightweight models struggle on open-ended terminal tasks.</li>
+  <li><strong>How reasoning effort scales within a single model:</strong> Raising effort from <code>1 Low</code> &rarr; <code>3 High</code> / <code>4 xHigh</code> unlocks major gains on most models (<code>Claude Sonnet 5.5</code> jumps from <code>21.8%</code> to <code>55.5%</code>, <code>Claude Opus 5.5</code> climbs smoothly from <code>36.4%</code> &rarr; <code>48.8%</code> &rarr; <code>54.5%</code> &rarr; <code>62.1%</code>, and <code>GPT-6.1 Terra</code> rises from <code>23.0%</code> to <code>42.1%</code>). Pushing all the way to <code>5 Max</code> often hits diminishing returns&mdash;or even regressions&mdash;while multiplying cost and latency (<code>Claude Opus 5.5</code> jumps from <code>$7.64</code> / <code>26m 29s</code> to <code>$13.40</code> / <code>51m 02s</code> while dipping to <code>60.6%</code>, and <code>Claude Fable 5.2</code> peaks at <code>Low</code> <code>57.3%</code> for <code>$4.43</code> whereas <code>Max</code> costs <code>$32.67/task</code> for <code>55.5%</code>).</li>
 </ul>
 
 <!-- ==================== STEP 2 ==================== -->
@@ -593,12 +593,12 @@ blockquote{border-left:4px solid #8250df;margin:30px 0;padding-left:22px;color:v
   <div class="playbook-card">
     <h4>2. Agentic Coding</h4>
     <p>Writing application and domain logic in existing repositories, multi-file refactoring, CLI/systems workflows, and performance tuning.</p>
-    <div class="pb-models"><strong>Copilot Fusion</strong> (<code>80.5%</code> DeepSWE / <code>68.5%</code> TB 4.0), <strong>Claude Fable 5.2</strong> (<code>75.9%</code>), <strong>Claude Sonnet 5.5</strong> (<code>75.2%</code> / <code>62.1%</code>), and <strong>Claude Opus 5.5</strong> (<code>74.5%</code> / <code>62.1%</code>) lead, with <strong>GPT-6.1 Sol</strong> (<code>74.2%</code> at <code>$0.69</code>) close behind.</div>
+    <div class="pb-models"><strong>Copilot Fusion</strong> (<code>max: 80.5%</code> DeepSWE / <code>68.5%</code> TB 4.0), <strong>Claude Fable 5.2</strong> (<code>medium: 75.9%</code>), <strong>Claude Sonnet 5.5</strong> (<code>max: 75.2%</code> / <code>62.1%</code>), and <strong>Claude Opus 5.5</strong> (<code>max: 74.5%</code> / <code>xhigh: 62.1%</code>) lead, with <strong>GPT-6.1 Sol</strong> (<code>high: 74.2%</code> at <code>$0.69</code>) close behind on repo tasks.</div>
   </div>
   <div class="playbook-card">
     <h4>3. Data Analysis &amp; Scientific Computing</h4>
     <p>Computational research workflows, quantitative data analysis, numerical simulation, and mathematical or engineering modeling in a terminal environment.</p>
-    <div class="pb-models"><strong>Claude Fable 5.2</strong> (<code>high: 74.3%</code>), <strong>Copilot Fusion</strong> (<code>max: 68.6%</code>), and <strong>GPT-6 Astra</strong> (<code>max: 62.0%</code>) perform best in this category.</div>
+    <div class="pb-models"><strong>Claude Fable 5.2</strong> (<code>high: 74.3%</code>), <strong>Copilot Fusion</strong> (<code>max: 68.6%</code>), and <strong>GPT-6 Astra</strong> (<code>max: 62.0%</code>) lead, followed by <strong>Claude Opus 5.5</strong> (<code>xhigh: 56.4%</code>) and cost-efficient <strong>GPT-6.1 Sol</strong> (<code>xhigh: 54.6%</code> at <code>$2.56</code>).</div>
   </div>
   <div class="playbook-card">
     <h4>4. Agent Skills &amp; Workflows</h4>
@@ -1250,7 +1250,7 @@ blockquote{border-left:4px solid #8250df;margin:30px 0;padding-left:22px;color:v
     <svg class="task-plot" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 364" role="img" aria-label="SkillsBench · Copilot CLI">
 <style>text{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;fill:#192740}</style>
 <rect width="1000" height="364" rx="10" fill="#ffffff" stroke="#dce3ee"/>
-<text x="225" y="25" font-size="12" fill="#59636e" font-weight="600">Range bar spans Low &rarr; Peak thinking level; solid circle marks peak resolution rate (hover any dot for exact effort &amp; cost).</text>
+<text x="225" y="25" font-size="12" fill="#59636e" font-weight="600">Range bar spans lowest &rarr; peak configuration; solid circle marks peak resolution rate (hover any dot for exact effort &amp; cost).</text>
 <line x1="225.0" y1="42" x2="225.0" y2="280" stroke="#dde4ee"/>
 <text x="225.0" y="306" text-anchor="middle" font-size="13.5">0%</text>
 <line x1="353.75" y1="42" x2="353.75" y2="280" stroke="#dde4ee"/>
@@ -1345,7 +1345,7 @@ blockquote{border-left:4px solid #8250df;margin:30px 0;padding-left:22px;color:v
   </section>
 </section>
 
-<div class="takeaway">Pick the top-performing model for your task type at <code>High</code> or <code>xHigh</code> effort (or <code>Copilot Fusion</code> at <code>High</code>/<code>Max</code>). When two models have similar capability on your task, use the <a href="#step-1">Step 1 charts</a> to pick the cheaper or faster one.</div>
+<div class="takeaway">Shortlist the top-performing models for your task type at their sweet-spot effort (typically <code>Medium</code> to <code>xHigh</code>, or <code>Copilot Fusion</code> at <code>High</code>/<code>Max</code>). When two candidates achieve similar capability&mdash;such as <code>Claude Opus 5.5</code> (<code>74.5%</code>, <code>$11.83</code>) and <code>GPT-6.1 Sol</code> (<code>74.2%</code>, <code>$0.69</code>) on <code>DeepSWE 1.1</code>&mdash;use the <a href="#step-1">Step 1</a> cost and speed profiles to pick the faster or cheaper one.</div>
 
 <!-- ==================== STEP 3 ==================== -->
 <h2 id="step-3">Step 3: Explore approaches and write bounded design specs</h2>
@@ -1381,7 +1381,7 @@ Write the comparison to docs/approaches.md. Do not implement anything yet.</pre>
 <div class="eff-summary-grid">
   <div class="eff-box">
     <h4>1. Pick a faster, lower-cost model</h4>
-    <p>In <a href="https://benchmarks.github.com/" target="_blank" rel="noopener">GitHub Copilot Benchmarks</a>, models like <strong>GPT-6.1 Sol</strong> (<code>$0.54&ndash;$0.86/task</code>), <strong>GPT-6.1 Terra</strong> (<code>$0.28&ndash;$0.48/task</code>), and <strong>Claude Sonnet 5.5</strong> (<code>$0.40&ndash;$1.53/task</code>) retain strong coding accuracy while cutting cost by <strong>75% to 90%</strong> and finishing in <strong>4 to 10 minutes</strong>.</p>
+    <p>On <code>DeepSWE 1.1</code> (<a href="https://benchmarks.github.com/" target="_blank" rel="noopener">GitHub Copilot Benchmarks</a>), configurations like <strong>GPT-6.1 Sol</strong> (<code>72.9%&ndash;74.2%</code> at <code>$0.54&ndash;$0.69/task</code>), <strong>GPT-6.1 Terra</strong> (<code>69.0%</code> at <code>$0.28/task</code>), <strong>Claude Sonnet 5.5</strong> (<code>63.4%&ndash;70.1%</code> at <code>$0.40&ndash;$0.78/task</code>), and <strong>Copilot Fusion (High)</strong> (<code>75.6%</code> at <code>$0.91/task</code>) retain high coding accuracy while cutting cost by <strong>80% to 95%</strong> vs. <code>Max</code> tiers&mdash;and finish in <strong>4 to 15 minutes</strong> on <code>Terminal-Bench 4.0</code>.</p>
   </div>
   <div class="eff-box">
     <h4>2. Medium effort is enough (at most High)</h4>
@@ -1393,7 +1393,7 @@ Write the comparison to docs/approaches.md. Do not implement anything yet.</pre>
   </div>
 </div>
 
-<div class="takeaway">Once your plan is written down, start a new session with a fast, lower-cost model (such as <code>GPT-6.1 Sol</code> or <code>Claude Sonnet 5.5</code>) at <code>Medium</code> effort (at most <code>High</code>) to implement and test the code.</div>
+<div class="takeaway">Once your plan is written down, start a new session with a fast, lower-cost configuration (such as <code>GPT-6.1 Sol</code>, <code>GPT-6.1 Terra</code>, or <code>Claude Sonnet 5.5</code> at <code>Medium</code>/<code>High</code> effort, or <code>Copilot Fusion</code> at <code>High</code>) to implement and test the code.</div>
 
 <!-- ==================== REAL EXAMPLE ==================== -->
 <h2 id="results">A real example: Enhancing skill performance without losing output quality</h2>
@@ -1411,7 +1411,7 @@ Write the comparison to docs/approaches.md. Do not implement anything yet.</pre>
   <ul>
     <li><strong>Steps 1 &amp; 2 (Choose the design model &amp; effort):</strong> Because diagnosing and redesigning the skill combines <strong>Agentic Coding</strong> and <strong>Data Analysis &amp; Scientific Computing</strong> (profiling phase latencies and token distributions), I selected <strong><code>GPT-6 Astra</code> at <code>High</code> effort</strong> for the afternoon design session.</li>
     <li><strong>Step 3 (Explore approaches &amp; write bounded specs):</strong> In a <strong>2.5-hour daytime design session</strong> (<code>35.7M</code> tokens), we first explored the runtime bottlenecks (<code>docs/approaches.md</code>) and then defined the target architecture, output-quality invariants, and three bounded specs to build in parallel: <strong>Plan A</strong> (deterministic setup), <strong>Plan B</strong> (parallel compiler passes), and <strong>Plan C</strong> (compacting model input from 1.6 MB to 300 KB with a deterministic report builder).</li>
-    <li><strong>Step 4 (Choose the implementation model &amp; effort):</strong> Before logging off, I opened three isolated Git worktrees and handed <code>Plan A</code>, <code>Plan B</code>, and <code>Plan C</code> to <strong><code>GPT-5.6 Sol</code></strong> at <code>Medium</code>/<code>High</code> effort to implement and verify against the 12-case benchmark suite overnight.</li>
+    <li><strong>Step 4 (Choose the implementation model &amp; effort):</strong> Before logging off, I opened three isolated Git worktrees and handed <code>Plan A</code>, <code>Plan B</code>, and <code>Plan C</code> to <strong><code>GPT-5.6 Sol</code></strong> (an earlier Sol-tier release, succeeded by <code>GPT-6.1 Sol</code> in the benchmarks above) at <code>Medium</code>/<code>High</code> effort to implement and verify against the 12-case benchmark suite overnight.</li>
   </ul>
 </div>
 
@@ -1434,7 +1434,7 @@ Write the comparison to docs/approaches.md. Do not implement anything yet.</pre>
 
 <h2>Putting the workflow into practice</h2>
 <div class="flow"><div>1. Understand the models</div><div>2. Choose the design model</div><div>3. Explore &amp; write bounded specs</div><div>4. Choose the implementation model</div></div>
-<p>For any complex, long-running engineering task, resist the temptation to hand the entire problem to a single model in one prompt. Understand how the Claude and GPT families trade off peak resolution against per-task cost (Step 1), pick a high-reasoning model for daytime design (Step 2), explore options and lock down bounded design specs (Step 3), and then switch to cost-efficient GPT models to implement those specs in parallel worktrees overnight (Step 4).</p>
+<p>For any complex, long-running engineering task, resist the temptation to hand the entire problem to a single model in one prompt. Understand how Copilot models and reasoning efforts trade off resolution, per-task cost, and execution speed (Step 1), shortlist a top-performing model for your task type for daytime design (Step 2), explore options and lock down bounded design specs (Step 3), and then start fresh sessions with faster, lower-cost configurations to implement those specs in parallel worktrees overnight (Step 4).</p>
 <blockquote>The goal is not to write one perfect prompt and walk away. It is to structure the work so that Copilot has the context, boundaries, and direction it needs to succeed.</blockquote>
 </article>
 </main>
