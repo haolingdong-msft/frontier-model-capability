@@ -141,8 +141,8 @@ blockquote{border-left:4px solid #8250df;margin:30px 0;padding-left:22px;color:v
 <h1>How to tackle complex, long-running tasks with GitHub Copilot</h1>
 <p class="dek">A simple four-step workflow: use a strong reasoning model to design a clear plan during the day, then switch to a faster, cheaper model to write the code overnight.</p>
 
-<p>Have you ever given GitHub Copilot a big, multi-hour task&mdash;only to come back later and find it stuck in a loop, burning through tokens, or claiming &ldquo;done!&rdquo; while quietly breaking existing behavior?</p>
-<p>For small, self-contained edits, a single prompt works great. For hard tasks&mdash;like making a system 5&times; faster without hurting quality, or changing core logic with tricky edge cases&mdash;asking one model to figure out the design, weigh trade-offs, edit dozens of files, and test everything in a single open-ended prompt rarely works. One bad early guess snowballs into hours of wasted work.</p>
+<p>Have you ever given GitHub Copilot a big, multi-hour task, only to come back later and find it stuck in a loop, burning through tokens, or claiming &ldquo;done!&rdquo; while quietly breaking existing behavior?</p>
+<p>For small, self-contained edits, a single prompt works great. For hard tasks (such as making a system 5&times; faster without hurting quality, or changing core logic with tricky edge cases), asking one model to figure out the design, weigh trade-offs, edit dozens of files, and test everything in a single open-ended prompt rarely works. One bad early guess snowballs into hours of wasted work.</p>
 
 <h3>The 4-step workflow</h3>
 <p>Instead of pasting one giant prompt and hoping for the best, split <strong>daytime design</strong> from <strong>overnight coding</strong> in four steps:</p>
@@ -384,7 +384,7 @@ blockquote{border-left:4px solid #8250df;margin:30px 0;padding-left:22px;color:v
       </aside>
     </div>
     <div style="margin-top: 12px; padding: 10px 14px; background: #f6f8fa; border-left: 3px solid #0969da; border-radius: 0 6px 6px 0; font-size: 0.92rem; line-height: 1.55; color: #24292f;">
-      <strong>How to read this:</strong> At <strong>High (3)</strong> effort (circled), <strong>GPT-6.1 Sol</strong> solves 50.0% of tasks vs. 54.5% for <strong>Claude Opus 5.5</strong>&mdash;almost the same accuracy for <strong>nearly 5&times; less money</strong> ($0.86 vs. $3.97 per task). Meanwhile, pushing Opus from <strong>xHigh (4)</strong> to <strong>Max (5)</strong> nearly doubles the cost ($7.64 &rarr; $13.40) while accuracy actually dips (62.1% &rarr; 60.6%).
+      <strong>How to read this:</strong> At <strong>High (3)</strong> effort (circled), <strong>GPT-6.1 Sol</strong> solves 50.0% of tasks vs. 54.5% for <strong>Claude Opus 5.5</strong>, delivering almost the same accuracy for <strong>nearly 5&times; less money</strong> ($0.86 vs. $3.97 per task). Meanwhile, pushing Opus from <strong>xHigh (4)</strong> to <strong>Max (5)</strong> nearly doubles the cost ($7.64 &rarr; $13.40) while accuracy actually dips (62.1% &rarr; 60.6%).
     </div>
     <p class="gh-bench-footnote">Benchmark source: <a href="https://benchmarks.github.com/" target="_blank" rel="noopener">GitHub Copilot Benchmarks &middot; Terminal-Bench 4.0 (benchmarks.github.com) &nearr;</a></p>
   </div>
@@ -572,7 +572,7 @@ blockquote{border-left:4px solid #8250df;margin:30px 0;padding-left:22px;color:v
       </aside>
     </div>
     <div style="margin-top: 12px; padding: 10px 14px; background: #f6f8fa; border-left: 3px solid #0969da; border-radius: 0 6px 6px 0; font-size: 0.92rem; line-height: 1.55; color: #24292f;">
-      <strong>How to read this:</strong> Turning <strong>Claude Opus 5.5</strong> up from <strong>High (3)</strong> to <strong>xHigh (4)</strong> (circled) boosts accuracy from 54.5% to 62.1%, but more than doubles median wait time per task (12m 53s &rarr; 26m 29s)&mdash;and <strong>Max (5)</strong> takes 51 minutes. By contrast, <strong>GPT-6.1 Sol</strong> at <strong>High (3)</strong> finishes in under 10 minutes.
+      <strong>How to read this:</strong> Turning <strong>Claude Opus 5.5</strong> up from <strong>High (3)</strong> to <strong>xHigh (4)</strong> (circled) boosts accuracy from 54.5% to 62.1%, but more than doubles median wait time per task (12m 53s &rarr; 26m 29s), and <strong>Max (5)</strong> takes 51 minutes. By contrast, <strong>GPT-6.1 Sol</strong> at <strong>High (3)</strong> finishes in under 10 minutes.
     </div>
     <p class="gh-bench-footnote">Benchmark source: <a href="https://msbenchapp.azurewebsites.net/reports/compete?bin=2026-11-16&amp;benchmark=terminalbench4&amp;view=chart&amp;agent=Copilot+CLI&amp;x=timeP50&amp;chart=expanded" target="_blank" rel="noopener">MSBench Reports &middot; Terminal-Bench 4.0 Agent Time P50 (Copilot CLI, 2026-11-16) &nearr;</a></p>
   </div>
@@ -585,13 +585,13 @@ blockquote{border-left:4px solid #8250df;margin:30px 0;padding-left:22px;color:v
     <h4>Heavyweights vs. fast value models</h4>
     <ul>
       <li><strong>Heavyweights</strong> (<strong>Copilot Fusion Max</strong>, <strong>Claude Opus 5.5</strong>, <strong>Claude Sonnet 5.5</strong> at high effort, <strong>Claude Fable 5.2</strong>) solve the hardest problems (57%&ndash;68.5%), but cost $4&ndash;$33/task and run longer. Save them for <strong>design</strong>.</li>
-      <li><strong>Fast value models</strong> (<strong>GPT-6.1 Sol</strong>, <strong>Copilot Fusion High</strong>, <strong>GPT-6.1 Terra</strong>) still solve 38%&ndash;54.5% of tasks for just $0.33&ndash;$1.77 in 6&ndash;15 minutes&mdash;ideal for <strong>coding</strong>.</li>
+      <li><strong>Fast value models</strong> (<strong>GPT-6.1 Sol</strong>, <strong>Copilot Fusion High</strong>, <strong>GPT-6.1 Terra</strong>) still solve 38%&ndash;54.5% of tasks for just $0.33&ndash;$1.77 in 6&ndash;15 minutes, making them ideal for <strong>coding</strong>.</li>
       <li><strong>Lightweight models</strong> (<strong>GPT-6 Luna</strong>) cost pennies, but struggle on complex multi-step tasks (&lt;15%).</li>
     </ul>
   </div>
   <div class="family-card gpt">
     <div class="fc-tag">Pattern 2 &middot; Thinking Effort</div>
-    <h4>Turn up effort to High or xHigh&mdash;rarely Max</h4>
+    <h4>Turn up effort to High or xHigh, rarely Max</h4>
     <ul>
       <li>Raising effort from <strong>Low (1)</strong> to <strong>High (3)</strong> or <strong>xHigh (4)</strong> gives a big accuracy jump on most models (for example, <strong>Claude Opus 5.5</strong> climbs from 36.4% to 62.1%, and <strong>Claude Sonnet 5.5</strong> jumps from 21.8% to 55.5%).</li>
       <li>Going all the way to <strong>Max (5)</strong> rarely pays off: cost and wait time roughly <strong>double</strong>, while accuracy plateaus or even dips slightly (<strong>Opus 5.5</strong> and <strong>Fable 5.2</strong>).</li>
@@ -603,7 +603,7 @@ blockquote{border-left:4px solid #8250df;margin:30px 0;padding-left:22px;color:v
 
 <!-- ==================== STEP 2 ==================== -->
 <h2 id="step-2">Step 2: Pick a strong design model for your task type</h2>
-<p>Step 1 showed how models behave on terminal coding tasks, but no single model wins every kind of work&mdash;for example, <strong>GPT-6 Astra</strong> sits mid-pack on CLI tasks, yet ranks <strong>#1 on UI design</strong> and <strong>top-3 on scientific computing</strong>. Because your daytime design chat is short and shapes everything that follows, start by picking a top model for your specific task:</p>
+<p>Step 1 showed how models behave on terminal coding tasks, but no single model wins every kind of work. For example, <strong>GPT-6 Astra</strong> sits mid-pack on CLI tasks, yet ranks <strong>#1 on UI design</strong> and <strong>top-3 on scientific computing</strong>. Because your daytime design chat is short and shapes everything that follows, start by picking a top model for your specific task:</p>
 
 <div class="playbook-grid">
   <div class="playbook-card">
@@ -619,7 +619,7 @@ blockquote{border-left:4px solid #8250df;margin:30px 0;padding-left:22px;color:v
   <div class="playbook-card">
     <h4>3. Data Analysis &amp; Scientific Computing</h4>
     <p>Analyzing datasets, profiling bottlenecks, and running math, science, or engineering scripts.</p>
-    <div class="pb-models"><strong>Top picks:</strong> <strong>Claude Fable 5.2</strong> (High: 74.3%), <strong>Copilot Fusion</strong> (Max: 68.6%), and <strong>GPT-6 Astra</strong> (Max: 62.0%)&mdash;or <strong>GPT-6.1 Sol</strong> (54.6% at $2.56) on a budget.</div>
+    <div class="pb-models"><strong>Top picks:</strong> <strong>Claude Fable 5.2</strong> (High: 74.3%), <strong>Copilot Fusion</strong> (Max: 68.6%), and <strong>GPT-6 Astra</strong> (Max: 62.0%), or <strong>GPT-6.1 Sol</strong> (54.6% at $2.56) on a budget.</div>
   </div>
   <div class="playbook-card">
     <h4>4. Agent Skills &amp; Workflows</h4>
@@ -1161,7 +1161,7 @@ blockquote{border-left:4px solid #8250df;margin:30px 0;padding-left:22px;color:v
 
 <!-- ==================== STEP 3 ==================== -->
 <h2 id="step-3">Step 3: Explore options first, then write a clear plan</h2>
-<p>Once you have picked a strong design model, <strong>don&rsquo;t ask it to write code right away.</strong> When Copilot jumps straight into coding, it locks onto the first idea it thinks of&mdash;even if that approach is slow, over-complicated, or breaks subtle edge cases. Instead, spend your daytime chat doing two quick steps before any code is touched:</p>
+<p>Once you have picked a strong design model, <strong>don&rsquo;t ask it to write code right away.</strong> When Copilot jumps straight into coding, it locks onto the first idea it thinks of, even if that approach is slow, over-complicated, or breaks subtle edge cases. Instead, spend your daytime chat doing two quick steps before any code is touched:</p>
 
 <h3>3.1 Ask for 2&ndash;3 options before picking a direction</h3>
 <p>Ask Copilot to find the root cause of the problem and propose 2 to 3 different ways to solve it, along with the pros, cons, and risks of each. That lets <strong>you</strong> choose the right direction in minutes instead of discovering a dead end hours later.</p>
@@ -1176,7 +1176,7 @@ For each approach, explain:
 Save the comparison to docs/approaches.md. Do not write any code yet.</pre></div>
 
 <h3>3.2 Turn your chosen option into a clear plan file</h3>
-<p>Once you pick which approach (or approaches) to try, ask your design model to write a standalone plan file (<code>plan-1.md</code>, <code>plan-2.md</code>, etc.). Think of this file as the handoff checklist for your coding agent&mdash;it spells out <strong>what to build</strong>, <strong>which files it may touch</strong>, <strong>what must not break</strong>, and <strong>how to test the result</strong>.</p>
+<p>Once you pick which approach (or approaches) to try, ask your design model to write a standalone plan file (<code>plan-1.md</code>, <code>plan-2.md</code>, etc.). Think of this file as the handoff checklist for your coding agent: it spells out <strong>what to build</strong>, <strong>which files it may touch</strong>, <strong>what must not break</strong>, and <strong>how to test the result</strong>.</p>
 
 <div class="prompt"><strong>Prompt template: Write a clear implementation plan</strong><pre>For each selected approach in docs/approaches.md, write a standalone implementation plan (plan-1.md, plan-2.md, etc.) that clearly lists:
 1. Design: what each part does and its inputs/outputs.
@@ -1193,11 +1193,11 @@ Save the comparison to docs/approaches.md. Do not write any code yet.</pre></div
 <div class="eff-summary-grid">
   <div class="eff-box">
     <h4>1. Pick a fast, low-cost model</h4>
-    <p>Models in the upper-left of <a href="#step-1">Step 1</a>&mdash;like <strong>GPT-6.1 Sol</strong> ($0.63&ndash;$0.86/task), <strong>GPT-6.1 Terra</strong> ($0.33&ndash;$0.48/task), or <strong>Copilot Fusion (High)</strong> ($1.77/task)&mdash;cut cost by <strong>75% to 90%</strong> vs. heavyweight <code>xHigh</code>/<code>Max</code> models and finish in <strong>6 to 15 minutes</strong>.</p>
+    <p>Models in the upper-left of <a href="#step-1">Step 1</a> (such as <strong>GPT-6.1 Sol</strong> at $0.63&ndash;$0.86/task, <strong>GPT-6.1 Terra</strong> at $0.33&ndash;$0.48/task, or <strong>Copilot Fusion High</strong> at $1.77/task) cut cost by <strong>75% to 90%</strong> vs. heavyweight <code>xHigh</code>/<code>Max</code> models and finish in <strong>6 to 15 minutes</strong>.</p>
   </div>
   <div class="eff-box">
     <h4>2. Medium effort is enough (at most High)</h4>
-    <p>Because your plan file already specifies which files to edit and how to verify them, <strong><code>Medium</code> effort is usually enough (at most <code>High</code>)</strong>&mdash;saving the extra wait time and cost of <code>xHigh</code> or <code>Max</code>.</p>
+    <p>Because your plan file already specifies which files to edit and how to verify them, <strong><code>Medium</code> effort is usually enough (at most <code>High</code>)</strong>, saving the extra wait time and cost of <code>xHigh</code> or <code>Max</code>.</p>
   </div>
   <div class="eff-box">
     <h4>3. Start a fresh chat session</h4>
@@ -1215,7 +1215,7 @@ Save the comparison to docs/approaches.md. Do not write any code yet.</pre></div
   <div class="cb-label">Before &middot; One Open-Ended Prompt Overnight</div>
   <p>At first, I gave <strong>GPT-6 Astra</strong> a single open-ended prompt and let it run overnight:</p>
   <p><code>"Help me improve the performance to meet 5 mins target, at the same time avoid reports quality regression by running benchmark."</code></p>
-  <p><strong>What happened:</strong> It ran for <strong>12 hours</strong> and burned <strong>160.5M tokens (1,583 calls)</strong>&mdash;yet <strong>0 out of 12 cases</strong> hit the 5-minute target, and <strong>0 out of 12 reports</strong> met our quality bar because the agent cut corners to save time. I spent 2.5 hours the next morning reviewing the mess only to <code>git revert</code> the entire branch.</p>
+  <p><strong>What happened:</strong> It ran for <strong>12 hours</strong> and burned <strong>160.5M tokens (1,583 calls)</strong>, yet <strong>0 out of 12 cases</strong> hit the 5-minute target and <strong>0 out of 12 reports</strong> met our quality bar because the agent cut corners to save time. I spent 2.5 hours the next morning reviewing the mess only to <code>git revert</code> the entire branch.</p>
 </div>
 
 <div class="case-box night">
@@ -1247,7 +1247,7 @@ Save the comparison to docs/approaches.md. Do not write any code yet.</pre></div
 <h2>Putting it into practice</h2>
 <div class="flow"><div>1. Understand the models</div><div>2. Pick a design model</div><div>3. Write a clear plan</div><div>4. Code with a fast model</div></div>
 <p>Next time you face a complex, multi-hour task, resist the urge to paste one big prompt and walk away. Check how models trade off accuracy, cost, and speed (Step 1), use a top model for your task type during the day (Step 2) to compare options and write a clear <code>plan.md</code> (Step 3), and then start a fresh session with a fast, cost-efficient model at <code>Medium</code> effort to build and test it overnight (Step 4).</p>
-<blockquote>The secret isn&rsquo;t writing one magic prompt and walking away&mdash;it&rsquo;s giving Copilot clear plans, clear guardrails, and the right model for each phase of the work.</blockquote>
+<blockquote>The secret isn&rsquo;t writing one magic prompt and walking away. It&rsquo;s giving Copilot clear plans, clear guardrails, and the right model for each phase of the work.</blockquote>
 </article>
 </main>
 <script>
