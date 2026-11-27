@@ -75,7 +75,7 @@ blockquote{border-left:4px solid #8250df;margin:30px 0;padding-left:22px;color:v
 .handoff-note{background:#fbf8ff;border:1px solid #d8b9ff;border-left:4px solid #8250df;border-radius:8px;padding:14px 18px;margin:20px 0}
 .handoff-note strong.hn-head{display:block;font-size:14px;color:#6639ba;margin-bottom:4px}
 .handoff-note p{margin:0;font-size:14.5px;line-height:1.5;color:#1f2328}
-.eff-summary-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:18px 0}
+.eff-summary-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin:18px 0}
 .eff-box{background:#ffffff;border:1px solid #d0d7de;border-top:3px solid #1a7f37;border-radius:10px;padding:15px 17px}
 .eff-box h4{margin:0 0 6px;font-size:15.5px;color:#1f2328}
 .eff-box p{margin:0;font-size:13.8px;line-height:1.5;color:#59636e}
@@ -166,7 +166,7 @@ blockquote{border-left:4px solid #8250df;margin:30px 0;padding-left:22px;color:v
   <a class="wf-step-card overnight" href="#step-4">
     <div class="wf-phase">Step 4 &middot; Overnight Code</div>
     <strong>4. Code with a fast model</strong>
-    <span>Start a fresh session with a faster, cheaper model at Medium effort (at most High) to build the plan.</span>
+    <span>Run plans in parallel sub-sessions with a fast model, supervised by a central monitor.</span>
   </a>
 </div>
 
@@ -1200,12 +1200,16 @@ Save the comparison to docs/approaches.md. Do not write any code yet.</pre></div
     <p>Because your plan file already specifies which files to edit and how to verify them, <strong><code>Medium</code> effort is usually enough (at most <code>High</code>)</strong>, saving the extra wait time and cost of <code>xHigh</code> or <code>Max</code>.</p>
   </div>
   <div class="eff-box">
-    <h4>3. Start a fresh chat session</h4>
-    <p>Switching models mid-conversation breaks <a href="https://github.blog/ai-and-ml/github-copilot/getting-more-from-each-token-how-copilot-improves-context-handling-and-model-routing/" target="_blank" rel="noopener">Copilot&rsquo;s prompt caching</a>. Finish your design in one chat, save the plan to a file, and open a <strong>new session</strong> (or separate Git worktrees) to write the code.</p>
+    <h4>3. Start a fresh sub-session per plan</h4>
+    <p>Switching models mid-conversation breaks <a href="https://github.blog/ai-and-ml/github-copilot/getting-more-from-each-token-how-copilot-improves-context-handling-and-model-routing/" target="_blank" rel="noopener">Copilot&rsquo;s prompt caching</a>. Finish your design in one chat, save each plan to a file, and open a <strong>fresh sub-session</strong> in its own Git worktree to write the code.</p>
+  </div>
+  <div class="eff-box">
+    <h4>4. Monitor sub-sessions to stop dead-end loops</h4>
+    <p>When running multiple sub-sessions in parallel, use one <strong>central session</strong> to periodically check their progress. If a sub-session gets stuck repeating errors without making progress, stop it early to cut losses and prevent wasted tokens.</p>
   </div>
 </div>
 
-<div class="takeaway">Start a new session with a fast, lower-cost model (such as <code>GPT-6.1 Sol</code>, <code>GPT-6.1 Terra</code>, or <code>Claude Sonnet 5.5</code> at <code>Medium</code>/<code>High</code> effort, or <code>Copilot Fusion</code> at <code>High</code>) and hand it your saved <code>plan.md</code> to build and test.</div>
+<div class="takeaway">Run each saved <code>plan.md</code> in a fresh sub-session with a fast, lower-cost model at <code>Medium</code> (at most <code>High</code>) effort, and use a central session to monitor progress and stop any stalled run early.</div>
 
 <!-- ==================== REAL EXAMPLE ==================== -->
 <h2 id="results">A real example: Speeding up a 22-minute skill without losing quality</h2>
@@ -1223,7 +1227,7 @@ Save the comparison to docs/approaches.md. Do not write any code yet.</pre></div
   <ul>
     <li><strong>Steps 1 &amp; 2 (Pick a strong design model):</strong> Finding why the skill was slow needed both <strong>Agentic Coding</strong> and <strong>Data Analysis</strong> (profiling latency and token usage), so I picked <strong>GPT-6 Astra at <code>High</code> effort</strong> for an afternoon design chat.</li>
     <li><strong>Step 3 (Explore options &amp; write clear plans):</strong> In <strong>2.5 hours</strong> (35.7M tokens), we identified the bottlenecks (<code>docs/approaches.md</code>), set strict quality guardrails, and wrote three standalone candidate plans: <strong>Plan A</strong> (add caching to the preparation phase), <strong>Plan B</strong> (minimize model input size), and <strong>Plan C</strong> (run tasks in parallel using subagents).</li>
-    <li><strong>Step 4 (Code &amp; benchmark in parallel):</strong> Before logging off, I opened three clean Git worktrees with fresh sessions and handed <code>Plan A</code>, <code>Plan B</code>, and <code>Plan C</code> to <strong>GPT-5.6 Sol</strong> (the predecessor to <strong>GPT-6.1 Sol</strong>) at <code>Medium</code>/<code>High</code> effort to build and run all 12 benchmark tests overnight.</li>
+    <li><strong>Step 4 (Run sub-sessions in parallel with a central monitor):</strong> Before logging off, I launched three isolated sub-sessions in clean Git worktrees, handing <code>Plan A</code>, <code>Plan B</code>, and <code>Plan C</code> to <strong>GPT-5.6 Sol</strong> (the predecessor to <strong>GPT-6.1 Sol</strong>) at <code>Medium</code>/<code>High</code> effort, with a central session monitoring progress so any run stuck in a loop could be stopped early instead of burning tokens all night.</li>
     <li><strong>Outcome:</strong> <strong>Plan B</strong> delivered the best results, saving both tokens and compute effort while achieving the target performance improvement (12/12 reports passing quality checks).</li>
   </ul>
 </div>
@@ -1247,7 +1251,7 @@ Save the comparison to docs/approaches.md. Do not write any code yet.</pre></div
 
 <h2>Putting it into practice</h2>
 <div class="flow"><div>1. Understand the models</div><div>2. Pick a design model</div><div>3. Write a clear plan</div><div>4. Code with a fast model</div></div>
-<p>Next time you face a complex, multi-hour task, resist the urge to paste one big prompt and walk away. Check how models trade off accuracy, cost, and speed (Step 1), use a top model for your task type during the day (Step 2) to compare options and write a clear <code>plan.md</code> (Step 3), and then start a fresh session with a fast, cost-efficient model at <code>Medium</code> effort to build and test it overnight (Step 4).</p>
+<p>Next time you face a complex, multi-hour task, resist the urge to paste one big prompt and walk away. Check how models trade off accuracy, cost, and speed (Step 1), use a top model for your task type during the day (Step 2) to compare options and write a clear <code>plan.md</code> (Step 3), and then launch fast, cost-efficient sub-sessions with a central monitor to build and test overnight without spinning in loops (Step 4).</p>
 <blockquote>The secret isn&rsquo;t writing one magic prompt and walking away. It&rsquo;s giving Copilot clear plans, clear guardrails, and the right model for each phase of the work.</blockquote>
 </article>
 </main>
