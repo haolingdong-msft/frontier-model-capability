@@ -1224,7 +1224,7 @@ Save the comparison to docs/approaches.md. Do not write any code yet.</pre></div
     <li><strong>Steps 1 &amp; 2 (Pick a strong design model):</strong> Finding why the skill was slow needed both <strong>Agentic Coding</strong> and <strong>Data Analysis</strong> (profiling latency and token usage), so I picked <strong>GPT-6 Astra at <code>High</code> effort</strong> for an afternoon design chat.</li>
     <li><strong>Step 3 (Explore options &amp; write clear plans):</strong> In <strong>2.5 hours</strong> (35.7M tokens), we identified the bottlenecks (<code>docs/approaches.md</code>), set strict quality guardrails, and wrote three standalone candidate plans: <strong>Plan A</strong> (add caching to the preparation phase), <strong>Plan B</strong> (minimize model input size), and <strong>Plan C</strong> (run tasks in parallel using subagents).</li>
     <li><strong>Step 4 (Code &amp; benchmark in parallel):</strong> Before logging off, I opened three clean Git worktrees with fresh sessions and handed <code>Plan A</code>, <code>Plan B</code>, and <code>Plan C</code> to <strong>GPT-5.6 Sol</strong> (the predecessor to <strong>GPT-6.1 Sol</strong>) at <code>Medium</code>/<code>High</code> effort to build and run all 12 benchmark tests overnight.</li>
-    <li><strong>Outcome:</strong> <strong>Plan B</strong> delivered the best results: it saved both tokens and compute effort while achieving the target performance improvement (12/12 reports passing quality checks).</li>
+    <li><strong>Outcome:</strong> <strong>Plan B</strong> delivered the best results, saving both tokens and compute effort while achieving the target performance improvement (12/12 reports passing quality checks).</li>
   </ul>
 </div>
 
